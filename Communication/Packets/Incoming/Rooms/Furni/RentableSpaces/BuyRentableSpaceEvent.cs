@@ -30,7 +30,6 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces
                 QuasarEnvironment.GetGame().GetRentableSpaceManager().ConfirmBuy(Session, rsi, 3600);
             }
 
-
         }
     }
 }
