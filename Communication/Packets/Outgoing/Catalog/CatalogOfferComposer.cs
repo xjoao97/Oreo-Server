@@ -1,0 +1,79 @@
+﻿using System;
+using System.Linq;
+using System.Text;
+using System.Collections.Generic;
+
+using Quasar.HabboHotel.Items;
+using Quasar.HabboHotel.Catalog;
+using Quasar.HabboHotel.Catalog.Utilities;
+
+namespace Quasar.Communication.Packets.Outgoing.Catalog
+{
+    class CatalogOfferComposer : ServerPacket
+    {
+        public CatalogOfferComposer(CatalogItem Item)
+            : base(ServerPacketHeader.CatalogOfferMessageComposer)
+        {
+            base.WriteInteger(Item.OfferId);
+           base.WriteString(Item.Data.ItemName);
+            base.WriteBoolean(false);
+            base.WriteInteger(Item.CostCredits);
+
+            if (Item.CostDiamonds > 0)
+            {
+                base.WriteInteger(Item.CostDiamonds);
+                base.WriteInteger(5);
+            }
+            else if (Item.CostGOTWPoints > 0)
+            {
+                base.WriteInteger(Item.CostGOTWPoints);
+                base.WriteInteger(103);
+            }
+            else
+            {
+                base.WriteInteger(Item.CostPixels);
+                base.WriteInteger(0);
+            }
+
+            base.WriteBoolean(ItemUtility.CanGiftItem(Item));
+            base.WriteInteger(string.IsNullOrEmpty(Item.Badge) ? 1 : 2);
+
+            if (!string.IsNullOrEmpty(Item.Badge))
+            {
+               base.WriteString("b");
+               base.WriteString(Item.Badge);
+            }
+
+           base.WriteString(Item.Data.Type.ToString());
+            if (Item.Data.Type.ToString().ToLower() == "b")
+               base.WriteString(Item.Data.ItemName);
+            else
+            {
+                base.WriteInteger(Item.Data.SpriteId);
+                if (Item.Data.InteractionType == InteractionType.WALLPAPER || Item.Data.InteractionType == InteractionType.FLOOR || Item.Data.InteractionType == InteractionType.LANDSCAPE)
+                   base.WriteString(Item.Name.Split('_')[2]);
+                else if (Item.PageID == 9)
+                {
+                    CatalogBot CataBot = null;
+                    if (!QuasarEnvironment.GetGame().GetCatalog().TryGetBot(Item.ItemId, out CataBot))
+                       base.WriteString("hd-180-7.ea-1406-62.ch-210-1321.hr-831-49.ca-1813-62.sh-295-1321.lg-285-92");
+                    else
+                       base.WriteString(CataBot.Figure);
+                }
+                else if (Item.ExtraData != null)
+                base.WriteString(Item.ExtraData != null ? Item.ExtraData : string.Empty);
+                base.WriteInteger(Item.Amount);
+                base.WriteBoolean(Item.IsLimited);
+                if (Item.IsLimited)
+                {
+                    base.WriteInteger(Item.LimitedEditionStack);
+                    base.WriteInteger(Item.LimitedEditionStack - Item.LimitedEditionSells);
+                }
+            }
+            base.WriteInteger(0);
+            base.WriteBoolean(ItemUtility.CanSelectAmount(Item));
+            base.WriteBoolean(true);
+            base.WriteString("");
+        }
+    }
+}
