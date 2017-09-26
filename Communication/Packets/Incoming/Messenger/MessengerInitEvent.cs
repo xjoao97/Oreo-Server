@@ -24,8 +24,23 @@ namespace Quasar.Communication.Packets.Incoming.Messenger
                 Friends.Add(Buddy);
             }
 
-            Session.SendMessage(new MessengerInitComposer());
-            Session.SendMessage(new BuddyListComposer(Friends, Session.GetHabbo()));
+            Session.SendPacket(new MessengerInitComposer());
+
+            int page = 0;
+            if (Friends.Count() == 0)
+            {
+                Session.SendPacket(new BuddyListComposer(Friends, Session.GetHabbo(), 1, 0));
+            }
+            else
+            {
+                int pages = ((Friends.Count() - 1) / 500) + 1;
+                foreach (ICollection<MessengerBuddy> batch in Friends.Batch(500))
+                {
+                    Session.SendPacket(new BuddyListComposer(batch.ToList(), Session.GetHabbo(), pages, page));
+
+                    page++;
+                }
+            }
 
             try
             {
