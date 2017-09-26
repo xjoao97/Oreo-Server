@@ -104,6 +104,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Pets
                 Room.GetRoomUserManager().RemoveBot(Pet.VirtualId, false);
                 Session.SendMessage(new PetInventoryComposer(Session.GetHabbo().GetInventoryComponent().GetPets()));
             }
+                Room.GetRoomUserManager().RemoveBot(Pet.VirtualId, false);
         }
     }
 }
