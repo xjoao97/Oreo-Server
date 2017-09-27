@@ -111,6 +111,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
                 WallHeight = 15;
 
             string ModelName = "model_bc_" + Room.Id;
+            Map += '\r' + new string('x', SizeX);
 
             DataRow Row = null;
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
