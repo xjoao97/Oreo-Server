@@ -628,6 +628,8 @@ namespace Quasar.HabboHotel.Items
                     {
                         #region Group Gates
                         case InteractionType.GUILD_GATE:
+                        case InteractionType.VIPGATE:
+                        case InteractionType.HCGATE:
                             {
                                 if (ExtraData == "1")
                                 {
@@ -1727,6 +1729,12 @@ namespace Quasar.HabboHotel.Items
                 GetRoom().AddUserToTent(Id, user, this);
             }
 
+            if (GetBaseItem().InteractionType == InteractionType.PRESSURE_TILE)
+            {
+                this.ExtraData = "1";
+                this.UpdateState();
+            }
+
             GetRoom().GetWired().TriggerEvent(Wired.WiredBoxType.TriggerWalkOnFurni, user.GetClient().GetHabbo(), this);
             user.LastItem = this;
         }
@@ -1738,6 +1746,12 @@ namespace Quasar.HabboHotel.Items
 
             if (GetBaseItem().InteractionType == InteractionType.TENT || GetBaseItem().InteractionType == InteractionType.TENT_SMALL)
                 GetRoom().RemoveUserFromTent(Id, user, this);
+
+            if (GetBaseItem().InteractionType == InteractionType.PRESSURE_TILE)
+            {
+                this.ExtraData = "0";
+                this.UpdateState();
+            }
 
             GetRoom().GetWired().TriggerEvent(Wired.WiredBoxType.TriggerWalkOffFurni, user.GetClient().GetHabbo(), this);
         }

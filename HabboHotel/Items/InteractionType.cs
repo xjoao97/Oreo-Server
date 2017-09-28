@@ -137,7 +137,7 @@ namespace Quasar.HabboHotel.Items
 
 
         PRESSURE_PAD,
-
+        PRESSURE_TILE,
         WF_FLOOR_SWITCH_1,
         WF_FLOOR_SWITCH_2,
 
@@ -607,6 +607,8 @@ namespace Quasar.HabboHotel.Items
                     return InteractionType.EASTEREGG;
                 case "machineslot":
                     return InteractionType.SLOT_MACHINE;
+                case "pressure_tile":
+                    return InteractionType.PRESSURE_TILE;
 
                 default:
                     {

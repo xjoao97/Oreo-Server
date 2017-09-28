@@ -1100,10 +1100,7 @@ namespace Quasar.HabboHotel.Rooms
                             return false;
                         }
 
-
-
                         if (User.GetClient() == null || User.GetClient().GetHabbo() == null)
-
                             return false;
 
                         if (User.GetClient().GetHabbo().GetClubManager().HasSubscription("habbo_vip"))
@@ -1112,7 +1109,6 @@ namespace Quasar.HabboHotel.Rooms
                             I.ExtraData = "1";
                             I.UpdateState(false, true);
                             I.RequestUpdate(4, true);
-
                             return true;
                         }
                         else
