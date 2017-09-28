@@ -7,8 +7,7 @@ using Quasar.HabboHotel.Rooms;
 using Quasar.HabboHotel.Items;
 using Quasar.HabboHotel.Quests;
 using Quasar.Communication.Packets.Outgoing.Rooms.Engine;
-
-
+using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 
 namespace Quasar.Communication.Packets.Incoming.Rooms.Engine
 {
@@ -65,6 +64,17 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Engine
 
             if (Rotation != Item.Rotation)
                 QuasarEnvironment.GetGame().GetQuestManager().ProgressUserQuest(Session, QuestType.FURNI_ROTATE);
+
+            if (Item.Data.InteractionType == InteractionType.FOOTBALL)
+            {
+                RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
+                if (User.GetClient() != null && (User.IsWalking || Item.interactingBallUser == 1))
+                {
+                    User.GetClient().SendMessage(new ObjectUpdateComposer(Item, Room.OwnerId));
+                    User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("supernoti", "¡No puedes mover la pelota mientras caminas!"));
+                    return;
+                }
+            }
 
             if (!Room.GetRoomItemHandler().SetFloorItem(Session, Item, x, y, Rotation, false, false, true))
             {
