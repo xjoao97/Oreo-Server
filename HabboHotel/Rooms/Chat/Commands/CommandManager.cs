@@ -150,6 +150,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
         /// </summary>
         private void RegisterUser()
         {
+            this.Register("ball", new BallCommand());
             this.Register("eventtype", new EventSwapCommand());
             this.Register("changelog", new ChangelogCommand());
             this.Register("handitem", new CarryCommand());
