@@ -23,6 +23,7 @@ using Quasar.Communication.Packets.Outgoing.Rooms.Session;
 using Quasar.HabboHotel.Rooms.Games.Teams;
 using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 using Quasar.Football;
+using Quasar.HabboHotel.Items.Wired.Util;
 
 namespace Quasar.HabboHotel.Items
 {
