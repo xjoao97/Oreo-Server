@@ -522,6 +522,9 @@ namespace Quasar.HabboHotel.Items
                     case InteractionType.FREEZE_TILE:
                         return new InteractorFreezeTile();
 
+                    case InteractionType.FOOTBALL:
+                        return new InteractorFootball();
+                        
                     case InteractionType.footballcounterblue:
                     case InteractionType.footballcountergreen:
                     case InteractionType.footballcounterred:
