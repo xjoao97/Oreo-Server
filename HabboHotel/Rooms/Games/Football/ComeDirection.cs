@@ -1,4 +1,5 @@
 ﻿using Quasar.HabboHotel.Rooms;
+using Quasar.HabboHotel.Rooms;
 using Quasar.Football;
 using System.Drawing;
 
@@ -6,26 +7,59 @@ namespace Quasar.Football
 {
     public class ComeDirection
     {
-        internal static IComeDirection GetComeDirection(Point user, Point ball)
+        internal static IComeDirection GetComeDirection(Point user, Point ball, bool Click, RoomUser Player)
         {
             try
             {
-                if (user.X == ball.X && user.Y - 1 == ball.Y)
-                    return IComeDirection.Down;
-                if (user.X + 1 == ball.X && user.Y - 1 == ball.Y)
-                    return IComeDirection.DownLeft;
-                if (user.X + 1 == ball.X && user.Y == ball.Y)
-                    return IComeDirection.Left;
-                if (user.X + 1 == ball.X && user.Y + 1 == ball.Y)
-                    return IComeDirection.UpLeft;
-                if (user.X == ball.X && user.Y + 1 == ball.Y)
-                    return IComeDirection.Up;
-                if (user.X - 1 == ball.X && user.Y + 1 == ball.Y)
-                    return IComeDirection.UpRight;
-                if (user.X - 1 == ball.X && user.Y == ball.Y)
-                    return IComeDirection.Right;
-                if (user.X - 1 == ball.X && user.Y - 1 == ball.Y)
-                    return IComeDirection.DownRight;
+                if (!Click)
+                {
+                    if (user.X == ball.X && user.Y - 1 == ball.Y)
+                        return IComeDirection.Down;
+                    if (user.X + 1 == ball.X && user.Y - 1 == ball.Y)
+                        return IComeDirection.DownLeft;
+                    if (user.X + 1 == ball.X && user.Y == ball.Y)
+                        return IComeDirection.Left;
+                    if (user.X + 1 == ball.X && user.Y + 1 == ball.Y)
+                        return IComeDirection.UpLeft;
+                    if (user.X == ball.X && user.Y + 1 == ball.Y)
+                        return IComeDirection.Up;
+                    if (user.X - 1 == ball.X && user.Y + 1 == ball.Y)
+                        return IComeDirection.UpRight;
+                    if (user.X - 1 == ball.X && user.Y == ball.Y)
+                        return IComeDirection.Right;
+                    if (user.X - 1 == ball.X && user.Y - 1 == ball.Y)
+                        return IComeDirection.DownRight;
+                }
+                else if (Player != null)
+                    {
+                        //User Arriba - Pelota Abajo
+                        if (Player.RotBody == 4)
+                            return IComeDirection.Up;
+                        //User Abajo - Pelota Arriba
+                        if (Player.RotBody == 0)
+                            return IComeDirection.Down;
+                        //User Derecha - Pelota Izquierda
+                        if (Player.RotBody == 6)
+                            return IComeDirection.Right;
+                        //User Izquierda - Pelota Derecha
+                        if (Player.RotBody == 2)
+                            return IComeDirection.Left;
+
+                        //Diagonales
+                        //User Abajo Derecha - Pelota Arriba Izquierda
+                        if (Player.RotBody == 1)
+                            return IComeDirection.DownLeft;
+                        //User Abajo Izquierda - Pelota Arriba Derecha
+                        if (Player.RotBody == 7)
+                            return IComeDirection.DownRight;
+                        //User Arriba Izquierda - Pelota Abajo Derecha
+                        if (Player.RotBody == 3)
+                            return IComeDirection.UpLeft;
+                        //User Arriba Derecha - Pelota Abajo Izquierda
+                        if (Player.RotBody == 5)
+                            return IComeDirection.UpRight;
+                    }
+                
                 return IComeDirection.Null;
             }
             catch
@@ -159,17 +193,13 @@ namespace Quasar.Football
                         return IComeDirection.Up;
 
                     case IComeDirection.DownLeft:
-                        return room.GetGameMap().Model.MapSizeX - 1 <= x
-                            ? IComeDirection.DownRight
-                            : IComeDirection.UpLeft;
+                        return IComeDirection.DownRight;
 
                     case IComeDirection.Left:
                         return IComeDirection.Right;
 
                     case IComeDirection.UpLeft:
-                        return room.GetGameMap().Model.MapSizeX - 1 <= x
-                            ? IComeDirection.UpRight
-                            : IComeDirection.DownLeft;
+                        return IComeDirection.UpRight;
                 }
                 return IComeDirection.Null;
             }
