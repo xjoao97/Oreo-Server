@@ -897,6 +897,7 @@ namespace Quasar.HabboHotel.Rooms
                         {
                             User.IsWalking = false;
                             User.RemoveStatus("mv");
+                            User.handelingBallStatus = 0;
 
                             if (User.Statusses.ContainsKey("sign"))
                                 User.RemoveStatus("sign");
@@ -1052,6 +1053,9 @@ namespace Quasar.HabboHotel.Rooms
                         }
                         if (!User.RidingHorse)
                             User.UpdateNeeded = true;
+                        
+                        if (_room.GotSoccer())
+                            _room.GetSoccer().OnUserWalk(User);
                     }
                     else
                     {
