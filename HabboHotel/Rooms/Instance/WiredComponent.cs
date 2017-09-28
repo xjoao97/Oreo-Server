@@ -83,6 +83,8 @@ namespace Quasar.HabboHotel.Rooms.Instance
                             NewBox.StringData = "0";
                         else if (NewBox.Type == WiredBoxType.EffectMatchPosition)
                             NewBox.StringData = "0;0;0";
+                        else if (NewBox.Type == WiredBoxType.EffectMoveToDir)
+                            NewBox.StringData = "0;0";
                         else if (NewBox.Type == WiredBoxType.EffectMoveAndRotate)
                             NewBox.StringData = "0;0";
                     }
@@ -340,7 +342,7 @@ namespace Quasar.HabboHotel.Rooms.Instance
             {
                 foreach (IWiredItem Item in Items)
                 {
-                    if (Item.Type != WiredBoxType.EffectMoveAndRotate && Item.Type != WiredBoxType.EffectMoveFurniFromNearestUser && Item.Type != WiredBoxType.EffectMoveFurniToNearestUser)
+                    if (Item.Type != WiredBoxType.EffectMoveToDir && Item.Type != WiredBoxType.EffectMoveAndRotate && Item.Type != WiredBoxType.EffectMoveFurniFromNearestUser && Item.Type != WiredBoxType.EffectMoveFurniToNearestUser)
                         continue;
 
                     if (Item.SetItems == null || Item.SetItems.Count == 0)
