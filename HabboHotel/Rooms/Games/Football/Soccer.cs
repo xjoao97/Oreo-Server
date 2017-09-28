@@ -65,62 +65,66 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
 
         internal void OnUserWalk(RoomUser User)
         {
-            if (User == null)
-                return;
-
-            foreach (Item ball in _balls.Values)
+            try
             {
-                if (ball == null)
+
+                if (User == null)
                     return;
 
-                //If user position is same as ball position AND The goal Y is the same as Ball y position SHOOT!
-                if (User.SetX == ball.GetX && User.SetY == ball.GetY && User.GoalX == ball.GetX && User.GoalY == ball.GetY && User.handelingBallStatus == 0) // super chute.
+                foreach (Item item in this._balls.Values.ToList())
                 {
-                    Point userPoint = new Point(User.X, User.Y);
-                    ball.ExtraData = "55";
-                    ball.BallTryGoThrough = 0;
-                    ball.Shoot = true;
-                    ball.ballIsMoving = true;
-                    ball.ballMover = User.GetClient();
-                    MoveBall(ball, User.GetClient(), userPoint);
-                }
+                    if (item == null)
+                        continue;
 
-                //if user position is same as ball //shoot!  SHOOT!
-                else if (User.X == ball.GetX && User.Y == ball.GetY && User.handelingBallStatus == 0)
-                {
-                    Point userPoint = new Point(User.SetX, User.SetY);
-                    ball.ExtraData = "55";
-                    ball.BallTryGoThrough = 0;
-                    ball.Shoot = true;
-                    ball.ballIsMoving = true;
-                    ball.ballMover = User.GetClient();
-                    MoveBall(ball, User.GetClient(), userPoint);
-                }
-                else
-                {
-                    //if user goal is same as ball position
-                    if (User.handelingBallStatus == 0 && User.GoalX == ball.GetX && User.GoalY == ball.GetY)
-                        return;
-
-                    if (User.SetX == ball.GetX && User.SetY == ball.GetY && User.IsWalking && (User.X != User.GoalX || User.Y != User.GoalY))
+                    if (User.SetX == item.GetX && User.SetY == item.GetY && User.GoalX == item.GetX && User.GoalY == item.GetY && User.handelingBallStatus == 0) // super chute.
                     {
-                        User.handelingBallStatus = 1;
-                        IComeDirection _comeDirection = ComeDirection.GetComeDirection(new Point(User.X, User.Y), ball.Coordinate);
-                        if (_comeDirection != IComeDirection.Null)
-                        {
-                            int NewX = User.SetX;
-                            int NewY = User.SetY;
+                        Point userPoint = new Point(User.X, User.Y);
+                        item.ExtraData = "55";
+                        item.BallIsMoving = true;
+                        item.BallValue = 1;
+                        MoveBall(item, User, userPoint, false, 6);
+                    }
+                    
+                    else if (User.X == item.GetX && User.Y == item.GetY && User.handelingBallStatus == 0)
+                    {
+                        Point userPoint = new Point(User.SetX, User.SetY);
+                        item.ExtraData = "55";
+                        item.BallIsMoving = true;
+                        item.BallValue = 1;
+                        MoveBall(item, User, userPoint, false, 6);
+                    }
+                    else
+                    {
+                        if (User.handelingBallStatus == 1 && User.GoalX == User.SetX && User.GoalY == User.SetY)
+                            continue;
 
-                            ComeDirection.GetNewCoords(_comeDirection, ref NewX, ref NewY);
-                            if (ball.GetRoom().GetGameMap().ValidTile(NewX, NewY))
-                            {
-                                ball.ExtraData = "11";
-                                ball.ballMover = User.GetClient();
-                                MoveBall(ball, User.GetClient(), NewX, NewY);
-                            }
+                        if (User.SetX != item.GetX || User.SetY != item.GetY || !User.IsWalking ||
+                            (User.X == User.GoalX && User.Y == User.GoalY))
+                            continue;
+
+                        User.handelingBallStatus = 1;
+                        IComeDirection comeDirection = ComeDirection.GetComeDirection(new Point(User.X, User.Y), item.Coordinate, false, null);
+                        if (comeDirection == IComeDirection.Null)
+                            continue;
+
+                        int newX = User.SetX;
+                        int newY = User.SetY;
+
+                        if (item.GetRoom().GetGameMap().SquareHasUsers(User.SetX, User.SetY) || !item.GetRoom().GetGameMap().StackTable(User.SetX, User.SetY))
+                        {
+                            comeDirection = ComeDirection.InverseDirections(_room, comeDirection, User.X, User.Y);
+                            newX = item.GetX;
+                            newY = item.GetY;
                         }
+
+                        ComeDirection.GetNewCoords(comeDirection, ref newX, ref newY);
+                        item.ExtraData = "11";
+                        MoveBall(item, User.GetClient(), x, y, true);
                     }
                 }
+            }
+            catch
+            {
             }
         }
 
@@ -234,7 +238,7 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
                                 tile => tile.X == gameItemCoord.X && tile.Y == gameItemCoord.Y));
         }
 
-        internal bool MoveBall(Item item, GameClient mover, int newX, int newY)
+        public bool MoveBall(Item item, GameClient mover, int newX, int newY, bool bNew)
         {
             if (item == null || item.GetBaseItem() == null)
                 return false;
@@ -246,150 +250,100 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
                 return false;
 
             Point oldRoomCoord = item.Coordinate;
-
-            Double NewZ = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
-
-            _room.SendMessage(new UpdateFootBallComposer(item, newX, newY));
-
             if (oldRoomCoord.X == newX && oldRoomCoord.Y == newY)
                 return false;
 
-            item.SetState(newX, newY, item.GetZ, Gamemap.GetAffectedTiles(item.GetBaseItem().Length, item.GetBaseItem().Width, newX, newY, item.Rotation));
+            double NewZ = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
+            if (bNew)
+                this._room.SendMessage(new UpdateFootBallComposer(item, newX, newY, NewZ));
+            else
+                this._room.SendMessage(new SlideObjectBundleComposer(item.Coordinate.X, item.Coordinate.Y, item.GetZ, newX, newY, NewZ, item.Id, item.Id, item.Id));
+            
+            this._room.GetRoomItemHandler().SetFloorItem(null, item, newX, newY, item.Rotation, false, false, false, false);
 
             if (itemIsOnGameItem || mover == null || mover.GetHabbo() == null)
                 return false;
 
             this._room.OnUserShoot(mover, item);
 
-            return true;
+            return false;
         }
 
-        public void MoveBall(Item item, GameClient client, Point user, bool skip = false)
+        public void MoveBall(Item item, RoomUser Player, Point user, bool Shift, int Shots)
         {
             try
             {
-                item.comeDirection = ComeDirection.GetComeDirection(user, item.Coordinate);
+                item.comeDirection = ComeDirection.GetComeDirection(user, item.Coordinate, Shift, Shift == true ? Player : null);
 
                 if (item.comeDirection != IComeDirection.Null)
-                    // item.ballMover = client;
-                    new TaskFactory().StartNew(() => MoveBallProcess(item, skip));
+                    new TaskFactory().StartNew(() => MoveBallProcess(item, Player.GetClient(), Shots));
             }
             catch
             {
             }
         }
 
-        public async void MoveBallProcess(Item item, bool skip = false)
+        public async void MoveBallProcess(Item Item, GameClient client, int Shots)
         {
-            if (item.ballMover == null || item.ballMover.GetHabbo() == null)
-                return;
+            int tryes = 0;
+            int newX = Item.Coordinate.X;
+            int newY = Item.Coordinate.Y;
+            Item.interactingBallUser = 1;
 
-            if (item == null)
-                return;
-
-            int newX = item.Coordinate.X;
-            int newY = item.Coordinate.Y;
-
-            // if comedirection niets is?!
-            if (item.comeDirection == IComeDirection.Null)
             {
-                item.ballIsMoving = false;
-                return;
-            }
-
-            if (_room == null)
-                return;
-
-            if (_room.GetRoomUserManager().GetRoomUsers() == null)
-                return;
-
-            List<RoomUser> users = _room.GetRoomUserManager().GetRoomUsers().OrderBy(a => Guid.NewGuid()).ToList();
-            foreach (RoomUser user in users)
-            {
-                if (user.SetX == newX && user.SetY == newY && user.UserId != item.ballMover.GetHabbo().Id && item.ExtraData != "44" && item.ExtraData != "33"
-                    && user.VirtualId > _room.GetRoomUserManager().GetRoomUserByHabbo(item.ballMover.GetHabbo().Id).VirtualId)
-                {
-                    Point userPoint = new Point(user.X, user.Y);
-                    item.ExtraData = "55";
-                    item.ballIsMoving = true;
-                    item.BallTryGoThrough = 0;
-                    item.Shoot = true;
-                    item.ballMover = user.GetClient();
-                    MoveBall(item, user.GetClient(), userPoint);
+                if (this._room == null || this._room.GetGameMap() == null)
                     return;
-                }
-            }
 
-            //Set old newX and newY
-            int resetX = newX;
-            int resetY = newY;
-
-            //Calc other direction
-            ComeDirection.GetNewCoords(item.comeDirection, ref newX, ref newY);
-
-            bool ignoreUsers = false;
-            if (_room.GetGameMap().SquareHasUsers(newX, newY))
-            {
-                if (item.ExtraData != "55" && item.ExtraData != "44")
+                int total = Item.ExtraData == "55" ? Shots : 1;
+                for (var i = 0; i != total; i++)
                 {
-                    item.ballIsMoving = false;
-                    return;
-                }
-
-                ignoreUsers = true;
-            }
-
-            if (ignoreUsers == false)
-            {
-                //check if ball can go through
-                if (!_room.GetGameMap().itemCanBePlacedHere(newX, newY))
-                {
-                    //A ball can't go through a wall!!! Set reversed coordinates.
-                    item.comeDirection = ComeDirection.InverseDirections(_room, item.comeDirection, newX, newY);
-                    newX = resetX;
-                    newY = resetY;
-
-                    item.BallTryGoThrough++;
-
-                    //try 2 times
-                    if (item.BallTryGoThrough > 2)
+                    if (Item.comeDirection == IComeDirection.Null)
                     {
-                        item.ballIsMoving = false;
-                        item.ExtraData = ("0").ToString();
-                        return;
+                        Item.BallIsMoving = false;
+                        Item.interactingBallUser = 0;
+                        break;
                     }
 
-                    //try again
-                    MoveBallProcess(item, true);
-                    return;
-                }
-            }
+                    int resetX = newX;
+                    int resetY = newY;
+                    ComeDirection.GetNewCoords(Item.comeDirection, ref newX, ref newY);
 
-            if (item.ballIsMoving)
-            {
-                if (MoveBall(item, item.ballMover, newX, newY))
-                {
-                    int ExtraData = 11;
-                    int.TryParse(item.ExtraData, out ExtraData);
-
-                    if (ExtraData > 11)
+                    if (!this._room.GetGameMap().StackTable(newX, newY) || this._room.GetGameMap().SquareHasUsers(newX, newY))
                     {
-                        if (!item.Shoot)
+                        Item.comeDirection = ComeDirection.InverseDirections(this._room, Item.comeDirection, newX, newY);
+                        newX = resetX;
+                        newY = resetY;
+                        tryes++;
+                        if (tryes > 2)
                         {
-                            item.ExtraData = (int.Parse(item.ExtraData) - 11).ToString();
+                            Item.BallIsMoving = false;
+                            Item.interactingBallUser = 0;
                         }
-
-                        item.Shoot = false;
-                        // wait 90 secs
-                        await Task.Delay(_room.BallSpeed);
-                        MoveBallProcess(item, false);
-                        return;
+                        continue;
                     }
-                }
 
-                item.ExtraData = "0";
-                item.BallTryGoThrough = 0;
-                item.ballIsMoving = false;
+                    if (MoveBall(Item, client, newX, newY, false))
+                    {
+                        Item.BallIsMoving = false;
+                        Item.interactingBallUser = 0;
+                        break;
+                    }
+
+                    int number;
+                    int.TryParse(Item.ExtraData, out number);
+                    if (number > 11)
+                        Item.ExtraData = (int.Parse(Item.ExtraData) - 11).ToString();
+
+                    await Task.Delay(90);
+                }
+                Item.interactingBallUser = 0;
+                Item.BallValue++;
+
+                if (Item.BallValue <= Shots)
+                    return;
+
+                Item.BallIsMoving = false;
+                Item.BallValue = 1;
             }
         }
 
