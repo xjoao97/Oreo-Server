@@ -799,7 +799,6 @@ namespace Quasar.HabboHotel.Rooms
                     User.DanceId = 0;
                     QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_FootballGoalScored", 1);
                     SendMessage(new ActionComposer(User.VirtualId, 1));
-                    Ball.ballstop = true;
                 }
             }
             if (Key != null)

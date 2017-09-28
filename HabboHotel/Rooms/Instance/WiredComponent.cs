@@ -193,7 +193,7 @@ namespace Quasar.HabboHotel.Rooms.Instance
                     return new RemoveActorFromTeamBox(_room, Item);
 
                 case WiredBoxType.EffectMoveToDir:
-                    return new MoveToDir(_room, Item);
+                    return new MoveToDirBox(_room, Item);
                 /*
                 
                 case WiredBoxType.EffectMoveFurniToNearestUser:

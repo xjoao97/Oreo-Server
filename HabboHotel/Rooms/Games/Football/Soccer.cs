@@ -119,7 +119,7 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
 
                         ComeDirection.GetNewCoords(comeDirection, ref newX, ref newY);
                         item.ExtraData = "11";
-                        MoveBall(item, User.GetClient(), x, y, true);
+                        MoveBall(item, User.GetClient(), newX, newY, true);
                     }
                 }
             }

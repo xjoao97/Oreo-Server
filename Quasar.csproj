@@ -799,6 +799,7 @@
     <Compile Include="HabboHotel\Items\Interactor\InteractorCounter.cs" />
     <Compile Include="HabboHotel\Items\Interactor\InteractorCrafting.cs" />
     <Compile Include="HabboHotel\Items\Interactor\InteractorEasterEgg.cs" />
+    <Compile Include="HabboHotel\Items\Interactor\InteractorFootball.cs" />
     <Compile Include="HabboHotel\Items\Interactor\InteractorJukebox.cs" />
     <Compile Include="HabboHotel\Items\Interactor\InteractorLoveLock.cs" />
     <Compile Include="HabboHotel\Items\Interactor\InteractorMagicEgg.cs" />
@@ -851,6 +852,7 @@
     <Compile Include="HabboHotel\Items\Wired\Boxes\Triggers\LongTriggerBox.cs" />
     <Compile Include="HabboHotel\Items\Wired\Boxes\Triggers\UserFurniCollision.cs" />
     <Compile Include="HabboHotel\Items\Wired\Boxes\Triggers\UserSaysCommandBox.cs" />
+    <Compile Include="HabboHotel\Items\Wired\Util\Movement.cs" />
     <Compile Include="HabboHotel\LandingView\CommunityGoal\CommunityGoalVS.cs" />
     <Compile Include="HabboHotel\LandingView\Promotions\Promotion.cs" />
     <Compile Include="HabboHotel\Moderation\BanTypeUtility.cs" />
@@ -934,6 +936,7 @@
     <Compile Include="HabboHotel\Rooms\Chat\Commands\User\ColourCommand.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\User\ColourList.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\User\EventSwapCommand.cs" />
+    <Compile Include="HabboHotel\Rooms\Chat\Commands\User\Fun\BallCommand.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\User\Fun\BurnCommand.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\User\Fun\CommandKiss.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\User\CustomLegit.cs" />
