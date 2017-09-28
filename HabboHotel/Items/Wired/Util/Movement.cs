@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Achernar.HabboHotel.Items.Wired.Util
+namespace Quasar.HabboHotel.Items.Wired.Util
 {
     public enum MovementState
     {
@@ -154,7 +154,7 @@ namespace Achernar.HabboHotel.Items.Wired.Util
 
                 case MovementState.LEFT_RIGHT:
                     {
-                        if (AchernarServer.GetRandomNumber(0, 2) == 1)
+                        if (QuasarEnvironment.GetRandomNumber(0, 2) == 1)
                             HandleMovement(ref newPoint, MovementState.LEFT);
                         else
                             HandleMovement(ref newPoint, MovementState.RIGHT);
@@ -163,7 +163,7 @@ namespace Achernar.HabboHotel.Items.Wired.Util
 
                 case MovementState.UP_DOWN:
                     {
-                        if (AchernarServer.GetRandomNumber(0, 2) == 1)
+                        if (QuasarEnvironment.GetRandomNumber(0, 2) == 1)
                             HandleMovement(ref newPoint, MovementState.UP);
                         else
                             HandleMovement(ref newPoint, MovementState.DOWN);
@@ -172,7 +172,7 @@ namespace Achernar.HabboHotel.Items.Wired.Util
 
                 case MovementState.RANDOM:
                     {
-                        switch (AchernarServer.GetRandomNumber(1, 5))
+                        switch (QuasarEnvironment.GetRandomNumber(1, 5))
                         {
                             case 1:
                                 {
@@ -224,7 +224,7 @@ namespace Achernar.HabboHotel.Items.Wired.Util
 
                 case MovementDirection.RANDOM:
                     {
-                        switch (AchernarServer.GetRandomNumber(1, 5))
+                        switch (QuasarEnvironment.GetRandomNumber(1, 5))
                         {
                             case 1:
                                 {
@@ -274,7 +274,7 @@ namespace Achernar.HabboHotel.Items.Wired.Util
 
                 case RotationState.RANDOM:
                     {
-                        if (AchernarServer.GetRandomNumber(0, 3) == 1)
+                        if (QuasarEnvironment.GetRandomNumber(0, 3) == 1)
                             HandleClockwiseRotation(ref rotation);
                         else
                             HandleCounterClockwiseRotation(ref rotation);
