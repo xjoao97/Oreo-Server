@@ -48,6 +48,8 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Furni.Wired
 
                 base.WriteString(Box.StringData != null ? (Box.StringData.Split('-')[0]) : "");
             }
+             else if (Box.Type == WiredBoxType.EffectMoveToDir)
+                base.WriteString(string.Empty);
             else
             {
                 base.WriteString(Box.StringData);
@@ -87,12 +89,11 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Furni.Wired
             else if (Box.Type == WiredBoxType.EffectMoveToDir)
             {
                 if (String.IsNullOrEmpty(Box.StringData))
-                    Box.StringData = "0;0;0";
+                    Box.StringData = "0;0";
 
-                base.WriteInteger(3);
-                base.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[0]) : 0);
-                base.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[1]) : 0);
-                base.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[2]) : 0);
+                base.WriteInteger(2);
+                base.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[0]) : 50);
+                base.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[1]) : 5);
             }
             else if (Box.Type == WiredBoxType.EffectGiveReward)
             {
