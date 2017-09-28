@@ -318,7 +318,7 @@ namespace Quasar.HabboHotel.Items.Wired
                         BlockedItems.Add(Item.Item.GetBaseItem().SpriteId);
                     else continue;
                 }
-                else if ((Item.Type == WiredBoxType.EffectMoveFurniToNearestUser && HasMoveRotate) || (Item.Type == WiredBoxType.EffectMoveAndRotate && HasMoveNear) || (Item.Type == WiredBoxType.EffectMoveToDir && (HasMoveNear || HasMoveRotate)))
+                else if ((Item.Type == WiredBoxType.EffectMoveFurniToNearestUser && (HasMoveRotate || HasMoveNear || HasMoveToDir)) || (Item.Type == WiredBoxType.EffectMoveAndRotate && (HasMoveNear || HasMoveToDir)) || (Item.Type == WiredBoxType.EffectMoveToDir && (HasMoveNear || HasMoveRotate)))
                 {
                     if (!BlockedItems.Contains(Item.Item.GetBaseItem().SpriteId))
                         BlockedItems.Add(Item.Item.GetBaseItem().SpriteId);
