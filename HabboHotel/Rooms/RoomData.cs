@@ -68,6 +68,7 @@ namespace Quasar.HabboHotel.Rooms
         //public bool QuemarEnabled;
         public bool RespectNotificationsEnabled;
         public bool PetMorphsAllowed;
+        public int Shoot;
 
         public void Fill(DataRow Row)
         {
@@ -139,6 +140,7 @@ namespace Quasar.HabboHotel.Rooms
             //this.QuemarEnabled = QuasarEnvironment.EnumToBool(Row["quemar_enabled"].ToString());
             this.RespectNotificationsEnabled = QuasarEnvironment.EnumToBool(Row["respect_notifications_enabled"].ToString());
             this.PetMorphsAllowed = QuasarEnvironment.EnumToBool(Row["pet_morphs_allowed"].ToString());
+            this.Shoot = Convert.ToInt32(Row["shoot"]);
 
             WiredScoreBordDay = new Dictionary<int, KeyValuePair<int, string>>();
             WiredScoreBordWeek = new Dictionary<int, KeyValuePair<int, string>>();
