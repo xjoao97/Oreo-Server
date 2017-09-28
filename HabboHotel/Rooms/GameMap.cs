@@ -1017,19 +1017,19 @@ namespace Quasar.HabboHotel.Rooms
                 return Item.Coordinate;
         }
 
-        /*internal bool IsValidMovement(int CoordX, int CoordY)
+        public bool IsValidMovement(int CoordX, int CoordY)
         {
             if (CoordX < 0 || CoordY < 0 || CoordX >= Model.MapSizeX || CoordY >= Model.MapSizeY)
                 return false;
 
             if (SquareHasUsers(CoordX, CoordY))
-                return false;
+                return true;
 
             if (GetCoordinatedItems(new Point(CoordX, CoordY)).Count > 0 && !SquareIsOpen(CoordX, CoordY, false))
                 return false;
 
             return Model.SqState[CoordX, CoordY] == SquareState.OPEN;
-        }*/
+        }
 
         public bool IsValidStep2(RoomUser User, Vector2D From, Vector2D To, bool EndOfPath, bool Override)
         {
