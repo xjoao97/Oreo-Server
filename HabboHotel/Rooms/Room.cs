@@ -170,6 +170,7 @@ namespace Quasar.HabboHotel.Rooms
             //this.EnablesEnabled = Data.EnablesEnabled;
             this.RespectNotificationsEnabled = Data.RespectNotificationsEnabled;
             this.PetMorphsAllowed = Data.PetMorphsAllowed;
+            this.Shoot = Data.Shoot;
 
             this.poolQuestion = string.Empty;
             this.yesPoolAnswers = new List<int>();
