@@ -122,7 +122,7 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Engine
     class UpdateFootBallComposer : ServerPacket
     {
 
-        public UpdateFootBallComposer(Item Item, int newX, int newY)
+        public UpdateFootBallComposer(Item Item, int newX, int newY, double newZ)
             : base(ServerPacketHeader.ObjectUpdateMessageComposer)
         {
             base.WriteInteger(Item.Id);
@@ -130,8 +130,8 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Engine
             base.WriteInteger(newX);
             base.WriteInteger(newY);
             base.WriteInteger(4); // rot;
-            base.WriteString((String.Format("{0:0.00}", TextHandling.GetString(Item.GetZ))));
-            base.WriteString((String.Format("{0:0.00}", TextHandling.GetString(Item.GetZ))));
+            base.WriteString((String.Format("{0:0.00}", TextHandling.GetString(newZ))));
+            base.WriteString((String.Format("{0:0.00}", TextHandling.GetString(newZ))));
             base.WriteInteger(0);
             base.WriteInteger(0);
             base.WriteString(Item.ExtraData);
