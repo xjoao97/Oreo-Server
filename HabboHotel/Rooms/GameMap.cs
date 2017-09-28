@@ -1309,6 +1309,29 @@ namespace Quasar.HabboHotel.Rooms
             return mGameMap[x, y] == 1;
         }
 
+        public bool StackTable(int CoordX, int CoordY)
+        {
+            if (!ValidTile(CoordX, CoordY))
+                return false;
+
+            if (!itemCanBePlacedHere(CoordX, CoordY))
+                return false;
+
+            List<Item> Items = _room.GetGameMap().GetAllRoomItemForSquare(CoordX, CoordY);
+            if (Items.Count > 0)
+            {
+                foreach (Item Item in Items)
+                {
+                    if (Item == null || Item.Data == null)
+                        continue;
+
+                    if (!Item.Data.Stackable)
+                        return false;
+                }
+            }
+            return true;
+        }
+        
         public double SqAbsoluteHeight(int X, int Y)
         {
             Point Points = new Point(X, Y);
