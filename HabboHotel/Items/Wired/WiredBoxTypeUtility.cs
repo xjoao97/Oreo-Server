@@ -308,6 +308,7 @@ namespace Quasar.HabboHotel.Items.Wired
 
             bool HasMoveRotate = Effects.Where(x => x.Type == WiredBoxType.EffectMoveAndRotate).ToList().Count > 0;
             bool HasMoveNear = Effects.Where(x => x.Type == WiredBoxType.EffectMoveFurniToNearestUser).ToList().Count > 0;
+            bool HasMoveToDir = Effects.Where(x => x.Type == WiredBoxType.EffectMoveToDir).ToList().Count > 0;
 
             foreach (IWiredItem Item in Effects)
             {
@@ -317,7 +318,7 @@ namespace Quasar.HabboHotel.Items.Wired
                         BlockedItems.Add(Item.Item.GetBaseItem().SpriteId);
                     else continue;
                 }
-                else if ((Item.Type == WiredBoxType.EffectMoveFurniToNearestUser && HasMoveRotate) || (Item.Type == WiredBoxType.EffectMoveAndRotate && HasMoveNear))
+                else if ((Item.Type == WiredBoxType.EffectMoveFurniToNearestUser && HasMoveRotate) || (Item.Type == WiredBoxType.EffectMoveAndRotate && HasMoveNear) || (Item.Type == WiredBoxType.EffectMoveToDir && (HasMoveNear || HasMoveRotate)))
                 {
                     if (!BlockedItems.Contains(Item.Item.GetBaseItem().SpriteId))
                         BlockedItems.Add(Item.Item.GetBaseItem().SpriteId);
