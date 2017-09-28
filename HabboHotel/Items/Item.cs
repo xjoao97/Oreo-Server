@@ -87,7 +87,8 @@ namespace Quasar.HabboHotel.Items
         internal bool ballIsMoving;
         internal bool Shoot = false;
         internal IComeDirection comeDirection;
-
+        public MovementDirection MoveToDirMovement = MovementDirection.NONE;
+        
         //public int ExtradataInt // added
         //{
         //    get
