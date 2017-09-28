@@ -33,9 +33,6 @@ namespace Quasar.HabboHotel.Items
 
         public long NextCommand = 0;
         public int Id;
-        public int ballsteps = 0;
-        public bool ballstop = false;
-        public int BallDireccion;
         public bool ejex;
         public bool ejey;
         private ItemData _data;
@@ -44,6 +41,8 @@ namespace Quasar.HabboHotel.Items
         public string Figure;
         public string Gender;
         public int GroupId;
+        public bool BallIsMoving;
+        public int BallValue;
         public int InteractingUser;
         public int InteractingUser2;
         public int LimitedNo;
