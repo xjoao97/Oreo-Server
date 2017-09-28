@@ -7,7 +7,7 @@ using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.GameClients;
 using Quasar.HabboHotel.Rooms;
 
-namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Extra
+namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fan
 {
     class BallCommand : IChatCommand
     {
