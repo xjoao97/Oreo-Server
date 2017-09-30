@@ -14,7 +14,7 @@ using Quasar.HabboHotel.Pathfinding;
 using Quasar.HabboHotel.Rooms.AI;
 using Quasar.HabboHotel.Quests;
 using Quasar.HabboHotel.Rooms.Games;
-
+using Quasar.HabboHotel.Astar;
 using Quasar.HabboHotel.Users;
 using Quasar.HabboHotel.Users.Inventory;
 using Quasar.Communication.Packets.Incoming;
@@ -817,8 +817,8 @@ namespace Quasar.HabboHotel.Rooms
                     {
                         User.DiceTotal = 0;
 
-                        if (_room.GetGameMap().IsValidStep2(User, new Vector2D(User.X, User.Y), new Vector2D(User.SetX, User.SetY), (User.GoalX == User.SetX && User.GoalY == User.SetY), User.AllowOverride))
-                        {
+                        if (this._room.GetGameMap().IsValidWalk(User, new Vector2D(User.X, User.Y), new Vector2D(User.SetX, User.SetY), User.AllowOverride) || User.RidingHorse)
+                            {
                             if (!User.RidingHorse)
                                 _room.GetGameMap().UpdateUserMovement(new Point(User.Coordinate.X, User.Coordinate.Y), new Point(User.SetX, User.SetY), User);
 
@@ -870,30 +870,10 @@ namespace Quasar.HabboHotel.Rooms
                         User.SetStep = false;
                     }
 
-                    if (User.PathRecalcNeeded)
-                    {
-                        if (User.Path.Count > 1)
-                            User.Path.Clear();
-
-                        User.Path = PathFinder.FindPath(User, this._room.GetGameMap().DiagonalEnabled, this._room.GetGameMap(), new Vector2D(User.X, User.Y), new Vector2D(User.GoalX, User.GoalY));
-
-                        if (User.Path.Count > 1)
-                        {
-                            User.PathStep = 1;
-                            User.IsWalking = true;
-                            User.PathRecalcNeeded = false;
-                        }
-                        else
-                        {
-                            User.PathRecalcNeeded = false;
-                            if (User.Path.Count > 1)
-                                User.Path.Clear();
-                        }
-                    }
-
                     if (User.IsWalking && !User.Freezed)
                     {
-                        if (InvalidStep || (User.PathStep >= User.Path.Count) || (User.GoalX == User.X && User.GoalY == User.Y)) //No path found, or reached goal (:
+                        SquarePoint point = DreamPathfinder.GetNextStep(User, new Vector2D(User.X, User.Y), new Vector2D(User.GoalX, User.GoalY), this._room.GetGameMap());
+                        if (InvalidStep || (point.X == User.X) && (point.Y == User.Y) || (User.GoalX == User.X && User.GoalY == User.Y)) //No path found, or reached goal (:
                         {
                             User.IsWalking = false;
                             User.RemoveStatus("mv");
@@ -933,31 +913,10 @@ namespace Quasar.HabboHotel.Rooms
                         }
                         else
                         {
-                            Vector2D NextStep = User.Path[(User.Path.Count - User.PathStep) - 1];
-                            User.PathStep++;
+                            int nextX = point.X;
+                            int nextY = point.Y;
 
-                            if (User.FastWalking && User.PathStep < User.Path.Count)
-                            {
-                                int s2 = (User.Path.Count - User.PathStep) - 1;
-                                NextStep = User.Path[s2];
-                                User.PathStep++;
-                            }
-
-                            if (User.SuperFastWalking && User.PathStep < User.Path.Count)
-                            {
-                                int s2 = (User.Path.Count - User.PathStep) - 1;
-                                NextStep = User.Path[s2];
-                                User.PathStep++;
-                                User.PathStep++;
-                            }
-
-                            int nextX = NextStep.X;
-                            int nextY = NextStep.Y;
-                            User.RemoveStatus("mv");
-
-                            if (_room.GetGameMap().IsValidStep2(User, new Vector2D(User.X, User.Y), new Vector2D(nextX, nextY), (User.GoalX == nextX && User.GoalY == nextY), User.AllowOverride))
-                            {
-                                double nextZ = _room.GetGameMap().SqAbsoluteHeight(nextX, nextY);
+                            double nextZ = _room.GetGameMap().SqAbsoluteHeight(nextX, nextY);
 
                                 if (!User.IsBot)
                                 {
@@ -1041,15 +1000,13 @@ namespace Quasar.HabboHotel.Rooms
                                 _room.GetGameMap().GameMap[User.X, User.Y] = User.SqState; // REstore the old one
                                 User.SqState = _room.GetGameMap().GameMap[User.SetX, User.SetY]; //Backup the new one
 
-                                if (_room.RoomBlockingEnabled == 0)
-                                {
-                                    RoomUser Users = _room.GetRoomUserManager().GetUserForSquare(nextX, nextY);
-                                    if (Users != null)
-                                        _room.GetGameMap().GameMap[nextX, nextY] = 0;
-                                }
-                                else
-                                    _room.GetGameMap().GameMap[nextX, nextY] = 1;
+                            if (_room.RoomBlockingEnabled == 0)
+                            {
+                                    _room.GetGameMap().GameMap[nextX, nextY] = 0;
                             }
+                            else
+                                _room.GetGameMap().GameMap[nextX, nextY] = 1;
+
                         }
                         if (!User.RidingHorse)
                             User.UpdateNeeded = true;

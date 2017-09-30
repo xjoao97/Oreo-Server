@@ -566,11 +566,11 @@ namespace Quasar.HabboHotel.Rooms
                 return;
             }
 
-            if ((GetRoom().GetGameMap().SquareHasUsers(pX, pY, this) && !pOverride) || Frozen)
+            if (Frozen)
                 return;
 
             UnIdle();
-
+            IsWalking = true;
             GoalX = pX;
             GoalY = pY;
             PathRecalcNeeded = true;

@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fan
         }
         public string Description
         {
-            get { return "Cambia los cuadros a recorrer de la pelota (double click)."; }
+            get { return "Altera o valor de quadros que a bola corre!"; }
         }
         public void Execute(GameClient Session, Room Room, string[] Params)
         {
@@ -30,7 +30,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fan
 
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Escribe un numero del 0 al 4. (0 Desactiva el doble click)");
+                Session.SendWhisper("Escreva um número de 1 a 4. (0 Desativa o DoubleClick)");
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fan
             {
                 if (Value < 0 || Value > 4)
                 {
-                    Session.SendWhisper("Numero no valido.");
+                    Session.SendWhisper("Número ivalido!");
                     return;
                 }
 
@@ -51,7 +51,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fan
                     dbClient.RunQuery();
                 }
 
-                Session.SendWhisper("Balón: " + Room.Shoot + "c");
+                Session.SendWhisper("Bola definida para: " + Room.Shoot + "");
             }
         }
     }

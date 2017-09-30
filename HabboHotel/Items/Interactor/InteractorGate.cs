@@ -62,6 +62,7 @@ namespace Quasar.HabboHotel.Items.Interactor
             Item.ExtraData = NewMode.ToString();
             Item.UpdateState();
 
+            Item.RegenerateBlock(NewMode.ToString(), Item.GetRoom().GetGameMap());
             Item.GetRoom().GetGameMap().updateMapForItem(Item);
             Item.GetRoom().GetWired().TriggerEvent(WiredBoxType.TriggerStateChanges, Session.GetHabbo(), Item);
             //Item.GetRoom().GenerateMaps();

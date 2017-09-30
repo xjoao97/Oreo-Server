@@ -1031,6 +1031,119 @@ namespace Quasar.HabboHotel.Rooms
             return Model.SqState[CoordX, CoordY] == SquareState.OPEN;
         }
 
+        public bool IsValidWalk(RoomUser User, Vector2D From, Vector2D To, bool Override)
+        {
+            if (!ValidTile(To.X, To.Y))
+                return false;
+
+            if (Override)
+                return true;
+
+            List<Item> Items = _room.GetGameMap().GetAllRoomItemForSquare(To.X, To.Y);
+            if (Items.Count > 0)
+            {
+                bool HasGroupGate = Items.ToList().Where(x => x.GetBaseItem().InteractionType == InteractionType.GUILD_GATE).ToList().Count() > 0;
+                if (HasGroupGate)
+                {
+                    Item I = Items.FirstOrDefault(x => x.GetBaseItem().InteractionType == InteractionType.GUILD_GATE);
+                    if (I != null)
+                    {
+                        Group Group = null;
+                        if (!QuasarEnvironment.GetGame().GetGroupManager().TryGetGroup(I.GroupId, out Group))
+                            return false;
+
+                        if (User.GetClient() == null || User.GetClient().GetHabbo() == null)
+                            return false;
+
+                        if (Group.IsMember(User.GetClient().GetHabbo().Id))
+                        {
+                            I.InteractingUser = User.GetClient().GetHabbo().Id;
+                            I.ExtraData = "1";
+                            I.UpdateState(false, true);
+
+                            I.RequestUpdate(4, true);
+
+                            return true;
+                        }
+                        else
+                            return false;
+                    }
+                }
+                bool HasHcGate = Items.ToList().Where(x => x.GetBaseItem().InteractionType == InteractionType.HCGATE).ToList().Count() > 0;
+                if (HasHcGate)
+                {
+                    Item I = Items.FirstOrDefault(x => x.GetBaseItem().InteractionType == InteractionType.HCGATE);
+                    if (I != null)
+                    {
+                        var IsHc = User.GetClient().GetHabbo().GetClubManager().HasSubscription("habbo_vip");
+                        if (!IsHc)
+                        {
+                            User.GetClient().SendMessage(new AlertNotificationHCMessageComposer(3));
+                            return false;
+                        }
+
+                        if (User.GetClient() == null || User.GetClient().GetHabbo() == null)
+                            return false;
+
+                        if (User.GetClient().GetHabbo().GetClubManager().HasSubscription("habbo_vip"))
+                        {
+                            I.InteractingUser = User.GetClient().GetHabbo().Id;
+                            I.ExtraData = "1";
+                            I.UpdateState(false, true);
+                            I.RequestUpdate(4, true);
+                            return true;
+                        }
+                        else
+                        {
+                            User.GetClient().SendMessage(new AlertNotificationHCMessageComposer(3));
+                            return false;
+                        }
+                    }
+                }
+
+            bool HasVIPGate = Items.ToList().Where(x => x.GetBaseItem().InteractionType == InteractionType.VIPGATE).ToList().Count() > 0;
+            if (HasVIPGate)
+            {
+                Item I = Items.FirstOrDefault(x => x.GetBaseItem().InteractionType == InteractionType.VIPGATE);
+                if (I != null)
+                {
+                        if (User.GetClient() == null || User.GetClient().GetHabbo() == null)
+                            return false;
+
+                        bool IsVIP = User.GetClient().GetHabbo().GetClubManager().HasSubscription("club_vip");
+                    if (!IsVIP)
+                    {
+                        User.GetClient().SendMessage(new AlertNotificationHCMessageComposer(1));
+                        return false;
+                    }
+                    
+                    if (User.GetClient().GetHabbo().GetClubManager().HasSubscription("club_vip"))
+                    {
+                        I.InteractingUser = User.GetClient().GetHabbo().Id;
+                        I.ExtraData = "1";
+                        I.UpdateState(false, true);
+                        I.RequestUpdate(4, true);
+                        return true;
+                    }
+                    else
+                    {
+                        User.GetClient().SendMessage(new AlertNotificationHCMessageComposer(1));
+                        return false;
+                    }
+                }
+            }
+        }
+
+            if (_room.GetRoomUserManager().GetUserForSquare(To.X, To.Y) != null && _room.RoomBlockingEnabled == 0)
+                return false;
+
+            double HeightDiff = SqAbsoluteHeight(To.X, To.Y) - SqAbsoluteHeight(From.X, From.Y);
+            if (HeightDiff > 1.5 && !User.RidingHorse)
+                return false;
+
+            return true;
+        }
+
         public bool IsValidStep2(RoomUser User, Vector2D From, Vector2D To, bool EndOfPath, bool Override)
         {
             if (User == null)
@@ -1689,6 +1802,11 @@ namespace Quasar.HabboHotel.Rooms
         public byte[,] GameMap
         {
             get { return mGameMap; }
+        }
+
+        public double[,] ItemHeightMap
+        {
+            get { return mItemHeightMap; }
         }
 
         public void Dispose()

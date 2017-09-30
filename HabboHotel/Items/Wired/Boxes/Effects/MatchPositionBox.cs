@@ -153,19 +153,15 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             if (Item.GetBaseItem().InteractionType == InteractionType.DICE)
                 return;
+            
+             Item.ExtraData = Extradata;
+             Item.UpdateState(false, true);
 
             if (Item.GetBaseItem().InteractionType == InteractionType.GATE)
             {
-                if (Item.GetRoom().GetGameMap().SquareHasUsers(Item.GetX, Item.GetY))
-                {
-                    return;
-                }
+                Item.RegenerateBlock(Extradata.ToString(), Item.GetRoom().GetGameMap());
+                Item.GetRoom().GetGameMap().updateMapForItem(Item);
             }
-            
-                Item.ExtraData = Extradata;
-                Item.UpdateState(false, true);
-            
-                
         }
 
         private void SetRotation(Item Item, int Rotation)

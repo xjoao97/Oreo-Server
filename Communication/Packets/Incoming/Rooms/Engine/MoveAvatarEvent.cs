@@ -33,14 +33,15 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Engine
 
             if (MoveX == User.X && MoveY == User.Y)
             {
-                if(!User.IsWalking)
-                    return;
-                else
-                    User.SeatCount++;
+                User.SeatCount++;
 
-                if (User.SeatCount == 5)
+                if (User.SeatCount == 4)
+                {
+                    User.SeatCount = 0;
                     return;
+                }
             }
+            else { User.SeatCount = 0; }
 
             if (User.RidingHorse)
             {

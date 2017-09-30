@@ -170,6 +170,13 @@
     <Compile Include="Communication\Packets\Outgoing\Sound\GetMusicDataComposer.cs" />
     <Compile Include="Communication\Packets\Outgoing\Sound\SyncMusicComposer.cs" />
     <Compile Include="Communication\Packets\Outgoing\Users\ClubGiftRecievedComposer.cs" />
+    <Compile Include="HabboHotel\Astar\AStarHeuristicType.cs" />
+    <Compile Include="HabboHotel\Astar\DreamPathfinder.cs" />
+    <Compile Include="HabboHotel\Astar\HeightInfo.cs" />
+    <Compile Include="HabboHotel\Astar\IPathNode.cs" />
+    <Compile Include="HabboHotel\Astar\ModelInfo.cs" />
+    <Compile Include="HabboHotel\Astar\SquareInformation.cs" />
+    <Compile Include="HabboHotel\Astar\SquarePoint.cs" />
     <Compile Include="HabboHotel\Calendar\CalendarDay.cs" />
     <Compile Include="HabboHotel\Calendar\CalendarManager.cs" />
     <Compile Include="HabboHotel\Catalog\BCCatalogItem.cs" />

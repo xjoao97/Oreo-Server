@@ -591,6 +591,31 @@ namespace Quasar.HabboHotel.Items
             }
         }
 
+        public void RegenerateBlock(string NewMode, Gamemap Tile)
+        {
+            try
+            {
+                List<RoomUser> list = new List<RoomUser>();
+                int CurrentMode = 0;
+
+                if (!int.TryParse(NewMode, out CurrentMode))
+                {
+                }
+
+                if (CurrentMode <= 0)
+                {
+                    foreach (RoomUser user in _room.GetGameMap().GetRoomUsers(new Point(this.GetX, this.GetY)))
+                    {
+                        user.SqState = 0;
+                    }
+                    _room.GetGameMap().GameMap[this.GetX, this.GetY] = 0;
+                }
+            }
+            catch
+            {
+            }
+        }
+
         public void SetState(int pX, int pY, Double pZ, Dictionary<int, ThreeDCoord> Tiles)
         {
             GetX = pX;
