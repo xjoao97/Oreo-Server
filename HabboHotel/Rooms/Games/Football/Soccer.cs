@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Drawing;
 using System.Collections.Generic;
@@ -84,7 +84,7 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
                         item.BallValue = 1;
                         MoveBall(item, User, userPoint, false, 6);
                     }
-                    
+
                     else if (User.X == item.GetX && User.Y == item.GetY && User.handelingBallStatus == 0)
                     {
                         Point userPoint = new Point(User.SetX, User.SetY);
@@ -102,15 +102,22 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
                             (User.X == User.GoalX && User.Y == User.GoalY))
                             continue;
 
+                        int num = User.X - item.GetX;
+                        int num2 = User.Y - item.GetY;
+                        int x = num * -1;
+                        int y = num2 * -1;
+                        x += item.GetX;
+                        y += item.GetY;
+
                         User.handelingBallStatus = 1;
                         IComeDirection comeDirection = ComeDirection.GetComeDirection(new Point(User.X, User.Y), item.Coordinate, false, null);
                         if (comeDirection == IComeDirection.Null)
                             continue;
 
-                        int newX = User.SetX;
-                        int newY = User.SetY;
+                        int newX = User.X;
+                        int newY = User.Y;
 
-                        if (item.GetRoom().GetGameMap().SquareHasUsers(User.SetX, User.SetY) || !item.GetRoom().GetGameMap().StackTable(User.SetX, User.SetY))
+                        if (item.GetRoom().GetGameMap().SquareHasUsers(x, y) || !item.GetRoom().GetGameMap().StackTable(x, y))
                         {
                             comeDirection = ComeDirection.InverseDirections(_room, comeDirection, User.X, User.Y);
                             newX = item.GetX;
@@ -119,7 +126,7 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
 
                         ComeDirection.GetNewCoords(comeDirection, ref newX, ref newY);
                         item.ExtraData = "11";
-                        MoveBall(item, User.GetClient(), newX, newY, true);
+                        MoveBall(item, User.GetClient(), x, y, true);
                     }
                 }
             }
@@ -258,7 +265,7 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
                 this._room.SendMessage(new UpdateFootBallComposer(item, newX, newY, NewZ));
             else
                 this._room.SendMessage(new SlideObjectBundleComposer(item.Coordinate.X, item.Coordinate.Y, item.GetZ, newX, newY, NewZ, item.Id, item.Id, item.Id));
-            
+
             this._room.GetRoomItemHandler().SetFloorItem(null, item, newX, newY, item.Rotation, false, false, false, false);
 
             if (itemIsOnGameItem || mover == null || mover.GetHabbo() == null)
