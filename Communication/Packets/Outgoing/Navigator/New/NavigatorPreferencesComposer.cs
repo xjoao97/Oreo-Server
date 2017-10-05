@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Quasar.Communication.Packets.Outgoing.Navigator
+﻿namespace Quasar.Communication.Packets.Outgoing.Navigator
 {
     class NavigatorPreferencesComposer : ServerPacket
     {
         public NavigatorPreferencesComposer()
             : base(ServerPacketHeader.NavigatorPreferencesMessageComposer)
         {
-            base.WriteInteger(68);//X
-            base.WriteInteger(42);//Y
-            base.WriteInteger(425);//Width
-            base.WriteInteger(400);//Height
-            base.WriteBoolean(false);//Show or hide saved searches.
-            base.WriteInteger(0);//No idea?
+            base.WriteInteger(10);
+            base.WriteInteger(17);
+            base.WriteInteger(425);
+            base.WriteInteger(591);
+            base.WriteBoolean(false);
+            base.WriteInteger(0);
+                 //Sirio\\
         }
     }
 }
-
