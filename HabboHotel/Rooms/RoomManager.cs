@@ -165,7 +165,6 @@ namespace Quasar.HabboHotel.Rooms
                     this._loadedRoomData.TryRemove(Room.Id, out Data);
                 }
             }
-            //Logging.WriteLine("[RoomMgr] Unloaded room: \"" + Room.Name + "\" (ID: " + Room.RoomId + ")");
         }
 
         public List<RoomData> SearchGroupRooms(string Query)
@@ -200,6 +199,7 @@ namespace Quasar.HabboHotel.Rooms
             IEnumerable<RoomData> rooms =
                 (from RoomInstance in this._loadedRoomData
                  where RoomInstance.Value.UsersNow > 0 &&
+                 RoomInstance.Value.Score > 16 &&
                  (category == -1 || RoomInstance.Value.Category == category) &&
                  RoomInstance.Value.Access != RoomAccess.INVISIBLE
                  orderby RoomInstance.Value.Score descending
@@ -212,8 +212,8 @@ namespace Quasar.HabboHotel.Rooms
         {
             IEnumerable<RoomData> Rooms =
                 (from RoomInstance in this._loadedRoomData
-                 where RoomInstance.Value.UsersNow >= 0 &&
-                 RoomInstance.Value.Score >= 0 &&
+                 where RoomInstance.Value.UsersNow > 0 &&
+                 RoomInstance.Value.Score > 8 &&
                  RoomInstance.Value.Access != RoomAccess.INVISIBLE &&
                  RoomInstance.Value.Id != CurrentRoomId
                  orderby RoomInstance.Value.Score descending
@@ -237,7 +237,6 @@ namespace Quasar.HabboHotel.Rooms
             IEnumerable<RoomData> rooms =
                 (from RoomInstance in this._loadedRoomData
                  where RoomInstance.Value.Category == Category &&
-                 RoomInstance.Value.UsersNow > 0 &&
                  RoomInstance.Value.Access != RoomAccess.INVISIBLE
                  orderby RoomInstance.Value.UsersNow descending
                  select RoomInstance.Value).Take(Amount);
@@ -338,11 +337,11 @@ namespace Quasar.HabboHotel.Rooms
         {
             IEnumerable<Room> room =
                 (from RoomInstance in this._rooms
-                where (RoomInstance.Value.RoomData.UsersNow > 0 &&
-                RoomInstance.Value.RoomData.Access == RoomAccess.OPEN &&
-                RoomInstance.Value.RoomData.UsersNow < RoomInstance.Value.RoomData.UsersMax)
-                orderby RoomInstance.Value.RoomData.UsersNow descending
-                select RoomInstance.Value).Take(1);
+                 where (RoomInstance.Value.RoomData.UsersNow > 0 &&
+                 RoomInstance.Value.RoomData.Access == RoomAccess.OPEN &&
+                 RoomInstance.Value.RoomData.UsersNow < RoomInstance.Value.RoomData.UsersMax)
+                 orderby RoomInstance.Value.RoomData.UsersNow descending
+                 select RoomInstance.Value).Take(1);
 
             if (room.Count() > 0)
                 return room.First();
