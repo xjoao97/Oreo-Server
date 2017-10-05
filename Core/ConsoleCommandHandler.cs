@@ -34,7 +34,6 @@ namespace Quasar.Core
                     case "shutdown":
                         {
                             Logging.DisablePrimaryWriting(true);
-                            Logging.WriteLine("The server is saving users furniture, rooms, etc. WAIT FOR THE SERVER TO CLOSE, DO NOT EXIT THE PROCESS IN TASK MANAGER!!", ConsoleColor.Yellow);
                             QuasarEnvironment.PerformShutDown();
                             break;
                         }
@@ -44,8 +43,6 @@ namespace Quasar.Core
                     case "alert":
                         {
                             string Notice = inputData.Substring(6);
-                            //QuasarEnvironment.GetGame().GetClientManager().SendMessage(new RoomNotificationComposer("Mensagem dos Desenvolvedores", ""+ Notice + "", "frank_notify", ""));
-
                             QuasarEnvironment.GetGame().GetClientManager().SendMessage(new BroadcastMessageAlertComposer(Notice));
                             Console.WriteLine("Alerta enviada com sucesso!", ConsoleColor.DarkGreen);
                             break;
@@ -54,11 +51,10 @@ namespace Quasar.Core
 
                     #region help
                     case "help":
-                    case "ajda":
-                    case "sirio":
+                    case "ajuda":
                     case "h":
                         {
-                            Console.WriteLine("\n\nComandos disponíveis pelo Hen:\n\nnotification/info/alert - Alertar todos do hotel.\n\nstop - Desligar o emulador por completo.\n\nclear - Limpar essa tela do emulador.\n\ncata - Atualizar a Loja.\n\nitems - Atualizar items da Loja.\n\nnav - Atualize o navegador.\n\npolls - Atualize as Pesquisas.");
+                            Console.WriteLine("\n\nComandos disponíveis:\n\nalert - Alertar todos do hotel.\n\nstop - Desligar o emulador por completo.\n\nclear - Limpar essa tela do emulador.\n\ncata - Atualizar a Loja.\n\nitems - Atualizar items da Loja.\n\nnav - Atualize o navegador.");
                             break;
                         }
                     #endregion
@@ -89,10 +85,11 @@ namespace Quasar.Core
 
                     #region clear
                     case "clear":
+                    case "limpar":
                         {
                             Console.Clear();
                             Console.WriteLine();
-                            Console.WriteLine(@" Para mais informações visite - sirio.wulles.url.ph.", ConsoleColor.DarkCyan);
+                            Console.WriteLine(@" Registros limpados com sucesso!", ConsoleColor.DarkCyan);
                             Console.WriteLine();
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine(@"--------------------------------------------------------------------------------");
