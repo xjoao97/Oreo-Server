@@ -174,28 +174,12 @@
 //        }
 //    }
 //}
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
-using Quasar.HabboHotel.Rooms;
-using Quasar.HabboHotel.Items;
-using Quasar.HabboHotel.Rooms.AI;
-using Quasar.HabboHotel.Rooms.AI.Speech;
-using Quasar.HabboHotel.Items.Utilities;
-
-
 
 using Quasar.Communication.Packets.Outgoing.Catalog;
-using Quasar.Communication.Packets.Outgoing.Inventory.Furni;
-
 using Quasar.Database.Interfaces;
-using Quasar.HabboHotel.Rooms.AI.Responses;
 using Quasar.Communication.Packets.Outgoing.Notifications;
 using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 using Quasar.Communication.Packets.Outgoing.Moderation;
-using System.ServiceModel.Channels;
 
 namespace Quasar.Communication.Packets.Incoming.Catalog
 {
@@ -211,7 +195,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
 
             if (Pin == Session.GetHabbo().PinClient)
             {
-                QuasarEnvironment.GetGame().GetClientManager().ManagerAlert(RoomNotificationComposer.SendBubble("estaff", "El usuario " + Session.GetHabbo().Username + " se ha autentificado correctamente", ""));
+                QuasarEnvironment.GetGame().GetClientManager().ManagerAlert(RoomNotificationComposer.SendBubble("frank_tiny", "Um membro da equipe acabou de entrar no hotel: " + Session.GetHabbo().Username + ".", ""));
                 Session.SendMessage(new CheckGnomeNameComposer(Pin, 0));
                 Session.SendMessage(new GraphicAlertComposer("staff"));
                 Session.GetHabbo().StaffOk = true;

@@ -68,16 +68,15 @@ namespace Quasar
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
-            Console.WriteLine(@"                                                                                                            ");
-            Console.WriteLine(@"     " + @"    (`/\ @Custom                                                                                 ");
-            Console.WriteLine(@"     " + @"    `=\/\  @Whats                                        |         |                             ");
-            Console.WriteLine(@"     " + @"     `=\/\  ,---.,---..     ,,---.,---.   ,---.,-.-..   .|    ,---.|--- ,---.,---.               ");
-            Console.WriteLine(@"     " + @"      `=\/  |    ,---| \   / |---'|   |   |---'| | ||   ||    ,---||    |   ||                   ");
-            Console.WriteLine(@"     " + @"         \  `    `---^  `-´  `---''   '   `---'` ' '`---'`---'`---^`---'`---'`                   ");
-            Console.WriteLine(@"                                                                                                            ");
+            Console.WriteLine(@"                                                                                      ");
+            Console.WriteLine(@" Custom and Whats.                           |         |                             ");
+            Console.WriteLine(@" ,---.,---..     ,,---.,---.   ,---.,-.-..   .|    ,---.|--- ,---.,---.               ");
+            Console.WriteLine(@" |    ,---| \   / |---'|   |   |---'| | ||   ||    ,---||    |   ||                   ");
+            Console.WriteLine(@" `    `---^  `-´  `---''   '   `---'` ' '`---'`---'`---^`---'`---'`                   ");
+            Console.WriteLine(@"                                                                                      ");
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("             Agradecimientos a » @SergioT @Sledmore @Dylan @Finn @XDR @CarlosD @Mr.Mustache @Root  ");
+            Console.WriteLine(" SergioT, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache, Root, Wulles, Arfeu, Away ");
             Console.WriteLine("");
             Console.Title = "Loading Raven...";
             _defaultEncoding = Encoding.Default;
@@ -147,10 +146,11 @@ namespace Quasar
 
                 TimeSpan TimeUsed = DateTime.Now - ServerStarted;
 
+                Console.WriteLine(@" O Emulador foi ligado em: " + TimeUsed.Seconds + " segundos.", ConsoleColor.Cyan);
                 Console.WriteLine();
-
-                log.Info(">> RAVEN SERVER -> Ligado (" + TimeUsed.Seconds + " s, " + TimeUsed.Milliseconds + " ms)");
+                Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkRed);
             }
+
             catch (KeyNotFoundException e)
             {
                 Logging.WriteLine("Please check your configuration file - some values appear to be missing.", ConsoleColor.Red);
