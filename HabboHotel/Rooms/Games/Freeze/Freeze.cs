@@ -652,7 +652,6 @@ namespace Quasar.HabboHotel.Rooms.Games.Freeze
             _freezeBlocks.Clear();
             _freezeTiles.Clear();
             this._exitTeleports.Clear();
-
             _room = null;
             _random = null;
         }

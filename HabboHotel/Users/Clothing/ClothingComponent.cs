@@ -47,7 +47,7 @@ namespace Quasar.HabboHotel.Users.Clothing
                     {
                         if (this._allClothing.TryAdd(Convert.ToInt32(Row["part_id"]), new ClothingParts(Convert.ToInt32(Row["id"]), Convert.ToInt32(Row["part_id"]), Convert.ToString(Row["part"]))))
                         {
-                            //umm?
+
                         }
                     }
                 }

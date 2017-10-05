@@ -178,10 +178,10 @@ namespace Quasar.HabboHotel.Moderation
                 }
             }
 
-            /*log.Info("Loaded " + (this._userPresets.Count + this._roomPresets.Count) + " moderation presets.");
-            log.Info("Loaded " + this._userActionPresetCategories.Count + " moderation categories.");
-            log.Info("Loaded " + this._userActionPresetMessages.Count + " moderation action preset messages.");
-            log.Info("Cached " + this._bans.Count + " username and machine bans.");*/
+            /*log.Info("Carregado " + (this._userPresets.Count + this._roomPresets.Count) + " moderation presets.");
+            log.Info("Carregado " + this._userActionPresetCategories.Count + " moderation categories.");
+            log.Info("Carregado " + this._userActionPresetMessages.Count + " moderation action preset messages.");
+            log.Info("Carregado " + this._bans.Count + " username and machine bans.");*/
             log.Info(">> Moderation Manager -> Ligado");
         }
 

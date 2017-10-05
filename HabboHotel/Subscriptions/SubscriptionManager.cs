@@ -39,7 +39,7 @@ namespace Quasar.HabboHotel.Subscriptions
                 }
             }
 
-            //log.Info(">> Subscription Manager " + this._subscriptions.Count + " loaded.");
+            //log.Info(" Usuários com HC " + this._subscriptions.Count + " Carregado");
             log.Info(">> Subscription Manager -> Ligado");
         }
 

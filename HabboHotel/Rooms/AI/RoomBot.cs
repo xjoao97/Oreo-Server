@@ -136,14 +136,14 @@ namespace Quasar.HabboHotel.Rooms.AI
                     return new BartenderBot(VirtualId);
                 case BotAIType.VISITORLOGGER:
                     return new VisitorLogger(VirtualId);
-                case BotAIType.CASINO_BOT:
+                /*case BotAIType.CASINO_BOT:
                     return new CasinoCounter(VirtualId);
                 case BotAIType.ROULLETE_BOT:
                     return new CasinoRoullete(VirtualId);
                 case BotAIType.ROULETTEBOTDUCKET:
                     return new RouleteBotDucket(VirtualId);
                 case BotAIType.ROULETTEBOTHONOR:
-                    return new RouletteBotHonor(VirtualId);
+                    return new RouletteBotHonor(VirtualId);*/
                 default:
                     return new GenericBot(VirtualId);
             }

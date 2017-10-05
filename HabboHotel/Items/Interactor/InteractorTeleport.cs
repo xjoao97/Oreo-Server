@@ -78,10 +78,8 @@ namespace Quasar.HabboHotel.Items.Interactor
 
             User.LastInteraction = QuasarEnvironment.GetUnixTimestamp();
 
-            // Alright. But is this user in the right position?
             if (User.Coordinate == Item.Coordinate || User.Coordinate == Item.SquareInFront)
             {
-                // Fine. But is this tele even free?
                 if (Item.InteractingUser != 0)
                 {
                     return;

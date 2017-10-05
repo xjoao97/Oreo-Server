@@ -151,7 +151,6 @@ namespace Quasar.HabboHotel.Users.Effects
             }
 
             Habbo.GetClient().SendMessage(new AvatarEffectExpiredComposer(this));
-            // reset fx if in room?
         }
 
         public void AddToQuantity()

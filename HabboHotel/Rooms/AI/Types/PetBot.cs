@@ -175,7 +175,7 @@ namespace Quasar.HabboHotel.Rooms.AI.Types
 
             if (Pet.PetData.DBState != DatabaseUpdateState.NeedsInsert)
                 Pet.PetData.DBState = DatabaseUpdateState.NeedsUpdate;
-       
+
             if (Message.ToLower().Equals(Pet.PetData.Name.ToLower()))
             {
                 Pet.SetRot(Rotation.Calculate(Pet.X, Pet.Y, User.X, User.Y), false);

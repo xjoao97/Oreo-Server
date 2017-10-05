@@ -57,7 +57,7 @@ namespace Quasar.HabboHotel.Items
         public int interactingBallUser;
         public byte interactionCount;
         public byte interactionCountHelper;
-        
+
 
 
         private int _coordX;
@@ -88,7 +88,7 @@ namespace Quasar.HabboHotel.Items
         internal bool Shoot = false;
         internal IComeDirection comeDirection;
         public MovementDirection MoveToDirMovement = MovementDirection.NONE;
-        
+
         //public int ExtradataInt // added
         //{
         //    get
@@ -524,7 +524,7 @@ namespace Quasar.HabboHotel.Items
 
                     case InteractionType.FOOTBALL:
                         return new InteractorFootball();
-                        
+
                     case InteractionType.footballcounterblue:
                     case InteractionType.footballcountergreen:
                     case InteractionType.footballcounterred:
@@ -653,8 +653,6 @@ namespace Quasar.HabboHotel.Items
                     {
                         #region Group Gates
                         case InteractionType.GUILD_GATE:
-                        case InteractionType.VIPGATE:
-                        case InteractionType.HCGATE:
                             {
                                 if (ExtraData == "1")
                                 {
@@ -671,6 +669,27 @@ namespace Quasar.HabboHotel.Items
                                 break;
                             }
                         #endregion
+
+                        #region HC Gate
+                        case InteractionType.HCGATE:
+                        case InteractionType.VIPGATE:
+                            {
+                                if (ExtraData == "1")
+                                {
+                                    if (GetRoom().GetRoomUserManager().GetUserForSquare(GetX, GetY) == null)
+                                    {
+                                        ExtraData = "0";
+                                        UpdateState(false, true);
+                                    }
+                                    else
+                                    {
+                                        RequestUpdate(2, false);
+                                    }
+                                }
+                                break;
+                            }
+                        #endregion
+
 
                         #region Item Effects
                         //case InteractionType.FX_PROVIDER:
@@ -864,7 +883,7 @@ namespace Quasar.HabboHotel.Items
                                     }
                                     else
                                     {
-                                        // Invalid user, do nothing and move on for the next user. 
+                                        // Invalid user, do nothing and move on for the next user.
                                         InteractingUser = 0;
                                     }
                                 }
@@ -1042,7 +1061,7 @@ namespace Quasar.HabboHotel.Items
 
                                                 // Move into the tele
                                                 User.MoveTo(Coordinate.X, Coordinate.Y, true);
-                                            
+
                                         }
                                         // Not even near, do nothing and move on for the next user.
                                         else
@@ -1052,7 +1071,7 @@ namespace Quasar.HabboHotel.Items
                                     }
                                     else
                                     {
-                                        // Invalid user, do nothing and move on for the next user. 
+                                        // Invalid user, do nothing and move on for the next user.
                                         InteractingUser = 0;
                                     }
                                 }
@@ -1121,7 +1140,7 @@ namespace Quasar.HabboHotel.Items
                                 if (ExtraData == "-1")
                                 {
                                     var num = RandomNumber.GenerateRandom(1, 6);
-                                    
+
                                     var user = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(InteractingUser);
 
                                     if (user != null)

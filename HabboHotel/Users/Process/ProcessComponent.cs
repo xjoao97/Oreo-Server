@@ -96,8 +96,6 @@ namespace Quasar.HabboHotel.Users.Process
 
                 this._resetEvent.Reset();
 
-                // BIGIN COUD
-
                 #region Muted Checks
                 if (this._player.TimeMuted > 0)
                     this._player.TimeMuted -= 60;
@@ -149,9 +147,6 @@ namespace Quasar.HabboHotel.Users.Process
                 this._player.CheckCreditsTimer();
                 this._player.Effects().CheckEffectExpiry(this._player);
 
-                // END CODE
-
-                // Reset the values
                 this._timerRunning = false;
                 this._timerLagging = false;
 
@@ -170,12 +165,10 @@ namespace Quasar.HabboHotel.Users.Process
             {
                 this._resetEvent.WaitOne(TimeSpan.FromMinutes(5));
             }
-            catch { } // give up
+            catch { }
 
-            // Set the timer to disabled
             this._disabled = true;
 
-            // Dispose the timer to disable it.
             try
             {
                 if (this._timer != null)
@@ -183,10 +176,8 @@ namespace Quasar.HabboHotel.Users.Process
             }
             catch { }
 
-            // Remove reference to the timer.
             this._timer = null;
 
-            // Null the player so we don't reference it here anymore
             this._player = null;
         }
     }

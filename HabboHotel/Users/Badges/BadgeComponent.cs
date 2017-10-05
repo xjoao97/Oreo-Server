@@ -97,8 +97,6 @@ namespace Quasar.HabboHotel.Users.Badges
             if (HasBadge(Badge))
                 return;
 
-
-
             if (InDatabase)
             {
                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())

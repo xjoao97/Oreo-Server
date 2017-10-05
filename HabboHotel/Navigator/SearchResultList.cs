@@ -41,7 +41,6 @@ namespace Quasar.HabboHotel.Navigator
             set { this._id = value; }
         }
 
-        //TODO: Make an enum?
         public string Category
         {
             get { return this._category; }

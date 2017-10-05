@@ -51,7 +51,7 @@ namespace Quasar.HabboHotel.Achievements
             int TotalLevels = AchievementData.Levels.Count;
 
             if (UserData != null && UserData.Level == TotalLevels)
-                return false; // done, no more.
+                return false;
 
             int TargetLevel = (UserData != null ? UserData.Level + 1 : 1);
 

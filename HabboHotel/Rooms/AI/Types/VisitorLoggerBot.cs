@@ -48,21 +48,21 @@ namespace Quasar.HabboHotel.Rooms.AI.Types
 
                 foreach (DataRow Row in getUsername.Rows)
                 {
-                    Bot.Chat("¡Me alegro de verlo Señor! Diga 'Si', si desea saber quien ha visitado la sala en su ausencia.", false);
+                    Bot.Chat("Fico feliz em ver você, gostaria de saber se alguém visitou você?.. Digite 'Visitantes' e eu irei te contar tudo!", false);
                     return;
                 }
-                Bot.Chat("He estado muy atento y te afirmo que nadie visitó esta sala mientras tú no estabas.", false);
+                Bot.Chat("Eu juro que fiquei de olho aberto, e nesse tempo ninguém visitou você!", false);
             }
             else
             {
-                Bot.Chat("Hola " + User.GetClient().GetHabbo().Username + ", le hablaré de ti al dueño.", false);
+                Bot.Chat("Olá " + User.GetClient().GetHabbo().Username + ", irei avisar ao proprietário que você visitou ele!", false);
 
                 using (IQueryAdapter query = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     query.SetQuery("INSERT INTO room_visits (roomid, username, gone) VALUE (@roomid, @username, @gone)");
                     query.AddParameter("roomid", User.RoomId);
                     query.AddParameter("username", User.GetClient().GetHabbo().Username);
-                    query.AddParameter("gone", "todavía está en la sala.");
+                    query.AddParameter("gone", "ainda está no oquarto.");
                     query.RunQuery();
                 }
                 return;
@@ -93,7 +93,7 @@ namespace Quasar.HabboHotel.Rooms.AI.Types
             using (IQueryAdapter query = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 query.SetQuery("UPDATE room_visits SET gone = @gone WHERE roomid = @id AND username = @username");
-                query.AddParameter("gone", "se ha ido.");
+                query.AddParameter("gone", "já se foi.");
                 query.AddParameter("id", Client.GetHabbo().CurrentRoom.RoomId);
                 query.AddParameter("username", Client.GetHabbo().Username);
                 getUpdate = query.getTable();

@@ -45,12 +45,10 @@ namespace Quasar.HabboHotel.Users
     {
         private static readonly ILog log = LogManager.GetLogger("Quasar.HabboHotel.Users");
 
-        //Prefijos
         public string _tag;
         public string _tagcolor;
         public string _nameColor;
 
-        //Generic player values.
         private int _id;
         private string _username;
         private int _rank;
@@ -82,7 +80,6 @@ namespace Quasar.HabboHotel.Users
         private int _CurrentTalentLevel;
         private int _BonusPoints;
 
-        //Abilitys triggered by generic events.
         public string _alerttype = "2";
         public string _eventtype = "1";
         public int _eventsopened;
@@ -110,7 +107,6 @@ namespace Quasar.HabboHotel.Users
 
         public long _lastTimeUsedHelpCommand;
 
-        //Player saving.
         private bool _disconnected;
         private bool _habboSaved;
         private bool _changingName;
@@ -118,7 +114,6 @@ namespace Quasar.HabboHotel.Users
 
         public Dictionary<string, int> WiredRewards;
 
-        //Counters
         private double _floodTime;
         private int _friendCount;
         private double _timeMuted;
@@ -136,7 +131,6 @@ namespace Quasar.HabboHotel.Users
         public byte _croupier;
         public byte _TargetedBuy;
 
-        //Room related
         private int _tentId;
         private int _hopperId;
         private bool _isHopping;
@@ -147,13 +141,11 @@ namespace Quasar.HabboHotel.Users
         private int _currentRoomId;
         public bool Spectating = false;
 
-        //Advertising reporting system.
         private bool _hasSpoken;
         private bool _advertisingReported;
         private double _lastAdvertiseReport;
         private bool _advertisingReportBlocked;
 
-        //Values generated within the game.
         private bool _wiredInteraction;
         private int _questLastCompleted;
         private bool _inventoryAlert;
@@ -168,7 +160,7 @@ namespace Quasar.HabboHotel.Users
         public bool isDeveloping = false;
         public int lastX;
         public int lastY;
-        //alfas
+
         internal bool onDuty;
         internal bool onService;
         internal uint userHelping;
@@ -177,22 +169,15 @@ namespace Quasar.HabboHotel.Users
         internal bool requestTour;
         internal bool reportsOfHarassment;
 
-        // Camara
-
         public string _lastPhotoPreview;
         public string lastPhotoPreview;
 
-        //Fastfood
         private int _fastfoodScore;
 
-
-        //Just random fun stuff.
         private int _petId;
 
-        //Last purchases system
         public Dictionary<int, CatalogItem> _lastitems;
 
-        //Anti-script placeholders.
         private DateTime _lastGiftPurchaseTime;
         private DateTime _lastMottoUpdateTime;
         private DateTime _lastClothingUpdateTime;
@@ -416,7 +401,7 @@ namespace Quasar.HabboHotel.Users
                 dbClient.AddParameter("user_id", Id);
                 StatRow = dbClient.getRow();
 
-                if (StatRow == null)//No row, add it yo
+                if (StatRow == null)
                 {
                     dbClient.RunQuery("INSERT INTO `user_stats` (`id`) VALUES ('" + Id + "')");
                     dbClient.SetQuery("SELECT `id`,`roomvisits`,`onlinetime`,`respect`,`respectgiven`,`giftsgiven`,`giftsreceived`,`dailyrespectpoints`,`dailypetrespectpoints`,`achievementscore`,`quest_id`,`quest_progress`,`groupid`,`tickets_answered`,`respectstimestamp`,`forum_posts`, `PurchaseUsersConcurrent` FROM `user_stats` WHERE `id` = @user_id LIMIT 1");
@@ -459,7 +444,6 @@ namespace Quasar.HabboHotel.Users
                 this._habboStats.FavouriteGroupId = 0;
             #endregion
         }
-
 
 
         internal ClubManager GetClubManager()
@@ -1174,7 +1158,6 @@ namespace Quasar.HabboHotel.Users
 
         }
 
-
         public PermissionComponent GetPermissions()
         {
             return this._permissions;
@@ -1202,7 +1185,7 @@ namespace Quasar.HabboHotel.Users
 
             QuasarEnvironment.GetGame().GetClientManager().UnregisterClient(Id, Username);
 
-            if (!this._habboSaved) // GUARDADO DE USER
+            if (!this._habboSaved)
             {
                 this._habboSaved = true;
                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
@@ -1276,18 +1259,18 @@ namespace Quasar.HabboHotel.Users
                 if (this._creditsTickUpdate <= 0)
                 {
                     int CreditUpdate = QuasarStaticGameSettings.UserCreditsUpdateAmount;
-                    //int DucketUpdate = QuasarStaticGameSettings.UserPixelsUpdateAmount;
-                    //int VipDucketUpdate = QuasarStaticGameSettings.UserVipPixelsUpdateAmount;
+                    /*int DucketUpdate = QuasarStaticGameSettings.UserPixelsUpdateAmount;
+                    int VipDucketUpdate = QuasarStaticGameSettings.UserVipPixelsUpdateAmount;
 
                     this._credits += CreditUpdate;
-                    //if (this._client.GetHabbo().Rank == 2 && this._client.GetHabbo().VIPRank == 1)
-                    //{
-                    //    this._duckets += VipDucketUpdate;
-                    //}
-                    //else
-                    //{
-                    //    this._duckets += DucketUpdate;
-                    //}
+                    if (this._client.GetHabbo().Rank == 2 && this._client.GetHabbo().VIPRank == 1)
+                    {
+                        this._duckets += VipDucketUpdate;
+                    }
+                        else
+                    {
+                        this._duckets += DucketUpdate;
+                    }*/
 
 
                     if (this._client.GetHabbo().Rank == 2 && this._client.GetHabbo().VIPRank == 1)
@@ -1524,7 +1507,7 @@ namespace Quasar.HabboHotel.Users
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("INSERT INTO user_roomvisits (user_id,room_id,entry_timestamp,exit_timestamp,hour,minute) VALUES ('" + this.GetClient().GetHabbo().Id + "','" + this.GetClient().GetHabbo().CurrentRoomId + "','" + QuasarEnvironment.GetUnixTimestamp() + "','0','" + DateTime.Now.Hour + "','" + DateTime.Now.Minute + "');");// +
+                dbClient.RunQuery("INSERT INTO user_roomvisits (user_id,room_id,entry_timestamp,exit_timestamp,hour,minute) VALUES ('" + this.GetClient().GetHabbo().Id + "','" + this.GetClient().GetHabbo().CurrentRoomId + "','" + QuasarEnvironment.GetUnixTimestamp() + "','0','" + DateTime.Now.Hour + "','" + DateTime.Now.Minute + "');");
             }
 
 

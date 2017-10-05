@@ -39,7 +39,7 @@ namespace Quasar.HabboHotel.Items.Crafting
                 }
             }
 
-            log.Info(">> Crafting Manager -> Ligado");
+            //log.Info(" Crafting  - Carregado");
         }
 
         internal CraftingRecipe GetRecipe(string name)

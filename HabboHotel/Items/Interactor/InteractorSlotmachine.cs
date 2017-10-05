@@ -26,22 +26,21 @@ namespace Quasar.HabboHotel.Items.Interactor
 
         public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
         {
-            // Revisar la cantidad de diamantes que tiene.
             if (Session.GetHabbo().Diamonds <= 0)
             {
-                Session.SendWhisper("Para poder apostar debes tener diamantes, ahora mismo tienes 0.", 34);
+                Session.SendWhisper("Para apostar você deve ter diamantes, atualmente tem 0", 34);
                 return;
             }
 
             if (Session.GetHabbo()._bet > Session.GetHabbo().Diamonds)
             {
-                Session.SendWhisper("Estás apostando más diamantes de los que tienes.", 34);
+                Session.SendWhisper("Você está apostando mais diamantes de que você tem!", 34);
                 return;
             }
 
             if (Session.GetHabbo()._bet <= 0)
             {
-                Session.SendWhisper("No puedes apostar 0 diamantes.", 34);
+                Session.SendWhisper("Opa, você não pode apostar 0 diamantes!", 34);
                 return;
             }
 
@@ -118,35 +117,34 @@ namespace Quasar.HabboHotel.Items.Interactor
 
                 if (Random1 == Random2 && Random1 == Random3 && Random3 == Random2)
                 {
-                    //  ¥ - Estrella - » Trebol - ª Calavera
                     switch (Random1)
                     {
                         case 1:
                             Session.GetHabbo().Diamonds += Bet *4;
                             Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, -Bet, 5));
-                            Session.SendWhisper("Has ganado " + Bet * 4 + " diamantes con una triple estrella.", 34);
+                            Session.SendWhisper("Parabéns, você ganhou " + Bet * 4 + " diamantes com três estrelas!", 34);
                             QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Actor.GetClient(), "ACH_StarBet", 1);
                             break;
                         case 2:
                             Session.GetHabbo().Diamonds += Bet * 5;
                             Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, -Bet, 5));
-                            Session.SendWhisper("Has ganado " + Bet * 5 + " diamantes con un triple corazón.", 34);
+                            Session.SendWhisper("Parabéns, você ganhou " + Bet * 5 + " diamantes com três corações!", 34);
                             QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Actor.GetClient(), "ACH_HeartBet", 1);
                             break;
                         case 3:
                             Session.GetHabbo().Diamonds += Bet * 3;
                             Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, -Bet, 5));
-                            Session.SendWhisper("Has ganado " + Bet * 4 + " diamantes con una triple calavera.", 34);
+                            Session.SendWhisper("Parabéns, você ganhouo " + Bet * 4 + " diamantes com três caveiras!", 34);
                             QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Actor.GetClient(), "ACH_SkullBet", 1);
                             break;
                     }
                 }
-                
+
                 QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Actor.GetClient(), "ACH_GeneralBet", 1);
                 return;
             }
         }
-            
+
         public void OnWiredTrigger(Item Item)
         {
 

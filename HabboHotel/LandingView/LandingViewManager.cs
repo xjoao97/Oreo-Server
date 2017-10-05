@@ -42,7 +42,7 @@ namespace Quasar.HabboHotel.LandingView
             }
 
 
-            log.Info(">> LandingView Manager -> Ligado ");
+            //log.Info(" LandingView  - Carregado ");
         }
 
         public ICollection<Promotion> GetPromotionItems()

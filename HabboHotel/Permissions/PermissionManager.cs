@@ -92,14 +92,14 @@ namespace Quasar.HabboHotel.Permissions
 
                         if (!this.PermissionGroups.ContainsKey(GroupId))
                         {
-                            continue; // permission group does not exist
+                            continue;
                         }
 
                         Permission Permission = null;
 
                         if (!this.Permissions.TryGetValue(PermissionId, out Permission))
                         {
-                            continue; // permission does not exist
+                            continue;
                         }
 
                         if (PermissionGroupRights.ContainsKey(GroupId))
@@ -134,7 +134,7 @@ namespace Quasar.HabboHotel.Permissions
 
                         Permission Permission = null;
                         if (!this.Permissions.TryGetValue(PermissionId, out Permission))
-                            continue; // permission does not exist
+                            continue;
 
                         if (this.PermissionSubscriptionRights.ContainsKey(SubscriptionId))
                         {
@@ -153,10 +153,10 @@ namespace Quasar.HabboHotel.Permissions
                 }
             }
 
-            /*log.Info(">> Permissions " + this.Permissions.Count + " loaded.");
-            log.Info(">> Permissions Groups " + this.PermissionGroups.Count + " loaded");
-            log.Info(">> Permissions Rights " + this.PermissionGroupRights.Count + " loaded");
-            log.Info(">> Permissions Subscription " + this.PermissionSubscriptionRights.Count + " loaded");*/
+            /*log.Info(" Permissões " + this.Permissions.Count + " Carregado");
+            log.Info("   Permissões de Grupos " + this.PermissionGroups.Count + " Carregado");
+            log.Info("   Direitos " + this.PermissionGroupRights.Count + " Carregado");
+            log.Info("   Permissões HC " + this.PermissionSubscriptionRights.Count + " Carregado");*/
             log.Info(">> Permissions Manager -> Ligado");
         }
 

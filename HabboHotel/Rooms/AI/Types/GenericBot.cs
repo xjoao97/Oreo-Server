@@ -71,14 +71,14 @@ namespace Quasar.HabboHotel.Rooms.AI.Types
                     string word;
                     string String = QuasarEnvironment.GetGame().GetChatManager().GetFilter().IsUnnaceptableWord(Speech.Message, out word) ? "Spam" : Speech.Message;
                     if (String.Contains("<img src") || String.Contains("<font ") || String.Contains("</font>") || String.Contains("</a>") || String.Contains("<i>"))
-                        String = "I really shouldn't be using HTML within bot speeches.";
+                        String = "Você realmente não deveria usar o HTML dentro de discursos de bot.";
                     GetRoomUser().Chat(String, false, GetBotData().ChatBubble);
                 }
                 SpeechTimer = GetBotData().SpeakingInterval;
             }
             else
                 SpeechTimer--;
-           
+
             if (ActionTimer <= 0)
             {
                 Point nextCoord;
@@ -86,7 +86,7 @@ namespace Quasar.HabboHotel.Rooms.AI.Types
                 {
                     default:
                     case "stand":
-                        // (8) Why is my life so boring?
+
                         break;
 
                     case "freeroam":

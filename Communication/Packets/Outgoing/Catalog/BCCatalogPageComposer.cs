@@ -153,7 +153,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
                 }
 
                 //}
-                /*}*/
+                //}
             }
             else
                 base.WriteInteger(0);

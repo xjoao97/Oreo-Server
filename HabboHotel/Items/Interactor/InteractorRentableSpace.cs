@@ -38,7 +38,6 @@ namespace Quasar.HabboHotel.Items.Interactor
                 return;
             }
 
-
             int CurrentMode = 0;
             int NewMode = 0;
 
@@ -71,7 +70,7 @@ namespace Quasar.HabboHotel.Items.Interactor
 
         public void OnCycle(Item Item)
         {
-        }  
-                
+        }
+
         }
     }

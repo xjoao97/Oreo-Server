@@ -347,7 +347,7 @@ namespace Quasar.HabboHotel.Users.Messenger
                 }
 
             }
-            if (GetClient().GetHabbo().Rank >= 5 && ToId == int.MinValue) // int.MaxValue
+            if (GetClient().GetHabbo().Rank >= 5 && ToId == int.MinValue)
             {
                 QuasarEnvironment.GetGame().GetClientManager().StaffAlert(new FuckingConsoleMessageComposer(ToId, Message, GetClient().GetHabbo().Username + "/" + GetClient().GetHabbo().Look + "/" + GetClient().GetHabbo().Id), GetClient().GetHabbo().Id);
                 return;
@@ -369,13 +369,13 @@ namespace Quasar.HabboHotel.Users.Messenger
             {
                 GetClient().GetHabbo().MessengerSpamTime = QuasarEnvironment.GetUnixTimestamp() + 60;
                 GetClient().GetHabbo().MessengerSpamCount = 0;
-                GetClient().SendNotification("You cannot send a message, you have flooded the console.\n\nYou can send a message in 60 seconds.");
+                GetClient().SendNotification("Você não pode floodar mensagens.\n\nAguarde 60 segundos.");
                 return;
             }
             else if (GetClient().GetHabbo().MessengerSpamTime > QuasarEnvironment.GetUnixTimestamp())
             {
                 double Time = GetClient().GetHabbo().MessengerSpamTime - QuasarEnvironment.GetUnixTimestamp();
-                GetClient().SendNotification("You cannot send a message, you have flooded the console.\n\nYou can send a message in " + Time + " seconds.");
+                GetClient().SendNotification("Você não pode floodar no console\n\nVocê não pode enviar mensagens durante " + Time + " segundos.");
                 return;
             }
 
@@ -437,10 +437,10 @@ namespace Quasar.HabboHotel.Users.Messenger
             ServerPacket Packet = new ServerPacket(ServerPacketHeader.FriendListUpdateMessageComposer);
             Packet.WriteInteger(1);//Category Count
             Packet.WriteInteger(1);
-            Packet.WriteString("Chats de grupo");
+            Packet.WriteString("Chat de Grupos");
 
-            Packet.WriteInteger(1); // number of updates
-            Packet.WriteInteger(0); // don't know
+            Packet.WriteInteger(1);
+            Packet.WriteInteger(0);
 
             friend.Serialize(Packet, GetClient());
             return Packet;

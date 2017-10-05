@@ -59,8 +59,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
 
                 if (Value > 0)
                 {
-                    //Session.GetHabbo().Duckets += Value;
-                    Session.SendWhisper("Estos lingotes ya no son válidos ya que esta moneda ya no funciona para estas acciones.", 34);
+                    Session.GetHabbo().Duckets += Value;
                     Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Value));
                 }
             }

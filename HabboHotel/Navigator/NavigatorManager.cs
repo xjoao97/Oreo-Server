@@ -24,7 +24,6 @@ namespace Quasar.HabboHotel.Navigator
             this._topLevelItems = new Dictionary<int, TopLevelItem>();
             this._searchResultLists = new Dictionary<int, SearchResultList>();
 
-            //Does this need to be dynamic?
             this._topLevelItems.Add(1, new TopLevelItem(1, "official_view", "", ""));
             this._topLevelItems.Add(2, new TopLevelItem(2, "hotel_view", "", ""));
             this._topLevelItems.Add(3, new TopLevelItem(3, "roomads_view", "", ""));

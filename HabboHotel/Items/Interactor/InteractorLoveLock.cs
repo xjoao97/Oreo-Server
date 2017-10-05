@@ -54,11 +54,11 @@ namespace Quasar.HabboHotel.Items.Interactor
                     RoomUser UserTwo = Item.GetRoom().GetRoomUserManager().GetUserForSquare(pointTwo.X, pointTwo.Y);
 
                     if(UserOne == null || UserTwo == null)
-                        Session.SendNotification("No se encontro un usuario valido para poder bloquear esta cerradura de amor");
+                        Session.SendNotification("Não foi encontrado um parceiro(a)!");
                     else if(UserOne.GetClient() == null || UserTwo.GetClient() == null)
-                        Session.SendNotification("No se encontro un usuario valido para poder bloquear esta cerradura de amor");
+                        Session.SendNotification("Não foi encontrado um parceiro(a)!");
                     else if(UserOne.HabboId != Item.UserID && UserTwo.HabboId != Item.UserID)
-                        Session.SendNotification("Esta maquina solo la puede usar el dueño");
+                        Session.SendNotification("OOps, apenas o dono pode fechar!");
                     else
                     {
                         UserOne.CanWalk = false;

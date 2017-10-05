@@ -156,7 +156,7 @@ namespace Quasar.HabboHotel.GameClients
 
                 QuasarEnvironment.GetGame().GetClientManager().RegisterClient(this, userData.userID, userData.user.Username);
                 _habbo = userData.user;
-                
+
 
                 if (_habbo != null)
                 {
@@ -170,7 +170,7 @@ namespace Quasar.HabboHotel.GameClients
                     SendMessage(new UserRightsComposer(_habbo));
                     SendMessage(new AvailabilityStatusComposer());
                     SendMessage(new AchievementScoreComposer(_habbo.GetStats().AchievementPoints));
-                    
+
 
                     var habboClubSubscription = new ServerPacket(ServerPacketHeader.HabboClubSubscriptionComposer);
                     habboClubSubscription.WriteString("club_habbo");
@@ -189,7 +189,7 @@ namespace Quasar.HabboHotel.GameClients
                     SendMessage(new CfhTopicsInitComposer());
 
                     SendMessage(new BadgeDefinitionsComposer(QuasarEnvironment.GetGame().GetAchievementManager()._achievements));
-                    SendMessage(new SoundSettingsComposer(_habbo.ClientVolume, _habbo.ChatPreference, _habbo.AllowMessengerInvites, _habbo.FocusPreference, FriendBarStateUtility.GetInt(_habbo.FriendbarState)));  
+                    SendMessage(new SoundSettingsComposer(_habbo.ClientVolume, _habbo.ChatPreference, _habbo.AllowMessengerInvites, _habbo.FocusPreference, FriendBarStateUtility.GetInt(_habbo.FriendbarState)));
                     SendMessage(new TalentTrackLevelComposer());
                     if (GetHabbo().GetMessenger() != null)
                         GetHabbo().GetMessenger().OnStatusChanged(true);
@@ -236,7 +236,7 @@ namespace Quasar.HabboHotel.GameClients
                     }
                     if (!QuasarEnvironment.GetGame().GetCacheManager().ContainsUser(_habbo.Id))
                         QuasarEnvironment.GetGame().GetCacheManager().GenerateUser(_habbo.Id);
-                   
+
                     _habbo.InitProcess();
 
                     this.GetHabbo()._lastitems = new Dictionary<int, CatalogItem>();
@@ -258,7 +258,7 @@ namespace Quasar.HabboHotel.GameClients
 
                     if (GetHabbo()._NUX) { SendMessage(new MassEventComposer("habbopages/bienvenidanormal.txt")); }
                     else { SendMessage(new MassEventComposer("habbopages/bienvenidauser.txt")); }
-                
+
 
                     if (QuasarEnvironment.GetDBConfig().DBData["pin.system.enable"] == "0")
                         GetHabbo().StaffOk = true;
@@ -274,9 +274,9 @@ namespace Quasar.HabboHotel.GameClients
                         }
                     }
 
-                    //SendMessage(new CampaignCalendarDataComposer(_habbo.calendarGift));
-                    //if (int.Parse(QuasarEnvironment.GetDBConfig().DBData["advent.calendar.enable"]) == 1) // Tk Custom By Whats
-                    //    SendMessage(new MassEventComposer("openView/calendar"));
+                    SendMessage(new CampaignCalendarDataComposer(_habbo.calendarGift));
+                    if (int.Parse(QuasarEnvironment.GetDBConfig().DBData["advent.calendar.enable"]) == 1) // Tk Custom By Whats
+                        SendMessage(new MassEventComposer("openView/calendar"));
 
                     if (QuasarEnvironment.GetGame().GetTargetedOffersManager().TargetedOffer != null)
                     {
@@ -415,7 +415,7 @@ namespace Quasar.HabboHotel.GameClients
                     }
 
                     GetHabbo().OnDisconnect();
-                   
+
 
                 }
             }

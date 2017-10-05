@@ -106,7 +106,7 @@ namespace Quasar.HabboHotel.Rooms.AI
             int MaxE;
             if (Add)
             {
-                if (Energy == 100) // If Energy is 100, no point.
+                if (Energy == 100)
                     return;
 
                 if (Energy > 85)
@@ -116,7 +116,7 @@ namespace Quasar.HabboHotel.Rooms.AI
 
             }
             else
-                MaxE = 15; // Remove Max Energy as 15
+                MaxE = 15;
 
             if (MaxE <= 4)
                 MaxE = 15;
@@ -155,7 +155,7 @@ namespace Quasar.HabboHotel.Rooms.AI
                     return _room;
                 else
                     return null;
-            
+
             }
         }
 
@@ -186,7 +186,6 @@ namespace Quasar.HabboHotel.Rooms.AI
         {
             get
             {
-                //will error index out of range (need to look into this sometime)
                 return experienceLevels[Level - 1];
             }
         }

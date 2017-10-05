@@ -15,7 +15,7 @@ namespace Quasar.HabboHotel.Navigator
     {
         public static void Search(ServerPacket Message, SearchResultList SearchResult, string SearchData, GameClient Session, int FetchLimit)
         {
-            //Switching by categorys.
+          
             switch (SearchResult.CategoryType)
             {
                 default:

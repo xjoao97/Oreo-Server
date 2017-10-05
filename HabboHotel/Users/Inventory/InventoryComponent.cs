@@ -89,7 +89,7 @@ namespace Quasar.HabboHotel.Users.Inventory
             {
                 if (!this._petsItems.TryAdd(Pet.PetId, Pet))
                 {
-                    Console.WriteLine("Error whilst loading pet x1: " + Pet.PetId);
+                    Console.WriteLine("Erro ao carregar a lista de Mascotes: " + Pet.PetId);
                 }
             }
 
@@ -98,7 +98,7 @@ namespace Quasar.HabboHotel.Users.Inventory
             {
                 if (!this._botItems.TryAdd(Bot.Id, Bot))
                 {
-                    Console.WriteLine("Error whilst loading bot x1: " + Bot.Id);
+                    Console.WriteLine("Erro ao carregar a lista de Bots: " + Bot.Id);
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace Quasar.HabboHotel.Users.Inventory
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("DELETE FROM items WHERE room_id='0' AND user_id = " + _userId); //Do join 
+                dbClient.RunQuery("DELETE FROM items WHERE room_id='0' AND user_id = " + _userId); //Do join
             }
 
             this._floorItems.Clear();
@@ -160,7 +160,7 @@ namespace Quasar.HabboHotel.Users.Inventory
 
         public Item GetItem(int Id)
         {
-       
+
             if (_floorItems.ContainsKey(Id))
                 return (Item) _floorItems[Id];
             else if (_wallItems.ContainsKey(Id))
@@ -218,7 +218,7 @@ namespace Quasar.HabboHotel.Users.Inventory
             }
 
             Item ItemToAdd = new Item(Id, 0, BaseItem, ExtraData, 0, 0, 0, 0, _userId, Group, LimitedNumber, LimitedStack, string.Empty);
- 
+
             if (UserHoldsItem(Id))
                 RemoveItem(Id);
 
@@ -231,7 +231,7 @@ namespace Quasar.HabboHotel.Users.Inventory
 
         private bool UserHoldsItem(int itemID)
         {
-         
+
             if (_floorItems.ContainsKey(itemID))
                 return true;
             if (_wallItems.ContainsKey(itemID))
@@ -244,7 +244,7 @@ namespace Quasar.HabboHotel.Users.Inventory
             get
             {
                 Dictionary<int, Item> discs = new Dictionary<int, Item>();
-                
+
                 foreach (Item item in _floorItems.Values)
                 {
                     if (item.GetBaseItem().InteractionType == InteractionType.MUSIC_DISC)
@@ -261,7 +261,7 @@ namespace Quasar.HabboHotel.Users.Inventory
         {
             if (GetClient() == null)
                 return;
-            
+
             if(GetClient().GetHabbo() == null || GetClient().GetHabbo().GetInventoryComponent() == null)
                 GetClient().Disconnect();
 
@@ -385,18 +385,18 @@ namespace Quasar.HabboHotel.Users.Inventory
 
         public bool TryAddItem(Item item)
         {
-            if (item.Data.Type.ToString().ToLower() == "s")// ItemType.FLOOR)
+            if (item.Data.Type.ToString().ToLower() == "s")
             {
                 return this._floorItems.TryAdd(item.Id, item);
             }
 
-            else if (item.Data.Type.ToString().ToLower() == "i")//ItemType.WALL)
+            else if (item.Data.Type.ToString().ToLower() == "i")
             {
                 return this._wallItems.TryAdd(item.Id, item);
             }
             else
             {
-                throw new InvalidOperationException("Item did not match neither floor or wall item");
+                throw new InvalidOperationException("O item não corresponde nem ao item do chão ou da parede!");
             }
         }
 

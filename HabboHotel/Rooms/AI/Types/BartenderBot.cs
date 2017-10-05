@@ -35,7 +35,7 @@ namespace Quasar.HabboHotel.Rooms.AI.Types
 
         public override void OnUserLeaveRoom(GameClient Client)
         {
-            //if ()
+
         }
 
         public override void OnUserSay(RoomUser User, string Message)
@@ -136,7 +136,7 @@ namespace Quasar.HabboHotel.Rooms.AI.Types
                 {
                     default:
                     case "stand":
-                        // (8) Why is my life so boring?
+
                         break;
 
                     case "freeroam":

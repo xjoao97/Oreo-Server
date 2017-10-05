@@ -1,4 +1,5 @@
-﻿/*using System;
+﻿/*
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,7 @@ using Quasar.Communication.Packets.Incoming;
 using Quasar.Communication.Packets.Outgoing.Rooms.Avatar;
 using Quasar.Communication.Packets.Outgoing.Inventory.AvatarEffects;
 using Quasar.Communication.Packets.Outgoing.Avatar;
+using Quasar.HabboHotel.Users.Effects;
 
 namespace Quasar.HabboHotel.Users.Inventory.Effects
 {
@@ -72,7 +74,7 @@ namespace Quasar.HabboHotel.Users.Inventory.Effects
 
         public void StopEffect(int EffectId)
         {
-            // REMOVE EFFECT!!!
+
             AvatarEffect Effect = GetEffect(EffectId, true);
 
             if (Effect == null || !Effect.HasExpired)
@@ -113,7 +115,7 @@ namespace Quasar.HabboHotel.Users.Inventory.Effects
         public void ApplyEffect(int EffectId)
         {
             if (!HasEffect(EffectId, true))
-                return;    
+                return;
 
             Room Room = GetUserRoom();
             if (Room == null)
@@ -122,13 +124,13 @@ namespace Quasar.HabboHotel.Users.Inventory.Effects
             RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(GetClient().GetHabbo().Id);
             if (User == null)
                 return;
-            
+
 
             CurrentEffect = EffectId;
             Room.SendMessage(new AvatarEffectComposer(User.VirtualId, EffectId));
         }
 
-   
+
         public bool HasEffect(int EffectId, bool IfEnabledOnly)
         {
             if (EffectId == -1 || EffectId == 28 || EffectId == 29)
@@ -217,4 +219,5 @@ namespace Quasar.HabboHotel.Users.Inventory.Effects
             CurrentEffect = 0;
         }
     }
-}*/
+}
+*/

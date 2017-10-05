@@ -30,12 +30,12 @@ namespace Quasar.HabboHotel.Items
                         if (QuasarEnvironment.GetGame().GetItemManager().GetItem(Convert.ToInt32(Row["base_item"]), out Data))
                         {
                             I.Add(new Item(Convert.ToInt32(Row["id"]), Convert.ToInt32(Row["room_id"]), Convert.ToInt32(Row["base_item"]), Convert.ToString(Row["extra_data"]),
-                                Convert.ToInt32(Row["x"]), Convert.ToInt32(Row["y"]), Convert.ToDouble(Row["z"]), Convert.ToInt32(Row["rot"]), Convert.ToInt32(Row["user_id"]), 
+                                Convert.ToInt32(Row["x"]), Convert.ToInt32(Row["y"]), Convert.ToDouble(Row["z"]), Convert.ToInt32(Row["rot"]), Convert.ToInt32(Row["user_id"]),
                                 Convert.ToInt32(Row["group_id"]), Convert.ToInt32(Row["limited_number"]), Convert.ToInt32(Row["limited_stack"]), Convert.ToString(Row["wall_pos"]), Room));
                         }
                         else
                         {
-                            // Item data does not exist anymore.
+
                         }
                     }
                 }
