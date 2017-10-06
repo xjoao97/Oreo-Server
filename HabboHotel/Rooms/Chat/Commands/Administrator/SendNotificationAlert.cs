@@ -1,8 +1,8 @@
-﻿using Quasar.Communication.Packets.Outgoing.Moderation;
+﻿using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 
-namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
+namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 {
-    class HotelAlertCommand : IChatCommand
+    class SendNotificationAlert : IChatCommand
     {
         public string PermissionRequired
         {
@@ -27,7 +27,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                 return;
             }
             string Message = CommandManager.MergeParams(Params, 1);
-            QuasarEnvironment.GetGame().GetClientManager().SendMessage(new BroadcastMessageAlertComposer(Message));
+            QuasarEnvironment.GetGame().GetClientManager().SendMessage(new RoomCustomizedAlertComposer(Message));
 
             return;
         }

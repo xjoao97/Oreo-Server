@@ -2,9 +2,6 @@
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
-
-using Quasar.Utilities;
-using Quasar.HabboHotel.Rooms;
 using Quasar.HabboHotel.GameClients;
 
 using Quasar.HabboHotel.Rooms.Chat.Commands.User;
@@ -12,8 +9,6 @@ using Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Moderator;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.Fun;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Administrator;
-
-using Quasar.Communication.Packets.Outgoing.Rooms.Chat;
 using Quasar.Communication.Packets.Outgoing.Notifications;
 using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Events;
@@ -72,7 +67,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             if (Message == _prefix + "commands")
             {
                 StringBuilder List = new StringBuilder();
-                List.Append("- LISTA DE COMANDOS DISPONIBLES -\n\n");
+                List.Append("Aqui estão seus comandos disponíveis:\n\n");
                 foreach (var CmdList in _commands.ToList())
                 {
                     if (!string.IsNullOrEmpty(CmdList.Value.PermissionRequired))
@@ -81,7 +76,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
                             continue;
                     }
 
-                    List.Append(":" + CmdList.Key + " " + CmdList.Value.Parameters + " -> " + CmdList.Value.Description + "\n········································································\n");
+                    List.Append(":" + CmdList.Key + " " + CmdList.Value.Parameters + "\n" + CmdList.Value.Description + "\n\n");
                 }
                 Session.SendMessage(new MOTDNotificationComposer(List.ToString()));
                 //int Rank = Session.GetHabbo().Rank;
@@ -248,6 +243,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("massbadge", new MassBadgeCommand());
             this.Register("kick", new KickCommand());
             this.Register("ha", new HotelAlertCommand());
+            this.Register("notf", new SendNotificationAlert());
             this.Register("hal", new HALCommand());
             this.Register("give", new GiveCommand());
             this.Register("massgive", new MassGiveCommand());

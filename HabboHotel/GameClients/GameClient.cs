@@ -256,8 +256,8 @@ namespace Quasar.HabboHotel.GameClients
 
                     //}
 
-                    if (GetHabbo()._NUX) { SendMessage(new MassEventComposer("habbopages/bienvenidanormal.txt")); }
-                    else { SendMessage(new MassEventComposer("habbopages/bienvenidauser.txt")); }
+                    //if (GetHabbo()._NUX) { SendMessage(new MassEventComposer("habbopages/bienvenidanormal.txt")); }
+                    //else { SendMessage(new MassEventComposer("habbopages/bienvenidauser.txt")); }
 
 
                     if (QuasarEnvironment.GetDBConfig().DBData["pin.system.enable"] == "0")
