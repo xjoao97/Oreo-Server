@@ -1,13 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Linq;
 
 using Quasar.HabboHotel.Rooms;
+using Quasar.Database.Interfaces;
 using Quasar.Communication.Packets.Outgoing.Navigator;
 using Quasar.Communication.Packets.Outgoing.Rooms.Settings;
-using Quasar.Database.Interfaces;
-
 
 namespace Quasar.Communication.Packets.Incoming.Moderation
 {
@@ -28,8 +24,8 @@ namespace Quasar.Communication.Packets.Incoming.Moderation
 
             if (SetName)
             {
-                Room.RoomData.Name = "Quarto impróprio!";
-                Room.RoomData.Description = "Esse quarto não segue as normas";
+                Room.RoomData.Name = "Nome de Quarto Inaceitável";
+                Room.RoomData.Description = "Descrição de Quarto Inaceitável";
             }
 
             if (SetLock)
@@ -44,9 +40,9 @@ namespace Quasar.Communication.Packets.Incoming.Moderation
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 if (SetName && SetLock)
-                    dbClient.RunQuery("UPDATE `rooms` SET `caption` = 'Inappropriate to Hotel Management', `description` = 'Quarto impróprio', `tags` = '', `state` = '1' WHERE `id` = '" + Room.RoomId + "' LIMIT 1");
+                    dbClient.RunQuery("UPDATE `rooms` SET `caption` = 'Descrição de Quarto Inaceitável', `description` = 'Nome de Quarto Inaceitável', `tags` = '', `state` = '1' WHERE `id` = '" + Room.RoomId + "' LIMIT 1");
                 else if (SetName && !SetLock)
-                    dbClient.RunQuery("UPDATE `rooms` SET `caption` = 'Inappropriate to Hotel Management', `description` = 'Quarto impróprio', `tags` = '' WHERE `id` = '" + Room.RoomId + "' LIMIT 1");
+                    dbClient.RunQuery("UPDATE `rooms` SET `caption` = 'Descrição de Quarto Inaceitável', `description` = 'Nome de Quarto Inaceitável', `tags` = '' WHERE `id` = '" + Room.RoomId + "' LIMIT 1");
                 else if (!SetName && SetLock)
                     dbClient.RunQuery("UPDATE `rooms` SET `state` = '1', `tags` = '' WHERE `id` = '" + Room.RoomId + "' LIMIT 1");
             }

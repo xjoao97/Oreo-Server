@@ -355,7 +355,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             { return; }
 
             else
-                QuasarEnvironment.GetGame().GetClientManager().ManagerAlert(RoomNotificationComposer.SendBubble("advice", "" + Username + "\n\nUsó el comando:\n:" + Data + ".", ""));
+                QuasarEnvironment.GetGame().GetClientManager().ManagerAlert(RoomNotificationComposer.SendBubble("generic", "" + Username + "\nUsou o comando:\n:" + Data + ".", ""));
         }
 
         public bool TryGetCommand(string Command, out IChatCommand IChatCommand)
