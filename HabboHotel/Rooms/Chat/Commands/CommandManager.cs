@@ -2,19 +2,22 @@
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
-using Quasar.HabboHotel.GameClients;
 
+using Quasar.Database.Interfaces;
+
+using Quasar.HabboHotel.Items.Wired;
+using Quasar.HabboHotel.GameClients;
 using Quasar.HabboHotel.Rooms.Chat.Commands.User;
 using Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Moderator;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.Fun;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Administrator;
-using Quasar.Communication.Packets.Outgoing.Notifications;
-using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.Rooms.Chat.Commands.Events;
-using Quasar.HabboHotel.Items.Wired;
-using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
+
 using Quasar.HabboHotel.Rooms.Chat.Commands.User.Fan;
+
+using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
+using Quasar.Communication.Packets.Outgoing.Notifications;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands
 {
@@ -64,7 +67,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             if (room.GetFilter().CheckCommandFilter(Message))
                 return false;
 
-            if (Message == _prefix + "commands")
+            if (Message == _prefix + "commandsstafflist")
             {
                 StringBuilder List = new StringBuilder();
                 List.Append("Aqui estão seus comandos disponíveis:\n\n");
@@ -76,20 +79,9 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
                             continue;
                     }
 
-                    List.Append(":" + CmdList.Key + " " + CmdList.Value.Parameters + "\n" + CmdList.Value.Description + "\n\n");
+                    List.Append(":" + CmdList.Key + " " + CmdList.Value.Parameters + "\n" + CmdList.Value.Description + ".\n\n");
                 }
                 Session.SendMessage(new MOTDNotificationComposer(List.ToString()));
-                //int Rank = Session.GetHabbo().Rank;
-
-                //switch(Rank)
-                //{
-                //    case 1:
-                //        Session.SendMessage(new MassEventComposer("habbopages/chat/userscommands.txt"));
-                //        break;
-                //    case 2:
-                //        Session.SendMessage(new MassEventComposer("habbopages/chat/vipcommands.txt"));
-                //        break;
-                //}
                 return true;
             }
 
@@ -110,7 +102,6 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
                     if (!Session.GetHabbo().GetPermissions().HasCommand(Cmd.PermissionRequired))
                         return false;
                 }
-
 
                 Session.GetHabbo().IChatCommand = Cmd;
                 Session.GetHabbo().CurrentRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSaysCommand, Session.GetHabbo(), this);
@@ -135,9 +126,6 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
         private void RegisterEvents()
         {
             this.Register("eha", new EventAlertCommand());
-            this.Register("eventalert", new EventAlertCommand());
-            this.Register("special", new SpecialEvent());
-            this.Register("cata", new CatalogUpdateAlert());
         }
 
         /// <summary>
@@ -145,75 +133,56 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
         /// </summary>
         private void RegisterUser()
         {
+            this.Register("commands", new UserCommandsCommand()); //wulles
+            this.Register("comandos", new UserCommandsCommand()); //wulles
+            this.Register("habnam", new HabnamCommand()); //wulles
+            this.Register("yyxxabxa", new YYXXABXACommand()); //wulles
+            this.Register("moonwalk", new MoonwalkCommand()); //wulles
             this.Register("ball", new BallCommand());
-            this.Register("eventtype", new EventSwapCommand());
-            this.Register("changelog", new ChangelogCommand());
-            this.Register("handitem", new CarryCommand());
+            this.Register("item", new CarryCommand());
             this.Register("setbet", new SetBetCommand());
             this.Register("bubblebot", new BubbleBotCommand());
             this.Register("chatdegrupo", new GroepChatCommand());
             this.Register("disablespam", new DisableSpamCommand());
-            this.Register("build", new BuildCommand());
-            this.Register("about", new InfoCommand());
+            this.Register("about", new AboutCommand());
             this.Register("vipstatus", new ViewVIPStatusCommand());
-            this.Register("builder", new Builder());
             this.Register("color", new ColourCommand());
-            this.Register("info", new InfoCommand());
-            this.Register("precios", new PriceList());
-            this.Register("custom", new CustomLegit());
             this.Register("pickall", new PickAllCommand());
             this.Register("ejectall", new EjectAllCommand());
             this.Register("lay", new LayCommand());
             this.Register("sit", new SitCommand());
-            this.Register("ayuda", new HelpCommand());
             this.Register("prefix", new PrefixCommand());
-            this.Register("help", new HelpCommand());
-            this.Register("tour", new HelpCommand());
             this.Register("stand", new StandCommand());
             this.Register("mutepets", new MutePetsCommand());
             this.Register("mutebots", new MuteBotsCommand());
-            this.Register("buyroom", new BuyRoomCommand());
-            this.Register("sellroom", new SellRoomCommand());
             this.Register("mimic", new MimicCommand());
             this.Register("dance", new DanceCommand());
             this.Register("push", new PushCommand());
             this.Register("pull", new PullCommand());
-            this.Register("golpe", new GolpeCommand());
-            this.Register("curar", new CurarCommand());
             this.Register("enable", new EnableCommand());
             this.Register("follow", new FollowCommand());
             this.Register("faceless", new FacelessCommand());
-            this.Register("moonwalk", new MoonwalkCommand());
             this.Register("variables", new WiredVariable());
-
             this.Register("unload", new UnloadCommand());
+            this.Register("reload", new Reloadcommand());
             this.Register("regenmaps", new RegenMaps());
             this.Register("empty", new EmptyItems());
             this.Register("setmax", new SetMaxCommand());
             this.Register("setspeed", new SetSpeedCommand());
-            this.Register("disablediagonal", new DisableDiagonalCommand());
+            this.Register("diagonal", new DisableDiagonalCommand());
             this.Register("flagme", new FlagMeCommand());
-
-            this.Register("stats", new StatsCommand());
-            this.Register("estadisticas", new StatsCommand());
             this.Register("kickpets", new KickPetsCommand());
             this.Register("kickbots", new KickBotsCommand());
-
             this.Register("room", new RoomCommand());
             this.Register("dnd", new DNDCommand());
             this.Register("disablegifts", new DisableGiftsCommand());
             this.Register("convertcredits", new ConvertCreditsCommand());
             this.Register("disablewhispers", new DisableWhispersCommand());
             this.Register("disablemimic", new DisableMimicCommand()); ;
-
-            this.Register("pet", new PetCommand());
             this.Register("spush", new SuperPushCommand());
             this.Register("superpush", new SuperPushCommand());
             this.Register("disablefriends", new DisableFriends());
             this.Register("enablefriends", new EnableFriends());
-            this.Register("beso", new KissCommand());
-            this.Register("reload", new Reloadcommand());
-            this.Register("quemar", new BurnCommand());
         }
 
         private void Register(string v)
@@ -229,10 +198,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("ban", new BanCommand());
             this.Register("mip", new MIPCommand());
             this.Register("ipban", new IPBanCommand());
-
             this.Register("userinfo", new UserInfoCommand());
-            this.Register("sa", new StaffAlertCommand());
-            this.Register("ga", new GuideAlertCommand());
             this.Register("roomunmute", new RoomUnmuteCommand());
             this.Register("roommute", new RoomMuteCommand());
             this.Register("roombadge", new RoomBadgeCommand());
@@ -249,16 +215,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("massgive", new MassGiveCommand());
             this.Register("roomgive", new RoomGiveCommand());
             this.Register("givebadge", new GiveBadgeCommand());
-            this.Register("kill", new DisconnectCommand());
+            this.Register("dc", new DisconnectCommand());
             this.Register("alert", new AlertCommand());
             this.Register("tradeban", new TradeBanCommand());
-
             this.Register("masspoll", new MassPollCommand());
             this.Register("poll", new PollCommand());
-            this.Register("quizz", new IdolQuizCommand());
             this.Register("lastmsg", new LastMessagesCommand());
             this.Register("lastconsolemsg", new LastConsoleMessagesCommand());
-
             this.Register("teleport", new TeleportCommand());
             this.Register("summon", new SummonCommand());
             this.Register("override", new OverrideCommand());
@@ -272,15 +235,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("alleyesonme", new AllEyesOnMeCommand());
             this.Register("allaroundme", new AllAroundMeCommand());
             this.Register("forcesit", new ForceSitCommand());
-
             this.Register("ignorewhispers", new IgnoreWhispersCommand());
-            this.Register("forced_effects", new DisableForcedFXCommand());
-
+            this.Register("forcedeffects", new DisableForcedFXCommand());
             this.Register("makesay", new MakeSayCommand());
             this.Register("flaguser", new FlagUserCommand());
             this.Register("filter", new FilterCommand());
-            this.Register("publialert", new PubliAlert());
-            this.Register("rank", new GiveRanksCommand());
+            this.Register("giverank", new GiveRanksCommand());
+
+            //this.Register("quizz", new IdolQuizCommand());
         }
 
         /// <summary>
@@ -295,25 +257,18 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("addtag", new AddTagsToUserCommand());
             this.Register("givespecial", new GiveSpecialReward());
             this.Register("bubble", new BubbleCommand());
-            this.Register("alerttype", new AlertSwapCommand());
             this.Register("update", new UpdateCommand());
             this.Register("deletegroup", new DeleteGroupCommand());
-            this.Register("carry", new CarryCommand());
             this.Register("goto", new GOTOCommand());
-            this.Register("addpredesigned", new AddPredesignedCommand());
-            this.Register("removepredesigned", new RemovePredesignedCommand());
-            this.Register("radioalert", new DJAlert());
-            this.Register("radio", new DJAlert());
-            this.Register("dj", new DJAlert());
-            this.Register("c", new TrollAlert());
             this.Register("summonall", new SummonAll());
-            this.Register("ca", new CustomizedHotelAlert());
-            this.Register("massevent", new MassiveEventCommand());
             this.Register("viewinventary", new ViewInventaryCommand());
             this.Register("makevip", new MakeVipCommand());
             this.Register("removebadge", new RemoveBadgeCommand());
             this.Register("staffinfo", new StaffInfo());
-            this.Register("voucher", new VoucherCommand());
+
+            //this.Register("bubblealert", new TrollAlert()); - wulles can finish this after.
+            //this.Register("addpredesigned", new AddPredesignedCommand());
+            //this.Register("removepredesigned", new RemovePredesignedCommand());
         }
 
         /// <summary>
@@ -343,7 +298,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
         {
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("INSERT INTO `logs_client_staff` (`user_id`,`data_string`,`machine_id`, `timestamp`) VALUES (@UserId,@Data,@MachineId,@Timestamp)");
+                dbClient.SetQuery("INSERT INTO `logs_client_staff` (`user_id`,`data_string`,`machine_id`,`timestamp`) VALUES (@UserId,@Data,@MachineId,@Timestamp)");
                 dbClient.AddParameter("UserId", UserId);
                 dbClient.AddParameter("Data", Data);
                 dbClient.AddParameter("MachineId", MachineId);

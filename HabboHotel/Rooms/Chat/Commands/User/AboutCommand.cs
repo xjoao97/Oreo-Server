@@ -1,15 +1,14 @@
 ﻿using System;
 using Quasar.HabboHotel.GameClients;
 using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
-using Quasar.Communication.Packets.Outgoing;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 {
-    class InfoCommand : IChatCommand
+    class AboutCommand : IChatCommand
     {
         public string PermissionRequired
         {
-            get { return "command_info"; }
+            get { return "command_about"; }
         }
 
         public string Parameters
@@ -19,7 +18,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Información de Quasar."; }
+            get { return "Sobre o Emulador deste Hotel"; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)
@@ -30,7 +29,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             TimeSpan Uptime = DateTime.Now - QuasarEnvironment.ServerStarted;
             int OnlineUsers = QuasarEnvironment.GetGame().GetClientManager().Count;
             int RoomCount = QuasarEnvironment.GetGame().GetRoomManager().Count;
-            Session.SendMessage(new RoomNotificationComposer("QUASAR PROJECT r4.5 BUILD 050917:",
+            Session.SendMessage(new RoomNotificationComposer("Plus r4.5 - BUILD 050917:",
             "<font color='#31B404'><b>About Quasar:</b>\n" +
             "<font size=\"11\" color=\"#1C1C1C\">Private project powered by Custom and enhanced by Salinas & Root, </font>" +
             "<font size=\"11\" color=\"#1C1C1C\">our main goal is sharing Habbo basics with our customers, adding some untold content.\n\nQuasar Project started on July 2016 and keeps up for being one of the most relevant projects over the community.\n\n" +

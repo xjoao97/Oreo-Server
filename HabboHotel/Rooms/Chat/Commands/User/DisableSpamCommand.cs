@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-using Quasar.HabboHotel.GameClients;
+﻿using Quasar.HabboHotel.GameClients;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 {

@@ -30,7 +30,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
             string Message = CommandManager.MergeParams(Params, 1);
 
-            QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("estaff", "" + Message + "\n\n- " + Session.GetHabbo().Username + "", ""));
+            QuasarEnvironment.GetGame().GetClientManager().SendMessage(RoomNotificationComposer.SendBubble("shine_star", "" + Message + "\n\n- " + Session.GetHabbo().Username + "", ""));
             return;
 
 

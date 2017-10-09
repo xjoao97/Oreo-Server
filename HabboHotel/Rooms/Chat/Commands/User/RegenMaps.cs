@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
-namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
+﻿namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 {
     class RegenMaps : IChatCommand
     {
@@ -19,19 +14,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Regenerar el mapa de la sala en la que estás."; }
+            get { return "Limpar pisos do quarto"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (!Room.CheckRights(Session, true))
             {
-                Session.SendWhisper("Oops, solo el dueño de la sala puede ejecutar este comando!");
+                Session.SendWhisper("Apenas o proprietário deste quarto pode usar esse comando", 1);
                 return;
             }
 
             Room.GetGameMap().GenerateMaps();
-            Session.SendWhisper("Excelente, el mapa del juego ha sido regenerado.");
+            Session.SendWhisper("Você passou desinfetante no chão do quarto com sucesso", 1);
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Quasar.Communication.Packets.Outgoing.Rooms.Session;
 
-
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     class Reloadcommand : IChatCommand
@@ -19,21 +18,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Description
         {
-            get { return "Recarga la sala"; }
+            get { return "Recarregar o Quarto"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Session.GetHabbo().Id != Room.OwnerId && !Session.GetHabbo().GetPermissions().HasRight("room_any_owner"))
             {
-                Session.SendWhisper("Lo sentimos, este comando solo está disponible si eres el propietario de la sala");
+                Session.SendWhisper("Apenas o proprietário deste quarto pode usar esse comando", 1);
                 return;
             }
 
             List<RoomUser> UsersToReturn = Room.GetRoomUserManager().GetRoomUsers().ToList();
-
             QuasarEnvironment.GetGame().GetRoomManager().UnloadRoom(Room);
-
 
             foreach (RoomUser User in UsersToReturn)
             {
@@ -42,7 +39,6 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
                 User.GetClient().SendMessage(new RoomForwardComposer(Room.Id));
             }
-
 
         }
     }

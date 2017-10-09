@@ -1,5 +1,4 @@
-﻿using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
-using Quasar.Database.Interfaces;
+﻿using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.GameClients;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
@@ -13,19 +12,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Parameters
         {
-            get { return "%prefix%"; }
+            get { return ""; }
         }
 
         public string Description
         {
-            get { return "Borra tu prefijo."; }
+            get { return "Desativa sua TAG."; }
         }
 
         public void Execute(GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Por favor, escribe \":prefix off\" para desactivar tu prefijo.");
+                Session.SendWhisper("Use - :prefix off - para desativar sua TAG", 1);
                 return;
             }
 
@@ -38,7 +37,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                     dbClient.RunQuery("UPDATE `users` SET `tag` = NULL WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
                 }
                 Session.GetHabbo()._tag = string.Empty;
-                Session.SendWhisper("Prefijo borrado correctamente.", 34);
+                Session.SendWhisper("Sua TAG foi removida", 1);
             }
         }
     }

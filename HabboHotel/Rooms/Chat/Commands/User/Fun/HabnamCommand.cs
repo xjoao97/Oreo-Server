@@ -1,10 +1,10 @@
 ﻿namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class MoonwalkCommand : IChatCommand
+    class HabnamCommand : IChatCommand
     {
         public string PermissionRequired
         {
-            get { return "command_moonwalk"; }
+            get { return "command_habnam"; }
         }
 
         public string Parameters
@@ -14,15 +14,15 @@
 
         public string Description
         {
-            get { return "Ande de costas igual Michael Jackson"; }
+            get { return "Oppa Gangnam Style"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             var user = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
             if (user != null)
-                if (user.CurrentEffect != 136)
-                    user.ApplyEffect(136);
+                if (user.CurrentEffect != 140)
+                    user.ApplyEffect(140);
                 else
                     user.ApplyEffect(0);
         }

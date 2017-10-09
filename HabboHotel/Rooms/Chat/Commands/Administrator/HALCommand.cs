@@ -1,6 +1,4 @@
-﻿using Quasar.Communication.Packets.Outgoing;
-using Quasar.Communication.Packets.Outgoing.Moderation;
-using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
+﻿using Quasar.Communication.Packets.Outgoing.Moderation;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 {
