@@ -3,6 +3,6 @@
     class GraphicAlertComposer : ServerPacket
     {
         public GraphicAlertComposer(string image) : base(ServerPacketHeader.GraphicAlertComposer)
-        { base.WriteString("${image.library.url}graphicalerts/" + image + ".png"); }
+        { base.WriteString("${graphic.alerts.images.url}" + image + ".png"); }
     }
 }
