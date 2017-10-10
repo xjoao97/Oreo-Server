@@ -116,7 +116,7 @@ namespace Quasar.HabboHotel.Catalog
                         if (PredesignedId <= 0)
                             if (!ItemDataManager.GetItem(BaseId, out Data))
                             {
-                                log.Error("O item com ID " + ItemId + ", não foi encontrado na Furniture");
+                                //log.Error("O item com ID " + ItemId + ", não foi encontrado na Furniture");
                                 continue;
                             }
 
@@ -163,7 +163,7 @@ namespace Quasar.HabboHotel.Catalog
                                     ItemData PredesignedData = null;
                                     if (!ItemDataManager.GetItem(Convert.ToInt32(items[0]), out PredesignedData))
                                     {
-                                        log.Error("O item com ID " + ItemId + ", não foi encontrado na Furniture");
+                                        //log.Error("O item com ID " + ItemId + ", não foi encontrado na Furniture");
                                         continue;
                                     }
 
@@ -178,7 +178,7 @@ namespace Quasar.HabboHotel.Catalog
                         if (PredesignedId <= 0)
                             if (!ItemDataManager.GetItem(BaseId, out Data))
                             {
-                                log.Error("O item com ID " + ItemId + ", não foi encontrado na Furniture");
+                                //log.Error("O item com ID " + ItemId + ", não foi encontrado na Furniture");
                                 continue;
                             }
 

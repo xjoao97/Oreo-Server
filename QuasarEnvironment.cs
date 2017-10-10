@@ -18,14 +18,12 @@ using Quasar.Utilities;
 using log4net;
 
 using System.Collections.Concurrent;
-using Quasar.Communication.Packets.Outgoing.Moderation;
 using Quasar.Communication.Encryption.Keys;
 using Quasar.Communication.Encryption;
 
 using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.Cache;
 using Quasar.Database;
-using Quasar.Communication.Packets.Outgoing.Notifications;
 
 namespace Quasar
 {
@@ -35,7 +33,6 @@ namespace Quasar
 
         public const string PrettyVersion = "Quasar Emulator";
         public const string PrettyBuild = "3.8";
-        public const string HotelName = "Habbi";
 
         private static ConfigurationData _configuration;
         private static Encoding _defaultEncoding;
@@ -68,21 +65,19 @@ namespace Quasar
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
-            Console.WriteLine(@"                                                                                      ");
-            Console.WriteLine(@" Custom and Whats.                           |         |                             ");
+            Console.WriteLine();
+            Console.WriteLine(@"                                              |         |                             ");
             Console.WriteLine(@" ,---.,---..     ,,---.,---.   ,---.,-.-..   .|    ,---.|--- ,---.,---.               ");
             Console.WriteLine(@" |    ,---| \   / |---'|   |   |---'| | ||   ||    ,---||    |   ||                   ");
             Console.WriteLine(@" `    `---^  `-´  `---''   '   `---'` ' '`---'`---'`---^`---'`---'`                   ");
-            Console.WriteLine(@"                                                                                      ");
-
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(" SergioT, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache, Root, Wulles, Arfeu, Away ");
-            Console.WriteLine("");
-            Console.Title = "Loading Raven...";
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine(" SergioT, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache,");
+            Console.WriteLine(" Custom, Whats, Root, Wulles, Arfeu, Away. ");
+            Console.WriteLine();
+            Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkMagenta);
+            Console.Title = "Carregando [...]";
             _defaultEncoding = Encoding.Default;
-
-            Console.WriteLine("");
-            Console.WriteLine("");
 
             CultureInfo = CultureInfo.CreateSpecificCulture("en-GB");
 
@@ -118,7 +113,7 @@ namespace Quasar
                     return;
                 }
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine(CurrentTime + "» Conexión a la base de datos.");
+                //Console.WriteLine(CurrentTime + "» Conexión a la base de datos.");
                 //Reset our statistics first.
                 using (IQueryAdapter dbClient = GetDatabaseManager().GetQueryReactor())
                 {

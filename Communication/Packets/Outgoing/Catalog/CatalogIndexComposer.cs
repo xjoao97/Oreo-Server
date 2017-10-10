@@ -40,7 +40,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
             }
 
             base.WriteBoolean(false);
-            base.WriteString("NORMAL");
+            base.WriteString(Mode);
         }
 
         public CatalogIndexComposer(GameClient Session, ICollection<BCCatalogPage> Pages, string Mode, int Sub = 0)
@@ -76,7 +76,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
             }
 
             base.WriteBoolean(false);
-            base.WriteString("BUILDERS_CLUB");
+            base.WriteString(Mode);
         }
 
         public void WriteRootIndex(GameClient session, ICollection<CatalogPage> pages)
