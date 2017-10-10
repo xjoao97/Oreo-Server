@@ -23,7 +23,6 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 if (!Page.Enabled || !Page.Visible || Page.MinimumRank > Session.GetHabbo().Rank || (Page.MinimumVIP > Session.GetHabbo().VIPRank && Session.GetHabbo().Rank == 1))
                     return;
 
-                Session.GetHabbo().LastPage = PageId;
                 Session.SendMessage(new CatalogPageComposer(Page, CataMode, Session));
             }
 
@@ -39,7 +38,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             }
 
             Session.GetHabbo().lastLayout = Page.Template;
-           
+
         }
     }
 }

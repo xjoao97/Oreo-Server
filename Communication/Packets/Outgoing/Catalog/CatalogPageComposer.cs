@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+
 using Quasar.HabboHotel.Items;
 using Quasar.HabboHotel.Catalog;
 using Quasar.HabboHotel.Catalog.Utilities;
-using System.Collections.Generic;
 using Quasar.HabboHotel.GameClients;
 
 namespace Quasar.Communication.Packets.Outgoing.Catalog
@@ -29,7 +30,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
                 base.WriteString(s);
             }
 
-            if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy"))
+            if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy") && Page.PageLink != "last_purchases")
             {
 
                 base.WriteInteger(Page.Items.Count);
@@ -150,7 +151,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
                 }
             }
 
-            else if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy"))
+            else if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy") && Page.PageLink == "last_purchases")
             {
                 base.WriteInteger(Session.GetHabbo()._lastitems.Count());
                 foreach (var Item in Session.GetHabbo()._lastitems.ToList())
@@ -248,7 +249,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
 
                 }
             }
-            else if(Page.Template == "frontpage4" && CataMode == "BUILDERS_CLUB")
+            else if (Page.Template == "frontpage4" && CataMode == "BUILDERS_CLUB")
             {
                 ICollection<Frontpage> FrontPage = QuasarEnvironment.GetGame().GetCatalogFrontPageManager().GetBCCatalogFrontPage();
                 base.WriteInteger(FrontPage.Count);

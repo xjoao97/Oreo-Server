@@ -228,9 +228,6 @@ namespace Quasar.HabboHotel.Users
         private PermissionComponent _permissions;
 
         private IChatCommand _iChatCommand;
-
-        public int LastPage { get; set; }
-
         public bool PassedQuiz;
 
         public bool IsCitizen => CurrentTalentLevel > 4;
@@ -1288,12 +1285,12 @@ namespace Quasar.HabboHotel.Users
 
                     if (this._client.GetHabbo().Rank == 2 && this._client.GetHabbo().VIPRank == 1)
                     {
-                        this.GetClient().SendMessage(RoomNotificationComposer.SendBubble("newuser", "Você recebeu " + CreditUpdate + " créditos por estar conectado 15 minutos.", ""));
+                        //this.GetClient().SendMessage(RoomNotificationComposer.SendBubble("newuser", "Você recebeu " + CreditUpdate + " créditos por estar conectado 15 minutos.", ""));
 
                     }
                     else
                     {
-                        this.GetClient().SendMessage(RoomNotificationComposer.SendBubble("newuser", "Você recebeu " + CreditUpdate + " créditos por estar conectado 15 minutos.", ""));
+                        //this.GetClient().SendMessage(RoomNotificationComposer.SendBubble("newuser", "Você recebeu " + CreditUpdate + " créditos por estar conectado 15 minutos.", ""));
                     }
 
                     this.CreditsUpdateTick = QuasarStaticGameSettings.UserCreditsUpdateTimer;
