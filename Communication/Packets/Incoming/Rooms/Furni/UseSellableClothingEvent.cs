@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
+
+using Quasar.Database.Interfaces;
 
 using Quasar.HabboHotel.Items;
 using Quasar.HabboHotel.Rooms;
 using Quasar.HabboHotel.Catalog.Clothing;
 
-
-
 using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 using Quasar.Communication.Packets.Outgoing.Inventory.AvatarEffects;
-using Quasar.Database.Interfaces;
 
 namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
 {
@@ -40,20 +36,23 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
 
             if (Item.Data.InteractionType != InteractionType.PURCHASABLE_CLOTHING)
             {
-                Session.SendNotification("Oops, ocorreu um erro com essa roupa!");
+                Session.SendMessage(RoomNotificationComposer.SendBubble("changelooksucess", "Houve algum erro! Tente novamente e por favor avise a equipe.", ""));
+                Console.WriteLine("Houve um erro com alguma Roupa na Loja.");
                 return;
             }
 
             if (Item.Data.ClothingId == 0)
             {
-                Session.SendNotification("Oops, esse item não tem configuração para vestir, reporte a um moderador!");
+                Session.SendMessage(RoomNotificationComposer.SendBubble("changelooksucess", "Houve algum erro! Tente novamente e por favor avise a equipe.", ""));
+                Console.WriteLine("Houve um erro com alguma Roupa na Loja.");
                 return;
             }
 
             ClothingItem Clothing = null;
             if (!QuasarEnvironment.GetGame().GetCatalog().GetClothingManager().TryGetClothing(Item.Data.ClothingId, out Clothing))
             {
-                Session.SendNotification("Não encontramos a parte dessa roupa!");
+                Session.SendMessage(RoomNotificationComposer.SendBubble("changelooksucess", "Houve algum erro! Tente novamente e por favor avise a equipe.", ""));
+                Console.WriteLine("Houve um erro com alguma Roupa na Loja.");
                 return;
             }
 
@@ -64,13 +63,11 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
                 dbClient.RunQuery();
             }
 
-            //Remove the item.
             Room.GetRoomItemHandler().RemoveFurniture(Session, Item.Id);
 
             Session.GetHabbo().GetClothing().AddClothing(Clothing.ClothingName, Clothing.PartIds);
             Session.SendMessage(new FigureSetIdsComposer(Session.GetHabbo().GetClothing().GetClothingAllParts));
             Session.SendMessage(new RoomNotificationComposer("figureset.redeemed.success"));
-            Session.SendWhisper("Se por algum motivo sua roupa não aparece, reentre no hotel!");
         }
     }
 }

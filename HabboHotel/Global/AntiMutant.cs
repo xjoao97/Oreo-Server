@@ -2,9 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using System.Collections.Generic;
-using System.Net;
 using System.IO;
-using System.Xml;
 using System.Windows.Forms;
 
 namespace Quasar.HabboHotel.Global
@@ -47,7 +45,6 @@ namespace Quasar.HabboHotel.Global
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
-                //Was the file found?
             }
         }
 
@@ -55,7 +52,7 @@ namespace Quasar.HabboHotel.Global
         {
             List<string> toReturnFigureParts = new List<string>();
             List<string> fParts = new List<string>();
-            string[] requiredParts = { "hd", "ch" };
+            string[] requiredParts = { "hd" };
             bool flagForDefault = false;
 
             string[] FigureParts = Look.Split('.');
@@ -96,7 +93,7 @@ namespace Quasar.HabboHotel.Global
             if (flagForDefault)
             {
                 toReturnFigureParts.Clear();
-                toReturnFigureParts.AddRange("sh-3338-93.ea-1406-62.hr-831-49.ha-3331-92.hd-180-7.ch-3334-93-1408.lg-3337-92.ca-1813-62".Split('.'));
+                toReturnFigureParts.AddRange("ch-210-66.lg-270-82.sh-300-64.hr-105-42.hd-180-2".Split('.'));
             }
 
             foreach (string requiredPart in requiredParts.Where(requiredPart => !fParts.Contains(requiredPart) && !toReturnFigureParts.Contains(SetDefault(requiredPart, genderLook))))

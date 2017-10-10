@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 
-using Quasar.HabboHotel.Global;
+using Quasar.Database.Interfaces;
+
 using Quasar.HabboHotel.Rooms;
 using Quasar.HabboHotel.Quests;
 
 using Quasar.Communication.Packets.Outgoing.Rooms.Engine;
-using Quasar.Database.Interfaces;
-using Quasar.Communication.Packets.Outgoing.Moderation;
+using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 
 namespace Quasar.Communication.Packets.Incoming.Users
 {
@@ -42,7 +40,7 @@ namespace Quasar.Communication.Packets.Incoming.Users
             string[] AllowedGenders = { "M", "F" };
             if (!AllowedGenders.Contains(Gender))
             {
-                Session.SendMessage(new BroadcastMessageAlertComposer("Por favor, escolha um gênero válido!"));
+                Session.SendMessage(RoomNotificationComposer.SendBubble("changelooksucess", "Ocorreu um erro ao selecionar seu gênero.", ""));
                 return;
             }
 
@@ -59,6 +57,7 @@ namespace Quasar.Communication.Packets.Incoming.Users
                 dbClient.RunQuery();
             }
 
+            Session.SendMessage(RoomNotificationComposer.SendBubble("changelooksucess", "Visual alterado com sucesso!", ""));
             QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_AvatarLooks", 1);
             Session.SendMessage(new AvatarAspectUpdateMessageComposer(Look, Gender));
             if (Session.GetHabbo().Look.Contains("ha-1006"))
