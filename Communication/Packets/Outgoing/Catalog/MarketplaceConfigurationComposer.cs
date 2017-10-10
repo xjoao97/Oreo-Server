@@ -10,9 +10,10 @@
             base.WriteInteger(0);
             base.WriteInteger(0);
             base.WriteInteger(1);
-            base.WriteInteger(99999999);
+            base.WriteInteger(25000);
             base.WriteInteger(48);
             base.WriteInteger(7);
+            //ByWulles
         }
     }
 }

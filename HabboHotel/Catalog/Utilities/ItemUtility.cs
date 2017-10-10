@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
-using Quasar.HabboHotel.Items;
+﻿using Quasar.HabboHotel.Items;
 using Quasar.HabboHotel.Items.Utilities;
 
 namespace Quasar.HabboHotel.Catalog.Utilities
@@ -15,9 +10,6 @@ namespace Quasar.HabboHotel.Catalog.Utilities
             if (!Item.Data.AllowGift || Item.IsLimited || Item.Amount > 1 || Item.Data.ItemName.ToLower().StartsWith("cf_") || Item.Data.ItemName.ToLower().StartsWith("cfc_") ||
                 Item.Data.InteractionType == InteractionType.BADGE || (Item.Data.Type != 's' && Item.Data.Type != 'i') || Item.CostDiamonds > 0 ||
                 Item.Data.InteractionType == InteractionType.TELEPORT || Item.Data.InteractionType == InteractionType.DEAL)
-                return false;
-
-            if (Item.Data.IsRare)
                 return false;
 
             if (PetUtility.IsPet(Item.Data.InteractionType))
@@ -38,9 +30,9 @@ namespace Quasar.HabboHotel.Catalog.Utilities
             {
                 default:
                 case 9:
-                    return 7100; //4221 Changed to the right BaseItem, so it can be saved.
+                    return QuasarEnvironment.GetGame().GetItemManager().GetItemByName("horse_saddle1").Id;
                 case 10:
-                    return 4450;
+                    return QuasarEnvironment.GetGame().GetItemManager().GetItemByName("horse_saddle2").Id;
             }
         }
 

@@ -10,9 +10,9 @@ using Quasar.HabboHotel.Catalog.Pets;
 using Quasar.HabboHotel.Catalog.Vouchers;
 using Quasar.HabboHotel.Catalog.Marketplace;
 using Quasar.HabboHotel.Catalog.Clothing;
+using Quasar.HabboHotel.Catalog.PredesignedRooms;
 
 using Quasar.Database.Interfaces;
-using Quasar.HabboHotel.Catalog.PredesignedRooms;
 
 namespace Quasar.HabboHotel.Catalog
 {
@@ -73,7 +73,7 @@ namespace Quasar.HabboHotel.Catalog
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("SELECT `id`,`item_id`,`catalog_name`,`cost_credits`,`cost_pixels`,`cost_diamonds`,`amount`,`page_id`,`limited_sells`,`limited_stack`,`offer_active`,`extradata`,`badge`,`offer_id`,`cost_honor`,`predesigned_id` FROM `catalog_items`");
+                dbClient.SetQuery("SELECT `id`,`item_id`,`catalog_name`,`cost_credits`,`cost_pixels`,`cost_diamonds`,`amount`,`page_id`,`limited_sells`,`limited_stack`,`offer_active`,`extradata`,`badge`,`offer_id`,`cost_honor`,`predesigned_id` FROM `catalog_items` ORDER BY `order_id` ASC");
                 DataTable CatalogueItems = dbClient.getTable();
 
                 if (CatalogueItems != null)
@@ -219,8 +219,6 @@ namespace Quasar.HabboHotel.Catalog
                     }
                 }
 
-
-
                 dbClient.SetQuery("SELECT `id`,`parent_id`,`caption`,`page_link`,`visible`,`enabled`,`min_rank`,`min_vip`,`icon_image`,`page_layout`,`page_strings_1`,`page_strings_2` FROM `catalog_pages` ORDER BY `order_num`");
                 DataTable CatalogPages = dbClient.getTable();
 
@@ -271,8 +269,7 @@ namespace Quasar.HabboHotel.Catalog
                 this._petRaceManager.Init();
                 this._clothingManager.Init();
             }
-
-            log.Info(">> Catalog Manager -> Ligado");
+          //log.Info(">> Catalog Manager -> Ligado");
         }
 
         public bool TryGetBot(int ItemId, out CatalogBot Bot)

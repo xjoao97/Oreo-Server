@@ -1,9 +1,6 @@
-﻿using System;
-
-using Quasar.Communication.Packets.Outgoing.Catalog;
+﻿using Quasar.Communication.Packets.Outgoing.Catalog;
 using Quasar.HabboHotel.Catalog;
 using Quasar.HabboHotel.GameClients;
-using Quasar.Communication.Packets.Incoming;
 
 namespace Quasar.Communication.Packets.Incoming.Catalog
 {
@@ -13,7 +10,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
         {
             int PageId = Packet.PopInt();
             int Something = Packet.PopInt();
-            string CataMode = Packet.PopString();            
+            string CataMode = Packet.PopString();
 
             CatalogPage Page = null;
             BCCatalogPage BCPage = null;
@@ -26,6 +23,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 if (!Page.Enabled || !Page.Visible || Page.MinimumRank > Session.GetHabbo().Rank || (Page.MinimumVIP > Session.GetHabbo().VIPRank && Session.GetHabbo().Rank == 1))
                     return;
 
+                Session.GetHabbo().LastPage = PageId;
                 Session.SendMessage(new CatalogPageComposer(Page, CataMode, Session));
             }
 

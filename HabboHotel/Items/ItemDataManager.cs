@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
-using System.Linq;
 
 using log4net;
+
 using Quasar.Core;
-
 using Quasar.Database.Interfaces;
-
 
 namespace Quasar.HabboHotel.Items
 {
@@ -16,7 +14,7 @@ namespace Quasar.HabboHotel.Items
         private static readonly ILog log = LogManager.GetLogger("Quasar.HabboHotel.Items.ItemDataManager");
 
         public Dictionary<int, ItemData> _items;
-        public Dictionary<int, ItemData> _gifts;//<SpriteId, Item>
+        public Dictionary<int, ItemData> _gifts;
 
         public ItemDataManager()
         {
@@ -31,7 +29,7 @@ namespace Quasar.HabboHotel.Items
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("SELECT `id`,`item_name`,`public_name`,`type`,`width`,`length`,`stack_height`,`can_stack`,`can_sit`,`is_walkable`,`sprite_id`,`allow_recycle`,`allow_trade`,`allow_marketplace_sell`,`allow_gift`,`allow_inventory_stack`,`interaction_type`,`interaction_modes_count`,`vending_ids`,`height_adjustable`,`effect_id`,`wired_id`,`is_rare`,`clothing_id`, `extra_rot`,  `song_Id` FROM `furniture`");
+                dbClient.SetQuery("SELECT * FROM `furniture`");
                 DataTable ItemData = dbClient.getTable();
 
                 if (ItemData != null)
@@ -82,8 +80,7 @@ namespace Quasar.HabboHotel.Items
                     }
                 }
             }
-
-            log.Info(">> Items Manager -> Ligado");
+          //log.Info(">> Items Manager -> Ligado");
         }
 
         public bool GetItem(int Id, out ItemData Item)

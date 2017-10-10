@@ -33,7 +33,6 @@ using Quasar.HabboHotel.Rooms.Chat.Commands;
 using Quasar.HabboHotel.Users.Permissions;
 using Quasar.HabboHotel.Subscriptions;
 using Quasar.HabboHotel.Club;
-using System.Linq;
 using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 using Quasar.Communication.Packets.Outgoing.LandingView;
 using Quasar.HabboHotel.Users.Polls;
@@ -229,6 +228,9 @@ namespace Quasar.HabboHotel.Users
         private PermissionComponent _permissions;
 
         private IChatCommand _iChatCommand;
+
+        public int LastPage { get; set; }
+
         public bool PassedQuiz;
 
         public bool IsCitizen => CurrentTalentLevel > 4;

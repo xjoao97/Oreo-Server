@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Linq;
-
-using Quasar.Core;
 using Quasar.HabboHotel.Items;
 using Quasar.HabboHotel.Catalog;
-using Quasar.HabboHotel.Items.Utilities;
 using Quasar.HabboHotel.Catalog.Utilities;
 using System.Collections.Generic;
 using Quasar.HabboHotel.GameClients;
@@ -32,7 +29,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
                 base.WriteString(s);
             }
 
-            if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy") && Page.PageLink != "last_purchases")
+            if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy"))
             {
 
                 base.WriteInteger(Page.Items.Count);
@@ -153,7 +150,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
                 }
             }
 
-            else if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy") && Page.PageLink == "last_purchases")
+            else if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy"))
             {
                 base.WriteInteger(Session.GetHabbo()._lastitems.Count());
                 foreach (var Item in Session.GetHabbo()._lastitems.ToList())

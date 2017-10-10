@@ -1,6 +1,5 @@
 ﻿using Quasar.Communication.Packets.Outgoing.Catalog;
 using Quasar.HabboHotel.GameClients;
-using Quasar.Communication.Packets.Incoming;
 
 namespace Quasar.Communication.Packets.Incoming.Catalog
 {
