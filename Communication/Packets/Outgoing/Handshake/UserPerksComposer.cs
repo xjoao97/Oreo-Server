@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Quasar.HabboHotel.Users;
+﻿using Quasar.HabboHotel.Users;
 
 namespace Quasar.Communication.Packets.Outgoing.Handshake
 {
@@ -43,13 +40,13 @@ namespace Quasar.Communication.Packets.Outgoing.Handshake
             base.WriteBoolean(true);
             base.WriteString("BUILDER_AT_WORK");
             base.WriteString(""); // ??
-            base.WriteBoolean(true);
+            base.WriteBoolean(false);
             base.WriteString("NAVIGATOR_PHASE_ONE_2014");
             base.WriteString(""); // ??
             base.WriteBoolean(true);
             base.WriteString("CAMERA");
             base.WriteString(""); // ??
-            base.WriteBoolean(true);
+            base.WriteBoolean(false);
             base.WriteString("NAVIGATOR_PHASE_TWO_2014");
             base.WriteString(""); // ??
             base.WriteBoolean(true);

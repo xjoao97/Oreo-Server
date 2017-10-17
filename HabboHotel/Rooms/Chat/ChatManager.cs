@@ -60,7 +60,7 @@ namespace Quasar.HabboHotel.Rooms.Chat
         {
             this._emotions = new ChatEmotionsManager();
             this._logs = new ChatlogManager();
-         
+
             this._filter = new WordFilterManager();
             this._filter.InitWords();
             this._filter.InitCharacters();
@@ -68,11 +68,11 @@ namespace Quasar.HabboHotel.Rooms.Chat
             this._commands = new CommandManager(":");
             this._petCommands = new PetCommandManager();
             this._petLocale = new PetLocale();
-      
+
             this._chatStyles = new ChatStyleManager();
             this._chatStyles.Init();
 
-            log.Info(">> Chat Manager -> Ligado");
+            //log.Info(">> Chat Manager -> Ligado");
         }
 
         public ChatEmotionsManager GetEmotions()

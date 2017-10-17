@@ -1779,6 +1779,12 @@ namespace Quasar.HabboHotel.Items
                 this.UpdateState();
             }
 
+            if (GetBaseItem().InteractionType == InteractionType.PRESSURE_PAD)
+            {
+                this.ExtraData = "1";
+                this.UpdateState();
+            }
+
             GetRoom().GetWired().TriggerEvent(Wired.WiredBoxType.TriggerWalkOnFurni, user.GetClient().GetHabbo(), this);
             user.LastItem = this;
         }
@@ -1792,6 +1798,12 @@ namespace Quasar.HabboHotel.Items
                 GetRoom().RemoveUserFromTent(Id, user, this);
 
             if (GetBaseItem().InteractionType == InteractionType.PRESSURE_TILE)
+            {
+                this.ExtraData = "0";
+                this.UpdateState();
+            }
+
+            if (GetBaseItem().InteractionType == InteractionType.PRESSURE_PAD)
             {
                 this.ExtraData = "0";
                 this.UpdateState();

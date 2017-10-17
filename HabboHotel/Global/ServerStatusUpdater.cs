@@ -18,7 +18,7 @@ namespace Quasar.HabboHotel.Global
         string HotelName = QuasarEnvironment.GetConfig().data["hotel.name"];
 
         private Timer _timer;
-        
+
         public ServerStatusUpdater()
         {
         }
@@ -27,9 +27,9 @@ namespace Quasar.HabboHotel.Global
         {
             this._timer = new Timer(new TimerCallback(this.OnTick), null, TimeSpan.FromSeconds(UPDATE_IN_SECS), TimeSpan.FromSeconds(UPDATE_IN_SECS));
 
-            Console.Title = "QUASAR - [0] ON - [0] ROOMS - [0] UPTIME";
+            Console.Title = "Plus Emulator - 0 Online - 0 Quartos - 0 UPTIME";
 
-            log.Info(">> Server Status -> Ligado");
+            log.Info(" Server Status >> Atualizado");
         }
 
         public void OnTick(object Obj)
@@ -44,7 +44,7 @@ namespace Quasar.HabboHotel.Global
             int UsersOnline = Convert.ToInt32(QuasarEnvironment.GetGame().GetClientManager().Count);
             int RoomCount = QuasarEnvironment.GetGame().GetRoomManager().Count;
 
-            Console.Title = "QUASAR - [" + UsersOnline + "] ON - [" + RoomCount + "] ROOMS - [" + Uptime.Days + "] DAYS " + Uptime.Hours + "] HOURS";
+            Console.Title = "Plus Emulator - " + UsersOnline + " Online - " + RoomCount + " Quartos - " + Uptime.Days + " Dias " + Uptime.Hours + " Horas";
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {

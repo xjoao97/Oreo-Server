@@ -156,8 +156,8 @@ namespace Quasar.HabboHotel.Permissions
             /*log.Info(" Permissões " + this.Permissions.Count + " Carregado");
             log.Info("   Permissões de Grupos " + this.PermissionGroups.Count + " Carregado");
             log.Info("   Direitos " + this.PermissionGroupRights.Count + " Carregado");
-            log.Info("   Permissões HC " + this.PermissionSubscriptionRights.Count + " Carregado");*/
-            log.Info(">> Permissions Manager -> Ligado");
+            log.Info("   Permissões HC " + this.PermissionSubscriptionRights.Count + " Carregado");
+            log.Info(">> Permissions Manager -> Ligado");*/
         }
 
         public bool TryGetGroup(int Id, out PermissionGroup Group)

@@ -19,7 +19,7 @@ namespace Quasar.HabboHotel.Cache
             this._usersCached = new ConcurrentDictionary<int, UserCache>();
             this._process = new ProcessComponent();
             this._process.Init();
-            log.Info(">> Cache Manager -> Ligado");
+            //log.Info(">> Cache Manager -> Ligado");
         }
         public bool ContainsUser(int Id)
         {

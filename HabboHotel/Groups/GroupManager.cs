@@ -115,7 +115,7 @@ namespace Quasar.HabboHotel.Groups
                 }
             }
 
-            log.Info(">> Group Manager -> Ligado");
+            //log.Info(" Group Manager >> Atualizado");
         }
 
         public void ClearInfo()

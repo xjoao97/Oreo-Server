@@ -25,7 +25,7 @@ namespace Quasar.HabboHotel.Achievements
         {
             this._achievements = new Dictionary<string, Achievement>();
             this.LoadAchievements();
-            log.Info(">> Achievements Manager -> Ligado");
+            //log.Info(">> Achievements Manager -> Ligado");
         }
 
         public void LoadAchievements()

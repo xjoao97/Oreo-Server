@@ -11,7 +11,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Parameters
         {
-            get { return "%message%"; }
+            get { return "Alerta"; }
         }
 
         public string Description

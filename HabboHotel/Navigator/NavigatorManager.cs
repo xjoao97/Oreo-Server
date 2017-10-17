@@ -76,7 +76,7 @@ namespace Quasar.HabboHotel.Navigator
                 }
             }
 
-            log.Info(">> Navigator Manager -> Ligado");
+            log.Info(" Navegador >> Atualizado");
         }
 
         public List<SearchResultList> GetCategorysForSearch(string Category)

@@ -86,8 +86,8 @@ namespace ConnectionManager
             maxIpConnectionCount = connectionsPerIP;
             prepareConnectionDetails();
             _acceptedConnections = 0;
-            log.Info(">> Sucessfully connected to port: (" + portID + ")!");
-            log.Info(">> Max connections for IP [" + connectionsPerIP + "]!");
+            log.Info(" Conexão estabelecida na porta(" + portID + ")");
+            log.Info(" Máximo de conexões por IP (" + connectionsPerIP + ")");
         }
 
         /// <summary>

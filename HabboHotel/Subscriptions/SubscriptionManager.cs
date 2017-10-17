@@ -39,8 +39,8 @@ namespace Quasar.HabboHotel.Subscriptions
                 }
             }
 
-            //log.Info(" Usuários com HC " + this._subscriptions.Count + " Carregado");
-            log.Info(">> Subscription Manager -> Ligado");
+            //log.Info(" Usuários com Habbo Club " + this._subscriptions.Count + " Carregado");
+            log.Info(" Habbo Club >> Atualizado");
         }
 
         public bool TryGetSubscriptionData(int Id, out SubscriptionData Data)

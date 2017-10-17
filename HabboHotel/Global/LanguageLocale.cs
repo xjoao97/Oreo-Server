@@ -46,7 +46,7 @@ namespace Quasar.HabboHotel.Global
                 }
             }
 
-            log.Info(">> Language Manager -> Ligado");
+            //log.Info(">> Language Manager -> Ligado");
         }
 
         public string TryGetValue(string value)

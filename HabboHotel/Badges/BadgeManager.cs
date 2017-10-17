@@ -38,9 +38,9 @@ namespace Quasar.HabboHotel.Badges
             }
 
             //log.Info(">> Badge Manager with " + this._badges.Count + " badges loaded -> Ligado");
-            log.Info(">> Badge Manager -> Ligado");
+            //log.Info(">> Badge Manager -> Ligado");
         }
-   
+
         public bool TryGetBadge(string BadgeCode, out BadgeDefinition Badge)
         {
             return this._badges.TryGetValue(BadgeCode.ToUpper(), out Badge);

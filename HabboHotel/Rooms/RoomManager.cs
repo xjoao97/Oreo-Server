@@ -37,7 +37,7 @@ namespace Quasar.HabboHotel.Rooms
 
             this._purgeLastExecution = DateTime.Now.AddHours(3);
 
-            log.Info(">> Rooms Manager -> Ligado");
+            log.Info(" Quartos >> Atualizado");
         }
 
         public void OnCycle()

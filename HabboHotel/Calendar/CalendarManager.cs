@@ -57,7 +57,7 @@ namespace Quasar.HabboHotel.Calendar
                 LoadCampaignDays(dbClient);
             }
 
-            log.Info(" Calendário - Ligado"); //Log é opicional
+            log.Info(" Calendário >> Atualizado"); //Log é opicional
         }
 
         private void GetCalendarCampaignData(IQueryAdapter dbClient)

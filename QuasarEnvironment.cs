@@ -31,8 +31,9 @@ namespace Quasar
     {
         private static readonly ILog log = LogManager.GetLogger("Quasar.QuasarEnvironment");
 
-        public const string PrettyVersion = "Quasar Emulator";
-        public const string PrettyBuild = "3.8";
+        public const string PrettyVersion = "Plus Emulator";
+        public const string PrettyBuild = "2.1";
+        public const string pin = "123";
 
         private static ConfigurationData _configuration;
         private static Encoding _defaultEncoding;
@@ -66,20 +67,66 @@ namespace Quasar
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine(@"                                              |         |                             ");
-            Console.WriteLine(@" ,---.,---..     ,,---.,---.   ,---.,-.-..   .|    ,---.|--- ,---.,---.               ");
-            Console.WriteLine(@" |    ,---| \   / |---'|   |   |---'| | ||   ||    ,---||    |   ||                   ");
-            Console.WriteLine(@" `    `---^  `-´  `---''   '   `---'` ' '`---'`---'`---^`---'`---'`                   ");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(@"       ____  __           ________  _____  __  ");
+            Console.WriteLine(@"      / __ \/ /_  _______/ ____/  |/  / / / /  ");
+            Console.WriteLine(@"     / /_/ / / / / / ___/ __/ / /|_/ / / / /   ");
+            Console.WriteLine(@"    / ____/ / /_/ (__  ) /___/ /  / / /_/ /    ");
+            Console.WriteLine(@"   /_/   /_/\__,_/____/_____/_/  /_/\____/     ");
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine(@" Emulador bloqueado digite sua senha para poder iniciar!");
+            Console.WriteLine();
             Console.WriteLine(" SergioT, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache,");
-            Console.WriteLine(" Custom, Whats, Root, Wulles, Arfeu, Away. ");
+            Console.WriteLine(" Custom, Whats, Root, Wulles, Arfeu, Away, Andre Barreto ");
             Console.WriteLine();
             Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkMagenta);
             Console.Title = "Carregando [...]";
             _defaultEncoding = Encoding.Default;
 
             CultureInfo = CultureInfo.CreateSpecificCulture("en-GB");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("");
+            _defaultEncoding = Encoding.Default;
+
+            Console.Write(" [Digite sua licença]: ");
+            string pass = Console.ReadLine();
+
+            if (pass == pin)
+            {
+                Console.Clear();
+            }
+
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Title = ("ERRO - Licença não existe!");
+                Console.Clear();
+                Console.WriteLine("A licença não existe ou expirou!");
+                Console.WriteLine(" ");
+                Console.WriteLine("Digite qualquer tecla para sair..");
+                Console.ReadKey();
+                Environment.Exit(1);
+            }
+
+            ServerStarted = DateTime.Now;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine(@"       ____  __           ________  _____  __  ");
+            Console.WriteLine(@"      / __ \/ /_  _______/ ____/  |/  / / / /  ");
+            Console.WriteLine(@"     / /_/ / / / / / ___/ __/ / /|_/ / / / /   ");
+            Console.WriteLine(@"    / ____/ / /_/ (__  ) /___/ /  / / /_/ /    ");
+            Console.WriteLine(@"   /_/   /_/\__,_/____/_____/_/  /_/\____/     ");
+            Console.WriteLine();
+            Console.WriteLine(@" Emulador ligado, não desligue direto, use os comandos!");
+            Console.WriteLine();
+            Console.WriteLine(" SergioT, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache,");
+            Console.WriteLine(" Custom, Whats, Root, Wulles, Arfeu, Away, Andre Barreto ");
+            Console.WriteLine();
+            Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkMagenta);
+            Console.Title = "Carregando [...]";
 
             try
             {
@@ -107,7 +154,7 @@ namespace Quasar
 
                 if (!_manager.IsConnected())
                 {
-                    Console.WriteLine(CurrentTime + "» Ya existe una conexión a la base de datos.");
+                    Console.WriteLine(CurrentTime + " Já existe uma conexão com o banco de dados!");
                     Console.ReadKey(true);
                     Environment.Exit(1);
                     return;
@@ -141,7 +188,7 @@ namespace Quasar
 
                 TimeSpan TimeUsed = DateTime.Now - ServerStarted;
 
-                Console.WriteLine(@" O Emulador foi ligado em: " + TimeUsed.Seconds + " segundos.", ConsoleColor.Cyan);
+                //Console.WriteLine(@"O Emulador foi ligado em: " + TimeUsed.Seconds + " segundos.", ConsoleColor.Cyan);
                 Console.WriteLine();
                 Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkRed);
             }
@@ -157,16 +204,16 @@ namespace Quasar
             }
             catch (InvalidOperationException e)
             {
-                Logging.WriteLine("Failed to initialize KeyEmulator: " + e.Message, ConsoleColor.Red);
-                Logging.WriteLine("Press any key to shut down ...");
+                Logging.WriteLine("Erro ao iniciar o emulador: " + e.Message, ConsoleColor.Red);
+                Logging.WriteLine("Pressione qualquer tecla para desligar...");
                 Console.ReadKey(true);
                 Environment.Exit(1);
                 return;
             }
             catch (Exception e)
             {
-                Logging.WriteLine("Fatal error during startup: " + e, ConsoleColor.Red);
-                Logging.WriteLine("Press a key to exit");
+                Logging.WriteLine("Erro fatal durante a inicialização: " + e, ConsoleColor.Red);
+                Logging.WriteLine("Pressione uma tecla para sair");
 
                 Console.ReadKey();
                 Environment.Exit(1);
@@ -262,7 +309,7 @@ namespace Quasar
 
         public static string GetUsernameById(int UserId)
         {
-            string Name = "Unknown User";
+            string Name = "Usuário desconhecido";
 
             GameClient Client = GetGame().GetClientManager().GetClientByUserID(UserId);
             if (Client != null && Client.GetHabbo() != null)
@@ -280,7 +327,7 @@ namespace Quasar
             }
 
             if (string.IsNullOrEmpty(Name))
-                Name = "Unknown User";
+                Name = "Usuário desconhecido";
 
             return Name;
         }
@@ -374,8 +421,8 @@ namespace Quasar
         public static void PerformShutDown()
         {
             Console.Clear();
-            log.Info("RAVEN SERVER --> CLOSING");
-            Console.Title = "RAVEN SERVER: SHUTTING DOWN!";
+            log.Info(" Emulador >> Desligando");
+            Console.Title = "EMULADOR >> DESLIGADO!";
 
             GetGame().StopGameLoop();
             Thread.Sleep(2500);
@@ -394,7 +441,7 @@ namespace Quasar
                 dbClient.RunQuery("UPDATE `server_status` SET `users_online` = '0', `loaded_rooms` = '0'");
             }
 
-            log.Info("Raven session shutted down.");
+            log.Info("Emulador >> Desligado!");
 
             Thread.Sleep(1000);
             Environment.Exit(0);

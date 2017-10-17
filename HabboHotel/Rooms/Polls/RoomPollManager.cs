@@ -79,7 +79,7 @@ namespace Quasar.HabboHotel.Rooms.Polls
                 }
 
                 //log.Info("Loaded " + PollsLoaded + " room polls & " + QuestionsLoaded + " poll questions");
-                log.Info(">> Poll's Manager -> Ligado");
+                log.Info(" Poll's >> Atualizado");
             }
         }
 

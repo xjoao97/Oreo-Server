@@ -60,7 +60,7 @@ namespace Quasar.HabboHotel.Quests
                 }
             }
 
-            log.Info(">> Quest Manager -> Ligado");
+            //log.Info(">> Quest Manager -> Ligado");
         }
 
         private void AddToCounter(string category)

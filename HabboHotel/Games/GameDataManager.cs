@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Games
 
             this.Init();
         }
-         
+
         public void Init()
         {
             if (_games.Count > 0)
@@ -42,7 +42,7 @@ namespace Quasar.HabboHotel.Games
                 }
             }
 
-            log.Info(">> Data Manager -> Ligado");
+            //log.Info(">> Data Manager >> Atualizado");
         }
 
         public bool TryGetGame(int GameId, out GameData GameData)
