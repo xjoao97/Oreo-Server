@@ -44,6 +44,8 @@ namespace Quasar.Communication.Packets.Incoming.Groups
                 //Session.SendMessage(new PostUpdatedComposer(Session, Post));
                 //Session.SendMessage(new ThreadReplyComposer(Session, Post));
 
+                QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "", 1);
+
                 Thread.AddView(Session.GetHabbo().Id, 1);
 
             }

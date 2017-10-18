@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
 
             if (QuasarEnvironment.GetDBConfig().DBData["exchange_enabled"] != "1")
             {
-                Session.SendNotification("No momento você não pode fazer isso, tente depois!.");
+                Session.SendNotification("Exibe mensagem de erro quando tenta colocar no quarto de alguém!");
                 return;
             }
 
@@ -38,7 +38,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
             if (Exchange == null)
                 return;
 
-            if (!Exchange.GetBaseItem().ItemName.StartsWith("CFC_"))
+            if (Exchange.GetBaseItem().ItemName.StartsWith("CFC_"))
             {
 
                 string[] Split = Exchange.GetBaseItem().ItemName.Split('_');
@@ -51,7 +51,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
                 }
             }
 
-            if (!Exchange.GetBaseItem().ItemName.StartsWith("CF_"))
+            if (Exchange.GetBaseItem().ItemName.StartsWith("CF_"))
             {
 
                 string[] Split = Exchange.GetBaseItem().ItemName.Split('_');
@@ -59,8 +59,36 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
 
                 if (Value > 0)
                 {
+                    Session.GetHabbo().Credits += Value;
+                    Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
+                }
+            }
+
+            if (Exchange.GetBaseItem().ItemName.StartsWith("DCK_"))
+            {
+
+                string[] Split = Exchange.GetBaseItem().ItemName.Split('_');
+                int Value = int.Parse(Split[1]);
+
+                if (Value > 0)
+                {
+
                     Session.GetHabbo().Duckets += Value;
                     Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Value));
+                }
+            }
+
+            if (Exchange.GetBaseItem().ItemName.StartsWith("DIA_"))
+            {
+
+                string[] Split = Exchange.GetBaseItem().ItemName.Split('_');
+                int Value = int.Parse(Split[1]);
+
+                if (Value > 0)
+                {
+
+                    Session.GetHabbo().Diamonds += Value;
+                    Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, Value, 5));
                 }
             }
 

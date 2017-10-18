@@ -36,7 +36,6 @@ namespace Quasar.Communication.Packets.Incoming.Calendar
 
             Session.GetHabbo().calendarGift[CampaignDay] = true;
 
-            //Atualizar pacote
             Session.SendMessage(new CalendarPrizesComposer(QuasarEnvironment.GetGame().GetCalendarManager().GetCampaignDay(CampaignDay + 1)));
             Session.SendMessage(new CampaignCalendarDataComposer(Session.GetHabbo().calendarGift));
 
@@ -62,6 +61,8 @@ namespace Quasar.Communication.Packets.Incoming.Calendar
 
                             Session.SendMessage(new FurniListNotificationComposer(GiveItem.Id, 1));
                             Session.SendMessage(new FurniListUpdateComposer());
+                            Session.SendNotification("Você recebeu um item, abra seu inventário!");
+                            QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_Kalender", 1);
                         }
 
                         Session.GetHabbo().GetInventoryComponent().UpdateItems(false);
@@ -71,6 +72,8 @@ namespace Quasar.Communication.Packets.Incoming.Calendar
                 case "badge":
                     {
                         Session.GetHabbo().GetBadgeComponent().GiveBadge(GiftValue, true, Session);
+                        Session.SendNotification("Você recebeu um item, abra seu inventário!");
+                        QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_Kalender", 1);
                     }
                     break;
 
@@ -78,6 +81,8 @@ namespace Quasar.Communication.Packets.Incoming.Calendar
                     {
                         Session.GetHabbo().Diamonds += int.Parse(GiftValue);
                         Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
+                        Session.SendNotification("Você recebeu," + GiftValue + " diamantes!");
+                    QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_Kalender", 1);
                     }
                     break;
 
@@ -85,6 +90,8 @@ namespace Quasar.Communication.Packets.Incoming.Calendar
                     {
                         Session.GetHabbo().GOTWPoints += int.Parse(GiftValue);
                         Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
+                        Session.SendNotification("Você recebeu " + GiftValue + " pontos!");
+                        QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_Kalender", 1);
                     }
                     break;
 
