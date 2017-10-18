@@ -9,6 +9,7 @@ namespace Quasar.HabboHotel.Users.Messenger.FriendBar
     public enum FriendBarState
     {
         OPEN,
-        CLOSED
+        CLOSED,
+        MIDDLE
     }
 }

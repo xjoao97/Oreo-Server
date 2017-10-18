@@ -36,7 +36,7 @@ namespace Quasar.HabboHotel.Catalog
                 if (!ItemDataManager.GetItem(ItemId, out Data))
                     continue;
 
-                ItemDataList.Add(new CatalogItem(0, ItemId, Data, string.Empty, PageId, CostCredits, CostPixels, 0, Amount, 0, 0, false, "", "", 0, 0, 0));
+                ItemDataList.Add(new CatalogItem(0, ItemId, Data, string.Empty, PageId, CostCredits, CostPixels,0,Amount,0,0,false,"","",0,0,0,0));
             }
 
             this.CostCredits = Credits;

@@ -35,7 +35,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Pets
 
             if (Room.GetRoomUserManager().PetCount > QuasarStaticGameSettings.RoomPetPlacementLimit)
             {
-                Session.SendMessage(new RoomErrorNotifComposer(2));//5 = I have too many.
+                Session.SendMessage(new RoomErrorNotifComposer(2));
                 return;
             }
 
@@ -86,8 +86,9 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Pets
             Pet ToRemove = null;
             if (!Session.GetHabbo().GetInventoryComponent().TryRemovePet(Pet.PetId, out ToRemove))
             {
-                log.Error("Erro ao remover o mascote: " + ToRemove.PetId);
-                return;
+              string CurrentTime = DateTime.Now.ToString("HH:mm:ss" + " | ");
+              Console.WriteLine(CurrentTime + "Erro ao remover o animal de estimação: " + ToRemove.PetId);
+              return;
             }
 
             Session.SendMessage(new PetInventoryComposer(Session.GetHabbo().GetInventoryComponent().GetPets()));

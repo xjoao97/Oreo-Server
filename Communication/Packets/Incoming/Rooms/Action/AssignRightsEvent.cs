@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
@@ -12,6 +12,7 @@ using Quasar.HabboHotel.Users;
 
 using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.Cache;
+using Quasar.HabboHotel.Global;
 
 namespace Quasar.Communication.Packets.Incoming.Rooms.Action
 {
@@ -33,7 +34,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Action
 
             if (Room.UsersWithRights.Contains(UserId))
             {
-                Session.SendNotification(QuasarEnvironment.GetGame().GetLanguageLocale().TryGetValue("room_rights_has_rights_error"));
+                ///Session.SendNotification(LanguageLocal.G("room_rights_has_rights_error"));
                 return;
             }
 
@@ -47,7 +48,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Action
             RoomUser RoomUser = Room.GetRoomUserManager().GetRoomUserByHabbo(UserId);
             if (RoomUser != null && !RoomUser.IsBot)
             {
-                RoomUser.SetStatus("flatctrl", "1");
+                RoomUser.SetStatus("flatctrl 1", "");
                 RoomUser.UpdateNeeded = true;
                 if (RoomUser.GetClient() != null)
                     RoomUser.GetClient().SendMessage(new YouAreControllerComposer(1));
@@ -60,6 +61,11 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Action
                 if (User != null)
                     Session.SendMessage(new FlatControllerAddedComposer(Room.RoomId, User.Id, User.Username));
             }
+        }
+
+        private string LanguageLocal(string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,9 @@ namespace Quasar.HabboHotel.Users.Messenger.FriendBar
 
                 case 1:
                     return FriendBarState.OPEN;
+
+                case 3:
+                    return FriendBarState.MIDDLE;
             }
         }
 
@@ -31,6 +34,9 @@ namespace Quasar.HabboHotel.Users.Messenger.FriendBar
 
                 case FriendBarState.OPEN:
                     return 1;
+
+                case FriendBarState.MIDDLE:
+                    return 3;
             }
         }
     }
