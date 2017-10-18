@@ -422,7 +422,7 @@ namespace Quasar.HabboHotel.Users
                         int DailyRespects = 3;
 
                         if (this._permissions.HasRight("mod_tool"))
-                            DailyRespects = 20;
+                            DailyRespects = 3;
                         else if (QuasarEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(VIPRank, out SubData))
                             DailyRespects = SubData.Respects;
 

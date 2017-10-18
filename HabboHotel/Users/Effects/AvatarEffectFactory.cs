@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Users.Effects
         {
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("INSERT INTO `user_effects` (`user_id`,`effect_id`,`total_duration`,`is_activated`,`activated_stamp`,`quantity`) VALUES(@uid,@sid,@dur,'0',0,1)");
+                dbClient.SetQuery("INSERT INTO `user_effects` (`user_id`,`effect_id`,`total_duration`,`is_activated`,`activated_stamp`,`quantity`) VALUES (@uid,@sid,@dur,'0','0','1')");
                 dbClient.AddParameter("uid", Habbo.Id);
                 dbClient.AddParameter("sid", SpriteId);
                 dbClient.AddParameter("dur", Duration);

@@ -11,7 +11,7 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.AI.Pets
 {
     class PetInformationComposer : ServerPacket
     {
-        public PetInformationComposer(Pet Pet)
+        public PetInformationComposer(Pet Pet, bool isMounted = false)
             : base(ServerPacketHeader.PetInformationMessageComposer)
         {
             Room Room;
@@ -33,20 +33,20 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.AI.Pets
             base.WriteInteger(Pet.OwnerId);
             base.WriteInteger(Pet.Age);
             base.WriteString(Pet.OwnerName);
-            base.WriteInteger(1);//3 on hab
+            base.WriteInteger(1);
             base.WriteBoolean(Pet.Saddle > 0);
-            base.WriteBoolean(false);
-            base.WriteInteger(0);//5 on hab
-            base.WriteInteger(Pet.AnyoneCanRide); // Anyone can ride horse
+            base.WriteBoolean(isMounted);
             base.WriteInteger(0);
-            base.WriteInteger(0);//512 on hab
-            base.WriteInteger(0);//1536
-            base.WriteInteger(0);//2560
-            base.WriteInteger(0);//3584
+            base.WriteInteger(Pet.AnyoneCanRide);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
             base.WriteInteger(0);
             base.WriteString("");
             base.WriteBoolean(false);
-            base.WriteInteger(-1);//255 on hab
+            base.WriteInteger(-1);
             base.WriteInteger(-1);
             base.WriteInteger(-1);
             base.WriteBoolean(false);
@@ -69,20 +69,20 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.AI.Pets
             base.WriteInteger(Habbo.Id);
             base.WriteInteger(Convert.ToInt32(Math.Floor((QuasarEnvironment.GetUnixTimestamp() - Habbo.AccountCreated) / 86400)));//How?
             base.WriteString(Habbo.Username);
-            base.WriteInteger(1);//3 on hab
+            base.WriteInteger(1);
             base.WriteBoolean(false);
             base.WriteBoolean(false);
-            base.WriteInteger(0);//5 on hab
-            base.WriteInteger(0); // Anyone can ride horse
             base.WriteInteger(0);
-            base.WriteInteger(0);//512 on hab
-            base.WriteInteger(0);//1536
-            base.WriteInteger(0);//2560
-            base.WriteInteger(0);//3584
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(0);
             base.WriteInteger(0);
             base.WriteString("");
             base.WriteBoolean(false);
-            base.WriteInteger(-1);//255 on hab
+            base.WriteInteger(-1);
             base.WriteInteger(-1);
             base.WriteInteger(-1);
             base.WriteBoolean(false);

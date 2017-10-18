@@ -36,8 +36,8 @@ namespace Quasar.HabboHotel.Rooms
         public bool UserHandlingBall = false;
         public int LastRotBody;
         public int DistancePath = 0;
-        public int CarryItemID; //byte
-        public int CarryTimer; //byte
+        public int CarryItemID;
+        public int CarryTimer;
         public int ChatSpamCount = 0;
         public int ChatSpamTicks = 16;
         public ItemEffectType CurrentItemEffect;
@@ -50,11 +50,11 @@ namespace Quasar.HabboHotel.Rooms
         public bool Frozen;
         public int GateId;
 
-        public int GoalX; //byte
-        public int GoalY; //byte
+        public int GoalX;
+        public int GoalY;
         public int HabboId;
         public int HorseID = 0;
-        public int IdleTime; //byte
+        public int IdleTime;
         public bool InteractingGate;
         public int InternalRoomID;
         public bool IsAsleep;
@@ -73,24 +73,24 @@ namespace Quasar.HabboHotel.Rooms
         public int PrevTime;
         public bool RidingHorse = false;
         public int RoomId;
-        public int RotBody; //byte
-        public int RotHead; //byte
+        public int RotBody;
+        public int RotHead;
 
         public bool SetStep;
-        public int SetX; //byte
-        public int SetY; //byte
+        public int SetX;
+        public int SetY;
         public double SetZ;
         public double SignTime;
         public byte SqState;
         public Dictionary<string, string> Statusses;
-        public int TeleDelay; //byte
+        public int TeleDelay;
         public bool TeleportEnabled;
         public bool UpdateNeeded;
         public int VirtualId;
         public int handelingBallStatus = 0;
 
-        public int X; //byte
-        public int Y; //byte
+        public int X;
+        public int Y;
         public double Z;
 
         public FreezePowerUp banzaiPowerUp;
@@ -368,7 +368,7 @@ namespace Quasar.HabboHotel.Rooms
 
         public bool IncrementAndCheckFlood(out int MuteTime)
         {
-            MuteTime = 0;
+            MuteTime = 30;
 
             ChatSpamCount++;
             if (ChatSpamTicks == -1)
@@ -376,17 +376,17 @@ namespace Quasar.HabboHotel.Rooms
             else if (ChatSpamCount >= 6)
             {
                 if (GetClient().GetHabbo().GetPermissions().HasRight("events_staff"))
-                    MuteTime = 3;
+                    MuteTime = 30;
                 else if (GetClient().GetHabbo().GetPermissions().HasRight("gold_vip"))
-                    MuteTime = 1;
+                    MuteTime = 30;
                 else if (GetClient().GetHabbo().GetPermissions().HasRight("silver_vip"))
-                    MuteTime = 1;
+                    MuteTime = 30;
                 else
                     MuteTime = 20;
 
                 GetClient().GetHabbo().FloodTime = QuasarEnvironment.GetUnixTimestamp() + MuteTime;
 
-                ChatSpamCount = 0;
+                ChatSpamCount = 30;
                 return true;
             }
             return false;
@@ -426,7 +426,7 @@ namespace Quasar.HabboHotel.Rooms
             {
                 mRoom.SendToTent(GetClient().GetHabbo().Id, GetClient().GetHabbo().TentId, Packet);
 
-                Packet = new WhisperComposer(this.VirtualId, "[Tent Chat] " + Message, 0, Colour);
+                Packet = new WhisperComposer(this.VirtualId, "[Conversa em Tenda]  " + Message, 0, Colour);
 
                 List<RoomUser> ToNotify = mRoom.GetRoomUserManager().GetRoomUserByRank(2);
 

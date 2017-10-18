@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
@@ -15,9 +15,13 @@ namespace Quasar.Communication.Packets.Outgoing.Messenger
             : base(ServerPacketHeader.MessengerInitMessageComposer)
         {
             base.WriteInteger(QuasarStaticGameSettings.MessengerFriendLimit);//Friends max.
-            base.WriteInteger(300);
-            base.WriteInteger(800);
-            base.WriteInteger(0); // category count
+            base.WriteInteger(0);
+            base.WriteInteger(0);
+            base.WriteInteger(1);
+            base.WriteInteger(1);
+
+            base.WriteInteger(1);
+            base.WriteString("Chat de Grupos");
         }
     }
 }
