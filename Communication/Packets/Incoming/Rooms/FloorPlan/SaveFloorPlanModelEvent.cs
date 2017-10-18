@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Data;
 using System.Collections.Generic;
 
@@ -8,7 +7,6 @@ using Quasar.HabboHotel.Rooms;
 using Quasar.Communication.Packets.Outgoing.Rooms.Session;
 using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 using Quasar.Database.Interfaces;
-using Quasar.HabboHotel.Items;
 
 namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
 {
@@ -37,7 +35,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
                 return;
             }
 
-            if(Map.Any(letter => !validLetters.Contains(letter)) || String.IsNullOrEmpty(Map))
+            if (Map.Any(letter => !validLetters.Contains(letter)) || String.IsNullOrEmpty(Map))
             {
                 Session.SendMessage(new RoomNotificationComposer("floorplan_editor.error", "errors", "Oops, it appears that you have entered an invalid floor map!"));
                 return;
@@ -122,7 +120,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
 
                 if (Row == null)//The row is still null, let's insert instead.
                 {
-                    dbClient.SetQuery("INSERT INTO `room_models` (`id`,`door_x`,`door_y`, `door_z`, `door_dir`,`heightmap`,`custom`,`wall_height`) VALUES (@ModelName, @DoorX, @DoorY, @DoorZ, @DoorDirection, @Map,'1',@WallHeight)");
+                    dbClient.SetQuery("REPLACE INTO `room_models` (`id`,`door_x`,`door_y`, `door_z`, `door_dir`,`heightmap`,`custom`,`wall_height`) VALUES (@ModelName, @DoorX, @DoorY, @DoorZ, @DoorDirection, @Map,'1',@WallHeight)");
                     dbClient.AddParameter("ModelName", "model_bc_" + Room.Id);
                     dbClient.AddParameter("DoorX", DoorX);
                     dbClient.AddParameter("DoorY", DoorY);
