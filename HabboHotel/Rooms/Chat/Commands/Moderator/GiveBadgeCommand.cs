@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
+﻿using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 using Quasar.HabboHotel.GameClients;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
@@ -16,19 +12,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Parameters
         {
-            get { return "%username% %badge%"; }
+            get { return "Usuário Código"; }
         }
 
         public string Description
         {
-            get { return "Dar una placa a un usuario"; }
+            get { return "Dê um Emblema para algum usuário"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length != 3)
             {
-                Session.SendWhisper("Introduce el nombre del usuario a quien deseas enviar una placa!");
+                Session.SendWhisper("Algo deu errado! Tente novamente", 1);
                 return;
             }
 
@@ -38,18 +34,16 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                 if (!TargetClient.GetHabbo().GetBadgeComponent().HasBadge(Params[2]))
                 {
                     TargetClient.GetHabbo().GetBadgeComponent().GiveBadge(Params[2], true, TargetClient);
-                    if (TargetClient.GetHabbo().Id != Session.GetHabbo().Id)
-                        TargetClient.SendNotification("You have just been given a badge!");
-                    else
-                        Session.SendWhisper("Ha enviado correctamente la placa  " + Params[2] + "!");
+                    TargetClient.SendMessage(new RoomCustomizedAlertComposer("${wiredfurni.badgereceived.body}"));
+                    if (TargetClient.GetHabbo().Id != Session.GetHabbo().Id) ;
                 }
                 else
-                    Session.SendWhisper("Oops, este usuario ya tiene la placa  (" + Params[2] + ") !");
+                    Session.SendMessage(new RoomCustomizedAlertComposer("Parece que esse usuário já tem este Emblema. Veja seu Inventário!"));
                 return;
             }
             else
             {
-                Session.SendWhisper("Oops, no se ha encontrado al usuario!");
+                Session.SendWhisper("Algo deu errado! Tente novamente", 1);
                 return;
             }
         }

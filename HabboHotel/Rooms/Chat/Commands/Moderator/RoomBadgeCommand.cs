@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
-
-using Quasar.HabboHotel.Rooms;
+﻿using System.Linq;
+using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 {
@@ -16,19 +12,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Parameters
         {
-            get { return "%badge%"; }
+            get { return "Código"; }
         }
 
         public string Description
         {
-            get { return "Dar placa a todos los de una sala"; }
+            get { return "Dar um emblema para todos do Quarto"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Introduce el codigo de la placa que deseas enviar en esta sala.");
+                Session.SendWhisper("Você precisa por o código do emblema que deseja dar", 1);
                 return;
             }
 
@@ -40,13 +36,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                 if (!User.GetClient().GetHabbo().GetBadgeComponent().HasBadge(Params[1]))
                 {
                     User.GetClient().GetHabbo().GetBadgeComponent().GiveBadge(Params[1], true, User.GetClient());
-                    User.GetClient().SendNotification("Acabas de recibir una placa de sala.");
+                    User.GetClient().SendMessage(new RoomCustomizedAlertComposer("${wiredfurni.badgereceived.body}"));
                 }
                 else
-                    User.GetClient().SendWhisper(Session.GetHabbo().Username + " ya tiene esa placa");
+                    User.GetClient().SendMessage(new RoomCustomizedAlertComposer("Parece que você já tem esse Emblema. Veja seu Inventário!"));
             }
 
-            Session.SendWhisper("Enviaste correctamente en la sala el codigo  " + Params[2] + " placa!");
+            Session.SendWhisper("Você enviou o emblema: " + Params[2] + ", para todos deste Quarto", 1);
         }
     }
 }

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
 
 using Quasar.Communication.Packets.Incoming;
+
 using Quasar.HabboHotel.Rooms;
 using Quasar.HabboHotel.Users;
-using Quasar.Communication.Packets.Outgoing.Rooms.Chat;
+using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 
 namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -63,11 +61,11 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                 return false;
 
             if (Player.GetBadgeComponent().HasBadge(StringData))
-                Player.GetClient().SendNotification("Parece que ya has obtenido esta placa, revisa tu inventario.");
+                Player.GetClient().SendMessage(new RoomCustomizedAlertComposer("Parece que você já tem esse Emblema. Veja seu Inventário!"));
             else
             {
                 Player.GetBadgeComponent().GiveBadge(StringData, true, Player.GetClient());
-                Player.GetClient().SendNotification("¡Acabas de recibir una placa!");
+                Player.GetClient().SendMessage(new RoomCustomizedAlertComposer("${wiredfurni.badgereceived.body}"));
             }
 
             return true;
