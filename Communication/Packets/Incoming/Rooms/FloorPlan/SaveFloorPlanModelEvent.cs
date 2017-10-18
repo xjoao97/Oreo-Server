@@ -43,7 +43,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
                 return;
             }
 
-            var modelData = Map.Split((char)13);
+            var modelData = Map.Split('\n');
 
             int SizeY = modelData.Length;
             int SizeX = modelData[0].Length;
@@ -111,7 +111,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
                 WallHeight = 15;
 
             string ModelName = "model_bc_" + Room.Id;
-            Map += '\r' + new string('x', SizeX);
+            Map += '\n' + new string('x', SizeX);
 
             DataRow Row = null;
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
@@ -145,7 +145,8 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
                     dbClient.RunQuery();
                 }
 
-                dbClient.SetQuery("UPDATE `rooms` SET `model_name` = @ModelName, `wallthick` = @WallThick, `floorthick` = @FloorThick WHERE `id` = '" + Room.Id + "' LIMIT 1");
+                dbClient.SetQuery("UPDATE `rooms` SET `model_name` = @ModelName, `wallthick` = @WallThick, `floorthick` = @FloorThick WHERE `id` = @roomId LIMIT 1");
+                dbClient.AddParameter("roomId", Room.Id);
                 dbClient.AddParameter("ModelName", "model_bc_" + Room.Id);
                 dbClient.AddParameter("WallThick", WallThick);
                 dbClient.AddParameter("FloorThick", FloorThick);
