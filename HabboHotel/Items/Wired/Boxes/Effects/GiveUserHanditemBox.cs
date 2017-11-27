@@ -61,7 +61,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             var handitem = int.Parse(StringData);
             User.CarryItem(handitem);
-            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wfhanditem", "" + User.GetClient().GetHabbo().Username + ", acabas de recibir una bebida u otro objeto similar por un efecto de Wired.", ""));
+            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wfhanditem", "" + User.GetClient().GetHabbo().Username + ",você acabou de receber uma bebida ou outro objeto similar por um efeito Wired.", ""));
             Item.UpdateState(false, true);
             Item.RequestUpdate(2, true);
 

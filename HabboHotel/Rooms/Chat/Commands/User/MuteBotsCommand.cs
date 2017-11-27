@@ -33,9 +33,9 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             }
 
             if (Session.GetHabbo().AllowBotSpeech)
-                Session.SendWhisper("Cambio realizado, ahora no puedes escuchar lo que dicen los Bots");
+                Session.SendWhisper("Mudança feita, agora você não pode ouvir o que os Bots dizem");
             else
-                Session.SendWhisper("Cambio realizado, ahora puedes escuchar lo que dicen los Bots.");                       
+                Session.SendWhisper("Mudança feita, agora você pode ouvir o que os Bots dizem.");
         }
     }
 }

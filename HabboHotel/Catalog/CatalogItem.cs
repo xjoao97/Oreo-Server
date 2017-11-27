@@ -179,7 +179,7 @@ namespace Quasar.HabboHotel.Catalog
 
             Message.WriteInteger(Months); // months
             Message.WriteInteger(Days); // days
-            Message.WriteBoolean(true);
+            Message.WriteBoolean(false);
             Message.WriteInteger(Days); // wtf
             Message.WriteInteger(future.Year); // year
             Message.WriteInteger(future.Month); // month

@@ -1,4 +1,4 @@
-﻿using Quasar.HabboHotel.Catalog.PredesignedRooms;
+/*﻿using Quasar.HabboHotel.Catalog.PredesignedRooms;
 using System.Text;
 using System.Linq;
 using System.Globalization;
@@ -19,19 +19,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Agrega la Sala a las Salas pre-diseñadas"; }
+            get { return "Adiciona um quarto a lista!"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Room == null) return;
-            //if (QuasarEnvironment.GetGame().GetCatalog().GetPredesignedRooms().Exists((uint)Room.Id))
-            //{
-            //    Session.SendWhisper("La sala ya está agregada en la lista.");
-            //    return;
-            //}
+            if (QuasarEnvironment.GetGame().GetCatalog().GetPredesignedRooms().Exists((uint)Room.Id))
+            {
+                Session.SendWhisper("Esse quarto está na lista!");
+                return;
+            }
 
-            StringBuilder itemAmounts = new StringBuilder(), floorItemsData = new StringBuilder(), wallItemsData = new StringBuilder(), 
+            StringBuilder itemAmounts = new StringBuilder(), floorItemsData = new StringBuilder(), wallItemsData = new StringBuilder(),
                 decoration = new StringBuilder();
             var floorItems = Room.GetRoomItemHandler().GetFloor;
             var wallItems = Room.GetRoomItemHandler().GetWall;
@@ -52,7 +52,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
                 wallItemsData.Append(roomItem.BaseItem + "$$$$" + roomItem.wallCoord + "$$$$" + roomItem.ExtraData + ";");
             }
-            
+
             decoration.Append(Room.RoomData.FloorThickness + ";" + Room.RoomData.WallThickness + ";" +
                 Room.RoomData.Model.WallHeight + ";" + Room.RoomData.Hidewall + ";" + Room.RoomData.Wallpaper + ";" +
                 Room.RoomData.Landscape + ";" + Room.RoomData.Floor);
@@ -62,17 +62,17 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                 dbClient.SetQuery("INSERT INTO catalog_predesigned_rooms(room_model,flooritems,wallitems,catalogitems,room_id,room_decoration) VALUES('" + Room.RoomData.ModelName +
                     "', '" + floorItemsData + "', '" + wallItemsData + "', '" + itemAmounts + "', " + Room.Id + ", '" + decoration + "');");
                 var predesignedId = (uint)dbClient.InsertQuery();
-                
+
                 QuasarEnvironment.GetGame().GetCatalog().GetPredesignedRooms().predesignedRoom.Add(predesignedId,
                     new PredesignedRooms(predesignedId, (uint)Room.Id, Room.RoomData.ModelName,
                         floorItemsData.ToString().TrimEnd(';'), wallItemsData.ToString().TrimEnd(';'),
                         itemAmounts.ToString().TrimEnd(';'), decoration.ToString()));
             }
 
-            Session.SendWhisper("La sala se ha guardado correctamente a la lista.");
+            Session.SendWhisper("O quarto foi adicionado a lista!");
 
 
 
         }
     }
-}
+}*/

@@ -26,7 +26,7 @@ namespace Quasar.HabboHotel.Items.Interactor
             {
                 if (Session.GetHabbo().Username != Item.FoundBy)
                 {
-                    Session.SendMessage(RoomNotificationComposer.SendBubble("easteregg", "¡Este huevo ya ha sido encontrado por " + Item.FoundBy + "!", ""));
+                    Session.SendMessage(RoomNotificationComposer.SendBubble("easteregg", "Esse ovo já foi aberto por " + Item.FoundBy + "!", ""));
                     return;
                 }
             }
@@ -75,7 +75,7 @@ namespace Quasar.HabboHotel.Items.Interactor
                                 int RewardDiamonds = RandomNumber.GenerateRandom(1, 10);
                                 Session.GetHabbo().Diamonds += RewardDiamonds;
                                 Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, RewardDiamonds, 5));
-                                Session.SendWhisper("Acabas de ganar " + RewardDiamonds + " diamantes con este Huevo de Pascua, ¡qué suerte!.", 34);
+                                Session.SendWhisper("Você ganou " + RewardDiamonds + " diamantes com esse ovo!", 34);
                                 break;
                             case 2:
                             case 3:
@@ -96,7 +96,7 @@ namespace Quasar.HabboHotel.Items.Interactor
                             case 20:
                                 Session.GetHabbo().GOTWPoints += 1;
                                 Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 1, 103));
-                                Session.SendMessage(RoomNotificationComposer.SendBubble("easteregg", "Acabas de conseguir un Huevo de Pascua, colecciona varios para canjearlos por premios.", ""));
+                                Session.SendMessage(RoomNotificationComposer.SendBubble("easteregg", "Você acabou de receber um ovo de Páscoa, colete vários para resgatá-los por prêmios.", ""));
                                 break;
                             case 7:
                                 ItemData RewardItemPrize = null;
@@ -109,7 +109,7 @@ namespace Quasar.HabboHotel.Items.Interactor
                                     Session.GetHabbo().GetInventoryComponent().TryAddItem(GiveItem);
                                     Session.SendMessage(new FurniListNotificationComposer(GiveItem.Id, 1));
                                     Session.SendMessage(new FurniListUpdateComposer());
-                                    Session.SendMessage(RoomNotificationComposer.SendBubble("easteregg", "Acabas de recibir un Huevo de Pascua raro.\n\n¡Corre, " + Session.GetHabbo().Username + ", haz click aquí y revisa tu inventario!", "inventory/open"));
+                                    Session.SendMessage(RoomNotificationComposer.SendBubble("easteregg", "Você acabou de receber um ovo de páscoa raro.\n\nAbra seu inventário " + Session.GetHabbo().Username + "!", "inventory/open"));
                                 }
 
                                 Session.GetHabbo().GetInventoryComponent().UpdateItems(true);

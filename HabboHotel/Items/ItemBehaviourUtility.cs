@@ -110,7 +110,7 @@ namespace Quasar.HabboHotel.Items
                 //        Message.WriteInteger(1);
                 //        Message.WriteInteger(Item.GetRoom().WiredCasinoApuestas.Count);
                 //        ScoreBordatas = Item.GetRoom().WiredCasinoApuestas;
-                                  
+
                 //        }
 
                 //        else
@@ -135,7 +135,7 @@ namespace Quasar.HabboHotel.Items
                 //                Message.WriteString((string.IsNullOrEmpty(postor) ? string.Empty : postor));
                 //            }
                 //        }
-                    
+
                 //    break;
 
                 case InteractionType.GNOME_BOX:
@@ -193,8 +193,8 @@ namespace Quasar.HabboHotel.Items
                         Message.WriteString(Item.ExtraData);
                         Message.WriteString(Group.Id.ToString());
                         Message.WriteString(Group.Badge);
-                        Message.WriteString(QuasarEnvironment.GetGame().GetGroupManager().GetGroupColour(Group.Colour1, true)); // Group Colour 1
-                        Message.WriteString(QuasarEnvironment.GetGame().GetGroupManager().GetGroupColour(Group.Colour2, false)); // Group Colour 2
+                        Message.WriteString(QuasarEnvironment.GetGame().GetGroupManager().GetGroupColour(Group.Colour1, true));
+                        Message.WriteString(QuasarEnvironment.GetGame().GetGroupManager().GetGroupColour(Group.Colour2, false));
                     }
                     break;
 
@@ -313,17 +313,17 @@ namespace Quasar.HabboHotel.Items
                     string[] BadgeData = Item.ExtraData.Split(Convert.ToChar(9));
                     if (Item.ExtraData.Contains(Convert.ToChar(9).ToString()))
                     {
-                        Message.WriteString("0");//No idea
-                        Message.WriteString(BadgeData[0]);//Badge name
-                        Message.WriteString(BadgeData[1]);//Owner
-                        Message.WriteString(BadgeData[2]);//Date
+                        Message.WriteString("0");
+                        Message.WriteString(BadgeData[0]);
+                        Message.WriteString(BadgeData[1]);
+                        Message.WriteString(BadgeData[2]);
                     }
                     else
                     {
-                        Message.WriteString("0");//No idea
-                        Message.WriteString("DEV");//Badge name
-                        Message.WriteString("Sledmore");//Owner
-                        Message.WriteString("13-13-1337");//Date
+                        Message.WriteString("0");
+                        Message.WriteString("DEV");
+                        Message.WriteString("Sledmore");
+                        Message.WriteString("13-13-1337");
                     }
                     break;
 
@@ -365,7 +365,7 @@ namespace Quasar.HabboHotel.Items
                     Message.WriteInteger(1);
 
                     Message.WriteString("rarity");
-                    Message.WriteString("1");//Leve should be dynamic.
+                    Message.WriteString("1");
                     break;
             }
         }

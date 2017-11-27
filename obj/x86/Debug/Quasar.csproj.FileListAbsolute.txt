@@ -1,0 +1,39 @@
+C:\Users\Verissimo\Desktop\Quasar\obj\x86\Debug\Quasar.csprojResolveAssemblyReference.cache
+C:\Users\Verissimo\Desktop\Quasar\bin\Debug\KeyServer.exe.config
+C:\Users\Verissimo\Desktop\Quasar\bin\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Quasar\bin\Debug\KeyServer.pdb
+C:\Users\Verissimo\Desktop\Quasar\bin\Debug\log4net.dll
+C:\Users\Verissimo\Desktop\Quasar\bin\Debug\MySql.Data.dll
+C:\Users\Verissimo\Desktop\Quasar\bin\Debug\log4net.xml
+C:\Users\Verissimo\Desktop\Quasar\obj\x86\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Quasar\obj\x86\Debug\KeyServer.pdb
+C:\Users\Verissimo\Desktop\Emulador\obj\x86\Debug\Quasar.csprojResolveAssemblyReference.cache
+C:\Users\Verissimo\Desktop\Emulador\obj\x86\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Emulador\obj\x86\Debug\KeyServer.pdb
+C:\Users\Verissimo\Desktop\Emulador\bin\Debug\KeyServer.exe.config
+C:\Users\Verissimo\Desktop\Emulador\bin\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Emulador\bin\Debug\KeyServer.pdb
+C:\Users\Verissimo\Desktop\Emulador\bin\Debug\log4net.dll
+C:\Users\Verissimo\Desktop\Emulador\bin\Debug\MySql.Data.dll
+C:\Users\Verissimo\Desktop\Emulador\bin\Debug\log4net.xml
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\bin\Debug\KeyServer.exe.config
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\bin\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\bin\Debug\KeyServer.pdb
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\bin\Debug\log4net.dll
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\bin\Debug\MySql.Data.dll
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\bin\Debug\log4net.xml
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\obj\x86\Debug\Quasar.csprojResolveAssemblyReference.cache
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\obj\x86\Debug\Quasar.csproj.CoreCompileInputs.cache
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\obj\x86\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Nova pasta\Emulador\obj\x86\Debug\KeyServer.pdb
+C:\Users\Verissimo\Desktop\Emulador\obj\x86\Debug\Quasar.csproj.CoreCompileInputs.cache
+C:\Users\Verissimo\Desktop\Biga\Emulador\bin\Debug\KeyServer.exe.config
+C:\Users\Verissimo\Desktop\Biga\Emulador\bin\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Biga\Emulador\bin\Debug\KeyServer.pdb
+C:\Users\Verissimo\Desktop\Biga\Emulador\bin\Debug\log4net.dll
+C:\Users\Verissimo\Desktop\Biga\Emulador\bin\Debug\MySql.Data.dll
+C:\Users\Verissimo\Desktop\Biga\Emulador\bin\Debug\log4net.xml
+C:\Users\Verissimo\Desktop\Biga\Emulador\obj\x86\Debug\Quasar.csprojResolveAssemblyReference.cache
+C:\Users\Verissimo\Desktop\Biga\Emulador\obj\x86\Debug\Quasar.csproj.CoreCompileInputs.cache
+C:\Users\Verissimo\Desktop\Biga\Emulador\obj\x86\Debug\KeyServer.exe
+C:\Users\Verissimo\Desktop\Biga\Emulador\obj\x86\Debug\KeyServer.pdb

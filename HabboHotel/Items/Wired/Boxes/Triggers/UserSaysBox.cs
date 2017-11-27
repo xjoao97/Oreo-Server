@@ -37,7 +37,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Triggers
 
             this.BoolData = OwnerOnly == 1;
             this.StringData = Message.ToLower();
-            
+
         }
 
         public bool Execute(params object[] Params)
@@ -70,21 +70,17 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Triggers
                 }
 
                 Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, Message, 0, 0));
-                //Check the ICollection to find the random addon effect.
                 bool HasRandomEffectAddon = Effects.Where(x => x.Type == WiredBoxType.AddonRandomEffect).ToList().Count() > 0;
                 if (HasRandomEffectAddon)
                 {
-                    //Okay, so we have a random addon effect, now lets get the IWiredItem and attempt to execute it.
                     IWiredItem RandomBox = Effects.FirstOrDefault(x => x.Type == WiredBoxType.AddonRandomEffect);
                     if (!RandomBox.Execute())
                         return false;
 
-                    //Success! Let's get our selected box and continue.
                     IWiredItem SelectedBox = Instance.GetWired().GetRandomEffect(Effects.ToList());
                     if (!SelectedBox.Execute())
                         return false;
 
-                    //Woo! Almost there captain, now lets broadcast the update to the room instance.
                     if (Instance != null)
                     {
                         Instance.GetWired().OnEvent(RandomBox.Item);

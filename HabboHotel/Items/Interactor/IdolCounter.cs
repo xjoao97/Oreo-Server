@@ -10,7 +10,7 @@ namespace Quasar.HabboHotel.Items.Interactor
     {
         public void OnPlace(GameClient Session, Item Item)
         {
-            //if (Item.team == TEAM.NONE) USAR PARA EL USER
+            //if (Item.team == TEAM.NONE)
             //    return;
 
             Item.ExtraData = "0";

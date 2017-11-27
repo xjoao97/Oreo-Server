@@ -58,7 +58,7 @@ namespace Quasar.HabboHotel.Items.Interactor
                 count++;
                 Item.ExtraData = count + "";
                 Item.UpdateState(true, true);
-                Session.SendMessage(new RoomNotificationComposer("Piso mudo de cor!"));
+                //Session.SendMessage(new RoomNotificationComposer("Piso mudou de cor!"));
         }
 
         public void OnWiredTrigger(Item Item)

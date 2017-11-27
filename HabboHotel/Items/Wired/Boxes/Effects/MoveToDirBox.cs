@@ -179,137 +179,137 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                                     {
                                         if (Item.MoveToDirMovement == MovementDirection.RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.UP;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
                                                 break;
@@ -318,40 +318,40 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
                                         }
 
@@ -366,77 +366,77 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                                     {
                                         if (Item.MoveToDirMovement == MovementDirection.RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
                                                 break;
                                             }
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                             {
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
                                                 break;
@@ -445,24 +445,24 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
                                         }
 
@@ -477,154 +477,154 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                                     {
                                         if (Item.MoveToDirMovement == MovementDirection.RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
                                         }
 
@@ -639,90 +639,90 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                                     {
                                         if (Item.MoveToDirMovement == MovementDirection.RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY)) // derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1)) // arriba
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY)) // izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY))
                                                 Item.MoveToDirMovement = MovementDirection.LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1)) // abajo
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.UP_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_RIGHT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
                                         }
                                         else if (Item.MoveToDirMovement == MovementDirection.DOWN_LEFT)
                                         {
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1)) // abajo derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1)) // arriba derecha
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX + 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_RIGHT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1)) // arriba izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY - 1))
                                                 Item.MoveToDirMovement = MovementDirection.UP_LEFT;
-                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1)) // abajo izq
+                                            if (Instance.GetGameMap().IsValidMovement(Item.GetX - 1, Item.GetY + 1))
                                                 Item.MoveToDirMovement = MovementDirection.DOWN_LEFT;
                                         }
 

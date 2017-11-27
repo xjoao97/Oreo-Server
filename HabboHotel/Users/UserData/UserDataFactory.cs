@@ -221,7 +221,7 @@ namespace Quasar.HabboHotel.Users.UserDataManagement
                     Relationships.Add(Convert.ToInt32(Row[2]), new Relationship(Convert.ToInt32(Row[0]), Convert.ToInt32(Row[2]), Convert.ToInt32(Row[3].ToString())));
             }
 
-            
+
             Dictionary<string, Subscription> subscriptions = new Dictionary<string, Subscription>();
             foreach (DataRow dataRow in Subscriptions.Rows)
             {

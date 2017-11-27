@@ -81,7 +81,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Conditions
         {
             foreach (Item Item in this.SetItems.Values.ToList())
             {
-                if (Item == null || !Instance.GetRoomItemHandler().GetFloor.Contains(Item)) //Si el Furni esta en la sala
+                if (Item == null || !Instance.GetRoomItemHandler().GetFloor.Contains(Item))
                     continue;
 
                 bool NoFurni = false;

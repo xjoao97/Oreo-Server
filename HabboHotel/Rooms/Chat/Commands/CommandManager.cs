@@ -138,12 +138,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("habnam", new HabnamCommand()); //wulles
             this.Register("yyxxabxa", new YYXXABXACommand()); //wulles
             this.Register("moonwalk", new MoonwalkCommand()); //wulles
-            this.Register("ball", new BallCommand());
+            this.Register("emoji", new EmojiCommand());
+            this.Register("bola", new BallCommand());
             this.Register("item", new CarryCommand());
             this.Register("setbet", new SetBetCommand());
             this.Register("bubblebot", new BubbleBotCommand());
-            this.Register("chatdegrupo", new GroepChatCommand());
-            this.Register("disablespam", new DisableSpamCommand());
+            this.Register("grupo", new GroepChatCommand());
+            this.Register("spam", new DisableSpamCommand());
             this.Register("about", new AboutCommand());
             this.Register("vipstatus", new ViewVIPStatusCommand());
             this.Register("color", new ColourCommand());
@@ -160,7 +161,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("push", new PushCommand());
             this.Register("pull", new PullCommand());
             this.Register("enable", new EnableCommand());
-            this.Register("follow", new FollowCommand());
+            this.Register("seguir", new FollowCommand());
             this.Register("faceless", new FacelessCommand());
             this.Register("variables", new WiredVariable());
             this.Register("unload", new UnloadCommand());
@@ -212,6 +213,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("notf", new SendNotificationAlert());
             this.Register("hal", new HALCommand());
             this.Register("give", new GiveCommand());
+            this.Register("arfeu", new LandingCommand());
             this.Register("massgive", new MassGiveCommand());
             this.Register("roomgive", new RoomGiveCommand());
             this.Register("givebadge", new GiveBadgeCommand());
@@ -240,7 +242,6 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("makesay", new MakeSayCommand());
             this.Register("flaguser", new FlagUserCommand());
             this.Register("filter", new FilterCommand());
-            this.Register("giverank", new GiveRanksCommand());
 
             //this.Register("quizz", new IdolQuizCommand());
         }
@@ -253,8 +254,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("developer", new DevelopperCommand());
             this.Register("ia", new SendGraphicAlertCommand());
             this.Register("iau", new SendImageToUserCommand());
-            this.Register("viewevents", new ViewStaffEventListCommand());
-            this.Register("addtag", new AddTagsToUserCommand());
+            this.Register("viewevents", new ViewStaffEventListCommand());;
             this.Register("givespecial", new GiveSpecialReward());
             this.Register("bubble", new BubbleCommand());
             this.Register("update", new UpdateCommand());

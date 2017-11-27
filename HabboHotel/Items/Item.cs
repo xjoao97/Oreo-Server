@@ -81,7 +81,6 @@ namespace Quasar.HabboHotel.Items
         private readonly bool mIsWallItem;
         private readonly bool mIsFloorItem;
 
-        // Futbol
         internal int BallTryGoThrough;
         internal GameClient ballMover;
         internal bool ballIsMoving;
@@ -89,7 +88,7 @@ namespace Quasar.HabboHotel.Items
         internal IComeDirection comeDirection;
         public MovementDirection MoveToDirMovement = MovementDirection.NONE;
 
-        //public int ExtradataInt // added
+        //public int ExtradataInt
         //{
         //    get
         //    {
@@ -100,7 +99,6 @@ namespace Quasar.HabboHotel.Items
         //    }
         //}
 
-            // Idk if this is needed, I think because otherwise why I have it lol xd
         public int ExtradataInt
         {
             get
@@ -857,13 +855,13 @@ namespace Quasar.HabboHotel.Items
                                                 showHopperEffect = true;
                                             }
                                         }
-                                        // Is he in front of the tele?
+
                                         else if (User.Coordinate == SquareInFront)
                                         {
                                             User.AllowOverride = true;
                                             keepDoorOpen = true;
 
-                                            // Lock his walking. We're taking control over him. Allow overriding so he can get in the tele.
+
                                             if (User.IsWalking && (User.GoalX != GetX || User.GoalY != GetY))
                                             {
                                                 User.ClearMovement(true);
@@ -872,10 +870,10 @@ namespace Quasar.HabboHotel.Items
                                             User.CanWalk = false;
                                             User.AllowOverride = true;
 
-                                            // Move into the tele
+
                                             User.MoveTo(Coordinate.X, Coordinate.Y, true);
                                         }
-                                        // Not even near, do nothing and move on for the next user.
+  
                                         else
                                         {
                                             InteractingUser = 0;
@@ -883,7 +881,7 @@ namespace Quasar.HabboHotel.Items
                                     }
                                     else
                                     {
-                                        // Invalid user, do nothing and move on for the next user.
+
                                         InteractingUser = 0;
                                     }
                                 }
@@ -892,20 +890,19 @@ namespace Quasar.HabboHotel.Items
                                 {
                                     User2 = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(InteractingUser2);
 
-                                    // Is this user okay?
+
                                     if (User2 != null)
                                     {
-                                        // If so, open the door, unlock the user's walking, and try to push him out in the right direction. We're done with him!
+
                                         keepDoorOpen = true;
                                         User2.UnlockWalking();
                                         User2.MoveTo(SquareInFront);
                                     }
 
-                                    // This is a one time thing, whether the user's valid or not.
                                     InteractingUser2 = 0;
                                 }
 
-                                // Set the new item state, by priority
+
                                 if (keepDoorOpen)
                                 {
                                     if (ExtraData != "1")
@@ -939,7 +936,7 @@ namespace Quasar.HabboHotel.Items
                                     }
                                 }
 
-                                // We're constantly going!
+
                                 RequestUpdate(1, false);
                                 break;
                             }
@@ -954,18 +951,18 @@ namespace Quasar.HabboHotel.Items
                                 bool keepDoorOpen = false;
                                 bool showTeleEffect = false;
 
-                                // Do we have a primary user that wants to go somewhere?
+    
                                 if (InteractingUser > 0)
                                 {
                                     User = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(InteractingUser);
 
-                                    // Is this user okay?
+    
                                     if (User != null)
                                     {
-                                        // Is he in the tele?
+
                                         if (User.Coordinate == Coordinate)
                                         {
-                                            //Remove the user from the square
+
                                             User.AllowOverride = false;
 
                                             if (ItemTeleporterFinder.IsTeleLinked(Id, GetRoom()))
@@ -974,11 +971,11 @@ namespace Quasar.HabboHotel.Items
 
                                                 if (true)
                                                 {
-                                                    // Woop! No more delay.
+
                                                     int TeleId = ItemTeleporterFinder.GetLinkedTele(Id, GetRoom());
                                                     int RoomId = ItemTeleporterFinder.GetTeleRoomId(TeleId, GetRoom());
 
-                                                    // Do we need to tele to the same room or gtf to another?
+
                                                     if (RoomId == this.RoomId)
                                                     {
                                                         Item Item = GetRoom().GetRoomItemHandler().GetItem(TeleId);
@@ -989,15 +986,15 @@ namespace Quasar.HabboHotel.Items
                                                         }
                                                         else
                                                         {
-                                                            // Set pos
+
                                                             User.SetPos(Item.GetX, Item.GetY, Item.GetZ);
                                                             User.SetRot(Item.Rotation, false);
 
-                                                            // Force tele effect update (dirty)
+
                                                             Item.ExtraData = "2";
                                                             Item.UpdateState(false, true);
 
-                                                            // Set secondary interacting user
+
                                                             Item.InteractingUser2 = InteractingUser;
                                                             GetRoom().GetGameMap().RemoveUserFromMap(User, new Point(GetX, GetY));
 
@@ -1008,7 +1005,7 @@ namespace Quasar.HabboHotel.Items
                                                     {
                                                         if (User.TeleDelay == 0)
                                                         {
-                                                            // Let's run the teleport delegate to take futher care of this.. WHY DARIO?!
+  
                                                             if (!User.IsBot && User != null && User.GetClient() != null &&
                                                                 User.GetClient().GetHabbo() != null)
                                                             {
@@ -1028,29 +1025,28 @@ namespace Quasar.HabboHotel.Items
                                                         //QuasarEnvironment.GetGame().GetRoomManager().AddTeleAction(new TeleUserData(User.GetClient().GetMessageHandler(), User.GetClient().GetHabbo(), RoomId, TeleId));
                                                     }
                                                     GetRoom().GetGameMap().GenerateMaps();
-                                                    // We're done with this tele. We have another one to bother.
+
                                                 }
                                                 else
                                                 {
-                                                    // We're linked, but there's a delay, so decrease the delay and wait it out.
-                                                    //User.TeleDelay--;
+
                                                 }
                                             }
                                             else
                                             {
-                                                // This tele is not linked, so let's gtfo.
+
                                                 User.UnlockWalking();
                                                 InteractingUser = 0;
                                             }
                                         }
-                                        // Is he in front of the tele?
+
                                         else if (User.Coordinate == SquareInFront)
                                         {
                                                 User.AllowOverride = true;
-                                                // Open the door
+
                                                 keepDoorOpen = true;
 
-                                                // Lock his walking. We're taking control over him. Allow overriding so he can get in the tele.
+
                                                 if (User.IsWalking && (User.GoalX != GetX || User.GoalY != GetY))
                                                 {
                                                     User.ClearMovement(true);
@@ -1059,11 +1055,10 @@ namespace Quasar.HabboHotel.Items
                                                 User.CanWalk = false;
                                                 User.AllowOverride = true;
 
-                                                // Move into the tele
                                                 User.MoveTo(Coordinate.X, Coordinate.Y, true);
 
                                         }
-                                        // Not even near, do nothing and move on for the next user.
+
                                         else
                                         {
                                             InteractingUser = 0;
@@ -1071,30 +1066,30 @@ namespace Quasar.HabboHotel.Items
                                     }
                                     else
                                     {
-                                        // Invalid user, do nothing and move on for the next user.
+
                                         InteractingUser = 0;
                                     }
                                 }
 
-                                // Do we have a secondary user that wants to get out of the tele?
+
                                 if (InteractingUser2 > 0)
                                 {
                                     User2 = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(InteractingUser2);
 
-                                    // Is this user okay?
+
                                     if (User2 != null)
                                     {
-                                        // If so, open the door, unlock the user's walking, and try to push him out in the right direction. We're done with him!
+
                                         keepDoorOpen = true;
                                         User2.UnlockWalking();
                                         User2.MoveTo(SquareInFront);
                                     }
 
-                                    // This is a one time thing, whether the user's valid or not.
+
                                     InteractingUser2 = 0;
                                 }
 
-                                // Set the new item state, by priority
+
                                 if (showTeleEffect)
                                 {
                                     if (ExtraData != "2")
@@ -1120,7 +1115,7 @@ namespace Quasar.HabboHotel.Items
                                     }
                                 }
 
-                                // We're constantly going!
+
                                 RequestUpdate(1, false);
                                 break;
                             }
@@ -1671,26 +1666,25 @@ namespace Quasar.HabboHotel.Items
         public static string[] RandomizeStrings(string[] arr)
         {
             List<KeyValuePair<int, string>> list = new List<KeyValuePair<int, string>>();
-            // Add all strings from array
-            // Add new random int each time
+
             foreach (string s in arr)
             {
                 list.Add(new KeyValuePair<int, string>(_random.Next(), s));
             }
-            // Sort the list by the random number
+
             var sorted = from item in list
                          orderby item.Key
                          select item;
-            // Allocate new string array
+
             string[] result = new string[arr.Length];
-            // Copy values to array
+
             int index = 0;
             foreach (KeyValuePair<int, string> pair in sorted)
             {
                 result[index] = pair.Value;
                 index++;
             }
-            // Return copied array
+
             return result;
         }
 

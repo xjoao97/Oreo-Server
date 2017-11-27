@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Permite ver el inventario de un usuario"; }
+            get { return "Permite ver o inventário de um usuário"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -36,29 +36,29 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                 GameClient Client = QuasarEnvironment.GetGame().GetClientManager().GetClientByUsername(Username);
                 if (Client != null)
                 {
-                    Session.SendWhisper("El usuario está online. Espera a que este se desconecte para poder ver su inventario.");
+                    Session.SendWhisper("O usuário está online, espere ele sair do hotel!");
                     return;
                 }
 
                 int UserId = QuasarEnvironment.GetGame().GetClientManager().GetUserIdByUsername(Username);
                 if (UserId == 0)
                 {
-                    Session.SendWhisper("El nombre de usuario no existe.");
+                    Session.SendWhisper("O nome de usuário não existe.");
                     return;
                 }
 
                 Session.GetHabbo().GetInventoryComponent().LoadUserInventory(UserId);
 
-                Session.SendWhisper("El inventario ha sido cambiado por el de " + Username);
+                Session.SendWhisper("O inventário foi alterado para o" + Username);
             }
             else
             {
                 Session.GetHabbo().GetInventoryComponent().LoadUserInventory(0);
 
-                Session.SendWhisper("Tu inventario ha vuelto a la normalidad.");
+                Session.SendWhisper("Seu inventário voltou ao normal.");
             }
 
-            Session.SendWhisper("La sala se ha guardado correctamente a la lista.");
+            //Session.SendWhisper("...");
         }
     }
 }

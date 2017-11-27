@@ -19,19 +19,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Desactivar la opción de andar en diagonal en tu sala."; }
+            get { return "Desative a opção de caminhar diagonalmente em seu quarto."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (!Room.CheckRights(Session, true))
             {
-                Session.SendWhisper("Oops, solo el dueño de la sala puede ejecutar el comando!");
+                Session.SendWhisper("Oops, Somente o proprietário da sala pode executar o comando!");
                 return;
             }
 
             Room.GetGameMap().DiagonalEnabled = !Room.GetGameMap().DiagonalEnabled;
-            Session.SendWhisper("Nadie puede caminar en diagonal en la sala");
+            Session.SendWhisper("Ninguém pode caminhar na diagonal da sala");
         }
     }
 }

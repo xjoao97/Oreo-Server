@@ -49,20 +49,20 @@ namespace Quasar.HabboHotel.Groups.Forums
 
             var User = GetAuthor();
             var oculterData = GetDeleter();
-            Packet.WriteInteger(Id); //Post Id
-            Packet.WriteInteger(ParentThread.Posts.IndexOf(this)); //Post Index
+            Packet.WriteInteger(Id);
+            Packet.WriteInteger(ParentThread.Posts.IndexOf(this));
 
-            Packet.WriteInteger(User.Id); //User id
-            Packet.WriteString(User.Username); //Username
-            Packet.WriteString(User.Look); //User look
+            Packet.WriteInteger(User.Id);
+            Packet.WriteString(User.Username);
+            Packet.WriteString(User.Look);
 
-            Packet.WriteInteger((int)(QuasarEnvironment.GetUnixTimestamp() - Timestamp)); //User message timestamp
-            Packet.WriteString(Message); // Message text
-            Packet.WriteByte(DeletedLevel * 10); // User message oculted by - level
-            Packet.WriteInteger(oculterData != null ? oculterData.Id : 0); // User that oculted message ID
-            Packet.WriteString(oculterData != null ? oculterData.Username : "Unknown"); //Oculted message user name
+            Packet.WriteInteger((int)(QuasarEnvironment.GetUnixTimestamp() - Timestamp));
+            Packet.WriteString(Message);
+            Packet.WriteByte(DeletedLevel * 10);
+            Packet.WriteInteger(oculterData != null ? oculterData.Id : 0);
+            Packet.WriteString(oculterData != null ? oculterData.Username : "Unknown");
             Packet.WriteInteger(242342340);
-            Packet.WriteInteger(ParentThread.GetUserPosts(User.Id).Count); //User messages count
+            Packet.WriteInteger(ParentThread.GetUserPosts(User.Id).Count);
         }
 
         internal void Save()

@@ -66,7 +66,7 @@ namespace Quasar.HabboHotel.Rooms
                             {
                                 Room.isCrashed = true;
                                 UnloadRoom(Room);
-                                Logging.WriteLine("[RoomMgr] Room crashed (task didn't complete within 30 seconds): " + Room.RoomId);
+                                Logging.WriteLine("[RoomMgr] O quarto travou (A tarefa não foi concluída dentro de 30 segundos): " + Room.RoomId);
                             }
                         }
                     }
@@ -74,7 +74,7 @@ namespace Quasar.HabboHotel.Rooms
             }
             catch (Exception e)
             {
-                Logging.LogCriticalException("Issue with the RoomManager: " + e);
+                //Logging.LogCriticalException("Algum erro está acontecendo: " + e);
             }
         }
 
@@ -478,10 +478,10 @@ namespace Quasar.HabboHotel.Rooms
 
                 QuasarEnvironment.GetGame().GetRoomManager().UnloadRoom(Room);
                 Console.Clear();
-                log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + String.Format("{0:0.##}", ((double)i / length) * 100) + "%");
+                log.Info(" DESLIGANDO SERVIDOR > Items Salvos: " + String.Format("{0:0.##}", ((double)i / length) * 100) + "%");
                 i++;
             }
-            log.Info("Salas Guardadas correctamente!");
+            log.Info("Salas guardadas correctamente!");
         }
     }
 }

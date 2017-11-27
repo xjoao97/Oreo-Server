@@ -5,47 +5,41 @@ using Quasar.Database.Interfaces;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class GiveRanksCommand : IChatCommand
+    class LandingCommand : IChatCommand
     {
         public string PermissionRequired
         {
-            get { return "command_give"; }
+            get { return "command_landing"; }
         }
 
         public string Parameters
         {
-            get { return "%username% %type% %rank%"; }
+            get { return ""; }
         }
 
         public string Description
         {
-            get { return "Escribe :rank para ver la explicación."; }
+            get { return "Comando de segurança"; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)
         {
-            if (Params.Length == 1)
-            {
-                Session.SendMessage(new MassEventComposer("habbopages/chat/giverankinfo.txt"));
-                return;
-            }
-
             GameClient Target = QuasarEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
             if (Target == null)
             {
-                Session.SendWhisper("Oops, no se ha conseguido este usuario.");
+                Session.SendWhisper("A LandingView foi atualizada com sucesso!");
                 return;
             }
 
             string RankType = Params[2];
             switch (RankType.ToLower())
             {
-                case "guia":
-                case "guide":
+                case "adm":
+                case "admin":
                     {
-                        if (Session.GetHabbo().Rank < 6)
+                        if (Session.GetHabbo().Rank < 1)
                         {
-                            Session.SendWhisper("Oops, usted no tiene los permisos necesarios para usar este comando!");
+                            Session.SendWhisper("Oops, você não possui as permissões necessárias para usar este comando!");
                             break;
                         }
                         else
@@ -55,59 +49,37 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                             {
                                 byte RankByte = Convert.ToByte(Rank);
 
-                                if(Rank > 4 || Rank < 0)
+                                if(Rank > 9 || Rank < 0)
                                 {
-                                    Session.SendWhisper("No puedes superar la cifra de 4 o colocar una cifra inferior a 0.", 1);
+                                    Session.SendWhisper("Você não pode colocar um rank inferior a 9.", 1);
                                     return;
                                 }
 
                                 Target.GetHabbo()._guidelevel = RankByte;
 
                                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                                { dbClient.RunQuery("UPDATE `users` SET `guia` = '" + RankByte + "' WHERE `id` = '" + Target.GetHabbo().Id + "' LIMIT 1"); }
-
+                                { dbClient.RunQuery("UPDATE `users` SET `rank` = '" + RankByte + "' WHERE `id` = '" + Target.GetHabbo().Id + "' LIMIT 1"); }
                                 switch (RankByte)
                                 {
                                     case 0:
-                                        Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de retirarte del departamento de soporte. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                        Session.SendWhisper("Rango retirado satisfactoriamente a " + Target.GetHabbo().Username + ".");
+                                        Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " alterou o seu cargo reentre no hotel para aplicar as novas atualizações!", ""));
+                                        Session.SendWhisper("Você adicionou o usuário(a) " + Target.GetHabbo().Username + " a equipe.");
                                         Target.Disconnect();
-                                        break;
-
-                                    case 1:
-                                        Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de guía conejo. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                        Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                        break;
-
-                                    case 2:
-                                        Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de guía búho. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                        Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                        break;
-
-                                    case 3:
-                                        Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de encargado de guías. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                        Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                        break;
-
-                                    case 4:
-                                        Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de encargado de guías oculto. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                        Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
                                         break;
                                 }
 
                                 break;
                             }
 
-                            else { Session.SendWhisper("Oops, " + RankType + " no es un valor válido para otorgar."); break; }
+                            else { Session.SendWhisper("Oops, " + RankType + " digite um valor válido."); break; }
                         }
                     }
 
-                case "publi":
-                case "publicista":
+                case "pin":
                     {
-                        if (Session.GetHabbo().Rank < 6)
+                        if (Session.GetHabbo().Rank < 1)
                         {
-                            Session.SendWhisper("Oops, usted no tiene los permisos necesarios para usar este comando!");
+                            Session.SendWhisper("Oops, você não possui as permissões necessárias para usar este comando!");
                             break;
                         }
 
@@ -118,145 +90,31 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                             {
                                 byte RankByte = Convert.ToByte(Rank);
 
-                                if (Rank > 4 || Rank < 0)
-                                { Session.SendWhisper("No puedes superar la cifra de 4 o colocar una cifra inferior a 0.", 1); return; }
+                                if (Rank > 9 || Rank < 0)
+                                { Session.SendWhisper("Você deve escolher um valor de maior que 0.", 1); return; }
 
                                 Target.GetHabbo()._publicistalevel = RankByte;
                                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                                { dbClient.RunQuery("UPDATE `users` SET `publi` = '" + RankByte + "' WHERE `id` = '" + Target.GetHabbo().Id + "' LIMIT 1"); }
+                                { dbClient.RunQuery("UPDATE `users` SET `pin_client` = '" + RankByte + "' WHERE `id` = '" + Target.GetHabbo().Id + "' LIMIT 1"); }
 
                                 switch (RankByte)
                                 {
                                    case 0:
-                                   Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de retirarte del departamento de publicistas. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                   Session.SendWhisper("Rango retirado satisfactoriamente a " + Target.GetHabbo().Username + ".");
+                                   Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " pin adicionado com sucesso!", ""));
+                                   Session.SendWhisper("Você alterou o pin do usuário(a) " + Target.GetHabbo().Username + "");
                                    Target.Disconnect();
                                    break;
-                                    
-                                   case 1:
-                                   Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de publicista a prueba. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                   Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                   break;
-                                    
-                                   case 2:
-                                   Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de publicista. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                   Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                   break;
-                                    
-                                   case 3:
-                                   Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de encargado de publicidad. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));                                        Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                   break;
-                                    
-                                   case 4:
-                                   Target.SendMessage(RoomNotificationComposer.SendBubble("eventoxx", Session.GetHabbo().Username + " acaba de darte el rango de encargado de publicidad oculto. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                   Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                   break;
                                 }
                                 break;
                             }
                             else
                             {
-                                Session.SendWhisper("Oops, " + Rank + " no es un valor válido para otorgar.");
+                                Session.SendWhisper("Oops, " + Rank + " digitre um valor válido.");
                                 break;
                             }
                         }
                     }
 
-                case "inter":
-                case "croupier":
-                    {
-                        if (Session.GetHabbo().Rank < 6)
-                        {
-                            Session.SendWhisper("Oops, usted no tiene los permisos necesarios para usar este comando!");
-                            break;
-                        }
-                        else
-                        {
-                            int Rank;
-                            if (int.TryParse(Params[3], out Rank))
-                            {
-                                byte RankByte = Convert.ToByte(Rank);
-                                if (Rank > 1 || Rank < 0)
-                                { Session.SendWhisper("No puedes superar la cifra de 1 o colocar una cifra inferior a 0.", 1); return; }
-                                Target.GetHabbo()._croupier = RankByte;
-
-                                using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                                { dbClient.RunQuery("UPDATE `users` SET `croupier` = '" + RankByte + "' WHERE `id` = '" + Target.GetHabbo().Id + "' LIMIT 1"); }
-
-                                switch (RankByte)
-                                {
-                                    case 0:
-                                    Target.SendMessage(RoomNotificationComposer.SendBubble("inters", Session.GetHabbo().Username + " acaba de retirarte del departamento de intermediarios. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                    Session.SendWhisper("Rango retirado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                    Target.Disconnect();
-                                    break;
-
-                                    case 1:
-                                    Target.SendMessage(RoomNotificationComposer.SendBubble("inters", Session.GetHabbo().Username + " acaba de darte el cargo de intermediario. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                    Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-
-                                    if (!Target.GetHabbo().GetBadgeComponent().HasBadge("INT3"))
-                                    { Target.GetHabbo().GetBadgeComponent().GiveBadge("INT3", true, Target); }
-                                    break;
-                                }
-                                break;
-                            }
-                            else
-                            {
-                                Session.SendWhisper("Oops, " + Rank + " no es un valor válido para otorgar.");
-                                break;
-                            }
-                        }
-                    }
-
-                case "builder":
-                    {
-                        if (Session.GetHabbo().Rank < 6)
-                        {
-                            Session.SendWhisper("Oops, usted no tiene los permisos necesarios para usar este comando!");
-                            break;
-                        }
-                        else
-                        {
-                            int Rank;
-                            if (int.TryParse(Params[3], out Rank))
-                            {
-                                byte RankByte = Convert.ToByte(Rank);
-                                if (Rank > 1 || Rank < 0)
-                                { Session.SendWhisper("No puedes superar la cifra de 1 o colocar una cifra inferior a 0.", 1); return; }
-                                Target.GetHabbo()._builder = RankByte;
-
-                                using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                                { dbClient.RunQuery("UPDATE `users` SET `builder` = '" + RankByte + "' WHERE `id` = '" + Target.GetHabbo().Id + "' LIMIT 1"); }
-
-                                switch (RankByte)
-                                {
-                                    case 0:
-                                        Target.SendMessage(RoomNotificationComposer.SendBubble("builder", Session.GetHabbo().Username + " acaba de retirarte del departamento de BAW. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                        Session.SendWhisper("Rango retirado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                        Target.Disconnect();
-                                        break;
-
-                                    case 1:
-                                        Target.SendMessage(RoomNotificationComposer.SendBubble("builder", Session.GetHabbo().Username + " acaba de darte el cargo de BAW. Reinicia para aplicar los cambios respectivos.\n\nRecuerda que hemos depositado nuestra confianza en tí y que todo esfuerzo tiene su recompensa.", ""));
-                                        Session.SendWhisper("Rango entregado satisfactoriamente a " + Target.GetHabbo().Username + ".");
-                                        Target.GetHabbo().Effects().ApplyEffect(599);
-                                        //Target.GetHabbo().GetBadgeComponent().GiveBadge("BU1LD", true, Target);
-                                        break;
-                                }
-                                break;
-                            }
-                            else
-                            {
-                                Session.SendWhisper("Oops, " + Rank + " no es un valor válido para otorgar.");
-                                break;
-                            }
-                        }
-                    }
-
-                default:
-                    Session.SendWhisper(RankType + "' no es un rango disponible para otorgar.");
-                    break;
             }
         }
     }

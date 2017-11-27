@@ -68,7 +68,6 @@ namespace Quasar.HabboHotel.Items
                         }
                         else
                         {
-                            // Item data does not exist anymore.
                         }
                     }
                 }

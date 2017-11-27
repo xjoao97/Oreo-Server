@@ -20,13 +20,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Activar o desactivar las solicitudes de amistad."; }
+            get { return "Habilite ou desabilite as solicitações de amigos."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             Session.GetHabbo().AllowFriendRequests = !Session.GetHabbo().AllowFriendRequests;
-            Session.SendWhisper("Ahora mismo " + (Session.GetHabbo().AllowFriendRequests == true ? "no aceptas" : "aceptas") + " nuevas peticiones de amistad");
+            Session.SendWhisper("Ahora mismo " + (Session.GetHabbo().AllowFriendRequests == true ? "não aceita" : "aceita") + " pedidos de amizade");
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {

@@ -60,12 +60,12 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                 return false;
 
             var effect = int.Parse(StringData);
-            
+
             if (effect == 102 | effect == 178 | effect == 187 | effect == 593 | effect == 596 | effect == 592 | effect == 597 | effect == 594 || effect == 598 || effect == 595 || effect == 599 || effect == 600)
                 return false;
 
             User.GetClient().GetHabbo().Effects().ApplyEffect(effect);
-            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wfeffect", "" + User.GetClient().GetHabbo().Username + ", acabas de aplicar un efecto mediante Wired en tu personaje.", ""));
+            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wfeffect", "" + User.GetClient().GetHabbo().Username + ", ativou um efeito sobre você!", ""));
             Item.UpdateState(false, true);
             Item.RequestUpdate(4, true);
 

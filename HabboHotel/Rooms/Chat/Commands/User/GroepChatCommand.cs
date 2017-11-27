@@ -26,7 +26,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Activa los grupos ON/OFF"; }
+            get { return "Ativa os chat de grupo ON/OFF"; }
         }
 
 
@@ -34,25 +34,25 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
         {
             if (Params.Length < 2)
             {
-                Session.SendWhisper("Ha ocurrido un error, especifica ON / OFF");
+                Session.SendWhisper("Ocorreu um erro, escolha ON / OFF");
                 return;
             }
 
             if (!Room.CheckRights(Session, true))
             {
-                Session.SendWhisper("No tienes permisos.");
+                Session.SendWhisper("Você não tem permissões.");
                 return;
             }
 
             if (Room.Group == null)
             {
-                Session.SendWhisper("Esta sala no tiene grupo, si lo acabas de crear haz :unload");
+                Session.SendWhisper("Este quarto não tem grupo, se você acabou de criar digite :unload");
                 return;
             }
 
             if (Room.Group.Id != Session.GetHabbo().GetStats().FavouriteGroupId)
             {
-                Session.SendWhisper("Solo se puede crear un grupo si lo tienes como favorito.");
+                Session.SendWhisper("Você só pode criar um grupo se o tiver como favorito.");
                 return;
             }
 
@@ -63,7 +63,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             {
                 if (group.HasChat)
                 {
-                    Session.SendWhisper("Este grupo ya tiene chat.");
+                    Session.SendWhisper("Este grupo já está ativo!");
                     return;
                 }
 
@@ -87,7 +87,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             {
                 if (!group.HasChat)
                 {
-                    Session.SendWhisper("Este grupo no tiene chat aun.");
+                    Session.SendWhisper("Esse grupo já esta desativado!");
                     return;
                 }
 
@@ -107,7 +107,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             }
             else
             {
-                Session.SendNotification("Ha ocurrido un error");
+                Session.SendNotification("Ocorreu um erro");
             }
 
 

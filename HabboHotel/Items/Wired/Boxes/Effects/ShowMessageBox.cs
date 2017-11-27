@@ -58,30 +58,24 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             string Message = StringData;
             string MessageFiltered = StringData;
 
-            // Convertir esta chapuza integral a switch
-
-            // USER VARIABLES
             if (StringData.Contains("%user%")) MessageFiltered = MessageFiltered.Replace("%user%", Player.Username);
             if (StringData.Contains("%userid%")) MessageFiltered = MessageFiltered.Replace("%userid%", Convert.ToString(Player.Id));
             if (StringData.Contains("%honor%")) MessageFiltered = MessageFiltered.Replace("%honor%", Convert.ToString(Player.GOTWPoints));
-            if (StringData.Contains("%pixeles%")) MessageFiltered = MessageFiltered.Replace("%pixeles%", Convert.ToString(Player.GOTWPoints));          
+            if (StringData.Contains("%pixeles%")) MessageFiltered = MessageFiltered.Replace("%pixeles%", Convert.ToString(Player.GOTWPoints));
             if (StringData.Contains("%duckets%")) MessageFiltered = MessageFiltered.Replace("%duckets%", Convert.ToString(Player.Duckets));
             if (StringData.Contains("%diamonds%")) MessageFiltered = MessageFiltered.Replace("%diamonds%", Convert.ToString(Player.Diamonds));
             if (StringData.Contains("%rank%")) MessageFiltered = MessageFiltered.Replace("%rank%", Convert.ToString(Player.Rank));
 
-            // ROOM VARIABLES
             if (StringData.Contains("%roomname%")) MessageFiltered = MessageFiltered.Replace("%roomname%", Player.CurrentRoom.Name);
             if (StringData.Contains("%roomusers%")) MessageFiltered = MessageFiltered.Replace("%userson%", Player.CurrentRoom.UserCount.ToString());
             if (StringData.Contains("%roomowner%")) MessageFiltered = MessageFiltered.Replace("%roomowner%", Player.CurrentRoom.OwnerName.ToString());
             if (StringData.Contains("%roomlikes%")) MessageFiltered = MessageFiltered.Replace("%roomlikes%", Player.CurrentRoom.Score.ToString());
 
-            // HOTEL VARIABLES
             if (StringData.Contains("%userson%")) MessageFiltered = MessageFiltered.Replace("%userson%", QuasarEnvironment.GetGame().GetClientManager().Count.ToString());
 
-            // SPECIAL VARIABLES
             if (StringData.Contains("%SIT%"))
             {
-                Message = Message.Replace("%SIT%", "Te has sentado");
+                Message = Message.Replace("%SIT%", "Você se sentou");
 
                 if (User.Statusses.ContainsKey("lie") || User.isLying || User.RidingHorse || User.IsWalking)
                     return false;
@@ -123,7 +117,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             if (StringData.Contains("%STAND%"))
             {
-                Message = Message.Replace("%STAND%", "Te has levantado");
+                Message = Message.Replace("%STAND%", "Você levantou");
                 if (User.isSitting)
                 {
                     User.Statusses.Remove("sit");
@@ -142,13 +136,13 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             if (StringData.Contains("%LAY%"))
             {
-                Message = Message.Replace("%LAY%", "Te has tumbado");
+                Message = Message.Replace("%LAY%", "Você deitou");
 
                 Room Room = Player.GetClient().GetHabbo().CurrentRoom;
 
                 if (!Room.GetGameMap().ValidTile(User.X + 2, User.Y + 2) && !Room.GetGameMap().ValidTile(User.X + 1, User.Y + 1))
                 {
-                    Player.GetClient().SendWhisper("Oops, no te puedes acostar aqui!");
+                    Player.GetClient().SendWhisper("Oops, você não pode deitar aqui");
                     return false;
                 }
 
@@ -207,17 +201,17 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             //    DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             //    dtDateTime = dtDateTime.AddSeconds(QuasarEnvironment.GetUnixTimestamp()).ToLocalTime();
 
-            //    QuasarEnvironment.GetGame().GetClientManager().StaffAlert(new RoomNotificationComposer("Alerta de publicidad mediante Wired: ",
-            //     "Atención, se está utilizando un Wired en una sala que emite un mensaje:  <b> " + Message.ToUpper() + "</b> dentro de la sala <b>" + User.GetClient().GetHabbo().CurrentRoom.Name + "</b>.\r\n", "", "Supervisar", "event:navigator/goto/" + User.GetClient().GetHabbo().CurrentRoomId));
+            //    QuasarEnvironment.GetGame().GetClientManager().StaffAlert(new RoomNotificationComposer("Alerta de plublicidade Wired: ",
+            //     "Atenção, um Wired está sendo usado em uma sala que emite uma mensagem:  <b> " + Message.ToUpper() + "</b> dentro da sala <b>" + User.GetClient().GetHabbo().CurrentRoom.Name + "</b>.\r\n", "", "Revisar", "event:navigator/goto/" + User.GetClient().GetHabbo().CurrentRoomId));
 
             //    Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Mensaje inapropiado.", 0, 34));
             //    return false;
             //}
 
-            // else { 
+            // else {
             Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, MessageFiltered, 0, 34));
                 return true;
-            
+
         }
     }
 }

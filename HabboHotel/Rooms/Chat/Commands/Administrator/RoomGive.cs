@@ -30,7 +30,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Por favor introduce ! (coins, duckets, diamonds, pixeles)");
+                Session.SendWhisper("Por favor digite a moeda!");
                 return;
             }
 
@@ -41,7 +41,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                     {
                         if (Params.Length == 1)
                         {
-                            Session.SendWhisper("Introduce el numero de diamantes");
+                            Session.SendWhisper("Digite o valor!");
                             return;
                         }
                         else
@@ -52,10 +52,10 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                                 {
                                     User.GetClient().GetHabbo().Diamonds += Amount;
                                     User.GetClient().SendMessage(new HabboActivityPointNotificationComposer(User.GetClient().GetHabbo().Diamonds, Amount, 5));
-                                    User.GetClient().SendMessage(new RoomCustomizedAlertComposer(Session.GetHabbo().Username + " te acaba de regalar " + Amount + " Diamantes."));
+                                    User.GetClient().SendMessage(new RoomCustomizedAlertComposer(Session.GetHabbo().Username + " te enviou " + Amount + " Diamantes."));
                                 }
                         }
-                        Session.SendWhisper("Enviaste correctamente en la sala " + Params[2] + " diamantes!");
+                        Session.SendWhisper("Enviou para o quarto " + Params[2] + " Diamantes!");
                     }
                     break;
 
@@ -63,7 +63,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_roomgive_reward"))
                         {
-                            Session.SendWhisper("Oops, No tiene el permiso necesario para usar este comando!");
+                            Session.SendWhisper("Oops, você não tem permissão para isso!");
                             break;
                         }
 
@@ -77,11 +77,11 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                     }
                     break;
 
-                case "pixeles":
+                case "pontos":
                     {
                         if (Params.Length == 1)
                         {
-                            Session.SendWhisper("Introduce el numero de pixeles");
+                            Session.SendWhisper("Digite o valor!");
                             return;
                         }
                         else
@@ -91,7 +91,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
                                 if (Amount > 50)
                                 {
-                                    Session.SendWhisper("No pueden enviar más de 50 Pixeles, esto será notificado al CEO y tomará medidas.");
+                                    Session.SendWhisper("Você não pode enviar esse valor!");
                                     return;
                                 }
 
@@ -99,10 +99,10 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
                             {
                                 User.GetClient().GetHabbo().GOTWPoints += Amount;
                                 User.GetClient().SendMessage(new HabboActivityPointNotificationComposer(User.GetClient().GetHabbo().GOTWPoints, Amount, 103));
-                                User.GetClient().SendMessage(new RoomCustomizedAlertComposer(Session.GetHabbo().Username + " te acaba de regalar " + Amount + " Pixeles."));
+                                User.GetClient().SendMessage(new RoomCustomizedAlertComposer(Session.GetHabbo().Username + " te enviou " + Amount + " Pontos."));
                             }
                         }
-                        Session.SendWhisper("Enviaste correctamente en la sala " + Params[2] + " pixeles!");
+                        Session.SendWhisper("Enviou para o quarto " + Params[2] + " Pontos!");
                     }
                     break;
             }

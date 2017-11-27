@@ -19,7 +19,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Elimina la Sala de la lista de Salas pre-diseñadas"; }
+            get { return "Retire o quarto da lista de quartos"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -27,7 +27,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
             if (Room == null) return;
             //if (!QuasarEnvironment.GetGame().GetCatalog().GetPredesignedRooms().Exists((uint)Room.Id))
             //{
-            //    Session.SendWhisper("La sala no existe en la lista.");
+            //    Session.SendWhisper("O quarto não existe na lista.");
             //    return;
             //}
 
@@ -42,7 +42,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
             }
 
             QuasarEnvironment.GetGame().GetCatalog().GetPredesignedRooms().predesignedRoom.Remove(predesignedId);
-            Session.SendWhisper("La Sala se eliminó correctamente de la lista.");
+            Session.SendWhisper("O quarto foi excluído com sucesso da lista.");
         }
     }
 }

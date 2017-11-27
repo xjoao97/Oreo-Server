@@ -23,14 +23,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Expulsar todos los objetos de grupo en la sala."; }
+            get { return "Remove tudo oque sobrou no seu quarto."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Session.GetHabbo().Id == Room.OwnerId)
             {
-                //Let us check anyway.
                 if (!Room.CheckRights(Session, true))
                     return;
 

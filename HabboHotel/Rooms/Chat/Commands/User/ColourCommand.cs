@@ -15,7 +15,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
 
         public string PermissionRequired
         {
-            get { return "command_dnd"; }
+            get { return "command_colour"; }
         }
         public string Parameters
         {
@@ -29,7 +29,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Debes seleccionar el color que quieres.");
+                Session.SendWhisper("Você deve selecionar a cor que deseja.");
                 return;
             }
             string chatColour = Params[1];
@@ -40,7 +40,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
                 case "black":
                 case "off":
                     Session.GetHabbo().chatColour = "";
-                    Session.SendWhisper("Tu chat de color ha sido desactivado.");
+                    Session.SendWhisper("Seu bate-papo colorido foi desabilitado.");
                     break;
                 case "blue":
                 case "red":
@@ -48,10 +48,10 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
                 case "purple":
                 case "green":
                     Session.GetHabbo().chatColour = chatColour;
-                    Session.SendWhisper("@"+ Colour +"@Has establecido tu color a: " + Colour + "");
+                    Session.SendWhisper("@"+ Colour +"Você mudou a cor para: " + Colour + "");
                     break;
                 default:
-                    Session.SendWhisper("El color: " + Colour + " no existe.");
+                    Session.SendWhisper("A cor: " + Colour + " não existe.");
                     break;
             }
             return;

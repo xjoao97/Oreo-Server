@@ -60,7 +60,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             if (User.SuperFastWalking)
                 User.SuperFastWalking = false;
 
-            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wffwalk", "" + User.GetClient().GetHabbo().Username + ", acabas de activar la hiperactividad mediante Wired, ve con cuidado, ahora vas más rápido que la luz.", ""));
+            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wffwalk", "" + User.GetClient().GetHabbo().Username + ", ativou um wired sobre você, agora você pode correr como o FLASH!", ""));
 
             return true;
         }

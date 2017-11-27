@@ -61,7 +61,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                 return false;
 
             if (Player.GetBadgeComponent().HasBadge(StringData))
-                Player.GetClient().SendMessage(new RoomCustomizedAlertComposer("Parece que você já tem esse Emblema. Veja seu Inventário!"));
+                Player.GetClient().SendMessage(new RoomCustomizedAlertComposer("Parece que você já tem esse Emblema, veja seu Inventário!"));
             else
             {
                 Player.GetBadgeComponent().GiveBadge(StringData, true, Player.GetClient());

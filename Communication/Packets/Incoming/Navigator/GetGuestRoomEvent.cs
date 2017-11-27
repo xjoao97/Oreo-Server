@@ -1,4 +1,5 @@
-﻿using Quasar.Communication.Packets.Outgoing.Navigator;
+using Quasar.Communication.Packets.Outgoing.Navigator;
+using Quasar.Communication.Packets.Outgoing.Sound;
 using Quasar.HabboHotel.Rooms;
 using System;
 using System.Collections.Generic;

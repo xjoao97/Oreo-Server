@@ -25,7 +25,7 @@ namespace Quasar.HabboHotel.Rooms
     public class Gamemap
     {
         private Room _room;
-        private byte[,] mGameMap;//0 = none, 1 = pool, 2 = normal skates, 3 = ice skates
+        private byte[,] mGameMap;
 
         public bool gotPublicPool;
         public bool DiagonalEnabled;
@@ -98,7 +98,7 @@ namespace Quasar.HabboHotel.Rooms
             user.GoalY = user.Y;
             user.SetStep = false;
             user.IsWalking = false;
-            user.UpdateNeeded = true;            
+            user.UpdateNeeded = true;
         }
 
         public void UpdateUserMovement(Point oldCoord, Point newCoord, RoomUser user)
@@ -289,7 +289,7 @@ namespace Quasar.HabboHotel.Rooms
                 }
 
                 /** COMENTADO YA QUE SALAS PUBLICAS NUEVA CRYPTO NO NECESARIO
-                if (!string.IsNullOrEmpty(StaticModel.StaticFurniMap)) 
+                if (!string.IsNullOrEmpty(StaticModel.StaticFurniMap))
                 {
                      * foreach (PublicRoomSquare square in StaticModel.Furnis)
                     {
@@ -1116,7 +1116,7 @@ namespace Quasar.HabboHotel.Rooms
                         User.GetClient().SendMessage(new AlertNotificationHCMessageComposer(1));
                         return false;
                     }
-                    
+
                     if (User.GetClient().GetHabbo().GetClubManager().HasSubscription("club_vip"))
                     {
                         I.InteractingUser = User.GetClient().GetHabbo().Id;
@@ -1309,7 +1309,6 @@ namespace Quasar.HabboHotel.Rooms
             if (HeightDiff > 1.5 && !User.RidingHorse)
                 return false;
 
-            //Check this last, because ya.
             RoomUser Userx = _room.GetRoomUserManager().GetUserForSquare(To.X, To.Y);
             if (Userx != null)
             {
@@ -1329,34 +1328,27 @@ namespace Quasar.HabboHotel.Rooms
             if (Override)
                 return true;
 
-            /*
-             * 0 = blocked
-             * 1 = open
-             * 2 = last step
-             * 3 = door
-             * */
-
             if (DiagMovement)
             {
                 int XValue = To.X - From.X;
                 int YValue = To.Y - From.Y;
 
-                if (XValue == -1 && YValue == -1) // arriba izquierda
+                if (XValue == -1 && YValue == -1)
                 {
                     if (mGameMap[To.X + 1, To.Y] != 1 && mGameMap[To.X, To.Y + 1] != 1)
                         return false;
                 }
-                else if (XValue == 1 && YValue == -1) // arriba derecha
+                else if (XValue == 1 && YValue == -1)
                 {
                     if (mGameMap[To.X - 1, To.Y] != 1 && mGameMap[To.X, To.Y + 1] != 1)
                         return false;
                 }
-                else if (XValue == 1 && YValue == 1) // abajo derecha
+                else if (XValue == 1 && YValue == 1)
                 {
                     if (mGameMap[To.X - 1, To.Y] != 1 && mGameMap[To.X, To.Y - 1] != 1)
                         return false;
                 }
-                else if (XValue == -1 && YValue == 1) // abajo izquierda
+                else if (XValue == -1 && YValue == 1)
                 {
                     if (mGameMap[To.X + 1, To.Y] != 1 && mGameMap[To.X, To.Y - 1] != 1)
                         return false;
@@ -1440,7 +1432,7 @@ namespace Quasar.HabboHotel.Rooms
             }
             return true;
         }
-        
+
         public double SqAbsoluteHeight(int X, int Y)
         {
             Point Points = new Point(X, Y);
@@ -1745,8 +1737,6 @@ namespace Quasar.HabboHotel.Rooms
 
             List<Item> Items = new List<Item>();
             List<int> Ids;
-
-            // CHANGED THIS ~  IF FAILED CHANGE BACK
 
             if (mCoordinatedItems.TryGetValue(Coord, out Ids))
                 Items = GetItemsFromIds(Ids);

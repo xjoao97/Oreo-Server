@@ -36,7 +36,7 @@ namespace Quasar.Net
 
             catch (Exception e)
             {
-                throw new ArgumentException("Could not set up MUS socket:\n" + e);
+                throw new ArgumentException("Não foi possível configurar o soquete MUS:\n" + e);
             }
         }
 

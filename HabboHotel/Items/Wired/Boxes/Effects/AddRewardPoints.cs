@@ -51,15 +51,15 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             if (times > 3)
             {
-                Owner.GetClient().SendWhisper("No puedes dar el premio más de tres veces.", 34);
+                Owner.GetClient().SendWhisper("Você não pode dar o prêmio mais de três vezes.", 34);
                 return;
             }
 
             if (Owner == null || Owner.Rank < 6)
             {
                 this.StringData = Convert.ToString(0 + ";" + times);
-                Owner.GetClient().SendWhisper("No sé quién te ha dado esto pero no deberías estar jugando con juguetes de mayores.", 34);
-                QuasarEnvironment.GetGame().GetClientManager().StaffAlert1(new RoomInviteComposer(int.MinValue, Owner.Username + " está utilizando sin permiso un Wired de Puntos de Recompensa."));
+                Owner.GetClient().SendWhisper("Eu não sei quem lhe deu isso, mas você não deveria estar usando isso..", 34);
+                QuasarEnvironment.GetGame().GetClientManager().StaffAlert1(new RoomInviteComposer(int.MinValue, Owner.Username + " está usando um Wired da equipe sem permissão!"));
             }
             return;
 
@@ -113,7 +113,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             User.GetClient().GetHabbo().GetStats().AchievementPoints += RewardPoints;
             User.GetClient().SendMessage(new AchievementScoreComposer(User.GetClient().GetHabbo().GetStats().AchievementPoints));
-            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("RewardPoints", "Felicidades, acabas de ganar " + RewardPoints + " puntos de recompensa.", ""));
+            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("RewardPoints", "Parabéns, você acabou de ganhar " + RewardPoints + " pontos de recompensa.", ""));
         }
     }
 }

@@ -129,14 +129,14 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
                     try
                     {
-                        if (int.Parse(this.StringData.Split(';')[1]) == 1)//Direction
+                        if (int.Parse(this.StringData.Split(';')[1]) == 1)
                             this.SetRotation(II, Convert.ToInt32(part[3]));
                     }
                     catch (Exception e) { Logging.LogWiredException(e.ToString()); }
 
                     try
                     {
-                        if (int.Parse(this.StringData.Split(';')[2]) == 1)//Position
+                        if (int.Parse(this.StringData.Split(';')[2]) == 1)
                             this.SetPosition(II, Convert.ToInt32(part[0].ToString()), Convert.ToInt32(part[1].ToString()), Convert.ToDouble(part[2].ToString()), Convert.ToInt32(part[3].ToString()));
                     }
                     catch (Exception e) { Logging.LogWiredException(e.ToString()); }
@@ -153,7 +153,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             if (Item.GetBaseItem().InteractionType == InteractionType.DICE)
                 return;
-            
+
              Item.ExtraData = Extradata;
              Item.UpdateState(false, true);
 

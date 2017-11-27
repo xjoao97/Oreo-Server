@@ -40,7 +40,6 @@ using Quasar.HabboHotel.Rooms.Polls;
 using Quasar.HabboHotel.Calendar;
 using Quasar.HabboHotel.Items.RentableSpaces;
 using Quasar.Communication.Packets.Outgoing.Nux;
-using Quasar.HabboHotel.LandingView.CommunityGoal;
 //using Quasar.HabboHotel.Alphas;
 
 namespace Quasar.HabboHotel
@@ -87,7 +86,6 @@ namespace Quasar.HabboHotel
         private readonly CrackableManager _crackableManager;
         private readonly FurniMaticRewardsManager _furniMaticRewardsManager;
         private readonly PollManager _pollManager;
-        private readonly CommunityGoalVS _communityGoalVS;
         private readonly CalendarManager _calendarManager;
         private RentableSpaceManager _rentableSpaceManager;
         private readonly NuxUserGiftsManager _nuxusergiftManager;
@@ -149,9 +147,6 @@ namespace Quasar.HabboHotel
             this._badgeManager.Init();
 
             this.forummanager = new GroupForumManager();
-
-            this._communityGoalVS = new CommunityGoalVS();
-            this._communityGoalVS.LoadCommunityGoalVS();
 
             this._permissionManager = new PermissionManager();
             this._permissionManager.Init();
@@ -392,9 +387,5 @@ namespace Quasar.HabboHotel
             return this._pollManager;
         }
 
-        public CommunityGoalVS GetCommunityGoalVS()
-        {
-            return this._communityGoalVS;
-        }
     }
 }

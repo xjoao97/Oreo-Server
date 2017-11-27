@@ -19,7 +19,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Activar o desactivar los mensajes de consola."; }
+            get { return "Ative ou desative as mensagens do console."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)

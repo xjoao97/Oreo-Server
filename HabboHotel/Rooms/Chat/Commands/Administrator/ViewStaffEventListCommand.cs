@@ -27,7 +27,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Observa una lista de los eventos abiertos por los Staffs."; }
+            get { return "Lista de eventos"; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)
@@ -35,7 +35,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             Dictionary<Habbo, UInt32> clients = new Dictionary<Habbo, UInt32>();
 
             StringBuilder content = new StringBuilder();
-            content.Append("Lista de eventos totales abiertos:\r\n");
+            content.Append("Lista de eventos:\r\n");
 
             foreach (var client in QuasarEnvironment.GetGame().GetClientManager()._clients.Values)
             {
@@ -48,7 +48,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                 if (client.Key == null)
                     continue;
 
-                content.Append("¥ " + client.Key.Username + " [Rango: " + client.Key.Rank + "] - Ha abierto: " + client.Key._eventsopened + " eventos.\r\n");
+                content.Append("" + client.Key.Username + "Cargo: " + client.Key.Rank + "] - Aberto: " + client.Key._eventsopened + " eventos.\r\n");
             }
 
             Session.SendMessage(new MOTDNotificationComposer(content.ToString()));

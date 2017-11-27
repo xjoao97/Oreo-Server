@@ -77,7 +77,7 @@ namespace Quasar.HabboHotel.Pathfinding
         {
             if (this.count == 0)
             {
-                throw new InvalidOperationException("Heap is empty");
+                throw new InvalidOperationException("Heap está vazio");
             }
             temp = this.array[0];
             this.array[0] = this.array[this.count - 1];

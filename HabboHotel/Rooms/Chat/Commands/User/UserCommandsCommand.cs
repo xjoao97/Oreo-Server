@@ -1,4 +1,6 @@
-﻿using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
+﻿using System;
+using Quasar.HabboHotel.GameClients;
+using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
 
 namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -16,15 +18,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Wulles ama rola"; }
+            get { return "Comandos do Hotel"; }
         }
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient Session, Room Room, string[] Params)
         {
-
-            Session.SendMessage(new MassEventComposer("habbopages/chat/commands/index.html"));
-            return;
-
+            var _cache = new Random().Next(0, 300);
+            Session.SendMessage(new MassEventComposer("habbopages/chat/commands.txt"));
         }
     }
 }

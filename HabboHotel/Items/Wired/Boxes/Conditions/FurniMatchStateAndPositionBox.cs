@@ -85,7 +85,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Conditions
                     string[] partsString = I.Split(':');
                     string[] part = partsString[1].Split(',');
 
-                    if (int.Parse(this.StringData.Split(';')[0]) == 1) //State
+                    if (int.Parse(this.StringData.Split(';')[0]) == 1)
                     {
                         try
                         {
@@ -95,7 +95,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Conditions
                         catch { }
                     }
 
-                    if (int.Parse(this.StringData.Split(';')[1]) == 1) //Direction
+                    if (int.Parse(this.StringData.Split(';')[1]) == 1)
                     {
                         try
                         {
@@ -105,7 +105,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Conditions
                         catch { }
                     }
 
-                    if (int.Parse(this.StringData.Split(';')[2]) == 1) //Position
+                    if (int.Parse(this.StringData.Split(';')[2]) == 1)
                     {
                         try
                         {

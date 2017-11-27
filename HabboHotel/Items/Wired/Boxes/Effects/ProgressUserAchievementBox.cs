@@ -37,8 +37,8 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             if (Owner == null || Owner.Rank < 6)
             {
                 this.StringData = "";
-                Owner.GetClient().SendWhisper("No sé quién te ha dado esto pero no deberías estar jugando con juguetes de mayores.", 34);
-                QuasarEnvironment.GetGame().GetClientManager().StaffAlert1(new RoomInviteComposer(int.MinValue, Owner.Username + " está utilizando sin permiso un Wired de Puntos de Recompensa."));
+                Owner.GetClient().SendWhisper("Eu não sei quem lhe deu isso, mas você não estar usando..", 34);
+                QuasarEnvironment.GetGame().GetClientManager().StaffAlert1(new RoomInviteComposer(int.MinValue, Owner.Username + " está usando um Wired da equipe!"));
             }
         }
 
@@ -56,7 +56,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                 return false;
 
             var Message = StringData.Split('-');
-            QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_" + Message[0], int.Parse(Message[1]));            
+            QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_" + Message[0], int.Parse(Message[1]));
             return true;
         }
     }

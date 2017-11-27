@@ -22,13 +22,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Activar o desactivar la opción de que copien tu ropa."; }
+            get { return "Ligue ou desligue a opção para copiar suas roupas."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             Session.GetHabbo().AllowMimic = !Session.GetHabbo().AllowMimic;
-            Session.SendWhisper("Usted " + (Session.GetHabbo().AllowMimic == true ? "ahora" : "ya no") + " protege su look.");
+            Session.SendWhisper("Você agora " + (Session.GetHabbo().AllowMimic == true ? "permite" : "não permite") + "que copiem sua roupa!");
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {

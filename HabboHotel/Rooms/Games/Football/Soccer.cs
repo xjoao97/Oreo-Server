@@ -76,7 +76,7 @@ namespace Quasar.HabboHotel.Rooms.Games.Football
                     if (item == null)
                         continue;
 
-                    if (User.SetX == item.GetX && User.SetY == item.GetY && User.GoalX == item.GetX && User.GoalY == item.GetY && User.handelingBallStatus == 0) // super chute.
+                    if (User.SetX == item.GetX && User.SetY == item.GetY && User.GoalX == item.GetX && User.GoalY == item.GetY && User.handelingBallStatus == 0)
                     {
                         Point userPoint = new Point(User.X, User.Y);
                         item.ExtraData = "55";

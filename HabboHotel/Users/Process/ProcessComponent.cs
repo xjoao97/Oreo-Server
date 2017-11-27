@@ -90,7 +90,7 @@ namespace Quasar.HabboHotel.Users.Process
                 if (this._timerRunning)
                 {
                     this._timerLagging = true;
-                    log.Warn("<Player " + this._player.Id + "> Server can't keep up, Player timer is lagging behind.");
+                    log.Warn("<Player " + this._player.Id + " Aviso, o relógio do jogador está atrasado!.");
                     return;
                 }
 

@@ -21,7 +21,7 @@ namespace Quasar.Communication.Packets.Incoming.Inventory.Furni
             allItems.AddRange(FloorItems);
             allItems.AddRange(WallItems);
 
-            if(allItems.Count == 0)
+            if (allItems.Count == 0)
             {
                 Session.SendMessage(new FurniListComposer());
                 return;
@@ -39,7 +39,7 @@ namespace Quasar.Communication.Packets.Incoming.Inventory.Furni
                 {
                     currentSlot++;
                     slots.Add(currentSlot, new List<Item>());
-                    items = slots[currentSlot]; // :v
+                    items = slots[currentSlot];
                 }
 
                 items.Add(item);
@@ -48,7 +48,7 @@ namespace Quasar.Communication.Packets.Incoming.Inventory.Furni
             }
             int i = 0;
 
-            foreach(List<Item> items in slots.Values)
+            foreach (List<Item> items in slots.Values)
             {
                 Session.SendMessage(new FurniListComposer(items, i, slots.Count));
                 i++;

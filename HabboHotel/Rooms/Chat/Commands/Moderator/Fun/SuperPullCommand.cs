@@ -30,39 +30,39 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Introduce el nombre del usuario que deseas hacer el super pull.");
+                Session.SendWhisper("Digite o nome do usuário.");
                 return;
             }
 
-            //if (!Room.SPullEnabled && !Room.CheckRights(Session, true) && !Session.GetHabbo().GetPermissions().HasRight("room_override_custom_config"))
-            //{
-            //    Session.SendWhisper("Oops, al parecer el dueño de la sala ha prohibido hacer los super pull en su sala.");
-            //    return;
-            //}
+            if (!Room.SPullEnabled && !Room.CheckRights(Session, true) && !Session.GetHabbo().GetPermissions().HasRight("room_override_custom_config"))
+            {
+                Session.SendWhisper("Oops, o dono da sala não permite que você use isso aqui.");
+                return;
+            }
 
             GameClient TargetClient = QuasarEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
             if (TargetClient == null)
             {
-                Session.SendWhisper("Hay un Error, no se encuentra al usuario online o no se encuentra en la sala.");
+                Session.SendWhisper("Oops, o usuário não está no quarto ou está offline..");
                 return;
             }
 
             RoomUser TargetUser = Room.GetRoomUserManager().GetRoomUserByHabbo(TargetClient.GetHabbo().Id);
             if (TargetUser == null)
             {
-                Session.SendWhisper("Hay un Error, no se encuentra al usuario online o no se encuentra en la sala..");
+                Session.SendWhisper("Oops, o usuário não está no quarto ou está offline..");
                 return;
             }
 
             if (TargetClient.GetHabbo().Username == Session.GetHabbo().Username)
             {
-                Session.SendWhisper("Vamos.. Seguramente usted no se querra empujar a si mismo!");
+                Session.SendWhisper("Vamos.. você não quer empurrar você mesmo!");
                 return;
             }
 
             if (TargetUser.TeleportEnabled)
             {
-                Session.SendWhisper("Oops, you cannot push a user whilst they have their teleport mode enabled.");
+                Session.SendWhisper("Oops, você não pode usar isso com teleport ativado.");
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 
             if (ThisUser.SetX - 1 == Room.GetGameMap().Model.DoorX)
             {
-                Session.SendWhisper("Por favor, no tire a ese usuario fuera de la Habitacion :c ");
+                Session.SendWhisper("Por favor, não jogue jogue alguém para fora do quarto :c ");
                 return;
             }
 
@@ -87,7 +87,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
             else if (ThisUser.RotBody == 6)
                 TargetUser.MoveTo(ThisUser.X - 1, ThisUser.Y);
 
-            Room.SendMessage(new ChatComposer(ThisUser.VirtualId, "*super pulls " + Params[1] + " to them*", 0, ThisUser.LastBubble));
+            Room.SendMessage(new ChatComposer(ThisUser.VirtualId, "*Puxou " + Params[1] + "", 0, ThisUser.LastBubble));
             return;
         }
     }

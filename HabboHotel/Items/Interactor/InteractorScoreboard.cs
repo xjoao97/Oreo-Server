@@ -25,7 +25,6 @@ namespace Quasar.HabboHotel.Items.Interactor
             {
             }
 
-
             if (Request == 1)
             {
                 if (Item.pendingReset && OldValue > 0)

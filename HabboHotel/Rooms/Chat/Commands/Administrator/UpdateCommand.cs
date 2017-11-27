@@ -25,14 +25,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Actualiza una característica de Quasar."; }
+            get { return "Atualiza o Hotel"; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Debe introducir algo para actualizar, e.g. :update catalog");
+                Session.SendWhisper("Você deve inserir algo para atualizar");
                 return;
             }
 
@@ -44,12 +44,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_rewards"))
                         {
-                            Session.SendWhisper("Oops, ha surgido un error.");
+                            Session.SendWhisper("Oops, ocorreu um erro");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetCalendarManager().Init();
-                        Session.SendWhisper("Calendario actualizado.");
+                        Session.SendWhisper("Calendário atualizado.");
                         break;
                     }
                 case "grupos":
@@ -57,7 +57,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_catalog"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar los grupos.");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar os grupos.");
                             break;
                         }
 
@@ -74,7 +74,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_catalog"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar el catálogo.");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o catálogo.");
                             break;
                         }
 
@@ -83,24 +83,20 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                         QuasarEnvironment.GetGame().GetCatalogFrontPageManager().LoadFrontPage();
                         QuasarEnvironment.GetGame().GetCatalog().Init(QuasarEnvironment.GetGame().GetItemManager());
                         QuasarEnvironment.GetGame().GetClientManager().SendMessage(new CatalogUpdatedComposer());
-                        QuasarEnvironment.GetGame().GetClientManager().SendMessage(RoomNotificationComposer.SendBubble("catalogue", "¡El catálogo ha sido actualizado, échale un vistazo!", "catalog/open/" + Message + ""));
+                        QuasarEnvironment.GetGame().GetClientManager().SendMessage(RoomNotificationComposer.SendBubble("catalogue", "O catálogo foi atualizado!", "catalog/open/" + Message + ""));
 
                         break;
-                    }              
+                    }
 
                 case "goals":
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_catalog"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar el LandingCommunityGoalVS.");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o LandingCommunityGoalVS.");
                             break;
                         }
 
                         string Message = CommandManager.MergeParams(Params, 2);
-
-                        QuasarEnvironment.GetGame().GetCommunityGoalVS().LoadCommunityGoalVS();
-
-                        Session.SendWhisper("Has actualizado satisfactoriamente los LandingCommunityGoalVS.", 34);
 
                         break;
                     }
@@ -108,12 +104,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_catalog"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar los premios de las piñatas.");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o premios de las piñatas.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetPinataManager().Initialize(QuasarEnvironment.GetDatabaseManager().GetQueryReactor());
-                        QuasarEnvironment.GetGame().GetClientManager().SendMessage(RoomNotificationComposer.SendBubble("catalogue", "Se han actualizado los premios de las piñatas.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().SendMessage(RoomNotificationComposer.SendBubble("catalogue", "Os prêmios das piñatas foram atualizados.", ""));
                         break;
                     }
 
@@ -121,7 +117,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_catalog"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar los premios de las piñatas.");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o premios de las piñatas.");
                             break;
                         }
                         QuasarEnvironment.GetGame().GetPollManager().Init();
@@ -131,50 +127,50 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                 case "list":
                     {
                         StringBuilder List = new StringBuilder("");
-                        List.AppendLine("Lista de comandos para actualizar");
-                        List.AppendLine("---------------------------------");
-                        List.AppendLine(":update catalog = Actualizar el cátalogo.");
-                        List.AppendLine(":update items = Actualiza los ítems, si cambias algo en 'furniture'");
-                        List.AppendLine(":update models = Por si añades algun modelo de sala manualmente");
-                        List.AppendLine(":update promotions = Actualiza las noticias que estan en vista hotel 'Server Landinds'");
-                        List.AppendLine(":update filter = Actualiza el filtro, 'siempre ejecutar si se añade una palabra'");
-                        List.AppendLine(":update navigator = Actualiza el Navegador");
-                        List.AppendLine(":update rights = Actualiza los Permisos");
-                        List.AppendLine(":update configs = Actualiza la configuracion del hotel");
-                        List.AppendLine(":update bans = Actualiza los baneados");
-                        List.AppendLine(":update tickets = Actualiza los tickets de mod");
-                        List.AppendLine(":update badge_definitions = Actualiza las placas agregadas");
-                        List.AppendLine(":update vouchers = Actualiza los vouchers agregados");
-                        List.AppendLine(":update characters = Actualiza los carácteres del filtro.");
-                        List.AppendLine(":update offers = Actualiza las ofertas relámpago del hotel.");
-                        List.AppendLine(":update nux = Actualiza los premios nux del hotel.");
-                        List.AppendLine(":update polls = Actualiza los polls del hotel.");
-                        Session.SendMessage(new MOTDNotificationComposer(List.ToString()));
+                        List.AppendLine ("Lista de comandos para atualizar");
+                        List.AppendLine ("---------------------------------");
+                        List.AppendLine (":update catalog = Atualiza o catálogo do hotel");
+                        List.AppendLine (":update items = Atualiza os items do hotel'");
+                        List.AppendLine (":update models = Atualiza os modelos de quarto do hotel");
+                        List.AppendLine (":update promotions = Atualiza os avidos da LandingView do hotel");
+                        List.AppendLine (":update filter = Atualiza o filtro do hotel");
+                        List.AppendLine (":update navigator = Atualiza o navegador do hotel");
+                        List.AppendLine (":update rights = Atualiza as permissões do hotel");
+                        List.AppendLine (":update configs = Atualiza as configurações do hotel");
+                        List.AppendLine (":update bans = Atualiza os usuários banidos do hotel");
+                        List.AppendLine (":update tickets = atualiza os pedidos de ajuda do hotel");
+                        List.AppendLine (":update badge_definitions = Atualizar os emblemas do hotel");
+                        List.AppendLine (":update vouchers = Atualiza os códigos do hotel");
+                        List.AppendLine (":update characters = Atualizar as palavras do filtro do hotel");
+                        List.AppendLine (":update offers = Atualiza ofertas relâmpago do hotel");
+                        List.AppendLine (":update nux = Atualize os prémios nux do hotel");
+                        List.AppendLine (":update polls = atualiza as pesquisas do hotel");
+                        Session.SendMessage (new MOTDNotificationComposer (List.ToString ()));
                         break;
                     }
 
                 case "nux":
                     if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_furni"))
                     {
-                        Session.SendWhisper("Oops, usted no tiene permiso para actualizar esto.");
+                        Session.SendWhisper("Oops, você não tem permissão para atualizar isso.");
                         break;
                     }
 
                     QuasarEnvironment.GetGame().GetNuxUserGiftsListManager().Initialize(QuasarEnvironment.GetDatabaseManager().GetQueryReactor());
                     QuasarEnvironment.GetGame().GetNuxUserGiftsManager().Initialize(QuasarEnvironment.GetDatabaseManager().GetQueryReactor());
-                    Session.SendWhisper("Has recargado los nux gifts.");
+                    Session.SendWhisper("Você recarregou os presentes do nux.");
                     break;
 
                 case "characters":
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_filter"))
                         {
-                            Session.SendWhisper("Oops, Usted no tiene permiso para actualizar los carácteres del filtro");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar os carácteres do filtro");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetChatManager().GetFilter().InitCharacters();
-                        Session.SendWhisper("Carácteres del filtro actualiza2 correctamente.");
+                        Session.SendWhisper("Atualizado com sucesso");
                         break;
                     }
 
@@ -184,30 +180,30 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_furni"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar los furnis");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o furnis");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetItemManager().Init();
-                        Session.SendWhisper("Items actualizados correctamente.");
+                        Session.SendWhisper("Items atualizado corretamente");
                         break;
                     }
 
                 case "crafting":
                     if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_furni"))
                     {
-                        Session.SendWhisper("Oops, usted no tiene permiso para actualizar el crafting.");
+                        Session.SendWhisper("Oops, você não tem permissão para atualizar o crafting.");
                         break;
                     }
 
                     QuasarEnvironment.GetGame().GetCraftingManager().Init();
-                    Session.SendWhisper("Crafting actualizado correctamente.");
+                    Session.SendWhisper("Crafting atualizado corretamente.");
                     break;
 
                 case "offers":
                     if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_furni"))
                     {
-                        Session.SendWhisper("Oops, usted no tiene permiso para actualizar los furnis");
+                        Session.SendWhisper("Oops, você não tem permissão para atualizar o furnis");
                         break;
                     }
 
@@ -218,24 +214,24 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                 case "songs":
                     if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_furni"))
                     {
-                        Session.SendWhisper("Oops, usted no tiene permiso para actualizar las canciones.");
+                        Session.SendWhisper("Oops, você não tem permissão para isso.");
                         break;
                     }
 
                     QuasarEnvironment.GetGame().GetMusicManager().Init();
-                    Session.SendWhisper("Has recargado todas las canciones.");
+                    Session.SendWhisper("Atualizado com sucesso.");
                     break;
 
                 case "models":
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_models"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar los Models");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar os Models");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetRoomManager().LoadModels();
-                        Session.SendWhisper("Modelos de sala actualizados correctamente.");
+                        Session.SendWhisper("Modelos de sala atualizado corretamente");
                         break;
                     }
 
@@ -243,12 +239,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_promotions"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permisos para actualizar las promociones.");
+                            Session.SendWhisper("Oops, você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetLandingManager().LoadPromotions();
-                        Session.SendWhisper("Noticias de vista al Hotel actualizadas correctamente.");
+                        Session.SendWhisper("Atualziado com sucesso.");
                         break;
                     }
 
@@ -256,12 +252,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_youtube"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar los videos de Youtube TV.");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o videos de Youtube TV.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetTelevisionManager().Init();
-                        Session.SendWhisper("Youtube television actualizado correctamente");
+                        Session.SendWhisper("Atualizado com sucesso!");
                         break;
                     }
 
@@ -269,12 +265,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_filter"))
                         {
-                            Session.SendWhisper("Oops, Usted no tiene permiso para actualizar el filtro");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o filtro");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetChatManager().GetFilter().InitWords();
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("filters", Session.GetHabbo().Username + " ha actualizado el filtro del hotel.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("filters", Session.GetHabbo().Username + " atualizou o filtro do hotel.", ""));
                         break;
                     }
 
@@ -282,12 +278,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_navigator"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar el navegador.");
+                            Session.SendWhisper("Oops, você não tem permissão para atualizar o navegador.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetNavigator().Init();
-                        QuasarEnvironment.GetGame().GetClientManager().SendMessage(RoomNotificationComposer.SendBubble("newuser", Session.GetHabbo().Username + " ha modificado las salas públicas del hotel.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().SendMessage(RoomNotificationComposer.SendBubble("newuser", Session.GetHabbo().Username + " alterou os quartos públicos do hotel.", ""));
                         break;
                     }
 
@@ -298,7 +294,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_rights"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene derecho para actualizar los derechos y permisos.");
+                            Session.SendWhisper("Oops, você não tem permissão para isso.");
                             break;
                         }
 
@@ -312,7 +308,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                             Client.GetHabbo().GetPermissions().Init(Client.GetHabbo());
                         }
 
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " ha actualizado todos los permisos, comandos y rangos del hotel.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + "atualizou as configurações do hotel.", ""));
                         break;
                     }
 
@@ -321,12 +317,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_configuration"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar la configuracion del Hotel");
+                            Session.SendWhisper("Oops, você não tem permissão para isso");
                             break;
                         }
 
                         QuasarEnvironment.ConfigData = new ConfigData();
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " ha recargado la configuración del hotel.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " alterou as configurações do hotel.", ""));
                         break;
                     }
 
@@ -334,12 +330,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_bans"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar la lista de baneados");
+                            Session.SendWhisper("Oops, você não tem permissão para isso");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetModerationManager().ReCacheBans();
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " ha actualizado la lista de baneos de " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + ".", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " atualizou a lista de banidos do" + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + ".", ""));
                         break;
                     }
 
@@ -347,12 +343,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_quests"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar las misiones.");
+                            Session.SendWhisper("Oops, você não tem permissão para isso");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetQuestManager().Init();
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " ha actualizado todas las misiones y retos de " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + ".", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " atualizou as Quests do hotel " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + ".", ""));
                         break;
                     }
 
@@ -360,12 +356,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_achievements"))
                         {
-                            Session.SendWhisper("Oops, usted no tiene permiso para actualizar los logros.");
+                            Session.SendWhisper("Oops, você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetAchievementManager().LoadAchievements();
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " ha recargado todos los desafíos y achievements del hotel satisfactoriamente.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " atualizou as configurações do hotel.", ""));
                         break;
                     }
 
@@ -375,13 +371,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_moderation"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_moderation' permission.");
+                            Session.SendWhisper("Oops, você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetModerationManager().Init();
-                        QuasarEnvironment.GetGame().GetClientManager().ModAlert("Moderation presets have been updated. Please reload the client to view the new presets.");
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " ha actualizado la configuración de los permisos de moderación.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().ModAlert("As suas configurações foram alteradas, reentre no hotel para atualizar.");
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " alterou as configurações da moderação.", ""));
                         break;
                     }
 
@@ -389,14 +385,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                 //    {
                 //        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_tickets"))
                 //        {
-                //            Session.SendWhisper("Oops, No tiene permisos para actualizar los tickets");
+                //            Session.SendWhisper("Você não tem permissão para isso.");
                 //            break;
                 //        }
 
                 //        if (QuasarEnvironment.GetGame().GetModerationTool().Tickets.Count > 0)
                 //            QuasarEnvironment.GetGame().GetModerationTool().Tickets.Clear();
 
-                //        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("tickets", Session.GetHabbo().Username + " ha actualizado y vaciado todos los tickets de Habbi.", ""));
+                //        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("tickets", Session.GetHabbo().Username + " atualizou os pedidos de ajuda do hotel.", ""));
                 //        break;
                 //    }
 
@@ -404,12 +400,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_vouchers"))
                         {
-                            Session.SendWhisper("Oops, no tienes los permisos suficientes para actualizar los vouchers.");
+                            Session.SendWhisper("Oops, você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetCatalog().GetVoucherManager().Init();
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " ha actualizado los códigos voucher del hotel.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("commandsupdated", Session.GetHabbo().Username + " atualizou os códigos do hotel.", ""));
                         break;
                     }
 
@@ -419,12 +415,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_game_center"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_game_center' permission.");
+                            Session.SendWhisper("Oops, você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetGameDataManager().Init();
-                        Session.SendWhisper("Game Center cache successfully updated.");
+                        Session.SendWhisper("Atualizado com sucesso.");
                         break;
                     }
 
@@ -432,12 +428,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_pet_locale"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_pet_locale' permission.");
+                            Session.SendWhisper("Você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetChatManager().GetPetLocale().Init();
-                        Session.SendWhisper("Pet locale cache successfully updated.");
+                        Session.SendWhisper("Atualizado com sucesso");
                         break;
                     }
 
@@ -445,12 +441,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_locale"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_locale' permission.");
+                            Session.SendWhisper("Você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetLanguageLocale().Init();
-                        Session.SendWhisper("Locale cache successfully updated.");
+                        Session.SendWhisper("Atualizado com sucesso");
                         break;
                     }
 
@@ -458,12 +454,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_anti_mutant"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_anti_mutant' permission.");
+                            Session.SendWhisper("Você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetAntiMutant().Init();
-                        Session.SendWhisper("Anti mutant successfully reloaded.");
+                        Session.SendWhisper("Atualziado com sucesso");
                         break;
                     }
 
@@ -471,12 +467,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_bots"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_bots' permission.");
+                            Session.SendWhisper("Você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetBotManager().Init();
-                        Session.SendWhisper("Bot recargados correctamente");
+                        Session.SendWhisper("Atualizado com sucesso");
                         break;
                     }
 
@@ -484,12 +480,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_rewards"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_rewards' permission.");
+                            Session.SendWhisper("Você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetRewardManager().Reload();
-                        Session.SendWhisper("Rewards managaer successfully reloaded.");
+                        Session.SendWhisper("Atualizado com sucesso");
                         break;
                     }
 
@@ -497,12 +493,12 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_chat_styles"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_chat_styles' permission.");
+                            Session.SendWhisper("Você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetChatManager().GetChatStyles().Init();
-                        Session.SendWhisper("Chat Styles successfully reloaded.");
+                        Session.SendWhisper("Atualizado com sucesso");
                         break;
                     }
 
@@ -511,16 +507,16 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
                     {
                         if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_badge_definitions"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_badge_definitions' permission.");
+                            Session.SendWhisper("Você não tem permissão para isso.");
                             break;
                         }
 
                         QuasarEnvironment.GetGame().GetBadgeManager().Init();
-                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("definitions", Session.GetHabbo().Username + " ha actualizado las definiciones de placas.", ""));
+                        QuasarEnvironment.GetGame().GetClientManager().StaffAlert(RoomNotificationComposer.SendBubble("definitions", Session.GetHabbo().Username + " atualizou os emblemas do hotel.", ""));
                         break;
                     }
                 default:
-                    Session.SendWhisper("'" + UpdateVariable + "' es un comando invalido, escribelo correctamente");
+                    Session.SendWhisper("'" + UpdateVariable + "' é um comando invalido");
                     break;
             }
         }

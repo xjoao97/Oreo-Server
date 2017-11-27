@@ -68,7 +68,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
                 if (Player.Rank >= 7 || this.Instance.OwnerId == Player.Id)
                 {
-                    Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Wired Expulsar: Este jugador no se puede expulsar", 0, 0));
+                    Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Este jogador não pode ser expulso", 0, 0));
                     return false;
                 }
 

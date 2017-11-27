@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Aumenta o reduce el aforo máximo en tu sala."; }
+            get { return "Aumente ou reduza a capacidade máxima em seu quarto."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -31,7 +31,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Introduce una cantidad correcta (en números) de cuantos usuarios pueden ingresar a tu sala.");
+                Session.SendWhisper("Digite um número correto (em números) de quantos usuários podem entrar no seu quarto.");
                 return;
             }
 
@@ -41,18 +41,18 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                 if (MaxAmount <= 0)
                 {
                     MaxAmount = 10;
-                    Session.SendWhisper("Cantidad de visitantes demasiado baja, la cantidad de visitantes se ha establecido en 10.");
+                    Session.SendWhisper("Quantidade de visitantes muito baixa, o número de visitantes foi definido para 10.");
                 }
                 else if (MaxAmount > 250 && !Session.GetHabbo().GetPermissions().HasRight("override_command_setmax_limit"))
                 {
                     MaxAmount = 250;
-                    Session.SendWhisper("Cantidad de visitantes demasiado alta, la cantidad de visitantes se ha establecido en 250.");
+                    Session.SendWhisper("A quantidade de visitantes é muito alta, o número de visitantes foi fixado em 250.");
                 }
                 else
 
                 Room.UsersMax = MaxAmount;
                 Room.RoomData.UsersMax = MaxAmount;
-                Room.SendMessage(RoomNotificationComposer.SendBubble("setmax", "" + Session.GetHabbo().Username + " ha establecido el límite de aforo a " + MaxAmount + ".", ""));
+                Room.SendMessage(RoomNotificationComposer.SendBubble("setmax", "" + Session.GetHabbo().Username + " definiu o limite de visitantes no quarto para " + MaxAmount + ".", ""));
 
                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
@@ -60,7 +60,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                 }
             }
             else
-                Session.SendWhisper("Cantidad invalida, solo es permitidos numeros.");
+                Session.SendWhisper("Valor invalido, apenas os números são permitidos.");
         }
     }
 }

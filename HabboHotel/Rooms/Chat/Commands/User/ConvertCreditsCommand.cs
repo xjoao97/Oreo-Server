@@ -24,16 +24,16 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Lleva tus monedas de inventario a Monedero"; }
+            get { return "Converta suas moedas para carteira"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             int TotalValue = 0;
 
-            try 
+            try
             {
-                DataTable Table = null;           
+                DataTable Table = null;
                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.SetQuery("SELECT `id` FROM `items` WHERE `user_id` = '" + Session.GetHabbo().Id + "' AND (`room_id`=  '0' OR `room_id` = '')");
@@ -42,7 +42,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
                 if (Table == null)
                 {
-                    Session.SendWhisper("De momento usted no tiene monedas en su inventario!");
+                    Session.SendWhisper("No momento você não possui moedas em seu inventárioo!");
                     return;
                 }
 
@@ -60,7 +60,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
                     string[] Split = Item.GetBaseItem().ItemName.Split('_');
                     int Value = int.Parse(Split[1]);
-                    
+
                     using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
                         dbClient.RunQuery("DELETE FROM `items` WHERE `id` = '" + Item.Id + "' LIMIT 1");
@@ -78,13 +78,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                 }
 
                 if (TotalValue > 0)
-                    Session.SendNotification("Todos sus creditos en inventario se llevaron a su monedero con un !\r\r(Total de: " + TotalValue + " creditos!");
+                    Session.SendNotification("Todos os seus créditos de inventário foram levados para a sua carteira!\r\r(Total: " + TotalValue + " creditos!");
                 else
-                    Session.SendNotification("Al parecer no tiene ningun otro articulo intercambiable!");
+                    Session.SendNotification("Não parece ter nenhum outro item intercambiável!");
             }
             catch
             {
-                Session.SendNotification("Oops, ocurrio un error mientras se intercambiaban sus creditos, contacte un administrador!");
+                Session.SendNotification("Oops, Ocorreu um erro ao trocar o seu crédito, entre em contato com um administrador!");
             }
         }
     }

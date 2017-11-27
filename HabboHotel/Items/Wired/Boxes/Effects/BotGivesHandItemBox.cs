@@ -67,7 +67,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             {
                 if (!Instance.GetGameMap().CanWalk(Actor.SquareBehind.X, Actor.SquareBehind.Y, false))
                 {
-                    Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "No puedo alcanzarte ¡debes acercarte más a mi!", 0, 31));
+                    Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Não consigo alcançá-lo, você deve se aproximar de mim!", 0, 31));
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
                     User.CarryItem(DrinkId);
                     User.BotData.TargetUser = Actor.HabboId;
-                    Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Aquí tienes tu bebida " + Player.GetClient().GetHabbo().Username + "!", 0, 31));
+                    Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Aqui está a sua bebida" + Player.GetClient().GetHabbo().Username + "!", 0, 31));
 
                     User.MoveTo(Actor.SquareBehind.X, Actor.SquareBehind.Y);
                 }

@@ -79,23 +79,23 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Conditions
                     string[] partsString = I.Split(':');
                     string[] part = partsString[1].Split(',');
 
-                    if (int.Parse(this.StringData.Split(';')[0]) == 1)//State
+                    if (int.Parse(this.StringData.Split(';')[0]) == 1)
                     {
                         if (II.ExtraData == part[4].ToString())
                             return false;
                     }
 
-                    if (int.Parse(this.StringData.Split(';')[1]) == 1)//Direction
+                    if (int.Parse(this.StringData.Split(';')[1]) == 1)
                     {
                         if (II.Rotation == Convert.ToInt32(part[3]))
                             return false;
                     }
 
-                    if (int.Parse(this.StringData.Split(';')[2]) == 1)//Position
+                    if (int.Parse(this.StringData.Split(';')[2]) == 1)
                     {
                         if (II.GetX == Convert.ToInt32(part[0]) && II.GetY == Convert.ToInt32(part[1]) && II.GetZ == Convert.ToDouble(part[2]))
                             return false;
-                    }              
+                    }
                 }
             }
             return true;

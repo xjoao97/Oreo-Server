@@ -58,16 +58,16 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             if (Player.GetPermissions().HasRight("mod_tool") || this.Instance.OwnerId == Player.Id)
             {
-                Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Wired Mute Exception: Unmutable Player", 0, 0));
+                Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Erro! Jogador incompatível", 0, 0));
                 return false;
             }
 
             int Time = (StringData != null ? int.Parse(StringData.Split(';')[0]) : 0);
-            string Message = (StringData != null ? (StringData.Split(';')[1]) : "No message!");
+            string Message = (StringData != null ? (StringData.Split(';')[1]) : "Sem mensagem!");
 
             if (Time > 0)
             {
-                Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Wired Mute: Muted for " + Time + "! Message: " + Message, 0, 0));
+                Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, "Wired Mute: Silenciado por " + Time + "! Aviso: " + Message, 0, 0));
                 if (!Instance.MutedUsers.ContainsKey(Player.Id))
                     Instance.MutedUsers.Add(Player.Id, (QuasarEnvironment.GetUnixTimestamp() + (Time * 60)));
                 else

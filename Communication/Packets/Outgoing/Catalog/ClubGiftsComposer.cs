@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +11,11 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
         public ClubGiftsComposer()
             : base(ServerPacketHeader.ClubGiftsMessageComposer)
         {
-            base.WriteInteger(231);//Days until next gift. base.WriteInteger(0); //Gifts available
-            base.WriteInteger(1);//Count?
+            base.WriteInteger(231);
+            //base.WriteInteger(0);
+            base.WriteInteger(1);
 
-            base.WriteInteger(1);//Conta?
+            base.WriteInteger(1);
             /*
             this._-1L8 = _arg1._-1u3();
             this._-1iD = _arg1.readString();
@@ -39,7 +40,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
 
             base.WriteInteger(202); //Id da Oferta
             base.WriteString("Oferta"); //Nome
-            base.WriteBoolean(false); //Rentável ou Compra
+            base.WriteBoolean(false); //Rent�vel ou Compra
             base.WriteInteger(0); //Valor em Moedas
             base.WriteInteger(0); //Valor em Duckets
             base.WriteInteger(0); //Valor em Gotw

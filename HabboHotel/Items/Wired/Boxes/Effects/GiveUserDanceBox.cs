@@ -58,7 +58,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             RoomUser ThisUser = User.GetClient().GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(User.GetClient().GetHabbo().Id);
             var dance = int.Parse(StringData);
             User.GetClient().GetHabbo().CurrentRoom.SendMessage(new DanceComposer(ThisUser, dance));
-            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wfdance", "" + User.GetClient().GetHabbo().Username + ", acabas de activar el baile " + StringData + " mediante Wired.", ""));
+            User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wfdance", "" + User.GetClient().GetHabbo().Username + ", Você apenas ativou a dança. " + StringData + " por um Wired.", ""));
             Item.UpdateState(false, true);
             Item.RequestUpdate(2, true);
 

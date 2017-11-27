@@ -50,10 +50,10 @@ namespace Quasar.HabboHotel.Items.Interactor
                 //Item.NextCommand = QuasarEnvironment.Now() + 3600000;
 
                 int Amount = 10;
-                Session.SendShout("Aha! Its the christmas duck! *Enjoy your 10 diamonds!");
+                Session.SendShout("Aha! É o pato do Natal! * Aproveite seus 10 diamantes!");
                 Session.GetHabbo().Diamonds += Amount;
                 Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, Amount, 5));
-                Session.SendNotification("Thank you for participating Pure's 2016 Christmas hunt! You have find the rare christmas duck! As a reward, you have recieved 10 diamonds!");
+                Session.SendNotification("Obrigado por participar da caça de Natal! Você encontrou o pato de Natal raro! Como uma recompensa, você recebeu 10 diamantes!");
                 Item.ExtraData = "0";
                 Item.UpdateState();
 

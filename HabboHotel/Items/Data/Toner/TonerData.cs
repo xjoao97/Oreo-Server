@@ -28,7 +28,7 @@ namespace Quasar.HabboHotel.Items.Data.Toner
 
             if (Row == null)
             {
-                //throw new NullReferenceException("No toner data found in the database for " + ItemId);
+                //throw new NullReferenceException("Não foi possível econtrar o item " + ItemId);
                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.RunQuery("INSERT INTO `room_items_toner` VALUES (" + ItemId + ",'0',0,0,0)");

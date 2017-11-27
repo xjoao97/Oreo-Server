@@ -31,9 +31,8 @@ namespace Quasar
     {
         private static readonly ILog log = LogManager.GetLogger("Quasar.QuasarEnvironment");
 
-        public const string PrettyVersion = "Plus Emulator";
+        public const string PrettyVersion = "Key Server";
         public const string PrettyBuild = "2.1";
-        public const string pin = "123";
 
         private static ConfigurationData _configuration;
         private static Encoding _defaultEncoding;
@@ -67,70 +66,27 @@ namespace Quasar
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine(@"       ____  __           ________  _____  __  ");
-            Console.WriteLine(@"      / __ \/ /_  _______/ ____/  |/  / / / /  ");
-            Console.WriteLine(@"     / /_/ / / / / / ___/ __/ / /|_/ / / / /   ");
-            Console.WriteLine(@"    / ____/ / /_/ (__  ) /___/ /  / / /_/ /    ");
-            Console.WriteLine(@"   /_/   /_/\__,_/____/_____/_/  /_/\____/     ");
-            Console.WriteLine();
-            Console.WriteLine(@" Emulador bloqueado digite sua senha para poder iniciar!");
-            Console.WriteLine();
-            Console.WriteLine(" SergioT, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache,");
-            Console.WriteLine(" Custom, Whats, Root, Wulles, Arfeu, Away, Andre Barreto ");
-            Console.WriteLine();
-            Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkMagenta);
-            Console.Title = "Carregando [...]";
-            _defaultEncoding = Encoding.Default;
-
-            CultureInfo = CultureInfo.CreateSpecificCulture("en-GB");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("");
-            _defaultEncoding = Encoding.Default;
-
-            Console.Write(" [Digite sua licença]: ");
-            string pass = Console.ReadLine();
-
-            if (pass == pin)
-            {
-                Console.Clear();
-            }
-
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Title = ("ERRO - Licença não existe!");
-                Console.Clear();
-                Console.WriteLine("A licença não existe ou expirou!");
-                Console.WriteLine(" ");
-                Console.WriteLine("Digite qualquer tecla para sair..");
-                Console.ReadKey();
-                Environment.Exit(1);
-            }
-
-            ServerStarted = DateTime.Now;
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Clear();
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine(@"       ____  __           ________  _____  __  ");
-            Console.WriteLine(@"      / __ \/ /_  _______/ ____/  |/  / / / /  ");
-            Console.WriteLine(@"     / /_/ / / / / / ___/ __/ / /|_/ / / / /   ");
-            Console.WriteLine(@"    / ____/ / /_/ (__  ) /___/ /  / / /_/ /    ");
-            Console.WriteLine(@"   /_/   /_/\__,_/____/_____/_/  /_/\____/     ");
-            Console.WriteLine();
-            Console.WriteLine(@" Emulador ligado, não desligue direto, use os comandos!");
-            Console.WriteLine();
-            Console.WriteLine(" SergioT, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache,");
-            Console.WriteLine(" Custom, Whats, Root, Wulles, Arfeu, Away, Andre Barreto ");
-            Console.WriteLine();
-            Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkMagenta);
-            Console.Title = "Carregando [...]";
 
+            Console.WriteLine(@"  _   __ _______   _______ ___________ _   _ ___________  ");
+            Console.WriteLine(@" | | / /|  ___\ \ / /  ___|  ___| ___ \ | | |  ___| ___ \ ");
+            Console.WriteLine(@" | |/ / | |__  \ V /\ `--.| |__ | |_/ / | | | |__ | |_/ / ");
+            Console.WriteLine(@" |    \ |  __|  \ /  `--. \  __||    /| | | |  __||    /  ");
+            Console.WriteLine(@" | |\  \| |___  | | /\__/ / |___| |\ \\ \_/ / |___| |\ \  ");
+            Console.WriteLine(@" \_| \_/\____/  \_/ \____/\____/\_| \_|\___/\____/\_| \_| K-5");
+            Console.WriteLine();
+            Console.WriteLine(@" Emulador ligado, não desligue direto use os comandos para salvar os dados!!");
+            Console.WriteLine();
+            Console.WriteLine(" Arfeu, Custom, Sledmore, Dylan, Finn, XDR, CarlosD, Mr.Mustache,");
+            Console.WriteLine(" One fuck for Wesley (The General), KeyAsc, Custom and the others if this emulator is leaked.");
+            Console.WriteLine(" Licenciado para uso: FPanel");
+            Console.WriteLine(" Versão atual: Quasar K-5");
+            Console.WriteLine();
+            Console.WriteLine(@"------------------------------------------------------------------------------------------------------------------------", ConsoleColor.DarkMagenta);
+            Console.Title = "Carregando [...]";
+            _defaultEncoding = Encoding.Default;
             try
             {
-
                 _configuration = new ConfigurationData(Path.Combine(Application.StartupPath, @"config.ini"));
 
                 var connectionString = new MySqlConnectionStringBuilder
@@ -190,7 +146,7 @@ namespace Quasar
 
                 //Console.WriteLine(@"O Emulador foi ligado em: " + TimeUsed.Seconds + " segundos.", ConsoleColor.Cyan);
                 Console.WriteLine();
-                Console.WriteLine(@"--------------------------------------------------------------------------------", ConsoleColor.DarkRed);
+                Console.WriteLine(@"------------------------------------------------------------------------------------------------------------------------", ConsoleColor.DarkRed);
             }
 
             catch (KeyNotFoundException e)

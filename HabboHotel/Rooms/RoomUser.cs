@@ -873,8 +873,4 @@ namespace Quasar.HabboHotel.Rooms
         }
     }
 
-    //0 = none
-    //1 = pool
-    //2 = normal skates
-    //3 = ice skates
 }

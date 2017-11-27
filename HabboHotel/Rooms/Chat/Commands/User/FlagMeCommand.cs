@@ -23,19 +23,19 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Cambia tu nombre de usuario."; }
+            get { return "Mude seu nome de usuário."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (!this.CanChangeName(Session.GetHabbo()))
             {
-                Session.SendWhisper("Lo sentimos, parece que actualmente no tienen la opción de cambiar su nombre de usuario, ESPERE UN POCO MAS DE TIEMPO.");
+                Session.SendWhisper("Desculpe, parece que atualmente você não tem a opção de alterar seu nome de usuário, espere mais um pouco.");
                 return;
             }
 
             Session.GetHabbo().ChangingName = true;
-            Session.SendNotification("Tenga en cuenta que si su nombre es prohibido, se le negara el acceso a su usario.\r\rTenga en cuenta que no volvera a cambiar su nombre en caso de tener problemas con el que haya elegido\r\rCierre esta ventana y haga clic en si mismo para empezar a cambiar el nombre!");
+            Session.SendNotification("Por favor, lembre-se que se seu nome for impróprio você será banido.\r\rObserve que você não mudará seu nome novamente se tiver problemas com o que você escolheu\r\rFeche esta janela e clique em si mesmo para começar a renomear!");
             Session.SendMessage(new UserObjectComposer(Session.GetHabbo()));
         }
 

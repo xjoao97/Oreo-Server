@@ -27,7 +27,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Recoger todos tus objetos que tengas en la sala."; }
+            get { return "Recolhe tudo que tem no quarto."; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)
@@ -48,7 +48,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
             List<Item> Items = Room.GetRoomItemHandler().GetWallAndFloor.ToList();
             if (Items.Count > 0)
-                Session.SendWhisper("Todavía hay más items en esta sala?, elimina manualmente o utilizar :ejectall para expulsarlos!");
+                Session.SendWhisper("Se ainda sobrar items no quarto recolha manualmente ou digite :ejectall");
 
             Session.SendMessage(new FurniListUpdateComposer());
         }

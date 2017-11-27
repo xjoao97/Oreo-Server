@@ -1,0 +1,711 @@
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18875 8 4 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18877 5 10 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18881 5 10 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18880 5 4 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2480] Pacote: : 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectsComposer.WriteFloorItem(Item Item, Int32 UserID) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectsComposer.cs:linha 119
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectsComposer..ctor(Item[] Objects, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectsComposer.cs:linha 27
+   em Quasar.HabboHotel.Rooms.Room.SendObjects(GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Room.cs:linha 1037
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.GetRoomEntryDataEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\GetRoomEntryDataEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3320] Pacote: [0][0]I?: 
+System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.Communication.Packets.Incoming.Rooms.Furni.CreditFurniRedeemEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Furni\CreditFurniRedeemEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3320] Pacote: [0][0]I?: 
+System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.Communication.Packets.Incoming.Rooms.Furni.CreditFurniRedeemEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Furni\CreditFurniRedeemEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18932 4 9 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18932 10 11 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:pickall[0][0][0][0]????: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Inventory.Furni.FurniListAddComposer..ctor(Item Item) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Inventory\Furni\FurniListAddComposer.cs:linha 30
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.RemoveItems(GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 1025
+   em Quasar.HabboHotel.Rooms.Chat.Commands.User.PickAllCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Chat\Commands\User\PickAllCommand.cs:linha 38
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3434] Pacote: : 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Inventory.Furni.FurniListComposer.WriteItem(Item Item) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Inventory\Furni\FurniListComposer.cs:linha 74
+   em Quasar.Communication.Packets.Outgoing.Inventory.Furni.FurniListComposer..ctor(List`1 Items, Int32 page, Int32 pages) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Inventory\Furni\FurniListComposer.cs:linha 42
+   em Quasar.Communication.Packets.Incoming.Inventory.Furni.RequestFurniInventoryEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Inventory\Furni\RequestFurniInventoryEvent.cs:linha 53
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3434] Pacote: : 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Inventory.Furni.FurniListComposer.WriteItem(Item Item) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Inventory\Furni\FurniListComposer.cs:linha 74
+   em Quasar.Communication.Packets.Outgoing.Inventory.Furni.FurniListComposer..ctor(List`1 Items, Int32 page, Int32 pages) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Inventory\Furni\FurniListComposer.cs:linha 42
+   em Quasar.Communication.Packets.Incoming.Inventory.Furni.RequestFurniInventoryEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Inventory\Furni\RequestFurniInventoryEvent.cs:linha 53
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3434] Pacote: : 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Inventory.Furni.FurniListComposer.WriteItem(Item Item) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Inventory\Furni\FurniListComposer.cs:linha 74
+   em Quasar.Communication.Packets.Outgoing.Inventory.Furni.FurniListComposer..ctor(List`1 Items, Int32 page, Int32 pages) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Inventory\Furni\FurniListComposer.cs:linha 42
+   em Quasar.Communication.Packets.Incoming.Inventory.Furni.RequestFurniInventoryEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Inventory\Furni\RequestFurniInventoryEvent.cs:linha 53
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18932 8 2 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18881 5 3 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18932 6 2 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18881 5 2 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3077] Pacote: [0][0][0][0][0]????: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Rooms.Instance.WiredComponent.LoadWiredBox(Item Item) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Instance\WiredComponent.cs:linha 122
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.LoadFurniture() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 290
+   em Quasar.HabboHotel.Rooms.Room..ctor(RoomData Data) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Room.cs:linha 193
+   em Quasar.HabboHotel.Rooms.RoomManager.LoadRoom(Int32 Id) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomManager.cs:linha 417
+   em Quasar.HabboHotel.Users.Habbo.PrepareRoom(Int32 Id, String Password) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Users\Habbo.cs:linha 1394
+   em Quasar.Communication.Packets.Incoming.Rooms.Connection.OpenFlatConnectionEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Connection\OpenFlatConnectionEvent.cs:linha 24
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]18933 9 7 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 847
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3077] Pacote: [0][0][0][0][0]????: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Rooms.Instance.WiredComponent.LoadWiredBox(Item Item) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Instance\WiredComponent.cs:linha 122
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.LoadFurniture() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomItemHandling.cs:linha 290
+   em Quasar.HabboHotel.Rooms.Room..ctor(RoomData Data) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Room.cs:linha 193
+   em Quasar.HabboHotel.Rooms.RoomManager.LoadRoom(Int32 Id) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\RoomManager.cs:linha 417
+   em Quasar.HabboHotel.Users.Habbo.PrepareRoom(Int32 Id, String Password) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Users\Habbo.cs:linha 1394
+   em Quasar.Communication.Packets.Incoming.Rooms.Connection.OpenFlatConnectionEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Connection\OpenFlatConnectionEvent.cs:linha 24
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3320] Pacote: [0][0]JF: 
+System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.Communication.Packets.Incoming.Rooms.Furni.CreditFurniRedeemEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Furni\CreditFurniRedeemEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3320] Pacote: [0][0]JF: 
+System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.Communication.Packets.Incoming.Rooms.Furni.CreditFurniRedeemEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Furni\CreditFurniRedeemEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3320] Pacote: [0][0]JF: 
+System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.Communication.Packets.Incoming.Rooms.Furni.CreditFurniRedeemEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Furni\CreditFurniRedeemEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:poll[0][0][0][0][0][0][0]: 
+System.IndexOutOfRangeException: O ?ndice estava fora dos limites da matriz.
+   em Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.PollCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Chat\Commands\Moderator\PollCommand.cs:linha 17
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Quasar\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3320] Pacote: [0][0]JF: 
+System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.Communication.Packets.Incoming.Rooms.Furni.CreditFurniRedeemEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Furni\CreditFurniRedeemEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]	180 9 4 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\RoomItemHandling.cs:linha 843
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]
+180 4 11 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\RoomItemHandling.cs:linha 843
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [1736] Pacote: [0]	180 8 4 0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.HabboHotel.Items.ItemBehaviourUtility.GenerateExtradata(Item Item, ServerPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Items\ItemBehaviourUtility.cs:linha 80
+   em Quasar.Communication.Packets.Outgoing.Rooms.Engine.ObjectAddComposer..ctor(Item Item, Room Room) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Rooms\Engine\ObjectAddComposer.cs:linha 106
+   em Quasar.HabboHotel.Rooms.RoomItemHandling.SetFloorItem(GameClient Session, Item Item, Int32 newX, Int32 newY, Int32 newRot, Boolean newItem, Boolean OnRoller, Boolean sendMessage, Boolean updateRoomUserStatuses, Boolean ball) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\RoomItemHandling.cs:linha 843
+   em Quasar.Communication.Packets.Incoming.Rooms.Engine.PlaceObjectEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Engine\PlaceObjectEvent.cs:linha 123
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2454] Pacote: [0][0][0]: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Inventory.Purse.GetHabboClubWindowEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Inventory\Purse\GetHabboClubWindowEvent.cs:linha 18
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2454] Pacote: [0][0][0]: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Inventory.Purse.GetHabboClubWindowEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Inventory\Purse\GetHabboClubWindowEvent.cs:linha 18
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [3320] Pacote: [0][0]1?: 
+System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.Communication.Packets.Incoming.Rooms.Furni.CreditFurniRedeemEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Nova pasta\Emulador\Communication\Packets\Incoming\Rooms\Furni\CreditFurniRedeemEvent.cs:linha 45
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Nova pasta\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Nova pasta\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Nova pasta\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Nova pasta\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Nova pasta\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Nova pasta\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:arank marcos[0][0][0][0][0][0][0][0]: 
+System.IndexOutOfRangeException: O ?ndice estava fora dos limites da matriz.
+   em Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.GiveRanksCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\Administrator\GiveRanksCommand.cs:linha 40
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:ARANK MARCOS publicista[0][0][0][0][0][0][0]: 
+System.IndexOutOfRangeException: O ?ndice estava fora dos limites da matriz.
+   em Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.GiveRanksCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\Administrator\GiveRanksCommand.cs:linha 117
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:arank marcos guia[0][0][0][0][0][0][0]: 
+System.IndexOutOfRangeException: O ?ndice estava fora dos limites da matriz.
+   em Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.GiveRanksCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\Administrator\GiveRanksCommand.cs:linha 54
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:arank marcos guia[0][0][0][0][0][0][0]: 
+System.IndexOutOfRangeException: O ?ndice estava fora dos limites da matriz.
+   em Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.GiveRanksCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\Administrator\GiveRanksCommand.cs:linha 54
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:Arank marcos guia [0][0][0][0][0][0][0]: 
+System.IndexOutOfRangeException: O ?ndice estava fora dos limites da matriz.
+   em Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.GiveRanksCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\Administrator\GiveRanksCommand.cs:linha 54
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]0: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]123: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]123: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]145: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2901] Pacote: [0]:arank marcos pin 12345[0][0][0][0][0][0][0][0]: 
+System.OverflowException: Valor era muito grande ou muito pequeno para um byte n?o atribu?do.
+   em System.Convert.ToByte(Int32 value)
+   em Quasar.HabboHotel.Rooms.Chat.Commands.Moderator.GiveRanksCommand.Execute(GameClient Session, Room Room, String[] Params) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\Administrator\GiveRanksCommand.cs:linha 97
+   em Quasar.HabboHotel.Rooms.Chat.Commands.CommandManager.Parse(GameClient Session, String Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\Rooms\Chat\Commands\CommandManager.cs:linha 109
+   em Quasar.Communication.Packets.Incoming.Rooms.Chat.ChatEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Rooms\Chat\ChatEvent.cs:linha 94
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]4: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]?=????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]123: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]123: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2988] Pacote: [0][0][0][0][0]123: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Incoming.Catalog.CheckGnomeNameEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\CheckGnomeNameEvent.cs:linha 39
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+
+
+Error in packet [2861] Pacote: [0]??????[0]NORMAL: 
+System.NullReferenceException: Refer?ncia de objeto n?o definida para uma inst?ncia de um objeto.
+   em Quasar.Communication.Packets.Outgoing.Catalog.CatalogPageComposer..ctor(CatalogPage Page, String CataMode, GameClient Session) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Outgoing\Catalog\CatalogPageComposer.cs:linha 60
+   em Quasar.Communication.Packets.Incoming.Catalog.GetCatalogPageEvent.Parse(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\Incoming\Catalog\GetCatalogPageEvent.cs:linha 26
+   em Quasar.Communication.Packets.PacketManager.TryExecutePacket(GameClient Session, ClientPacket Packet) na C:\Users\Verissimo\Desktop\Emulador\Communication\Packets\PacketManager.cs:linha 166
+   em Quasar.HabboHotel.GameClients.GameClient.parser_onNewPacket(ClientPacket Message) na C:\Users\Verissimo\Desktop\Emulador\HabboHotel\GameClients\GameClient.cs:linha 80
+

@@ -20,7 +20,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Graduar la velocidad de los rollers de 0 a 10."; }
+            get { return "Mude a velocidade dos rolos de 0 a 10."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -30,7 +30,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Ingresa que velocidad desea para los roller.");
+                Session.SendWhisper("Digite a velocidade que deseja para o rolo.");
                 return;
             }
 
@@ -44,7 +44,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                 }
             }
             else
-                Session.SendWhisper("Cantidad invalida, solo es permitido en numeros.");
+                Session.SendWhisper("Valor inválido, apenas permitido em números..");
         }
     }
 }

@@ -30,14 +30,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Expulsar a todos los BOTs dentro de tu sala."; }
+            get { return "Expulsar todos os BOTs dentro de sua sala."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (!Room.CheckRights(Session, true))
             {
-                Session.SendWhisper("Oops, Al parecer el dueño de la sala no permite que ejecutes este comando");
+                Session.SendWhisper("Oops, apenas o dono do quarto pode executar esse comando");
                 return;
             }
 
@@ -62,7 +62,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                 Room.GetRoomUserManager().RemoveBot(BotUser.VirtualId, false);
             }
 
-            Session.SendWhisper("Todos los bots fueron removidos.");
+            Session.SendWhisper("Todos os bots foram removidos.");
         }
     }
 }

@@ -115,7 +115,6 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                     if (Instance.GetWired().OtherBoxHasItem(this, Item.Id))
                         this.SetItems.TryRemove(Item.Id, out toRemove);
 
-                    // Prueba de Pusheo para el Salinas, que no le funciona.
                     Point Point = HandleMovement(Convert.ToInt32(this.StringData.Split(';')[0]), new Point(Item.GetX, Item.GetY));
                     int newRot = HandleRotation(Convert.ToInt32(this.StringData.Split(';')[1]), Item.Rotation);
 

@@ -71,7 +71,7 @@ namespace Quasar.HabboHotel.Items
                 return Item;
             }
         }
-      
+
         public static Item CreateGiftItem(ItemData Data, Habbo Habbo, string ExtraData, string DisplayFlags, int ItemId, int LimitedNumber = 0, int LimitedStack = 0)
         {
             if (Data == null) throw new InvalidOperationException("Data cannot be null.");
@@ -100,41 +100,47 @@ namespace Quasar.HabboHotel.Items
         }
 
         public static List<Item> CreateMultipleItems(ItemData Data, Habbo Habbo, string ExtraData, int Amount, int GroupId = 0)
-        {
-            if (Data == null) throw new InvalidOperationException("Data cannot be null.");
-
-            List<Item> Items = new List<Item>();
-
-            using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-            {
-                for (int i = 0; i < Amount; i++)
                 {
-                    dbClient.SetQuery("INSERT INTO `items` (base_item,user_id,room_id,x,y,z,wall_pos,rot,extra_data) VALUES(@did,@uid,@rid,@x,@y,@z,@wallpos,@rot,@flags);");
-                    dbClient.AddParameter("did", Data.Id);
-                    dbClient.AddParameter("uid", Habbo.Id);
-                    dbClient.AddParameter("rid", 0);
-                    dbClient.AddParameter("x", 0);
-                    dbClient.AddParameter("y", 0);
-                    dbClient.AddParameter("z", 0);
-                    dbClient.AddParameter("wallpos", "");
-                    dbClient.AddParameter("rot", 0);
-                    dbClient.AddParameter("flags", ExtraData);
+                    if (Data == null) throw new InvalidOperationException("Data cannot be null.");
 
-                    Item Item = new Item(Convert.ToInt32(dbClient.InsertQuery()), 0, Data.Id, ExtraData, 0, 0, 0, 0, Habbo.Id, GroupId, 0, 0, "");
+                    List<Item> Items = new List<Item>();
 
-                    if (GroupId > 0)
+                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
-                        dbClient.SetQuery("INSERT INTO `items_groups` (`id`, `group_id`) VALUES (@id, @gid)");
-                        dbClient.AddParameter("id", Item.Id);
-                        dbClient.AddParameter("gid", GroupId);
-                        dbClient.RunQuery();
-                    }
+                        StringBuilder query = new StringBuilder();
+                        query.Append("INSERT INTO `items` (base_item,user_id,room_id,x,y,z,wall_pos,rot,extra_data) VALUES(@did,@uid,@rid,@x,@y,@z,@wallpos,@rot,@flags)");
+                        for(int i = 0; i < Amount - 1; i++)
+                        {
+                            query.Append(",(@did,@uid,@rid,@x,@y,@z,@wallpos,@rot,@flags)");
+                        }
+                        query.Append(";");
 
-                    Items.Add(Item);
+                        dbClient.SetQuery(query.ToString());
+                        dbClient.AddParameter("did", Data.Id);
+                        dbClient.AddParameter("uid", Habbo.Id);
+                        dbClient.AddParameter("rid", 0);
+                        dbClient.AddParameter("x", 0);
+                        dbClient.AddParameter("y", 0);
+                        dbClient.AddParameter("z", 0);
+                        dbClient.AddParameter("wallpos", "");
+                        dbClient.AddParameter("rot", 0);
+                        dbClient.AddParameter("flags", ExtraData);
+                        
+                        int firstItemId = Convert.ToInt32(dbClient.InsertQuery());
+                        for (int i = firstItemId; i < firstItemId + Amount; i++)
+                        {
+                            Items.Add(new Item(i, 0, Data.Id, ExtraData, 0, 0, 0, 0, Habbo.Id, GroupId, 0, 0, ""));
+                            if (GroupId > 0)
+                            {
+                                dbClient.SetQuery("INSERT INTO `items_groups` (`id`, `group_id`) VALUES (@id, @gid)");
+                                dbClient.AddParameter("id",Items[i - firstItemId].Id);
+                                dbClient.AddParameter("gid", GroupId);
+                                dbClient.RunQuery();
+                            }
+                        }
+                    }
+                    return Items;
                 }
-            }
-            return Items;
-        }
 
         public static List<Item> CreateTeleporterItems(ItemData Data, Habbo Habbo, int GroupId = 0)
         {

@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Silenciar todo lo que digan las mascotas."; }
+            get { return "SilênciA tudo oque os animais de estimação dizem."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -33,9 +33,9 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             }
 
             if (Session.GetHabbo().AllowPetSpeech)
-                Session.SendWhisper("Cambio realizado, ahora no puedes escuchar lo que dicen las mascotas.");
+                Session.SendWhisper("Mudança feita, agora você não pode ouvir o que os animais de estimação dizem.");
             else
-                Session.SendWhisper("Cambio realizado, ahora puedes escuchar lo que dicen las mascotas");
+                Session.SendWhisper("Mudança feita, agora você pode ouvir o que os animais de estimação dizem");
         }
     }
 }

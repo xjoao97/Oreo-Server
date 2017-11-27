@@ -27,14 +27,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Expulsar a todas las mascotas de tu sala."; }
+            get { return "Expulsar todos os mascotas de sua sala."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (!Room.CheckRights(Session, true))
             {
-                Session.SendWhisper("Oops, only the room owner can run this command!");
+                Session.SendWhisper("Oops, apenas o proprietário da sala pode executar este comando!");
                 return;
             }
 
@@ -88,11 +88,11 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                     Room.GetRoomUserManager().RemoveBot(Pet.VirtualId, false);
                     Session.SendMessage(new PetInventoryComposer(Session.GetHabbo().GetInventoryComponent().GetPets()));
                 }
-                Session.SendWhisper("Success, removed all pets.");
+                Session.SendWhisper("Success, removeu todos os animais de estimação.");
             }
             else
             {
-                Session.SendWhisper("Oops, there isn't any pets in here!?");
+                Session.SendWhisper("Oops, não há animais de estimação aqui !");
             }
         }
     }

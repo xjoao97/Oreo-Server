@@ -96,7 +96,7 @@ namespace Quasar.HabboHotel.Rooms
         public int ForSaleAmount;
         public bool RoomForSale;
 
-        //public RoomTraxManager traxManager; // Added
+        //public RoomTraxManager traxManager;
 
         //private ProcessComponent _process = null;
 
@@ -162,12 +162,11 @@ namespace Quasar.HabboHotel.Rooms
             this.WhoCanKick = Data.WhoCanKick;
             this.WhoCanBan = Data.WhoCanBan;
 
-            //this.GolpeEnabled = Data.GolpeEnabled;
-            //this.PushEnabled = Data.PushEnabled;
-            //this.PullEnabled = Data.PullEnabled;
-            //this.SPullEnabled = Data.SPullEnabled;
-            //this.SPushEnabled = Data.SPushEnabled;
-            //this.EnablesEnabled = Data.EnablesEnabled;
+            this.PushEnabled = Data.PushEnabled;
+            this.PullEnabled = Data.PullEnabled;
+            this.SPullEnabled = Data.SPullEnabled;
+            this.SPushEnabled = Data.SPushEnabled;
+            this.EnablesEnabled = Data.EnablesEnabled;
             this.RespectNotificationsEnabled = Data.RespectNotificationsEnabled;
             this.PetMorphsAllowed = Data.PetMorphsAllowed;
             this.Shoot = Data.Shoot;
@@ -782,7 +781,7 @@ namespace Quasar.HabboHotel.Rooms
                 if (User == null || User.GetClient() == null)
                     continue;
                 User.GetClient().SendMessage(new RoomForwardComposer(ForSale.RoomId));
-                User.GetClient().SendNotification("¡La sala en la que te encontrabas acaba de ser comprada por " + Buyer.GetClient().GetHabbo().Username + " por un total de " + ForSale.ForSaleAmount + " duckets!");
+                User.GetClient().SendNotification("A sala onde você está acabou de ser comprada por " + Buyer.GetClient().GetHabbo().Username + " no total " + ForSale.ForSaleAmount + " duckets!");
             }
         }
 
@@ -897,13 +896,13 @@ namespace Quasar.HabboHotel.Rooms
                 try { GetRoomItemHandler().OnCycle(); }
                 catch (Exception e)
                 {
-                    Logging.LogException("Room ID [" + RoomId + "] is currently having issues cycling the room items." + e.ToString());
+                    //Logging.LogException("Room ID [" + RoomId + "] está tendo problemas com ITEMS" + e.ToString());
                 }
 
                 try { GetRoomUserManager().OnCycle(); }
                 catch (Exception e)
                 {
-                    Logging.LogException("Room ID [" + RoomId + "] is currently having issues cycling the room users." + e.ToString());
+                    //Logging.LogException("Room ID [" + RoomId + "] está tendo problemas com ITEMS" + e.ToString());
                 }
 
                 #region Status Updates
@@ -913,7 +912,7 @@ namespace Quasar.HabboHotel.Rooms
                 }
                 catch (Exception e)
                 {
-                    Logging.LogException("Room ID [" + RoomId + "] is currently having issues cycling the room user statuses." + e.ToString());
+                    //Logging.LogException("Room ID [" + RoomId + "] está tendo problemas com alguns PACOTES ou está usando TANJI." + e.ToString());
                 }
                 #endregion
 
@@ -925,28 +924,28 @@ namespace Quasar.HabboHotel.Rooms
                 }
                 catch (Exception e)
                 {
-                    Logging.LogException("Room ID [" + RoomId + "] is currently having issues cycling the game items." + e.ToString());
+                    //Logging.LogException("Room ID [" + RoomId + "] está tendo problemas com ITEMS." + e.ToString());
                 }
                 #endregion
 
                 try { GetWired().OnCycle(); }
                 catch (Exception e)
                 {
-                    Logging.LogException("Room ID [" + RoomId + "] is currently having issues cycling wired." + e.ToString());
+                    //Logging.LogException("Room ID [" + RoomId + "] está tendo problemas com WIRED." + e.ToString());
                 }
 
             }
             catch (Exception e)
             {
-                Logging.WriteLine("Room ID [" + RoomId + "] has crashed.");
-                Logging.LogException("Room ID [" + RoomId + "] has crashed." + e.ToString());
+                Logging.WriteLine("Room ID [" + RoomId + "] travou!");
+                Logging.LogException("Room ID [" + RoomId + "] travou!" + e.ToString());
                 OnRoomCrash(e);
             }
         }
 
         private void OnRoomCrash(Exception e)
         {
-            Logging.LogThreadException(e.ToString(), "Room cycle task for room " + RoomId);
+            //Logging.LogThreadException(e.ToString(), "Erro com o quarto" + RoomId);
 
             try
             {
@@ -955,7 +954,7 @@ namespace Quasar.HabboHotel.Rooms
                     if (user == null || user.GetClient() == null)
                         continue;
 
-                    user.GetClient().SendNotification("La sala acaba de crashear, contacta con un administrador.");//Unhandled exception in room: " + e);
+                    user.GetClient().SendNotification("O quarto travou, avise um Administrador.");
 
                     try
                     {
@@ -1278,8 +1277,6 @@ namespace Quasar.HabboHotel.Rooms
 
                 if (this._roomItemHandling != null)
                     this._roomItemHandling.Dispose();
-
-
 
                 if (ActiveTrades.Count > 0)
                     ActiveTrades.Clear();

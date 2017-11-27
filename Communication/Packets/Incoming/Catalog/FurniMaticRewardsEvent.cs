@@ -1,35 +1,3 @@
-﻿//using Quasar.Communication.Packets.Outgoing;
-
-//namespace Quasar.Communication.Packets.Incoming.Catalog
-//{
-//    class FurniMaticRewardsEvent : IPacketEvent
-//    {
-//        public void Parse(HabboHotel.GameClients.GameClient Session, ClientPacket Packet)
-//        {
-//            var response = new ServerPacket(ServerPacketHeader.FurniMaticRewardsComposer);
-//            response.WriteInteger(3);
-//            for (int i = 3; i >= 1; i--)
-//            {
-//                response.WriteInteger(i);
-//                if (i <= 1) response.WriteInteger(1);
-//                else if (i == 2) response.WriteInteger(15);
-//                else if (i == 3) response.WriteInteger(35);
-//                var rewards = QuasarEnvironment.GetGame().GetFurniMaticRewardsMnager().GetRewardsByLevel(i);
-//                response.WriteInteger(rewards.Count);
-//                foreach (var reward in rewards)
-//                {
-//                    response.WriteString(reward.GetBaseItem().ItemName);
-//                    response.WriteInteger(reward.DisplayId);
-//                    response.WriteString(reward.GetBaseItem().Type.ToString().ToLower());
-//                    response.WriteInteger(reward.GetBaseItem().SpriteId);
-//                }
-//            }
-
-//            Session.SendMessage(response);
-//        }
-//    }
-//}
-
 using Quasar.Communication.Packets.Outgoing;
 
 namespace Quasar.Communication.Packets.Incoming.Catalog
@@ -64,4 +32,3 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
         }
     }
 }
-

@@ -22,13 +22,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Activar o desactivar la recepción de regalos."; }
+            get { return "Ativar ou desativar a recepção de presente."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             Session.GetHabbo().AllowGifts = !Session.GetHabbo().AllowGifts;
-            Session.SendWhisper("Usted " + (Session.GetHabbo().AllowGifts == true ? "ahora" : "ya no") + " acepta regalos.");
+            Session.SendWhisper("Você " + (Session.GetHabbo().AllowGifts == true ? "aceita" : "não aceita") + " presentes");
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {

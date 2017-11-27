@@ -35,7 +35,6 @@ namespace Quasar.Communication.Packets.Incoming.LandingView
 
                 if (campaingName.Contains("CommunityGoal"))
                 {
-                    Session.SendMessage(new CommunityGoalComposer());
                     Session.SendMessage(new DynamicPollLandingComposer(false));
                 }
             }

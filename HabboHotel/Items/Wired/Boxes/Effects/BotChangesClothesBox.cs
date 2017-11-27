@@ -52,14 +52,14 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             string[] Stuff = this.StringData.Split('\t');
             if (Stuff.Length != 2)
-                return false;//This is important, incase a cunt scripts.
+                return false;
 
             string Username = Stuff[0];
 
             RoomUser User = this.Instance.GetRoomUserManager().GetBotByName(Username);
             if (User == null)
-                return false;      
-            
+                return false;
+
             string Figure = Stuff[1];
 
             ServerPacket UserChangeComposer = new ServerPacket(ServerPacketHeader.UserChangeMessageComposer);

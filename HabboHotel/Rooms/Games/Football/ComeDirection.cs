@@ -32,34 +32,24 @@ namespace Quasar.Football
                 }
                 else if (Player != null)
                     {
-                        //User Arriba - Pelota Abajo
                         if (Player.RotBody == 4)
                             return IComeDirection.Up;
-                        //User Abajo - Pelota Arriba
                         if (Player.RotBody == 0)
                             return IComeDirection.Down;
-                        //User Derecha - Pelota Izquierda
                         if (Player.RotBody == 6)
                             return IComeDirection.Right;
-                        //User Izquierda - Pelota Derecha
                         if (Player.RotBody == 2)
                             return IComeDirection.Left;
-
-                        //Diagonales
-                        //User Abajo Derecha - Pelota Arriba Izquierda
                         if (Player.RotBody == 1)
                             return IComeDirection.DownLeft;
-                        //User Abajo Izquierda - Pelota Arriba Derecha
                         if (Player.RotBody == 7)
                             return IComeDirection.DownRight;
-                        //User Arriba Izquierda - Pelota Abajo Derecha
                         if (Player.RotBody == 3)
                             return IComeDirection.UpLeft;
-                        //User Arriba Derecha - Pelota Abajo Izquierda
                         if (Player.RotBody == 5)
                             return IComeDirection.UpRight;
                     }
-                
+
                 return IComeDirection.Null;
             }
             catch

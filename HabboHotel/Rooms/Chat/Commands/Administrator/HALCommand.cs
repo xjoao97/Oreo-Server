@@ -16,21 +16,21 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Envia un mensaje entero a todo el Hotel con un Link"; }
+            get { return "Envia um link para o hotel"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length == 2)
             {
-                Session.SendWhisper("Por favor escribe el mensaje y el Link a enviar.");
+                Session.SendWhisper("Por favor escreva a mensagem.");
                 return;
             }
 
             string URL = Params[1];
             string Message = CommandManager.MergeParams(Params, 2);
 
-            QuasarEnvironment.GetGame().GetClientManager().SendMessage(new SendHotelAlertLinkEventComposer("Alerta del Equipo Administrativo:\r\n" + Message + "\r\n-" + Session.GetHabbo().Username, URL));
+            QuasarEnvironment.GetGame().GetClientManager().SendMessage(new SendHotelAlertLinkEventComposer("Alerta da equipe:\r\n" + Message + "\r\n-" + Session.GetHabbo().Username, URL));
             return;
         }
     }

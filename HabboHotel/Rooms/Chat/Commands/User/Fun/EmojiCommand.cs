@@ -13,7 +13,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
     {
         public string PermissionRequired
         {
-            get { return "command_about"; }
+            get { return "command_emoji"; }
         }
         public string Parameters
         {
@@ -21,13 +21,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
         }
         public string Description
         {
-            get { return "Numero de 1-189. Manda un emoji"; }
+            get { return "Use emoji para interagir"; }
         }
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Oops, debes escribir un numero de 1-189! Para ver la lista de emoji escribe :emoji list");
+                Session.SendWhisper("Oops, moji invalido digite :emoji list para ver quais você tem disponível!");
                 return;
             }
             string emoji = Params[1];
@@ -66,23 +66,23 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
                                 RoomUser TargetUser = Session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Username);
                                 if (emojiNum < 10)
                                 {
-                                    Username = "<img src='/c_images/emoji/Emoji_Smiley/Emoji%20Smiley-0" + emojiNum + ".png' height='20' width='20'><br>    ";
+                                    Username = "<img src='emoji/habbo/" + emojiNum + ".png' height='16' width='16'><br>       ";
                                 }
                                 else
                                 {
-                                    Username = "<img src='/c_images/emoji/Emoji_Smiley/Emoji%20Smiley-" + emojiNum + ".png' height='20' width='20'><br>    ";
+                                    Username = "<img src='emoji/habbo/" + emojiNum + ".png' height='16' width='16'><br>       ";
                                 }
                                 if (Room != null)
                                     Room.SendMessage(new UserNameChangeComposer(Session.GetHabbo().CurrentRoomId, TargetUser.VirtualId, Username));
 
-                                string Message = " ";
-                                Room.SendMessage(new ChatComposer(TargetUser.VirtualId, Message, 0, TargetUser.LastBubble));
+                                string Message = string.Empty;
+                                    Room.SendMessage(new ChatComposer(TargetUser.VirtualId, Message, 0, TargetUser.LastBubble));
                                 TargetUser.SendNamePacket();
 
                             }
                             else
                             {
-                                Session.SendWhisper("Emoji invalido, debe ser numero de 1-189. Para ver la lista de emojis escribe :emoji list");
+                                Session.SendWhisper("Emoji invalido, digite :emoji list para ver quais você tem disponível!");
                             }
 
                             break;
@@ -92,7 +92,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
                 }
                 else
                 {
-                    Session.SendWhisper("Emoji invalido, debe ser numero de 1-189. Para ver la lista de emojis escribe :emoji list");
+                    Session.SendWhisper("Emoji invalido, digite :emoji list para ver quais você tem disponível!");
                 }
             }
             return;

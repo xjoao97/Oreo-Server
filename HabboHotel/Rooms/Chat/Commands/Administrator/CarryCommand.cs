@@ -19,7 +19,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Le permite llevar un item en su mano"; }
+            get { return "Pegue uma bebida"; }
         }
 
         public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
@@ -27,7 +27,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
             int ItemId = 0;
             if (!int.TryParse(Convert.ToString(Params[1]), out ItemId))
             {
-                Session.SendWhisper("Por favor introduzca un item valido");
+                Session.SendWhisper("Digite um id válido");
                 return;
             }
 

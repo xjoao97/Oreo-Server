@@ -1,4 +1,4 @@
-﻿using Quasar.Communication.Packets.Outgoing.Inventory.Purse;
+using Quasar.Communication.Packets.Outgoing.Inventory.Purse;
 using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.Rooms;
 using System;
@@ -73,7 +73,7 @@ namespace Quasar.HabboHotel.Items
         {
 
             if (room == null || item == null) return;
-            if (item.GetBaseItem().InteractionType != InteractionType.PINATA && item.GetBaseItem().InteractionType != InteractionType.PINATATRIGGERED && item.GetBaseItem().InteractionType != InteractionType.MAGICEGG) return; 
+            if (item.GetBaseItem().InteractionType != InteractionType.PINATA && item.GetBaseItem().InteractionType != InteractionType.PINATATRIGGERED && item.GetBaseItem().InteractionType != InteractionType.MAGICEGG) return;
             if (!Crackable.ContainsKey(item.GetBaseItem().Id)) return;
             CrackableItem crackable;
             Crackable.TryGetValue(item.GetBaseItem().Id, out crackable);

@@ -31,7 +31,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
         public void HandleSave(ClientPacket Packet)
         {
             int Unknown = Packet.PopInt();
-            int FollowMode = Packet.PopInt();//1 = follow, 0 = don't.
+            int FollowMode = Packet.PopInt();
             string BotConfiguration = Packet.PopString();
 
             if (this.SetItems.Count > 0)
@@ -58,7 +58,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             string[] Stuff = this.StringData.Split(';');
             if (Stuff.Length != 2)
-                return false;//This is important, incase a cunt scripts.
+                return false;
 
             string Username = Stuff[1];
 

@@ -52,7 +52,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             string[] Stuff = this.StringData.Split('\t');
             if (Stuff.Length != 2)
-                return false;//This is important, incase a cunt scripts.
+                return false;
 
 
             Habbo Player = (Habbo)Params[0];

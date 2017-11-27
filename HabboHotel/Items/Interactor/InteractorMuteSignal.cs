@@ -46,7 +46,6 @@ namespace Quasar.HabboHotel.Items.Interactor
                 newMode = currentMode + 1;
             }
 
-            //1 = muted, 0 = no mute
             Room UserRoom = Item.GetRoom();
             switch (newMode)
             {

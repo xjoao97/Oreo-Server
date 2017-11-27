@@ -111,11 +111,9 @@
     <Compile Include="Communication\Packets\Incoming\Catalog\BuyServerCameraPhoto.cs" />
     <Compile Include="Communication\Packets\Incoming\Catalog\GetHCCatalogGiftsEvent.cs" />
     <Compile Include="Communication\Packets\Incoming\Groups\GetForumUserProfileEvent.cs" />
-    <Compile Include="Communication\Packets\Incoming\LandingView\CommunityGoalEvent.cs" />
     <Compile Include="Communication\Packets\Incoming\LandingView\ConcurrentUsersCompetition.cs" />
     <Compile Include="Communication\Packets\Incoming\LandingView\GiveUsersConcurrentReward.cs" />
     <Compile Include="Communication\Packets\Incoming\LandingView\RequestBonusRareEvent.cs" />
-    <Compile Include="Communication\Packets\Incoming\LandingView\VoteCommunityGoalVS.cs" />
     <Compile Include="Communication\Packets\Incoming\Messenger\SendMsgEvent.cs" />
     <Compile Include="Communication\Packets\Incoming\Nucs\GetNuxPresentEvent.cs" />
     <Compile Include="Communication\Packets\Incoming\Rooms\Action\AmbassadorWarningMessageEvent.cs" />
@@ -142,7 +140,6 @@
     <Compile Include="Communication\Packets\Outgoing\Catalog\GetClubOffersMessageComposer.cs" />
     <Compile Include="Communication\Packets\Outgoing\Catalog\LTDSoldAlertComposer.cs" />
     <Compile Include="Communication\Packets\Outgoing\LandingView\BonusRareMessageComposer.cs" />
-    <Compile Include="Communication\Packets\Outgoing\LandingView\CommunityGoalComposer.cs" />
     <Compile Include="Communication\Packets\Outgoing\LandingView\DynamicPollLandingComposer.cs" />
     <Compile Include="Communication\Packets\Outgoing\Moderation\CallForHelpPendingCallsComposer.cs" />
     <Compile Include="Communication\Packets\Outgoing\Moderation\SendHotelAlertLinkEventComposer.cs" />
@@ -860,7 +857,6 @@
     <Compile Include="HabboHotel\Items\Wired\Boxes\Triggers\UserFurniCollision.cs" />
     <Compile Include="HabboHotel\Items\Wired\Boxes\Triggers\UserSaysCommandBox.cs" />
     <Compile Include="HabboHotel\Items\Wired\Util\Movement.cs" />
-    <Compile Include="HabboHotel\LandingView\CommunityGoal\CommunityGoalVS.cs" />
     <Compile Include="HabboHotel\LandingView\Promotions\Promotion.cs" />
     <Compile Include="HabboHotel\Moderation\BanTypeUtility.cs" />
     <Compile Include="HabboHotel\Moderation\ModerationPresetActions.cs" />
@@ -893,7 +889,6 @@
     <Compile Include="HabboHotel\Rooms\AI\Types\VisitorLoggerBot.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\ChatManager.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\Administrator\AddPredesignedCommand.cs" />
-    <Compile Include="HabboHotel\Rooms\Chat\Commands\Administrator\AddTagsToUserCommands.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\Administrator\BubbleCommand.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\Administrator\CarryCommand.cs" />
     <Compile Include="HabboHotel\Rooms\Chat\Commands\Administrator\DeleteGroupCommand.cs" />

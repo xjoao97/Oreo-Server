@@ -145,7 +145,6 @@ namespace Quasar.HabboHotel.Rooms
 
         public string WallPositionCheck(string wallPosition)
         {
-            //:w=3,2 l=9,63 l
             try
             {
                 if (wallPosition.Contains(Convert.ToChar(13)))
@@ -352,7 +351,6 @@ namespace Quasar.HabboHotel.Rooms
             else if (Item.IsWallItem)
                 _room.SendMessage(new ItemRemoveComposer(Item, Item.UserID));
 
-            //TODO: Recode this specific part
             if (Item.IsWallItem)
                 _wallItems.TryRemove(Item.Id, out Item);
             else
@@ -577,11 +575,11 @@ namespace Quasar.HabboHotel.Rooms
                             /* if (Item.GetBaseItem().ItemName == "easter11_grasspatc")
                              {
                                  QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Client, "ACH_RbBunnyTa", 1);
-                             }                               
+                             }
                              if (Item.GetBaseItem().ItemName == "hole" || Item.GetBaseItem().ItemName == "hole2")
                              {
                                  QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Client, "ACH_RoomDecoHoleFurniCount", 1);
-                             }                      
+                             }
                              if (Item.GetBaseItem().ItemName == "snowb_slope")
                              {
                                  QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Client, "ACH_snowBoardBuild", 1);
@@ -736,7 +734,6 @@ namespace Quasar.HabboHotel.Rooms
                 }
             }
 
-            // Find affected objects
             var ItemsAffected = new List<Item>();
             var ItemsComplete = new List<Item>();
 
@@ -792,8 +789,7 @@ namespace Quasar.HabboHotel.Rooms
 
 
                     if (I.GetBaseItem().InteractionType == InteractionType.STACKTOOL)
-                    { // Basically the core of the fix
-                        // Questions -> Skype: keiz.er
+                    {
                         newZ = I.GetZ;
                         break;
                     }

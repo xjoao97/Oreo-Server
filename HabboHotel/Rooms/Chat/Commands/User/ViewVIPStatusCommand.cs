@@ -22,7 +22,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Información de Quasar."; }
+            get { return "Informação do Servidor."; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)

@@ -22,7 +22,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Use una burbuja de conversacion con un ID"; }
+            get { return "Use um balão de fala diferente!"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -33,14 +33,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Oops, usted no ha introducido el ID");
+                Session.SendWhisper("Oops, digite o ID");
                 return;
             }
 
             int Bubble = 0;
             if (!int.TryParse(Params[1].ToString(), out Bubble))
             {
-                Session.SendWhisper("Por favor introduce un numero valido.");
+                Session.SendWhisper("Por favor digite um número valido.");
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
             User.LastBubble = Bubble;
             Session.GetHabbo().CustomBubbleId = Bubble;
-            Session.SendWhisper("Bocadillo ajustado a: " + Bubble);
+            Session.SendWhisper("Balão alterado para: " + Bubble);
         }
     }
 }

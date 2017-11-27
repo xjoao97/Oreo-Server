@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Sentarse en el suelo."; }
+            get { return "Sente-se no chão."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -32,7 +32,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
             if (User.Statusses.ContainsKey("lie") || User.isLying || User.RidingHorse || User.IsWalking)
                 return;
-            
+
             if (!User.Statusses.ContainsKey("sit"))
             {
                 if ((User.RotBody % 2) == 0)

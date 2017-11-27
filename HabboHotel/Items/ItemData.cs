@@ -67,7 +67,7 @@ namespace Quasar.HabboHotel.Items
                     }
                     catch
                     {
-                        Console.WriteLine("Error with Item " + ItemName + " - Vending Ids");
+                        Console.WriteLine("Erro com o item " + ItemName + "");
                         continue;
                     }
                 }

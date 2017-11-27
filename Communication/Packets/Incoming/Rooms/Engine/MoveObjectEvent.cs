@@ -71,7 +71,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Engine
                 if (User.GetClient() != null && (User.IsWalking || Item.interactingBallUser == 1))
                 {
                     User.GetClient().SendMessage(new ObjectUpdateComposer(Item, Room.OwnerId));
-                    User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("supernoti", "¡No puedes mover la pelota mientras caminas!"));
+                    User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("supernoti", "Você não pode movera bola enquanto caminha!"));
                     return;
                 }
             }

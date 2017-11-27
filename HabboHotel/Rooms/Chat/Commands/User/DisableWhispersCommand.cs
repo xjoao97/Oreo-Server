@@ -19,13 +19,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Activar o desactivar la capacidad de recibir susurros."; }
+            get { return "Habilite ou desabilite a capacidade de receber sussurros."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             Session.GetHabbo().ReceiveWhispers = !Session.GetHabbo().ReceiveWhispers;
-            Session.SendWhisper("Usted " + (Session.GetHabbo().ReceiveWhispers ? "ahora" : "ya no") + " recibe susurros!");
+            Session.SendWhisper("Você " + (Session.GetHabbo().ReceiveWhispers ? "agora" : "agora não") + " recebe susurros!");
         }
     }
 }

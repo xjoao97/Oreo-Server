@@ -59,11 +59,11 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             if (mode == 1)
             {
                 User.Frozen = true;
-                User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wffrozen", "" + User.GetClient().GetHabbo().Username + ", acabas de ser congelado por un efecto de Wired, recuerda que no se trata de ningún error.", ""));
+                User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wffrozen", "" + User.GetClient().GetHabbo().Username + ", Você acabou de ser congelado por um efeito Wired, lembre-se que não é um erro.", ""));
             }
             if (mode == 2)
             {
-                User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wffrozen", "" + User.GetClient().GetHabbo().Username + ", acabas de ser descongelado por un efecto de Wired, ya puedes andar con normalidad.", ""));
+                User.GetClient().SendMessage(RoomNotificationComposer.SendBubble("wffrozen", "" + User.GetClient().GetHabbo().Username + ", Você foi descongelado, agora pode andar normalmente.", ""));
                 User.Frozen = false;
             }
 

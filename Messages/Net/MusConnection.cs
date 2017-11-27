@@ -480,38 +480,38 @@ namespace Quasar.Messages.Net
                     }
                     #endregion
                     #endregion
-                
-                    
+
+
                 //#region Camera related
-                    
+
                 //    #region :add_preview <photo_id> <user_id> <created_at>
                 //    case "add_preview":
                 //    {
                 //        int PhotoId = Convert.ToInt32(Params[0]);
                 //        int UserId = Convert.ToInt32(Params[1]);
                 //        long CreatedAt = Convert.ToInt64(Params[2]);
-                        
+
                 //        Client = QuasarEnvironment.GetGame().GetClientManager().GetClientByUserID(UserId);
-                        
+
                 //                    if (Client == null || Client.GetHabbo() == null || Client.GetHabbo().CurrentRoomId < 1)
                 //                           break;
-                        
+
                 //        QuasarEnvironment.GetGame().GetCameraManager().AddPreview(new CameraPhotoPreview(PhotoId, UserId, CreatedAt));
                 //                    break;
                 //    }
-                    
+
                 //    #endregion
 
                 //    #endregion
 
                                     default:
                     {
-                        log.Error("Unrecognized MUS packet: '" + header + "'");
+                        //log.Error("Unrecognized MUS packet: '" + header + "'");
                         return;
                     }
             }
 
-            log.Info("Successfully Parsed MUS command: '" + header + "'");
+            //log.Info("Successfully Parsed MUS command: '" + header + "'");
         }
     }
 }

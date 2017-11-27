@@ -16,13 +16,13 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Activar o desactivar la capacidad de recibir spam."; }
+            get { return "Habilite ou desabilite a capacidade de receber spam."; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)
         {
             Session.GetHabbo().AllowMessengerInvites = false;
-            Session.SendWhisper("Usted " + (Session.GetHabbo().AllowMessengerInvites ? "ahora" : "ya no") + " recibe Spams de consola!");
+            Session.SendWhisper("Você " + (Session.GetHabbo().AllowMessengerInvites ? "recebe" : "não recebe mais") + " Spam no console!");
         }
     }
 }

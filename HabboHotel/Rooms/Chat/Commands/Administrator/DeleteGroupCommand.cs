@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description
         {
-            get { return "Elimina un grupo de la base de dato."; }
+            get { return "Exclui um determinado grupo"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -32,7 +32,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
             if (Room.Group == null)
             {
-                Session.SendWhisper("Oops, al parecer no hay un grupo aquí.");
+                Session.SendWhisper("Oops, não há um grupo aqui.");
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Administrator
 
             QuasarEnvironment.GetGame().GetRoomManager().UnloadRoom(Room, true);
 
-            Session.SendNotification("Grupo eliminado satisfactoriamente.");
+            Session.SendNotification("Grupo excluido!");
             return;
         }
     }

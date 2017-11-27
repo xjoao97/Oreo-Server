@@ -23,34 +23,34 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Description
         {
-            get { return "Borra la placa a un usuario"; }
+            get { return "Remove o emblema de alguém"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length == 3)
             {
-                GameClient TargetClient = null; //Li3s
+                GameClient TargetClient = null;
                 TargetClient = QuasarEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
                 if (TargetClient != null)
                     if (!TargetClient.GetHabbo().GetBadgeComponent().HasBadge(Params[2]))
                     {
                         {
-                            Session.SendNotification("Este usuario no tiene la placa " + Params[2] + "");
+                            Session.SendNotification("Este usuário não possui o emblema " + Params[2] + "");
                         }
                     }
                     else
                     {
                         RoomUser ThisUser = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
                         TargetClient.GetHabbo().GetBadgeComponent().RemoveBadge(Params[2], TargetClient);
-                        TargetClient.SendNotification("Tu placa " + Params[2] + " ha sido robada por " + ThisUser.GetUsername() + "!");
-                        Session.SendNotification("La placa se le ha removido al usuario");
+                        TargetClient.SendNotification("Seu emblema " + Params[2] + " foi removido pelo Staff " + ThisUser.GetUsername() + "!");
+                        Session.SendNotification("O emblema foi removido!");
 
                     }
             }
             else
             {
-                Session.SendNotification("Usuario no encontrado.");
+                Session.SendNotification("Usuario não encontrado.");
                 return;
             }
         }

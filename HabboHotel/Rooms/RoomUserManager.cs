@@ -184,7 +184,7 @@ namespace Quasar.HabboHotel.Rooms
 
             if (Session.GetHabbo().CurrentRoom == null)
                 return false;
-            
+
             RoomUser User = new RoomUser(Session.GetHabbo().Id, _room.RoomId, primaryPrivateUserID++, _room);
 
             if (User == null || User.GetClient() == null)
@@ -197,7 +197,7 @@ namespace Quasar.HabboHotel.Rooms
             User.InternalRoomID = PersonalID;
 
             Session.GetHabbo().CurrentRoomId = _room.RoomId;
-            
+
             if (!this._users.TryAdd(PersonalID, User))
                 return false;
 
@@ -345,7 +345,7 @@ namespace Quasar.HabboHotel.Rooms
             if (Model == null)
                 return false;
 
-            
+
             foreach (RoomUser Bot in this._bots.Values.ToList())
             {
                 if (Bot == null || Bot.BotAI == null)
@@ -432,7 +432,7 @@ namespace Quasar.HabboHotel.Rooms
                     }
 
                     this.userCount--;
-                    
+
                     if (User != null)
                         User.Dispose();
 
@@ -1010,7 +1010,7 @@ namespace Quasar.HabboHotel.Rooms
                         }
                         if (!User.RidingHorse)
                             User.UpdateNeeded = true;
-                        
+
                         if (_room.GotSoccer())
                             _room.GetSoccer().OnUserWalk(User);
                     }
@@ -1217,7 +1217,7 @@ namespace Quasar.HabboHotel.Rooms
                                         User.Team = TEAM.NONE;
                                     }
                                     //Item.ExtraData = usersOnTeam.ToString();
-                                    //Item.UpdateState(false, true);                                
+                                    //Item.UpdateState(false, true);
                                 }
                                 break;
                             }
@@ -1262,7 +1262,7 @@ namespace Quasar.HabboHotel.Rooms
                                         User.Team = TEAM.NONE;
                                     }
                                     //Item.ExtraData = usersOnTeam.ToString();
-                                    //Item.UpdateState(false, true);                                
+                                    //Item.UpdateState(false, true);
                                 }
                                 break;
                             }
@@ -1361,7 +1361,7 @@ namespace Quasar.HabboHotel.Rooms
                                             if (TargetItem == null)
                                             {
                                                 if (User.GetClient() != null)
-                                                    User.GetClient().SendWhisper("Hey, that arrow is poorly!");
+                                                    User.GetClient().SendWhisper("Ei, algum erro aconteceu avise um administrador!");
                                                 return;
                                             }
                                             else
@@ -1439,7 +1439,6 @@ namespace Quasar.HabboHotel.Rooms
                                     }
                                     gateLook = gateLook.Substring(0, gateLook.Length - 1);
 
-                                    // Generating New Look.
                                     var Parts = User.GetClient().GetHabbo().Look.Split('.');
                                     var NewLook = "";
                                     foreach (var Part in Parts)
@@ -1574,7 +1573,7 @@ namespace Quasar.HabboHotel.Rooms
                                 {
                                     User.GetClient().GetHabbo().Effects().ApplyEffect(187);
                                     User.CurrentItemEffect = Type;
-                                    User.GetClient().SendMessage(new MassEventComposer("habbopages/vipexplanation.txt"));
+                                    User.GetClient().SendMessage(new MassEventComposer("habbopages/vip.txt"));
                                     break;
                                 }
 

@@ -17,21 +17,21 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
 
         public string Description
         {
-            get { return "Dale VIP a un usuario"; }
+            get { return "Dê VIP um a usuário"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Por favor introduce el nombre del usuario al que le enviaras la alerta");
+                Session.SendWhisper("Digite o nome do usuário para quem você enviará");
                 return;
             }
 
             GameClient TargetClient = QuasarEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
             if (TargetClient == null)
             {
-                Session.SendWhisper("Ocurrio un error, al parecer no se consigue el usuario o no se encuentra online");
+                Session.SendWhisper("Ocorreu um erro, aparentemente o usuário não está sendo alcançado ou não está conectado");
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
 
             if (Days > 31)
             {
-                Session.SendWhisper("Ocurrio un error, no puedes entregar tantos días al mismo usuario.");
+                Session.SendWhisper("Ocorreu um erro, você não pode enviar tantos dias para o mesmo usuário.");
                 return;
             }
 

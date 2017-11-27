@@ -27,7 +27,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description
         {
-            get { return "Observa una lista de todos los staffs conectados."; }
+            get { return "Mostra os membros da equipe online."; }
         }
 
         public void Execute(GameClient Session, Room Room, string[] Params)
@@ -35,7 +35,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
             Dictionary<Habbo, UInt32> clients = new Dictionary<Habbo, UInt32>();
 
             StringBuilder content = new StringBuilder();
-            content.Append("Estado de los Staff conectados en " + QuasarEnvironment.GetConfig().data["hotel.name"] + ":\r\n");
+            content.Append("Membros conectado no " + QuasarEnvironment.GetConfig().data["hotel.name"] + ":\r\n");
 
             foreach (var client in QuasarEnvironment.GetGame().GetClientManager()._clients.Values)
             {
@@ -48,7 +48,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
                 if (client.Key == null)
                     continue;
 
-                content.Append("¥ " + client.Key.Username + " [Rango: " + client.Key.Rank + "] - Se encuentra en la sala: " + ((client.Key.CurrentRoom == null) ? "En ninguna sala." : client.Key.CurrentRoom.RoomData.Name) + "\r\n");
+                content.Append("" + client.Key.Username + "Cargo: " + client.Key.Rank + "] - está no quarto: " + ((client.Key.CurrentRoom == null) ? "Em nenhum quarto." : client.Key.CurrentRoom.RoomData.Name) + "\r\n");
             }
 
             Session.SendMessage(new MOTDNotificationComposer(content.ToString()));

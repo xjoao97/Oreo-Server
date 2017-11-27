@@ -22,7 +22,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
 
         public string Description
         {
-            get { return "Activar un baile en tu personaje, de 0 a 4."; }
+            get { return "Dance de 0 a 4."; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
@@ -33,7 +33,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
 
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Please enter an ID of a dance.");
+                Session.SendWhisper("Digite o id da dança de 0 a 4.");
                 return;
             }
 
@@ -42,14 +42,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
             {
                 if (DanceId > 4 || DanceId < 0)
                 {
-                    Session.SendWhisper("The dance ID must be between 0 and 4!");
+                    Session.SendWhisper("Digite o id da dança de 0 a 4");
                     return;
                 }
 
                 Session.GetHabbo().CurrentRoom.SendMessage(new DanceComposer(ThisUser, DanceId));
             }
             else
-                Session.SendWhisper("Please enter a valid dance ID.");
+                Session.SendWhisper("Digite um id válido de 0 a 4");
         }
     }
 }

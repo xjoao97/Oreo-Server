@@ -54,18 +54,15 @@ namespace Quasar.HabboHotel.Rooms
 
        // public List<Habbo> QueueingUsers = new List<Habbo>();
 
-        public int TradeSettings;//Default = 2;
+        public int TradeSettings;
 
         public RoomPromotion _promotion;
 
-        //public bool GolpeEnabled;
-        //public bool PushEnabled;
-        //public bool PullEnabled;
-        //public bool SPushEnabled;
-        //public bool SPullEnabled;
-        //public bool EnablesEnabled;
-        //public bool BesosEnabled;
-        //public bool QuemarEnabled;
+        public bool PushEnabled;
+        public bool PullEnabled;
+        public bool SPushEnabled;
+        public bool SPullEnabled;
+        public bool EnablesEnabled;
         public bool RespectNotificationsEnabled;
         public bool PetMorphsAllowed;
         public int Shoot;
@@ -131,13 +128,11 @@ namespace Quasar.HabboHotel.Rooms
 
             mModel = QuasarEnvironment.GetGame().GetRoomManager().GetModel(ModelName);
 
-            //this.PushEnabled = QuasarEnvironment.EnumToBool(Row["push_enabled"].ToString());
-            //this.PullEnabled = QuasarEnvironment.EnumToBool(Row["pull_enabled"].ToString());
-            //this.SPushEnabled = QuasarEnvironment.EnumToBool(Row["spush_enabled"].ToString());
-            //this.SPullEnabled = QuasarEnvironment.EnumToBool(Row["spull_enabled"].ToString());
-            //this.EnablesEnabled = QuasarEnvironment.EnumToBool(Row["enables_enabled"].ToString());
-            //this.BesosEnabled = QuasarEnvironment.EnumToBool(Row["besos_enabled"].ToString());
-            //this.QuemarEnabled = QuasarEnvironment.EnumToBool(Row["quemar_enabled"].ToString());
+            this.PushEnabled = QuasarEnvironment.EnumToBool(Row["push_enabled"].ToString());
+            this.PullEnabled = QuasarEnvironment.EnumToBool(Row["pull_enabled"].ToString());
+            this.SPushEnabled = QuasarEnvironment.EnumToBool(Row["spush_enabled"].ToString());
+            this.SPullEnabled = QuasarEnvironment.EnumToBool(Row["spull_enabled"].ToString());
+            this.EnablesEnabled = QuasarEnvironment.EnumToBool(Row["enables_enabled"].ToString());
             this.RespectNotificationsEnabled = QuasarEnvironment.EnumToBool(Row["respect_notifications_enabled"].ToString());
             this.PetMorphsAllowed = QuasarEnvironment.EnumToBool(Row["pet_morphs_allowed"].ToString());
             this.Shoot = Convert.ToInt32(Row["shoot"]);
@@ -221,7 +216,7 @@ namespace Quasar.HabboHotel.Rooms
                 }
             }
         }
-    
+
 
         public RoomPromotion Promotion
         {

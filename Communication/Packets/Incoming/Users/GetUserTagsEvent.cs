@@ -20,8 +20,8 @@ namespace Quasar.Communication.Packets.Incoming.Users
 
             if (UserId == 2)
             {
-                Session.SendMessage(new MassEventComposer("habbopages/custom.txt"));
-                return;
+                //Session.SendMessage(new MassEventComposer("habbopages/custom.txt"));
+                //return;
             }
         }
     }

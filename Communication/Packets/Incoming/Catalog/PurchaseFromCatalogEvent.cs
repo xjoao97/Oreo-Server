@@ -213,7 +213,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
 
                     if (string.IsNullOrEmpty(ExtraData))
                     {
-                        Session.SendNotification("Essa palavra " + character + " não está permitida no filtro "+QuasarEnvironment.GetDBConfig().DBData["hotel.name"]+", por isso você não pode usar-la!");
+                        Session.SendNotification("Essa palavra " + character + " não está permitida no filtro " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + ", por isso você não pode usar-la!");
                         return;
                     }
 
@@ -245,7 +245,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
 
 
                 if (baseItem.InteractionType == InteractionType.tagcolor)
-                    {
+                {
                     if (Item.CostGOTWPoints > Session.GetHabbo().GOTWPoints)
                         return;
 
@@ -544,7 +544,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 case InteractionType.pet28:
                 case InteractionType.pet29:
                 case InteractionType.pet30:
-                     try
+                    try
                     {
                         string[] Bits = ExtraData.Split('\n');
                         string PetName = Bits[0];
@@ -907,7 +907,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                     {
                         Dictionary<int, CatalogItem> Lastitems = new Dictionary<int, CatalogItem>();
                         Lastitems = Session.GetHabbo()._lastitems;
-                        if(!Lastitems.ContainsKey(Item.Id)) Session.GetHabbo()._lastitems.Add(Item.Id, Item);
+                        if (!Lastitems.ContainsKey(Item.Id)) Session.GetHabbo()._lastitems.Add(Item.Id, Item);
                     }
 
 

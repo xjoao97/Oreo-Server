@@ -250,8 +250,6 @@ namespace Quasar.Communication.Packets
             this._incomingPackets.Add(ClientPacketHeader.RequestBonusRareEvent, new RequestBonusRareEvent());
             this._incomingPackets.Add(ClientPacketHeader.GiveConcurrentUsersRewardEvent, new GiveConcurrentUsersReward());
             this._incomingPackets.Add(ClientPacketHeader.ConcurrentUsersCompetitionEvent, new ConcurrentUsersCompetition());
-            this._incomingPackets.Add(ClientPacketHeader.VoteCommunityGoalVS, new VoteCommunityGoalVS());
-            this._incomingPackets.Add(ClientPacketHeader.CommunityGoalEvent, new CommunityGoalEvent());
         }
 
         private void RegisterRoomCamera()

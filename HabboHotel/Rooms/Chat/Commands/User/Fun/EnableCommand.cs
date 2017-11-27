@@ -23,14 +23,14 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
 
         public string Description
         {
-            get { return "Habilitar un efecto en tu personaje."; }
+            get { return "Habilita um efeito especial"; }
         }
 
         public void Execute(GameClients.GameClient Session, Rooms.Room Room, string[] Params)
         {
             if (Params.Length == 1)
             {
-                Session.SendWhisper("Usted debe escribir un ID Efecto");
+                Session.SendWhisper("Escreva um número!");
                 return;
             }
 
@@ -40,7 +40,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
 
             if (ThisUser.RidingHorse)
             {
-                Session.SendWhisper("No se puede activar un efecto mientras montas un caballo");
+                Session.SendWhisper("Você não pode usar um efeito em cima de um cavalo!");
                 return;
             }
             else if (ThisUser.Team != TEAM.NONE)
@@ -55,33 +55,26 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User.Fun
             if (EffectId > int.MaxValue || EffectId < int.MinValue)
                 return;
 
-            // Staff Effects
             if (EffectId == 102 && Session.GetHabbo().Rank < 5 || EffectId == 187 && Session.GetHabbo().Rank < 5 || EffectId == 593 && Session.GetHabbo().Rank < 5 || EffectId == 596 && Session.GetHabbo().Rank < 5 || EffectId == 598 && Session.GetHabbo().Rank < 5)
-            { Session.SendWhisper("Lo sentimos, lamentablemente sólo los staff pueden activar este efecto.");  return; }
+            { Session.SendWhisper("Você não é um membro da equipe para usar esse efeito desculpe!");  return; }
 
-            // Guide Effects
             if (EffectId == 592 && Session.GetHabbo()._guidelevel < 3|| EffectId == 595 && Session.GetHabbo()._guidelevel < 2 || EffectId == 597 && Session.GetHabbo()._guidelevel < 1)
-            {  Session.SendWhisper("Lo sentimos, no perteneces al equipo guía, es por ello que no puedes usar este efecto."); return; }
+            {  Session.SendWhisper("Você não é um membro da equipe para usar esse efeito desculpe."); return; }
 
-            // Croupier Effect
             if (EffectId == 594 && Session.GetHabbo()._croupier < 1)
-            { Session.SendWhisper("Lo sentimos, este enable es sólo para el equipo Croupier de " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + "."); return; }
+            { Session.SendWhisper("Desculpe, apenas membros da equipe do " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + " podem usar esse efeito."); return; }
 
-            // BAW Effect
             if (EffectId == 599 && Session.GetHabbo()._builder < 1)
-            { Session.SendWhisper("Lo sentimos, este enable es sólo para el equipo BAW de " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + "."); return; }
+            { Session.SendWhisper("Desculpe, apenas membros da equipe do " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + " podem usar esse efeito."); return; }
 
-            // Publicista Effect
             if (EffectId == 600 && Session.GetHabbo()._publicistalevel < 1)
-            {  Session.SendWhisper("Lo sentimos, este enable es sólo para los publicistas."); return; }
+            {  Session.SendWhisper("Você não é um membro da equipe para usar esse efeito desculpe."); return; }
 
-            // VIP Effect
             if (EffectId == 44 && Session.GetHabbo().Rank < 2)
-            { Session.SendWhisper("Lo sentimos, no eres VIP, por ello no puedes usar dicho enable."); return; }
-            
-            // Ambassador & Rookies Effect
+            { Session.SendWhisper("Desculpe, apenas usuários vip podem usar esse efeito!"); return; }
+
             if (EffectId == 178 && Session.GetHabbo().Rank < 3)
-            { Session.SendWhisper("Lo sentimos, este comando es sólo para los embajadores y rookies."); return; }
+            { Session.SendWhisper("Desculpe, apenas embaixadores podem usar esse efeito."); return; }
 
             Session.GetHabbo().LastEffect = EffectId;
             Session.GetHabbo().Effects().ApplyEffect(EffectId);

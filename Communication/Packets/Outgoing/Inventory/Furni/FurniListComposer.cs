@@ -83,7 +83,7 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.Furni
 
             if (!Item.IsWallItem)
             {
-               base.WriteString(string.Empty);
+                base.WriteString(string.Empty);
                 base.WriteInteger(0);
             }
         }

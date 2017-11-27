@@ -78,7 +78,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             //{
             //    string eventillo = "<img src=\"icon_256.png\" alt=\"xD\" height=\"15\" width=\"15\"></img>";
             //    Player.GetClient().SendMessage(new UserNameChangeComposer(Instance.Id, User.VirtualId, eventillo));
-            //    Player.GetClient().SendChat("Hay un nuevo evento, haz <a href='event:navigator/goto/3'><b>click aquí</b></a> para ir al evento.        ", 33);
+            //    Player.GetClient().SendChat("Há um novo evento, <a href='event:navigator/goto/3'><b>Clique Aqui</b></a> para ir ao evento.        ", 33);
             //}
             return true;
         }

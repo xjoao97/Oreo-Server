@@ -182,35 +182,35 @@ namespace Quasar.HabboHotel.Groups.Forums
         {
             var lastpost = GetLastMessage();
             var isn = lastpost == null;
-            Packet.WriteInteger(Id); //Thread ID
+            Packet.WriteInteger(Id);
             Packet.WriteInteger(GetAuthor().Id);
-            Packet.WriteString(GetAuthor().Username); //Thread Author
-            Packet.WriteString(Caption); //Thread Title
-            Packet.WriteBoolean(Pinned); //Pinned
-            Packet.WriteBoolean(Locked); //Locked
-            Packet.WriteInteger((int)(QuasarEnvironment.GetUnixTimestamp() - Timestamp)); //Created Secs Ago
-            Packet.WriteInteger(Posts.Count); //Message count
-            Packet.WriteInteger(GetUnreadMessages(Session.GetHabbo().Id)); //Unread message count
-            Packet.WriteInteger(1); // Message List Lentgh
+            Packet.WriteString(GetAuthor().Username);
+            Packet.WriteString(Caption);
+            Packet.WriteBoolean(Pinned);
+            Packet.WriteBoolean(Locked);
+            Packet.WriteInteger((int)(QuasarEnvironment.GetUnixTimestamp() - Timestamp));
+            Packet.WriteInteger(Posts.Count);
+            Packet.WriteInteger(GetUnreadMessages(Session.GetHabbo().Id));
+            Packet.WriteInteger(1);
 
-            Packet.WriteInteger(!isn ? lastpost.GetAuthor().Id : 0);// Las user to message id
-            Packet.WriteString(!isn ? lastpost.GetAuthor().Username : ""); //Last user to message name
-            Packet.WriteInteger(!isn ? (int)(QuasarEnvironment.GetUnixTimestamp() - lastpost.Timestamp) : 0); //Last message timestamp
+            Packet.WriteInteger(!isn ? lastpost.GetAuthor().Id : 0);
+            Packet.WriteString(!isn ? lastpost.GetAuthor().Username : "");
+            Packet.WriteInteger(!isn ? (int)(QuasarEnvironment.GetUnixTimestamp() - lastpost.Timestamp) : 0);
 
-            Packet.WriteByte(DeletedLevel * 10); //thread Deleted Level
+            Packet.WriteByte(DeletedLevel * 10);
 
             var deleter = GetDeleter();
             if (deleter != null)
             {
-                Packet.WriteInteger(deleter.Id);// deleter user id
-                Packet.WriteString(deleter.Username); //deleter user name
-                Packet.WriteInteger((int)(QuasarEnvironment.GetUnixTimestamp() - DeletedTimestamp));//deleted secs ago
+                Packet.WriteInteger(deleter.Id);
+                Packet.WriteString(deleter.Username);
+                Packet.WriteInteger((int)(QuasarEnvironment.GetUnixTimestamp() - DeletedTimestamp));
             }
             else
             {
-                Packet.WriteInteger(1);// deleter user id
-                Packet.WriteString("unknow"); //deleter user name
-                Packet.WriteInteger(0);//deleted secs ago
+                Packet.WriteInteger(1);
+                Packet.WriteString("unknow");
+                Packet.WriteInteger(0);
             }
         }
 
@@ -235,4 +235,3 @@ namespace Quasar.HabboHotel.Groups.Forums
         }
     }
 }
-

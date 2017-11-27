@@ -1,0 +1,33 @@
+
+
+Room ID [10] is currently having issues cycling wired.System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.HabboHotel.Items.Wired.Boxes.Effects.AddScoreBox.TeleportUser(Habbo Player) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\Wired\Boxes\Effects\AddScoreBox.cs:linha 97
+   em Quasar.HabboHotel.Items.Wired.Boxes.Effects.AddScoreBox.OnCycle() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\Wired\Boxes\Effects\AddScoreBox.cs:linha 67
+   em Quasar.HabboHotel.Rooms.Instance.WiredComponent.OnCycle() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Instance\WiredComponent.cs:linha 48
+   em Quasar.HabboHotel.Rooms.Room.ProcessRoom() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Room.cs:linha 932
+
+
+
+
+Room ID [10] is currently having issues cycling wired.System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.HabboHotel.Items.Wired.Boxes.Effects.AddScoreBox.TeleportUser(Habbo Player) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\Wired\Boxes\Effects\AddScoreBox.cs:linha 97
+   em Quasar.HabboHotel.Items.Wired.Boxes.Effects.AddScoreBox.OnCycle() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\Wired\Boxes\Effects\AddScoreBox.cs:linha 67
+   em Quasar.HabboHotel.Rooms.Instance.WiredComponent.OnCycle() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Instance\WiredComponent.cs:linha 48
+   em Quasar.HabboHotel.Rooms.Room.ProcessRoom() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Room.cs:linha 932
+
+
+
+
+Room ID [10] is currently having issues cycling wired.System.FormatException: A cadeia de caracteres de entrada n?o estava em um formato correto.
+   em System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   em System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   em Quasar.HabboHotel.Items.Wired.Boxes.Effects.AddScoreBox.TeleportUser(Habbo Player) na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\Wired\Boxes\Effects\AddScoreBox.cs:linha 97
+   em Quasar.HabboHotel.Items.Wired.Boxes.Effects.AddScoreBox.OnCycle() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Items\Wired\Boxes\Effects\AddScoreBox.cs:linha 67
+   em Quasar.HabboHotel.Rooms.Instance.WiredComponent.OnCycle() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Instance\WiredComponent.cs:linha 48
+   em Quasar.HabboHotel.Rooms.Room.ProcessRoom() na C:\Users\Verissimo\Desktop\Quasar\HabboHotel\Rooms\Room.cs:linha 932
+
+

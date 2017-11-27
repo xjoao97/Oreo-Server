@@ -32,7 +32,7 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.User
 
             if (!Room.GetGameMap().ValidTile(User.X + 2, User.Y + 2) && !Room.GetGameMap().ValidTile(User.X + 1, User.Y + 1))
             {
-                Session.SendWhisper("Oops, no te puedes acostar aqui!");
+                Session.SendWhisper("Oops, você não pode deitar aqui!");
                 return;
             }
 
