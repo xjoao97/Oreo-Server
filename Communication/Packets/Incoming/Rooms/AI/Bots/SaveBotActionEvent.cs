@@ -181,3 +181,6 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
         }
     }
 }
+
+
+// copiar esse código inteiro eric para por lá no bios mudar nome !
