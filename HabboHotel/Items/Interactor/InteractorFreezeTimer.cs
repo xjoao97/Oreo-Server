@@ -7,7 +7,6 @@ namespace Quasar.HabboHotel.Items.Interactor
     {
         public void OnPlace(GameClient Session, Item Item)
         {
-            Item.ExtraData = "30";
             Item.UpdateState();
         }
 
