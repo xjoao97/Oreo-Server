@@ -274,9 +274,6 @@ namespace Quasar.HabboHotel.GameClients
                         }
                     }
 
-                    SendMessage(new CampaignCalendarDataComposer(_habbo.calendarGift));
-                    if (int.Parse(QuasarEnvironment.GetDBConfig().DBData["advent.calendar.enable"]) == 1) // Tk Custom By Whats
-                        SendMessage(new MassEventComposer("openView/calendar"));
 
                     if (QuasarEnvironment.GetGame().GetTargetedOffersManager().TargetedOffer != null)
                     {
