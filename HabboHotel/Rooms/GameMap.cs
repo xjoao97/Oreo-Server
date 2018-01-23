@@ -1323,34 +1323,39 @@ namespace Quasar.HabboHotel.Rooms
         public bool IsValidStep(Vector2D From, Vector2D To, bool EndOfPath, bool Override, bool DiagMovement, bool Roller = false)
         {
             if (!ValidTile(To.X, To.Y))
+            {
                 return false;
+            }
 
-            if (Override)
+            // se temos comando override ativo evitamos !
+            if (User.AllowOverride)
+            {
                 return true;
+            }
 
             if (DiagMovement)
             {
                 int XValue = To.X - From.X;
                 int YValue = To.Y - From.Y;
 
-                if (XValue == -1 && YValue == -1)
+                if (XValue == -1 && YValue == -1) //Cima Esquerdo
                 {
-                    if (mGameMap[To.X + 1, To.Y] != 1 && mGameMap[To.X, To.Y + 1] != 1)
+                    if (mGameMap[To.X + 1, To.Y] != 1 && mGameMap[To.X, To.Y + 1] != 2) //&& mGameMap[To.X, To.Y + 1] != 1) <antigo código
                         return false;
                 }
-                else if (XValue == 1 && YValue == -1)
+                else if (XValue == 1 && YValue == -1) // Cima direita
                 {
-                    if (mGameMap[To.X - 1, To.Y] != 1 && mGameMap[To.X, To.Y + 1] != 1)
+                    if (mGameMap[To.X - 1, To.Y] != 1 && mGameMap[To.X, To.Y + 1] != 2) //&& mGameMap[To.X, To.Y + 1] != 1)  <antigo código
                         return false;
                 }
-                else if (XValue == 1 && YValue == 1)
+                else if (XValue == 1 && YValue == 1) // Baixo direito
                 {
-                    if (mGameMap[To.X - 1, To.Y] != 1 && mGameMap[To.X, To.Y - 1] != 1)
+                    if (mGameMap[To.X - 1, To.Y] != 1 && mGameMap[To.X, To.Y - 1] != 2) //&& mGameMap[To.X, To.Y - 1] != 1) <antigo código
                         return false;
                 }
-                else if (XValue == -1 && YValue == 1)
+                else if (XValue == -1 && YValue == 1) // Baixo esquerda
                 {
-                    if (mGameMap[To.X + 1, To.Y] != 1 && mGameMap[To.X, To.Y - 1] != 1)
+                    if (mGameMap[To.X + 1, To.Y] != 1 && mGameMap[To.X, To.Y - 1] != 2) //&& mGameMap[To.X, To.Y - 1] != 1) <antigo código
                         return false;
                 }
             }
