@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-Quasar.HabboHotel.Pathfinding
+namespace Quasar.HabboHotel.Pathfinding
 {
     class CoordinationUtil
     {
