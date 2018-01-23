@@ -928,7 +928,11 @@ namespace Quasar.HabboHotel.Rooms
                 }
                 #endregion
 
-                try { GetWired().OnCycle(); }
+                try
+                { 
+                    GetWired().OnCycle(); 
+                    
+                }
                 catch (Exception e)
                 {
                     //Logging.LogException("Room ID [" + RoomId + "] está tendo problemas com WIRED." + e.ToString());
