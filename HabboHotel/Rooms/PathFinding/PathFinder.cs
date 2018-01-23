@@ -19,7 +19,7 @@ namespace Quasar.HabboHotel.Pathfinding
                 new Vector2D(-1, 0)
             };
             
-        public static Vector2D[] TilesArround = new[]
+       public static Point[] TilesArround = new Point[]
         {
             new Point(-1,-1),
             new Point(0, -1),
