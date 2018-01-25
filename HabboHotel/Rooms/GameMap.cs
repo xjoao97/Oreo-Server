@@ -1328,11 +1328,10 @@ namespace Quasar.HabboHotel.Rooms
             }
 
             // se temos comando override ativo evitamos !
-            if (User.AllowOverride)
+            if (Override)
             {
                 return true;
             }
-
             if (DiagMovement)
             {
                 int XValue = To.X - From.X;
