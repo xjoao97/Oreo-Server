@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
@@ -66,6 +66,8 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
                         //Room.SendMessage(new UserChangeComposer(BotUser.GetClient(), true));
                         break;
                     }
+                    
+                    //Código inteiro fixado Retirar Inteiro Otimized
                 #endregion
                 #region Setup Speech (2)
                 case 2:
@@ -182,5 +184,3 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
     }
 }
 
-
-// copiar esse código inteiro eric para por lá no bios mudar nome !
