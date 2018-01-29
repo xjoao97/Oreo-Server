@@ -1,7 +1,7 @@
-﻿using System;
-using Quasar.HabboHotel.GameClients;
+using System;
+using Oreo.HabboHotel.GameClients;
 
-namespace Quasar.HabboHotel.Items.Interactor
+namespace Oreo.HabboHotel.Items.Interactor
 {
     public class InteractorBanzaiTimer : IFurniInteractor
     {
