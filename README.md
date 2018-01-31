@@ -1,4 +1,4 @@
-# Quasar Server r4.1  
+# Quasar Server r4.6  
  
 By: Finn, Custom, AndreSene, Saulol and Damien  
 Greetz: Wulles, Arfeu, SledMore and The General
