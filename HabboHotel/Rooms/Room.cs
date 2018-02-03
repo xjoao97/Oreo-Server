@@ -129,6 +129,7 @@ namespace Quasar.HabboHotel.Rooms
             this.UsersNow = 0;
             this.UsersMax = Data.UsersMax;
             this.ModelName = Data.ModelName;
+            this.lastTimerReset = DateTime.Now;
             this.Score = Data.Score;
             this.Tags = new List<string>();
             foreach (string tag in Data.Tags)
