@@ -167,6 +167,8 @@ namespace Quasar.HabboHotel.Items.Wired
                     return WiredBoxType.EffectProgressUserAchievement;
                 case 84:
                     return WiredBoxType.TotalUsersCoincidence;
+                case 85:
+                    return WiredBoxType.ConditionLessThanTimer;
             }
         }
 
@@ -183,6 +185,7 @@ namespace Quasar.HabboHotel.Items.Wired
                 case WiredBoxType.ConditionFurniHasUsers:
                 case WiredBoxType.TotalUsersCoincidence:
                 case WiredBoxType.ConditionTriggererOnFurni:
+                case WiredBoxType.ConditionLessThanTimer:
                     return 1;
                 case WiredBoxType.EffectMatchPosition:
                 case WiredBoxType.TriggerAtGivenTime:
