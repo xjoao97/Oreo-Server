@@ -43,12 +43,15 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Moderator
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("UPDATE `users` SET `time_muted` = '0' WHERE `id` = '" + TargetClient.GetHabbo().Id + "' LIMIT 1");
+                dbClient.runFastQuery("UPDATE `users` SET `time_muted` = '0' WHERE `id` = '" + TargetClient.GetHabbo().Id + "' LIMIT 1");
             }
 
-            TargetClient.GetHabbo().TimeMuted = 0;
-            TargetClient.SendNotification("Usted ha sido desmuteado por " + Session.GetHabbo().Username + "!");
-            Session.SendWhisper("Acabas de desmutear a  " + TargetClient.GetHabbo().Username + "!");
+               if(TargetClient.GetHabbo().TimeMuted == 0)
+	{
+			TargetClient.SendNotification("You have been un-muted by " + Session.GetHabbo().Username + "!");
+			Session.SendWhisper("You have successfully un-muted " + TargetClient.GetHabbo().Username + "!");
+	}
+
         }
     }
 }
