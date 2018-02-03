@@ -250,6 +250,8 @@ namespace Quasar.HabboHotel.Rooms.Instance
                     return new ActorHasNotHandItemBox(_room, Item);
                 case WiredBoxType.ConditionDateRangeActive:
                     return new DateRangeIsActiveBox(_room, Item);
+                case WiredBoxType.ConditionLessThanTimer:
+                    return new LessThanTimer(_room, Item);
                 /*
                 case WiredBoxType.ConditionMatchStateAndPosition:
                     return new FurniMatchStateAndPositionBox(_room, Item);
