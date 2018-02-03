@@ -169,6 +169,8 @@ namespace Quasar.HabboHotel.Items.Wired
                     return WiredBoxType.TotalUsersCoincidence;
                 case 85:
                     return WiredBoxType.ConditionLessThanTimer;
+                case 86:
+                    return WiredBoxType.ConditionMoreThanTimer;
             }
         }
 
@@ -186,6 +188,7 @@ namespace Quasar.HabboHotel.Items.Wired
                 case WiredBoxType.TotalUsersCoincidence:
                 case WiredBoxType.ConditionTriggererOnFurni:
                 case WiredBoxType.ConditionLessThanTimer:
+                case WiredBoxType.ConditionMoreThanTimer:
                     return 1;
                 case WiredBoxType.EffectMatchPosition:
                 case WiredBoxType.TriggerAtGivenTime:
