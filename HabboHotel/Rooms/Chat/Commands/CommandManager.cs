@@ -267,8 +267,6 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands
             this.Register("staffinfo", new StaffInfo());
 
             //this.Register("bubblealert", new TrollAlert()); - wulles can finish this after.
-            //this.Register("addpredesigned", new AddPredesignedCommand());
-            //this.Register("removepredesigned", new RemovePredesignedCommand());
         }
 
         /// <summary>
