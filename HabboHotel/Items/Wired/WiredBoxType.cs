@@ -91,6 +91,7 @@ namespace Quasar.HabboHotel.Items.Wired
         SendCustomMessageBox,
         TotalUsersCoincidence,
         ConditionLessThanTimer,
+        ConditionMoreThanTimer,
 
         AddonRandomEffect
     }
