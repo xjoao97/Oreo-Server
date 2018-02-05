@@ -307,6 +307,7 @@ namespace Quasar.Communication.Packets
 
         private void RegisterNavigator()
         {
+            this._incomingPackets.Add(ClientPacketHeader.AddRoomToStaffPicksEvent, new ToggleStaffPickEvent());
             this._incomingPackets.Add(ClientPacketHeader.AddFavouriteRoomMessageEvent, new AddFavouriteRoomEvent());
             this._incomingPackets.Add(ClientPacketHeader.GetUserFlatCatsMessageEvent, new GetUserFlatCatsEvent());
             this._incomingPackets.Add(ClientPacketHeader.DeleteFavouriteRoomMessageEvent, new RemoveFavouriteRoomEvent());
@@ -317,6 +318,7 @@ namespace Quasar.Communication.Packets
             this._incomingPackets.Add(ClientPacketHeader.GetGuestRoomMessageEvent, new GetGuestRoomEvent());
             this._incomingPackets.Add(ClientPacketHeader.EditRoomPromotionMessageEvent, new EditRoomEventEvent());
             this._incomingPackets.Add(ClientPacketHeader.GetEventCategoriesMessageEvent, new GetNavigatorFlatsEvent());
+            this._incomingPackets.Add(ClientPacketHeader.FindRandomFriendingRoomMessageEvent, new FindRandomFriendingRoomEvent());
         }
 
         public void RegisterNewNavigator()
