@@ -670,6 +670,18 @@ namespace Quasar.HabboHotel.Rooms
             List<Item> ItemsOnTile = GetFurniObjects(newX, newY);
             if (Item.GetBaseItem().InteractionType == InteractionType.ROLLER && ItemsOnTile.Where(x => x.GetBaseItem().InteractionType == InteractionType.ROLLER && x.Id != Item.Id).Count() > 0)
                 return false;
+                {
+                for (int i = 0; i < ItemsOnTile.Count(); i++)
+                {
+                    Item it = ItemsOnTile[i];
+                    if (it.Id == Item.Id)
+                        continue;
+                    if (it.GetBaseItem().InteractionType == InteractionType.ROLLER)
+                        return false;
+                }
+            }
+            if (Item.GetBaseItem().InteractionType == InteractionType.DICE && ItemsOnTile.Count(x => x.GetBaseItem().InteractionType == InteractionType.DICE && x.Id != Item.Id) > 0)
+            return false;
 
             if (!newItem)
                 NeedsReAdd = _room.GetGameMap().RemoveFromMap(Item);
