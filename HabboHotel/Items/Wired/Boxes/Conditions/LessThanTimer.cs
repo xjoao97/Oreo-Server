@@ -20,9 +20,13 @@ namespace Oreo.HabboHotel.Items.Wired.Boxes.Conditions
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
+        public int Delay { get { return this._delay; } set { this._delay = value; this.TickCount = value; } }
+        public int TickCount { get; set; }
         public string ItemsData { get; set; }
-        public int timeout { get; set; }
-        public string room { get; set; }
+        private int timeout;
+
+        private int _delay = 0;
+
 
         public LessThanTimer(Room Instance, Item Item)
         {
@@ -42,10 +46,12 @@ namespace Oreo.HabboHotel.Items.Wired.Boxes.Conditions
         public void HandleSave(ClientPacket Packet)
         {
             int Unknown = Packet.PopInt();
-            int Unknown2 = Packet.PopInt();
+            int Delay = Packet.PopInt();
 
-            this.StringData = Unknown2.ToString();
+            this.Delay = Delay;
+            this.TickCount = Delay;
         }
+
 
         public bool Execute(params object[] Params)
         {
@@ -56,8 +62,9 @@ namespace Oreo.HabboHotel.Items.Wired.Boxes.Conditions
             if (Player == null)
                 return false;
 
-            if (Instance == null)
+            if (Instance == null || Instance.lastTimerReset == null)
                 return false;
+
 
             return ((DateTime.Now - Instance.lastTimerReset).TotalSeconds < (timeout / 2));
             
