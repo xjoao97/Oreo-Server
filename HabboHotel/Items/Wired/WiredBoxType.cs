@@ -21,6 +21,7 @@ namespace Quasar.HabboHotel.Items.Wired
         TriggerUserFurniCollision,
         TriggerUserSaysCommand,
         TriggerAtGivenTime,
+        TriggerBotAlcanzaFurni,
 
         EffectShowMessage,
         EffectTeleportToFurni,
