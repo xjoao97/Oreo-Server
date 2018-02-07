@@ -95,6 +95,7 @@ namespace Quasar.HabboHotel.Rooms
         public int IdleTime { get; set; }
         public int ForSaleAmount;
         public bool RoomForSale;
+        internal event UserWalksFurniDelegate OnBotWalksOnFurni;
 
         //public RoomTraxManager traxManager;
 
@@ -156,6 +157,7 @@ namespace Quasar.HabboHotel.Rooms
             this.chatSpeed = Data.chatSpeed;
             this.chatDistance = Data.chatDistance;
             this.extraFlood = Data.extraFlood;
+            this.OnBotWalksOnFurni = null;
 
             this.TradeSettings = Data.TradeSettings;
 
@@ -378,6 +380,12 @@ namespace Quasar.HabboHotel.Rooms
                 _soccer = new Soccer(this);
 
             return _soccer;
+        }
+        
+        internal void BotWalksOnFurni(RoomUser user)
+        {
+            if (OnBotWalksOnFurni != null)
+                OnBotWalksOnFurni(user, new UserWalksOnArgs(user));
         }
 
         public TeamManager GetTeamManagerForBanzai()
