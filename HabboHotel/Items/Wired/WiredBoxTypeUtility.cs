@@ -171,8 +171,8 @@ namespace Quasar.HabboHotel.Items.Wired
                     return WiredBoxType.ConditionLessThanTimer;
                 case 86:
                     return WiredBoxType.ConditionMoreThanTimer;
-                case 87:
-                    return WiredBoxType.TriggerBotAlcanzaFurni;
+                 case 87:
+                    return WiredBoxType.BotReachUserBox;
             }
         }
 
@@ -186,7 +186,7 @@ namespace Quasar.HabboHotel.Items.Wired
                     return 0;
                 case WiredBoxType.TriggerWalkOnFurni:
                 case WiredBoxType.TriggerWalkOffFurni:
-                case WiredBoxType.TriggerBotAlcanzaFurni:
+                case WiredBoxType.BotReachUserBox:
                 case WiredBoxType.ConditionFurniHasUsers:
                 case WiredBoxType.TotalUsersCoincidence:
                 case WiredBoxType.ConditionTriggererOnFurni:
