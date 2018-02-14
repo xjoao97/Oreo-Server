@@ -23,7 +23,7 @@ namespace Oreo.HabboHotel.Items.Wired.Boxes.Conditions
         public int Delay { get { return this._delay; } set { this._delay = value; this.TickCount = value; } }
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
-        private int timeout;
+        private int Timeout;
 
         private int _delay = 0;
 
@@ -38,7 +38,7 @@ namespace Oreo.HabboHotel.Items.Wired.Boxes.Conditions
         {
             get
             {
-                return timeout;
+                return Timeout;
             }
         }
 
@@ -65,7 +65,7 @@ namespace Oreo.HabboHotel.Items.Wired.Boxes.Conditions
             if (Instance == null || Instance.lastTimerReset == null)
                 return false;
 
-            return ((DateTime.Now - Instance.lastTimerReset).TotalSeconds < (timeout / 2));
+            return ((DateTime.Now - Instance.lastTimerReset).TotalSeconds < (Timeout / 2));
 
         }
 
