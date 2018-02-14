@@ -23,7 +23,7 @@ namespace Oreo.HabboHotel.Items.Wired.Boxes.Conditions
         public int Delay { get { return this._delay; } set { this._delay = value; this.TickCount = value; } }
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
-        private int Timeout;
+        public int Timeout { get; set; }
 
         private int _delay = 0;
 
