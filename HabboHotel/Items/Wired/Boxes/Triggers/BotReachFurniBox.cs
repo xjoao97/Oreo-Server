@@ -49,7 +49,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Triggers
         public bool Execute(params object[] Params)
         {
             RoomUser Bot = (RoomUser)Params[0];
-            if (Bot == null || !Bot.IsBot || Bot.GetRoom() == null || Bot.BotData == null)
+            if (Bot == null || !Bot.IsBot || Bot.GetClient() == null || Bot.BotData == null)
                 return false;
 
             if (Bot.BotData.Name.ToLower() != StringData.ToLower())
