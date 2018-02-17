@@ -1,0 +1,20 @@
+Add esse code na sua client:
+
+// Sistema de Links de Quartos feito por Thiago Araujo
+$quarto = $_GET['room'];
+if (!$quarto) {$quarto = "";}
+if ($quarto == 0) {$quarto = "";}
+if ($quarto =! "") {mysql_query("UPDATE users SET Linkquarto = '" . $_GET['room'] . "' WHERE id = '".$my_id."'") or die(mysql_error());}
+
+No mesmo arquivo procure por "has.identity" : "1",  e add essse arquivo em baixo dele:
+
+<?php if ($quarto =! "") { ?>
+"forward.type" : "2", 
+"forward.id" : "<?php echo $_GET['room'];?>",
+<?php } ?>
+
+Depois add essa sql no banco de dados:
+
+ALTER TABLE `users`ADD COLUMN `Linkquarto` varchar(30) NOT NULL DEFAULT '0';
+
+Pronto, seu sistema de room links esta pronto.
