@@ -18,18 +18,7 @@ namespace Quasar.HabboHotel.Pathfinding
                 new Vector2D(-1, 1),
                 new Vector2D(-1, 0)
             };
-            
-       public static Point[] TilesArround = new Point[]
-        {
-            new Point(-1,-1),
-            new Point(0, -1),
-            new Point(1, -1),
-            new Point(1, 0),
-            new Point(1, 1),
-            new Point(0, 1),
-            new Point(-1, 1),
-            new Point(-1, 0)
-        };
+    
 
         public static Vector2D[] NoDiagMovePoints = new[]
             {
@@ -59,15 +48,6 @@ namespace Quasar.HabboHotel.Pathfinding
             return Path;
         }
         
-        internal static int CalculateRotation(int X1, int Y1, int X2, int Y2)
-        {
-            int dX = X2 - X1;
-            int dY = Y2 - Y1;
-
-            double d = Math.Atan2(dY, dX) * 180 / Math.PI;
-            return ((int)d + 90) / 45;
-        }
-
         public static PathFinderNode FindPathReversed(RoomUser User, bool Diag, Gamemap Map, Vector2D Start,
                                                       Vector2D End)
         {
