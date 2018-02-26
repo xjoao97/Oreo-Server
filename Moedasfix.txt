@@ -1,6 +1,6 @@
 #Fix de gerar moedas infinitamente: 
 Vai em sua DB e procure por furniture, quando achar procure as moedas que estão bugadas, quando achar procura nela por interaction_type e coloque nele:
 
-Exchange
+exchange 
 
 Depois no mesmo procure por behaviour_data e coloque o tanto de moedas que esse mobi gera para o usuário.
