@@ -1,10 +1,10 @@
-using Cloud.HabboHotel.Rooms;
-using Cloud.HabboHotel.Items;
-using Cloud.Communication.Packets.Outgoing.Inventory.Purse;
-using Cloud.Communication.Packets.Outgoing.Inventory.Furni;
-using Cloud.Database.Interfaces;
+using Oreo.HabboHotel.Rooms;
+using Oreo.HabboHotel.Items;
+using Oreo.Communication.Packets.Outgoing.Inventory.Purse;
+using Oreo.Communication.Packets.Outgoing.Inventory.Furni;
+using Oreo.Database.Interfaces;
 
-namespace Cloud.Communication.Packets.Incoming.Rooms.Furni
+namespace Oreo.Communication.Packets.Incoming.Rooms.Furni
 {
 	class CreditFurniRedeemEvent : IPacketEvent
 	{
@@ -14,15 +14,15 @@ namespace Cloud.Communication.Packets.Incoming.Rooms.Furni
 				return;
 
 
-			if (!CloudServer.GetGame().GetRoomManager().TryGetRoom(Session.GetHabbo().CurrentRoomId, out Room Room))
+			if (!OreoServer.GetGame().GetRoomManager().TryGetRoom(Session.GetHabbo().CurrentRoomId, out Room Room))
 				return;
 
 			if (!Room.CheckRights(Session, true))
 				return;
 
-			if (CloudServer.GetGame().GetSettingsManager().TryGetValue("room.item.exchangeables.enabled") != "1")
+			if (OreoServer.GetGame().GetSettingsManager().TryGetValue("room.item.exchangeables.enabled") != "1")
 			{
-				Session.SendNotification("Desculpe, mas o catálogo foi desativado!");
+				Session.SendNotification("Desculpe, mas as moedas foram  desativadas !");
 				return;
 			}
 
@@ -61,7 +61,7 @@ namespace Cloud.Communication.Packets.Incoming.Rooms.Furni
 				Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
 			}
 
-			using (IQueryAdapter dbClient = CloudServer.GetDatabaseManager().GetQueryReactor())
+			using (IQueryAdapter dbClient = OreoServer.GetDatabaseManager().GetQueryReactor())
 			{
 				dbClient.SetQuery("DELETE FROM `items` WHERE `id` = @exchangeId LIMIT 1");
 				dbClient.AddParameter("exchangeId", Exchange.Id);
