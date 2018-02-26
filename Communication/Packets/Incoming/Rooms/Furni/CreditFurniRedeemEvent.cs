@@ -20,7 +20,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
             if (!Session.GetHabbo().InRoom)
                 return;
 
-            Room Room;
+            Room Room;// retirar codigo inteiro 
 
             if (!QuasarEnvironment.GetGame().GetRoomManager().TryGetRoom(Session.GetHabbo().CurrentRoomId, out Room))
                 return;
