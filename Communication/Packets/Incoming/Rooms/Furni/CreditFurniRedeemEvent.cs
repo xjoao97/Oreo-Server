@@ -20,7 +20,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
             if (!Session.GetHabbo().InRoom)
                 return;
 
-            Room Room;// retirar codigo inteiro 
+            Room Room;
 
             if (!QuasarEnvironment.GetGame().GetRoomManager().TryGetRoom(Session.GetHabbo().CurrentRoomId, out Room))
                 return;
@@ -28,7 +28,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Furni
             if (!Room.CheckRights(Session, true))
                 return;
 
-            if (QuasarEnvironment.GetDBConfig().DBData["exchange_enabled"] != "1")
+            if (QuasarEnvironment.GetConfig().DBData["exchange_enabled"] != "1")
             {
                 Session.SendNotification("No momento você não pode fazer isso, tente depois!.");
                 return;
