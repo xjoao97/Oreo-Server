@@ -1,0 +1,15 @@
+Abra sua Htacess 
+
+Cole este código em baixo para Fixar a segurança
+
+
+
+RewriteEngine on
+
+RewriteRule ^gamedata/habbopages/help/pets/training(|/)$ ./resources/views/habbo-pages/help/pets/training.blade.php
+
+
+
+
+
+Fixado !
