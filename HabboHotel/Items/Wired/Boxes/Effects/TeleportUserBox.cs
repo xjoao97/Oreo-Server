@@ -1,19 +1,17 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 
-using Quasar.Communication.Packets.Incoming;
-using Quasar.HabboHotel.Rooms;
-using Quasar.HabboHotel.Users;
-using Quasar.Communication.Packets.Outgoing.Rooms.Chat;
-using System.Threading;
-using Quasar.HabboHotel.GameClients;
-using System.Threading.Tasks;
+using Emulator.Communication.Packets.Incoming;
+using Emulator.HabboHotel.Rooms;
+using Emulator.HabboHotel.Users;
 
-namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
+using Emulator.Communication.Packets.Outgoing.Rooms.Chat;
+
+namespace Emulator.HabboHotel.Items.Wired.Boxes.Effects
 {
     class TeleportUserBox : IWiredItem, IWiredCycle
     {
@@ -90,7 +88,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
             if (Player == null)
                 return false;
-            Player.LastEffect = Player.Effects().CurrentEffect;
+
             if (Player.Effects() != null)
                 Player.Effects().ApplyEffect(4);
 
@@ -130,11 +128,12 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                 SetItems.TryRemove(Item.Id, out Item);
 
                 if (Items.Contains(Item))
-                    Items.Remove(Item);
+                Items.Remove(Item);
 
                 if (SetItems.Count == 0 || Items.Count == 0)
                     return;
 
+               
                 Item = Items.First();
                 if (Item == null)
                     return;
@@ -143,16 +142,15 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             if (Room.GetGameMap() == null)
                 return;
 
-            Room.GetGameMap().TeleportToItem(User, Item);
+            //TODO
+            //if (Item.GetZ != User.Z)
+              //  return;
 
+            Room.GetGameMap().TeleportToItem(User, Item);
             Room.GetRoomUserManager().UpdateUserStatusses();
 
-            if (Player.Effects() != null && Player.LastEffect == 0 || Player.LastEffect == 4)
+            if (Player.Effects() != null)
                 Player.Effects().ApplyEffect(0);
-            else
-                Player.Effects().ApplyEffect(Player.LastEffect);
-
-            Room.GetWired().TriggerEvent(WiredBoxType.TriggerWalkOnFurni, User.GetClient().GetHabbo(), User.LastItem);
         }
     }
 }
