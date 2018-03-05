@@ -1,0 +1,3 @@
+Caso aconteça algo com banco de dados execute essa sql abaixo
+
+SET GLOBAL sql_mode = '';
