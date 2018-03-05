@@ -1,3 +1,8 @@
 Caso aconteça algo com banco de dados execute essa sql abaixo
 
 SET GLOBAL sql_mode = '';
+
+
+OU esse em baixo
+
+SET SQL_SAFE_UPDATES = 0
