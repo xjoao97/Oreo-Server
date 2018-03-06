@@ -1,55 +1,40 @@
-﻿using System;
-using System.Data;
+ing System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 
-using Quasar.Core;
-using Quasar.Utilities;
-using Quasar.Communication.Packets.Incoming;
+using Emulator.HabboHotel.Rooms.AI;
+using Emulator.HabboHotel.Items;
+using Emulator.HabboHotel.GameClients;
+using Emulator.HabboHotel.Users.Inventory.Pets;
+using Emulator.HabboHotel.Users.Inventory.Bots;
+using Emulator.Communication.Packets.Outgoing.Inventory.Furni;
 
-using Quasar.HabboHotel.Rooms.AI;
-using Quasar.HabboHotel.Items;
-using Quasar.HabboHotel.Rooms;
-using Quasar.HabboHotel.Catalog;
-using Quasar.HabboHotel.GameClients;
-using Quasar.HabboHotel.Users.UserDataManagement;
-using Quasar.HabboHotel.Users.Inventory.Pets;
-using Quasar.HabboHotel.Users.Inventory.Bots;
-using Quasar.Communication.Packets.Outgoing.Inventory.Bots;
-using Quasar.Communication.Packets.Outgoing.Inventory.Furni;
-using Quasar.Communication.Packets.Outgoing.Inventory.Purse;
+using Emulator.Database.Interfaces;
+using Emulator.Communication.Packets.Outgoing.Inventory.Pets;
+using Emulator.Communication.Packets.Outgoing.Inventory.Bots;
 
-using Quasar.Database.Interfaces;
-
-
-namespace Quasar.HabboHotel.Users.Inventory
+namespace Emulator.HabboHotel.Users.Inventory
 {
     public class InventoryComponent
     {
         private int _userId;
         private GameClient _client;
 
-        public int InventaryUserId;
-
-        public ConcurrentDictionary<int, Bot> _botItems;
-        public ConcurrentDictionary<int, Pet> _petsItems;
-        public ConcurrentDictionary<int, Item> _floorItems;
-        public ConcurrentDictionary<int, Item> _wallItems;
-        public ConcurrentDictionary<int, Item> _songDisks;
+        private readonly ConcurrentDictionary<int, Bot> _botItems;
+        private readonly ConcurrentDictionary<int, Pet> _petsItems;
+        private readonly ConcurrentDictionary<int, Item> _floorItems;
+        private readonly ConcurrentDictionary<int, Item> _wallItems;
 
         public InventoryComponent(int UserId, GameClient Client)
         {
             this._client = Client;
             this._userId = UserId;
-            this.InventaryUserId = 0;
 
             this._floorItems = new ConcurrentDictionary<int, Item>();
             this._wallItems = new ConcurrentDictionary<int, Item>();
             this._petsItems = new ConcurrentDictionary<int, Pet>();
             this._botItems = new ConcurrentDictionary<int, Bot>();
-            this._songDisks = new ConcurrentDictionary<int, Item>();
 
             this.Init();
         }
@@ -64,10 +49,8 @@ namespace Quasar.HabboHotel.Users.Inventory
                 this._petsItems.Clear();
             if (this._botItems.Count > 0)
                 this._botItems.Clear();
-            if (this._songDisks.Count > 0)
-                this._songDisks.Clear();
 
-            List<Item> Items = ItemLoader.GetItemsForUser(GetUserInventaryId());
+            List<Item> Items = ItemLoader.GetItemsForUser(_userId);
             foreach (Item Item in Items.ToList())
             {
                 if (Item.IsFloorItem)
@@ -89,7 +72,7 @@ namespace Quasar.HabboHotel.Users.Inventory
             {
                 if (!this._petsItems.TryAdd(Pet.PetId, Pet))
                 {
-                    Console.WriteLine("Erro ao carregar a lista de Mascotes: " + Pet.PetId);
+                    Console.WriteLine("Error whilst loading pet x1: " + Pet.PetId);
                 }
             }
 
@@ -98,23 +81,104 @@ namespace Quasar.HabboHotel.Users.Inventory
             {
                 if (!this._botItems.TryAdd(Bot.Id, Bot))
                 {
-                    Console.WriteLine("Erro ao carregar a lista de Bots: " + Bot.Id);
+                    Console.WriteLine("Error whilst loading bot x1: " + Bot.Id);
                 }
             }
         }
+
+        public void ClearBots()
+        {
+            UpdateItems(true);
+
+            using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
+            {
+                dbClient.RunQuery("DELETE FROM bots WHERE room_id='0' AND `ai_type` != 'pet' AND user_id = " + _userId); //Do join 
+            }
+
+            this._botItems.Clear();
+
+            if (_client != null)
+                _client.SendMessage(new BotInventoryComposer(_client.GetHabbo().GetInventoryComponent().GetBots()));
+        }
+
+        public void ClearPets()
+        {
+            UpdateItems(true);
+
+            using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
+            {
+                dbClient.RunQuery("DELETE FROM bots WHERE room_id='0' AND `ai_type` = 'pet' AND user_id = " + _userId); //Do join 
+            }
+
+            this._petsItems.Clear();
+
+            if (_client != null)
+                _client.SendMessage(new PetInventoryComposer(_client.GetHabbo().GetInventoryComponent().GetPets()));
+        }
+
+        public void ClearLTDS()
+        {
+            UpdateItems(true);
+
+            using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
+            {
+                dbClient.RunQuery("DELETE FROM items WHERE room_id='0' AND limited_number > 0 AND user_id = " + _userId); //Do join 
+            }
+
+            foreach (KeyValuePair<int, Item> Fi in _floorItems)
+            {
+                if (Fi.Value.LimitedNo < 1)
+                    continue;
+
+                _floorItems.Clear();
+
+            }
+
+            foreach (KeyValuePair<int, Item> Wi in _wallItems)
+            {
+                if (Wi.Value.LimitedNo < 1)
+                    continue;
+                _wallItems.Clear();
+            }
+
+
+            if (_client != null)
+                _client.SendMessage(new FurniListUpdateComposer());      
+    }
 
         public void ClearItems()
         {
             UpdateItems(true);
 
-            using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+            using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("DELETE FROM items WHERE room_id='0' AND user_id = " + _userId); //Do join
+                dbClient.RunQuery("DELETE FROM items WHERE room_id='0' AND limited_number < 1 AND user_id = " + _userId); //Do join 
             }
 
-            this._floorItems.Clear();
-            this._wallItems.Clear();
-            this._songDisks.Clear();
+           
+
+           foreach (KeyValuePair<int, Item> Fi in _floorItems)
+            {
+                if (Fi.Value.LimitedNo > 0)
+                    continue;
+                if (Fi.Value.Data.IsRare)
+                    continue;
+
+                _floorItems.Clear();
+
+            }
+
+            foreach (KeyValuePair<int, Item> Wi in _wallItems)
+            {
+                if (Wi.Value.LimitedNo > 0)
+                    continue;
+
+                if (Wi.Value.Data.IsRare)
+                    continue;
+
+                _wallItems.Clear();
+            }
+               
 
             if (_client != null)
                 _client.SendMessage(new FurniListUpdateComposer());
@@ -134,18 +198,9 @@ namespace Quasar.HabboHotel.Users.Inventory
             if (_wallItems != null)
                 _wallItems.Clear();
 
-            if (_songDisks != null)
-                _songDisks.Clear();
-
-            _botItems = null;
-            _songDisks = null;
-            _petsItems = null;
-            _floorItems = null;
-            _wallItems = null;
 
             _client = null;
         }
-
 
         public void UpdateItems(bool FromDatabase)
         {
@@ -162,11 +217,9 @@ namespace Quasar.HabboHotel.Users.Inventory
         {
 
             if (_floorItems.ContainsKey(Id))
-                return (Item) _floorItems[Id];
+                return (Item)_floorItems[Id];
             else if (_wallItems.ContainsKey(Id))
-                return (Item) _wallItems[Id];
-            else if (_songDisks.ContainsKey(Id))
-                return (Item)_songDisks[Id];
+                return (Item)_wallItems[Id];
 
             return null;
         }
@@ -185,20 +238,20 @@ namespace Quasar.HabboHotel.Users.Inventory
             {
                 if (FromRoom)
                 {
-                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                    using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
-                        dbClient.RunQuery("UPDATE `items` SET `base_item` = " + BaseItem + ", `room_id` = 0, `user_id` = " + _userId + " WHERE `id` = " + Id);
+                        dbClient.RunQuery("UPDATE `items` SET `room_id` = '0', `user_id` = '" + _userId + "' WHERE `id` = '" + Id + "' LIMIT 1");
                     }
                 }
                 else
                 {
-                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                    using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
-                      if (Id > 0)
-                            dbClient.RunQuery("INSERT INTO `items` (`id`,`base_item`, `extradata`,  `user_id`, `limited_number`, `limited_stack`) VALUES ('" + Id + "', '" + BaseItem + "', '" + ExtraData + "', '" + _userId + "', '" + LimitedNumber + "', '" + LimitedStack + "')");
+                        if (Id > 0)
+                            dbClient.RunQuery("INSERT INTO `items` (`id`,`base_item`, `user_id`, `limited_number`, `limited_stack`) VALUES ('" + Id + "', '" + BaseItem + "', '" + _userId + "', '" + LimitedNumber + "', '" + LimitedStack + "')");
                         else
                         {
-                            dbClient.SetQuery("INSERT INTO `items` (`base_item`, `user_id`, `extra_data`, `limited_number`, `limited_stack`) VALUES ('" + BaseItem + "', '" + _userId + "', '" + ExtraData + "', '" + LimitedNumber + "', '" + LimitedStack + "')");
+                            dbClient.SetQuery("INSERT INTO `items` (`base_item`, `user_id`, `limited_number`, `limited_stack`) VALUES ('" + BaseItem + "', '" + _userId + "', '" + LimitedNumber + "', '" + LimitedStack + "')");
                             Id = Convert.ToInt32(dbClient.InsertQuery());
                         }
 
@@ -239,22 +292,9 @@ namespace Quasar.HabboHotel.Users.Inventory
             return false;
         }
 
-        public Dictionary<int, Item> songDisks
+        internal Item GetFirstItemByBaseId(int id)
         {
-            get
-            {
-                Dictionary<int, Item> discs = new Dictionary<int, Item>();
-
-                foreach (Item item in _floorItems.Values)
-                {
-                    if (item.GetBaseItem().InteractionType == InteractionType.MUSIC_DISC)
-                    {
-                        discs.Add(item.Id, item);
-                    }
-                }
-
-                return discs;
-            }
+            return _floorItems.Values.Where(item => item != null && item.GetBaseItem() != null && item.GetBaseItem().Id == id).FirstOrDefault();
         }
 
         public void RemoveItem(int Id)
@@ -262,19 +302,17 @@ namespace Quasar.HabboHotel.Users.Inventory
             if (GetClient() == null)
                 return;
 
-            if(GetClient().GetHabbo() == null || GetClient().GetHabbo().GetInventoryComponent() == null)
+            if (GetClient().GetHabbo() == null || GetClient().GetHabbo().GetInventoryComponent() == null)
                 GetClient().Disconnect();
 
             if (this._floorItems.ContainsKey(Id))
             {
-                Item ToRemove = null;
-                this._floorItems.TryRemove(Id, out ToRemove);
+                this._floorItems.TryRemove(Id, out Item ToRemove);
             }
 
             if (this._wallItems.ContainsKey(Id))
             {
-                Item ToRemove = null;
-                this._wallItems.TryRemove(Id, out ToRemove);
+                this._wallItems.TryRemove(Id, out Item ToRemove);
             }
 
             GetClient().SendMessage(new FurniListRemoveComposer(Id));
@@ -282,7 +320,7 @@ namespace Quasar.HabboHotel.Users.Inventory
 
         private GameClient GetClient()
         {
-            return QuasarEnvironment.GetGame().GetClientManager().GetClientByUserID(_userId);
+            return HabboEnvironment.GetGame().GetClientManager().GetClientByUserID(_userId);
         }
 
         public void SendNewItems(int Id)
@@ -362,42 +400,30 @@ namespace Quasar.HabboHotel.Users.Inventory
         }
         #endregion
 
-        public void LoadUserInventory(int InventaryId)
-        {
-            // dont need to update Inventary?
-
-            InventaryUserId = InventaryId;
-            UpdateItems(true);
-        }
-
-        private int GetUserInventaryId()
-        {
-            if (InventaryUserId > 0)
-                return InventaryUserId;
-            else
-                return _userId;
-        }
-
-        internal Item GetFirstItemByBaseId(int id)
-        {
-            return _floorItems.Values.Where(item => item != null && item.GetBaseItem() != null && item.GetBaseItem().Id == id).FirstOrDefault();
-        }
-
         public bool TryAddItem(Item item)
         {
-            if (item.Data.Type.ToString().ToLower() == "s")
+            if (item.Data.Type.ToString().ToLower() == "s")// ItemType.FLOOR)
             {
                 return this._floorItems.TryAdd(item.Id, item);
             }
-
-            else if (item.Data.Type.ToString().ToLower() == "i")
+            else if (item.Data.Type.ToString().ToLower() == "i")//ItemType.WALL)
             {
                 return this._wallItems.TryAdd(item.Id, item);
             }
             else
             {
-                throw new InvalidOperationException("O item não corresponde nem ao item do chão ou da parede!");
+                throw new InvalidOperationException("Item did not match neither floor or wall item");
             }
+        }
+
+        public bool TryAddFloorItem(int itemId, Item item)
+        {
+            return this._floorItems.TryAdd(itemId, item);
+        }
+
+        public bool TryAddWallItem(int itemId, Item item)
+        {
+            return this._floorItems.TryAdd(itemId, item);
         }
 
         public ICollection<Item> GetFloorItems()
@@ -410,9 +436,11 @@ namespace Quasar.HabboHotel.Users.Inventory
             return this._wallItems.Values;
         }
 
-        public ICollection<Item> GetSongDisks()
+        public IEnumerable<Item> GetWallAndFloor
         {
-            return this._songDisks.Values;
+            get
+            {
+                return this._floorItems.Values.Concat(this._wallItems.Values);
+            }
         }
     }
-}
