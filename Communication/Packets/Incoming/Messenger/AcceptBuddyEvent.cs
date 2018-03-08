@@ -20,15 +20,6 @@ namespace Quasar.Communication.Packets.Incoming.Messenger
             else if (Amount < 0)
                 return;
                 
-                GameClient To = Oreoserver.GetGame().GetClientManager().GetClientByUserID(Request.To);
-                GameClient From = Oreoserver.GetGame().GetClientManager().GetClientByUserID(Request.From);
-
-                if (To != null && From != null)
-                {
-                    To.SendMessage(new RoomNotificationComposer("Friend Add", "Adicionado com sucesso  " + From.GetHabbo().Username + ".", "friendAdd");
-                    From.SendMessage(new RoomNotificationComposer("Friend Add", "Adicionado com sucesso  " + To.GetHabbo().Username + ".", "friendAdd");
-                }
-
             for (int i = 0; i < Amount; i++)
             {
                 int RequestId = Packet.PopInt();
