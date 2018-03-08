@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 
-using Quasar.Communication.Packets.Incoming;
-using Quasar.HabboHotel.Rooms;
-using Quasar.HabboHotel.Users;
+using Emulator.Communication.Packets.Incoming;
+using Emulator.HabboHotel.Rooms;
+using Emulator.HabboHotel.Users;
 using System.Drawing;
 using System.Security.Cryptography;
-using Quasar.Communication.Packets.Outgoing.Rooms.Engine;
-using Quasar.Utilities;
+using Emulator.Communication.Packets.Outgoing.Rooms.Engine;
+using Emulator.Utilities;
 
 
-namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
+namespace Emulator.HabboHotel.Items.Wired.Boxes.Effects
 {
     internal class MoveFurniToUserBox : IWiredItem, IWiredCycle
     {
@@ -81,8 +81,8 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
                 return false;
 
 
-            if (this._next == 0 || this._next < QuasarEnvironment.Now())
-                this._next = QuasarEnvironment.Now() + this.Delay;
+            if (this._next == 0 || this._next < HabboEnvironment.Now())
+                this._next = HabboEnvironment.Now() + this.Delay;
 
             if (!Requested)
             {
@@ -97,7 +97,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
             if (Instance == null || !Requested || _next == 0)
                 return false;
 
-            long Now = QuasarEnvironment.Now();
+            long Now = HabboEnvironment.Now();
             if (_next < Now)
             {
                 foreach (Item Item in this.SetItems.Values.ToList())
@@ -115,7 +115,7 @@ namespace Quasar.HabboHotel.Items.Wired.Boxes.Effects
 
                     Point Point = Instance.GetGameMap().GetChaseMovement(Item);
 
-                    Instance.GetWired().onUserFurniCollision(Instance, Item);
+                    Instance.GetWired().OnUserFurniCollision(Instance, Item);
 
                     if (!Instance.GetGameMap().ItemCanMove(Item, Point))
                         continue;
