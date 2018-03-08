@@ -1,28 +1,27 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 
+using Emulator.Communication.Packets.Incoming;
 using Emulator.HabboHotel.Rooms;
 using Emulator.HabboHotel.Users;
-using Emulator.Communication.Packets.Incoming;
 using Emulator.Communication.Packets.Outgoing.Rooms.Chat;
-using Emulator.HabboHotel.Rooms.Chat.Commands;
 
 namespace Emulator.HabboHotel.Items.Wired.Boxes.Triggers
 {
-    class UserSaysCommandBox : IWiredItem
+    class UserSaysBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.TriggerUserSaysCommand; } }
+        public WiredBoxType Type { get { return WiredBoxType.TriggerUserSays; } }
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public UserSaysCommandBox(Room Instance, Item Item)
+        public UserSaysBox(Room Instance, Item Item)
         {
             this.Instance = Instance;
             this.Item = Item;
@@ -50,13 +49,11 @@ namespace Emulator.HabboHotel.Items.Wired.Boxes.Triggers
             if (User == null)
                 return false;
 
-            if ((BoolData && Instance.OwnerId != Player.Id) || string.IsNullOrWhiteSpace(this.StringData))
+            string Message = Convert.ToString(Params[1]);
+            if ((BoolData && Instance.OwnerId != Player.Id) || Player == null || string.IsNullOrWhiteSpace(Message) || string.IsNullOrWhiteSpace(this.StringData))
                 return false;
 
-            if (!HabboEnvironment.GetGame().GetChatManager().GetCommands().TryGetCommand(this.StringData.Replace(":", "").ToLower(), out IChatCommand ChatCommand))
-                return false;
-
-            if (Player.IChatCommand == ChatCommand)
+            if (Message.ToLower().Contains(" " + this.StringData) || Message.Contains(" " + this.StringData.ToLower()) || Message.Contains(this.StringData + " ") || Message == this.StringData)
             {
                 Player.WiredInteraction = true;
                 ICollection<IWiredItem> Effects = Instance.GetWired().GetEffects(this);
@@ -70,7 +67,7 @@ namespace Emulator.HabboHotel.Items.Wired.Boxes.Triggers
                     Instance.GetWired().OnEvent(Condition.Item);
                 }
 
-                Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, this.StringData, 0, 0));
+                Player.GetClient().SendMessage(new WhisperComposer(User.VirtualId, Message, 0, 0));
                 //Check the ICollection to find the random addon effect.
                 bool HasRandomEffectAddon = Effects.Count(x => x.Type == WiredBoxType.AddonRandomEffect) > 0;
                 if (HasRandomEffectAddon)
@@ -102,6 +99,7 @@ namespace Emulator.HabboHotel.Items.Wired.Boxes.Triggers
                         Instance.GetWired().OnEvent(Effect.Item);
                     }
                 }
+
                 return true;
             }
 
@@ -109,4 +107,5 @@ namespace Emulator.HabboHotel.Items.Wired.Boxes.Triggers
         }
     }
 }
+
 
