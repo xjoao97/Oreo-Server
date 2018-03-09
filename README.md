@@ -1,20 +1,22 @@
 # Oreo 4.6
  
-By: Finn, Custom, AndreSene, Saulol and Damien  
-Greetz: Wulles, Arfeu, SledMore and The General
+Créditos : PEDRO , ERIC ....
 
  
-__Update:__ Architect Club in Development
+
  
 ## 1. Intruction and Updates
  
 __MobJacker__ The bin should be downloaded from the Dropbox for compilation, so upgrades with the Framework:
  
-    Updates:
-    Builder Club - Dev
-    Habbo Club - Finish
-    PathFinder - Dev
-    Pin Code - Dev Test
+    Updates Cumlative wireds :
+    wireds ativadores Bots Reorganized !
+    Wireds conditions moreless , thanless e negativos moreless e thanless reorganizados
+    Novo wired Timer reset 
+    Novos wireds customs !!
+    fixado wireds classificadores e outros que estavam com defeito ! 
+    
+    
  
 ## 2. Installation
  
