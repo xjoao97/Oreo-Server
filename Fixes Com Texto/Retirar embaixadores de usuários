@@ -1,0 +1,9 @@
+vá em HabboHotel\Rooms\Chat\Commands\User\Fun abra o arquivo EnableCommand.cs  em texto,e procure por
+
+
+if (EffectId == 178 && (!Session.GetHabbo().GetPermissions().HasRight(gold_vip") && !Session.GetHabbo().GetPermissions().HasRight("events_staff")))
+
+
+e substitua por 
+
+if (EffectId == 178 && (!Session.GetHabbo().GetPermissions().HasRight("mod_tool") && !Session.GetHabbo().GetPermissions().HasRight("mod_tool")))
