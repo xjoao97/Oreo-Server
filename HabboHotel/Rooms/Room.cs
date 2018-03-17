@@ -190,8 +190,8 @@ namespace Quasar.HabboHotel.Rooms
             this._wiredComponent = new WiredComponent(this);
             _roomMusicManager = new MusicManager();
 
-            GetRoomItemHandler().LoadFurniture();
-            GetGameMap().GenerateMaps();
+            this.GetRoomItemHandler().LoadFurniture();
+            this.GetGameMap().GenerateMaps();
 
             this.LoadPromotions();
             this.LoadRights();
