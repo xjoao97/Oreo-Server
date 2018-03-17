@@ -33,14 +33,11 @@ namespace Quasar.HabboHotel.Navigator
                                 DataTable GetRooms = null;
                                 using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                                 {
-                                    if (SearchData.ToLower().StartsWith("owner:"))
+            
                                     {
-                                        dbClient.SetQuery("SELECT `id` FROM `users` WHERE `username` = @username LIMIT 1");
-                                        dbClient.AddParameter("username", SearchData.Remove(0, 6));
-                                        UserId = dbClient.getInteger();
-
-                                        dbClient.SetQuery("SELECT * FROM `rooms` WHERE `owner` = '" + UserId + "' and `state` != 'invisible' ORDER BY `users_now` DESC LIMIT 50");
-                                        GetRooms = dbClient.getTable();
+                                        dbClient.SetQuery("SELECT `id`,`caption`,`description`,`roomtype`,`owner`,`state`,`category`,`users_now`,`users_max`,`model_name`,`score`,`allow_pets`,`allow_pets_eat`,`room_blocking_disabled`,`allow_hidewall`,`password`,`wallpaper`,`floor`,`landscape`,`floorthick`,`wallthick`,`mute_settings`,`kick_settings`,`ban_settings`,`chat_mode`,`chat_speed`,`chat_size`,`trade_settings`,`group_id`,`tags`,`respect_notifications_enabled`,`pet_morphs_allowed`,`shoot` FROM rooms WHERE `caption` LIKE @query ORDER BY `users_now` DESC LIMIT 50");
+                                        dbClient.AddParameter("query", "%" + SearchData + "%");
+                                        Table = dbClient.getTable();
                                     }
                                 }
 
