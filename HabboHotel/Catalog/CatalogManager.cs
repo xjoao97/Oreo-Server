@@ -11,6 +11,7 @@ using Quasar.HabboHotel.Catalog.Vouchers;
 using Quasar.HabboHotel.Catalog.Marketplace;
 using Quasar.HabboHotel.Catalog.Clothing;
 using Quasar.HabboHotel.Catalog.PredesignedRooms;
+using Oreo.HabboHotel.GameClients;
 
 using Quasar.Database.Interfaces;
 
@@ -292,9 +293,18 @@ namespace Quasar.HabboHotel.Catalog
             return this._bcpages.TryGetValue(pageId, out page);
         }
 
-        public ICollection<CatalogPage> GetPages()
+        public ICollection<CatalogPage> GetPages(GameClient session, int pageId)
         {
-            return this._pages.Values;
+            List<CatalogPage> pages = new List<CatalogPage>();
+            foreach (CatalogPage page in this._pages.Values)
+            {
+                if (page.ParentId != pageId || page.MinimumRank > session.GetHabbo().Rank || (page.MinimumVIP > session.GetHabbo().VIPRank && session.GetHabbo().Rank == 1))
+                {
+                    continue;
+                }
+                pages.Add(page);
+            }
+            return pages;
         }
 
         public ICollection<BCCatalogPage> GetBCPages()
