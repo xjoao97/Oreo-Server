@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Quasar.HabboHotel.GameClients;
 
 namespace Quasar.HabboHotel.Items.Interactor
@@ -100,9 +100,23 @@ namespace Quasar.HabboHotel.Items.Interactor
         {
             if (Item.GetRoom().GetFreeze().GameIsStarted)
                 Item.GetRoom().GetFreeze().StopGame(true);
+			
+			// Fixado Por Thiago Araujo
 
-            Item.pendingReset = true;
-            Item.UpdateNeeded = true;
+            bool TempoThiago = false;
+
+            if (Item.ExtraData == "30" || Item.ExtraData == "60" || Item.ExtraData == "120" || Item.ExtraData == "180" || Item.ExtraData == "300" || Item.ExtraData == "600" && TempoThiago == false)
+            {
+                Item.UpdateNeeded = true;
+                TempoThiago = true;
+            }
+
+            if (Item.ExtraData == "0" && TempoThiago == true)
+            {
+                Item.pendingReset = true;
+                TempoThiago = false;
+            }
+
             Item.UpdateState();
 
             Item.GetRoom().GetFreeze().StartGame();
