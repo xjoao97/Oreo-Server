@@ -273,6 +273,26 @@ namespace Quasar.HabboHotel.GameClients
                               QuasarEnvironment.GetGame().GetModerationManager().GetTickets));
                         }
                     }
+                    
+                     if (GetHabbo().Rank >= 3)
+                    {
+                        using (IQueryAdapter dbClient = OreoServer.GetDatabaseManager().GetQueryReactor())
+                        {
+                            dbClient.SetQuery("SELECT * FROM `ranks` WHERE id = '" + GetHabbo().Rank + "'");
+                            DataRow Table = dbClient.getRow();
+
+                            if (!GetHabbo().GetBadgeComponent().HasBadge(Convert.ToString(Table["badgeid"])))
+                            {
+
+                            }
+                            else
+                            {
+
+                                GetHabbo().GetBadgeComponent().GiveBadge(Convert.ToString(Table["badgeid"]), true, GetHabbo().GetClient());
+                                SendMessage(RoomNotificationComposer.SendBubble("badge/" + Table["badgeid"], "Você recebeu o emblema staff de acordo com seu rank!", "/inventory/open/badge"));
+                            }
+                        }
+                    }
 
 
                     if (QuasarEnvironment.GetGame().GetTargetedOffersManager().TargetedOffer != null)
