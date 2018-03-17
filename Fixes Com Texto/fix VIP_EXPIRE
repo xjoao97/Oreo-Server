@@ -1,0 +1,3 @@
+execute este código na sua sql
+
+ALTER TABLE <users> DROP COLUMN <vip_expire>;
