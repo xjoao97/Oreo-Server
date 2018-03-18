@@ -1,18 +1,18 @@
 exclui a tabela server_status e execute esta 
 
 
--- ----------------------------
--- Table structure for server_status
--- ----------------------------
-DROP TABLE IF EXISTS `server_status`;
+--
+-- Estrutura da tabela `server_status`
+--
+
 CREATE TABLE `server_status` (
-  `users_online` int(11) NOT NULL DEFAULT 0,
-  `loaded_rooms` int(11) NOT NULL DEFAULT 0,
-  `user_peak` int(11) NOT NULL,
-  UNIQUE KEY `users_online` (`users_online`) USING BTREE
+  `users_online` int(11) NOT NULL DEFAULT '0',
+  `loaded_rooms` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- ----------------------------
--- Records of server_status
--- ----------------------------
-INSERT INTO `server_status` VALUES ('1', '1', '22');
+--
+-- Extraindo dados da tabela `server_status`
+--
+
+INSERT INTO `server_status` (`users_online`, `loaded_rooms`) VALUES
+(0, 0);
