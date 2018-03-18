@@ -64,7 +64,7 @@ namespace Emulator.Communication.Packets.Incoming.Rooms.Furni
                 Room.GetRoomItemHandler().RemoveFurniture(null, Exchange.Id, false);
                 Session.GetHabbo().GetInventoryComponent().RemoveItem(Exchange.Id);     
             }
-            else if (Exchange.Data.ItemName.StartsWith("DIAMONDS_"))
+            else if (Exchange.Data.ItemName.StartsWith("DF_"))
             {
                 if (Value > 0)
                 {
