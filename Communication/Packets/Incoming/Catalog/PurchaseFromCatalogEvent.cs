@@ -369,26 +369,23 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             int LimitedEditionStack = 0;
 
 
-            if (Item.IsLimited)
+             if (Item.IsLimited)
             {
                 if (Item.LimitedEditionStack <= Item.LimitedEditionSells)
                 {
-                    Session.SendMessage(new LTDSoldAlertComposer());
+                    Session.SendNotification("Este item está esgotado!\n\n" + "Por favor, note que você não recebeu outro item (Você também não foi cobrado por isso!)");
                     Session.SendMessage(new CatalogUpdatedComposer());
                     Session.SendMessage(new PurchaseOKComposer());
                     return;
                 }
 
                 Item.LimitedEditionSells++;
-                QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_LTDPurchased", 1);
-
-                using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                using (IQueryAdapter dbClient = OreoServer.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.RunQuery("UPDATE `catalog_items` SET `limited_sells` = '" + Item.LimitedEditionSells + "' WHERE `id` = '" + Item.Id + "' LIMIT 1");
+                    dbClient.runFastquery("UPDATE `catalog_items` SET `limited_sells` = '" + Item.LimitedEditionSells + "' WHERE `id` = '" + Item.Id + "' LIMIT 1");
                     LimitedEditionSells = Item.LimitedEditionSells;
                     LimitedEditionStack = Item.LimitedEditionStack;
                 }
-            }
 
 
 
