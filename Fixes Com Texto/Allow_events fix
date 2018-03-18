@@ -1,0 +1,4 @@
+execute este codigo na db
+
+
+ALTER TABLE users MODIFY COLUMN `allow_events` enum('true','false');
