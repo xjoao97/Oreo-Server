@@ -1,0 +1,14 @@
+Entre no visual estudio 
+
+vá até na classe purchasefromcatalogevent.cs
+
+procure por
+
+if (Session.GetHabbo().Rank == 1)
+
+e retire este código logo abaixo
+
+if (Session.GetHabbo().Rank == 1)
+                {
+                    OreoServer.GetGame().GetClientManager().SendMessage(new RoomNotificationComposer("icons/" + Item.Data.ItemName + "_icon", 3, "O usuário " + Session.GetHabbo().Username + " comprou o raro LTD: " + Item.Name + "  Slot: " + Item.LimitedEditionSells + "/" + Item.LimitedEditionStack, "!"));
+                }
