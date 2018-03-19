@@ -1,0 +1,5 @@
+vai até na sua Database em permissions_commands
+
+exclua essa coluna 
+
+INSERT INTO `permissions_commands` VALUES ('command_maintenance', '15', '0');
