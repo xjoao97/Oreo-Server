@@ -44,11 +44,8 @@ call.for.help.improvements.enabled=true
 disabled.custom.chat.styles=1,2,8,18,23,28,30,31,32,33,34,35
 
 
-flash.dynamic.download.name.template=%typeid%.swf
-flash.dynamic.download.url=http://hibbz.com/swf/dcr/hof_furni/
-flash.dynamic.icon.download.name.template=icons/%typeid%%param%_icon.png
 group.badge.url=http://hibbz.com/swf/habbo-imaging/badge/%imagerdata%.gif
 
 habbopages.url=http://hibbz.com/swf/gamedata/habbopages/
 
-//otimized By xjoao Update 10
+//otimized By xjoao Update 11
