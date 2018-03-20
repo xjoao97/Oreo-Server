@@ -369,23 +369,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             int LimitedEditionStack = 0;
 
 
-             if (Item.IsLimited)
-            {
-                if (Item.LimitedEditionStack <= Item.LimitedEditionSells)
-                {
-                    Session.SendNotification("Este item está esgotado!\n\n" + "Por favor, note que você não recebeu outro item (Você também não foi cobrado por isso!)");
-                    Session.SendMessage(new CatalogUpdatedComposer());
-                    Session.SendMessage(new PurchaseOKComposer());
-                    return;
-                }
 
-                Item.LimitedEditionSells++;
-                using (IQueryAdapter dbClient = OreoServer.GetDatabaseManager().GetQueryReactor())
-                {
-                    dbClient.runFastquery("UPDATE `catalog_items` SET `limited_sells` = '" + Item.LimitedEditionSells + "' WHERE `id` = '" + Item.Id + "' LIMIT 1");
-                    LimitedEditionSells = Item.LimitedEditionSells;
-                    LimitedEditionStack = Item.LimitedEditionStack;
-                }
 
 
 
