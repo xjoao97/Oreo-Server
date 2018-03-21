@@ -1,24 +1,18 @@
-using System;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
-using System.Collections.Generic;
-
 using log4net;
-using Oreo.Database.Interfaces;
-using Oreo;
+using Emulator.Database.Interfaces;
 
-namespace Quasar.HabboHotel.Global
+namespace Emulator.HabboHotel.Global
 {
     public class ServerStatusUpdater : IDisposable
     {
         private static ILog log = LogManager.GetLogger("Mango.Global.ServerUpdater");
 
         private const int UPDATE_IN_SECS = 30;
-        string HotelName = OreoServer.GetConfig().data["hotel.name"];
 
         private Timer _timer;
-
+        
         public ServerStatusUpdater()
         {
         }
@@ -27,26 +21,39 @@ namespace Quasar.HabboHotel.Global
         {
             this._timer = new Timer(new TimerCallback(this.OnTick), null, TimeSpan.FromSeconds(UPDATE_IN_SECS), TimeSpan.FromSeconds(UPDATE_IN_SECS));
 
-            Console.Title = "Key Server - 0 Online - 0 Quartos - 0 UPTIME";
+            Console.Title = "Habbo Emulator ~ the whole new revolution.";
 
-            log.Info(" Server Status >> Atualizado");
+            log.Info("Server Status Updater has been started.");
         }
 
         public void OnTick(object Obj)
         {
             this.UpdateOnlineUsers();
+            
         }
 
         private void UpdateOnlineUsers()
-        {
-            TimeSpan Uptime = DateTime.Now - OreoServer.ServerStarted;
+        {         
+            TimeSpan Uptime = DateTime.Now - HabboEnvironment.ServerStarted;
+            int UsersOnline = Convert.ToInt32(HabboEnvironment.GetGame().GetClientManager().Count);
+            int RoomCount = HabboEnvironment.GetGame().GetRoomManager().Count;
+            int userPeak = HabboEnvironment.GetGame().GetClientManager().GetUserPeak();
+            
+            
+            if(UsersOnline > userPeak)
+            {
+                using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
+                {
+                    dbClient.SetQuery("UPDATE `server_status` SET `user_peak` = @peak LIMIT 1;");
+                    dbClient.AddParameter("peak", UsersOnline);                
+                    dbClient.RunQuery();
+                }
+                log.Info("New User Peak Achieved: "+ UsersOnline +" Users Online, congratulations!");
+            }
+            
+            Console.Title = "Habbo Emulator ~ the whole new revolution.";
 
-            int UsersOnline = Convert.ToInt32(OreoServer.GetGame().GetClientManager().Count);
-            int RoomCount = OreoServer.GetGame().GetRoomManager().Count;
-
-            Console.Title = "Key Server - " + UsersOnline + " Online - " + RoomCount + " Quartos - " + Uptime.Days + " Dias " + Uptime.Hours + " Horas";
-
-            using (IQueryAdapter dbClient = OreoServer.GetDatabaseManager().GetQueryReactor())
+            using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("UPDATE `server_status` SET `users_online` = @users, `loaded_rooms` = @loadedRooms LIMIT 1;");
                 dbClient.AddParameter("users", UsersOnline);
@@ -58,9 +65,9 @@ namespace Quasar.HabboHotel.Global
 
         public void Dispose()
         {
-            using (IQueryAdapter dbClient = OreoServer.GetDatabaseManager().GetQueryReactor())
+            using (IQueryAdapter dbClient = HabboEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.runFastQuery("UPDATE `server_status` SET `users_online` = '0', `loaded_rooms` = '0'");
+                dbClient.RunQuery("UPDATE `server_status` SET `users_online` = '0', `loaded_rooms` = '0'");
             }
 
             this._timer.Dispose();
