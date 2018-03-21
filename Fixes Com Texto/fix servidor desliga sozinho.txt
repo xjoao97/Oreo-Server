@@ -1,0 +1,139 @@
+vá em oreoserver.cs
+
+Procure por : 
+
+public static void PerformShutDown(bool restart)
+
+
+substitua por esse
+
+
+public static void PerformShutDown()
+        {
+            Console.Clear();
+            log.Info(" Emulador >> Desligando");
+            Console.Title = "EMULADOR >> DESLIGADO!";
+
+            GetGame().StopGameLoop();
+            Thread.Sleep(2500);
+            GetConnectionManager().Destroy();//Stop listening.
+            GetGame().GetPacketManager().UnregisterAll();//Unregister the packets.
+            GetGame().GetPacketManager().WaitForAllToComplete();
+            GetGame().GetClientManager().CloseAll();//Close all connections
+            GetGame().GetRoomManager().Dispose();//Stop the game loop.
+
+            using (IQueryAdapter dbClient = _manager.GetQueryReactor())
+            {
+                dbClient.RunQuery("TRUNCATE `catalog_marketplace_data`");
+                dbClient.RunQuery("UPDATE `users` SET online = '0'");
+                dbClient.RunQuery("TRUNCATE `user_auth_ticket`");
+                dbClient.RunQuery("UPDATE `rooms` SET `users_now` = '0' WHERE `users_now` > '0'");
+                dbClient.RunQuery("UPDATE `server_status` SET `users_online` = '0', `loaded_rooms` = '0'");
+            }
+
+            log.Info("Emulador >> Desligado!");
+
+            Thread.Sleep(1000);
+            Environment.Exit(0);
+        }
+        
+        
+        
+        
+        
+        OBS : RETIRE TODO ESTE CÓDIGO QUE ESTA EM BAIXO 
+        
+        
+        public static void PerformShutDown(bool restart)
+        {
+            Console.Clear();
+            log.Info("Desligando o servidor...");
+            Console.Title = "Oreo Server: Desligando!";
+
+            ShutdownStarted = true;
+
+            GetGame().GetClientManager().SendMessage(new BroadcastMessageAlertComposer(GetGame().GetLanguageManager().TryGetValue("server.shutdown.message")));
+            GetGame().StopGameLoop();
+            System.Threading.Thread.Sleep(2500);
+            GetConnectionManager().Destroy();//Stop listening.
+            GetGame().GetPacketManager().UnregisterAll();//Unregister the packets.
+            GetGame().GetPacketManager().WaitForAllToComplete();
+            GetGame().GetClientManager().CloseAll();//Close all connections
+            GetGame().GetRoomManager().Dispose();//Stop the game loop.
+
+            GetConnectionManager().Destroy();
+
+            using (IQueryAdapter dbClient = _manager.GetQueryReactor())
+            {
+                dbClient.runFastQuery("TRUNCATE `catalog_marketplace_data`");
+                dbClient.runFastQuery("UPDATE `users` SET online = '0', `auth_ticket` = NULL");
+                dbClient.runFastQuery("UPDATE `rooms` SET `users_now` = '0'");
+            }
+
+            _connectionManager.Destroy();
+            _game.Destroy();
+
+            log.Info("Oreo Server foi desligado.");
+
+            if (!restart)
+                log.WarnFormat("Desligado por completo. Presiione uma tecla para continuar...", ConsoleColor.Blue);
+
+            if (!restart)
+                Console.ReadKey();
+
+            IsLive = false;
+
+            if (restart)
+                Process.Start(Assembly.GetEntryAssembly().Location);
+
+            if (restart)
+                Console.WriteLine("Reiniciando...");
+            else
+                Console.WriteLine("Finalizando...");
+
+            System.Threading.Thread.Sleep(1000);
+            Environment.Exit(0);
+        }
+        
+        
+        depois retire essas duas Linhas em baixo :
+        
+        
+            public static void PerformShutDown()
+        {
+            PerformShutDown(false);
+        }
+
+        public static void PerformRestart()
+        {
+            PerformShutDown(true);
+            using (IQueryAdapter dbClient = _manager.GetQueryReactor())
+            {
+                dbClient.runFastQuery("UPDATE `server_status` SET `status` = '1'");
+            }
+        }
+        
+        
+        Logo depois adicione esta using : 
+        
+        using System.Threading;
+        
+        
+        
+        Depois por final vá em ConsoleCommandHandler.cs  e retire este código logo abaixo :
+        
+                    #region restart
+                    case "restart":
+                    case "reiniciar":
+                        ExceptionLogger.DisablePrimaryWriting(true);
+                        log.Warn("O servidor está economizando móveis de usuários, salas, etc. ESPERE QUE O SERVIDOR FECHE, NÃO SAIA DO PROCESSO NO GERADOR DE TAREFAS !!");
+                        OreoServer.PerformShutDown(true);
+                        break;
+                    #endregion
+                    
+                    
+                    
+                    
+                    agora por fim em ConsolecommanHandler retire o false de dentro do performshutdown depois em program.cs retire o false do performshutdown pronto !
+        
+        
