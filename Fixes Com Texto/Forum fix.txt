@@ -1,0 +1,4 @@
+Execute este código no seu banco de dados
+
+
+ALTER TABLE `groups` ADD `has_forum` ENUM('0','1') NOT NULL DEFAULT '0' AFTER `has_forum`;
