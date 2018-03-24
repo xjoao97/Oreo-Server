@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 
-using Emulator.Communication.Packets.Incoming;
-using Emulator.HabboHotel.Rooms;
-using Emulator.HabboHotel.Users;
-using Emulator.Communication.Packets.Outgoing.Rooms.Chat;
+using Galaxy.Communication.Packets.Incoming;
+using Galaxy.HabboHotel.Rooms;
+using Galaxy.HabboHotel.Users;
+using Galaxy.Communication.Packets.Outgoing.Rooms.Chat;
 
-namespace Emulator.HabboHotel.Items.Wired.Boxes.Triggers
+namespace Galaxy.HabboHotel.Items.Wired.Boxes.Triggers
 {
     class UserSaysBox : IWiredItem
     {
