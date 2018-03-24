@@ -1,7 +1,8 @@
-﻿using Quasar.HabboHotel.GameClients;
-using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
-
-namespace Quasar.HabboHotel.Rooms.Chat.Commands.Events
+using Galaxy.Communication.Packets.Outgoing.Rooms.Notifications;
+using Galaxy.HabboHotel.GameClients;
+using System.Linq;
+using System;
+namespace Galaxy.HabboHotel.Rooms.Chat.Commands.Events
 {
     internal class EventAlertCommand : IChatCommand
     {
@@ -14,7 +15,10 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Events
         }
         public string Parameters
         {
-            get { return "Mensagem"; }
+            get
+            {
+                return "[MENSAGEM]";
+            }
         }
         public string Description
         {
@@ -25,15 +29,27 @@ namespace Quasar.HabboHotel.Rooms.Chat.Commands.Events
         }
         public void Execute(GameClient Session, Room Room, string[] Params)
         {
+            if (Session != null)
+            {
+                if (Room != null)
+                {
+                    if (Params.Length == 1)
+                    {
+                        Session.SendWhisper("Por favor, digite uma mensagem para enviar.");
+                        return;
+                    }
+                    foreach (GameClient client in GalaxyServer.GetGame().GetClientManager().GetClients.ToList())
+                    {
+                        string Message = CommandManager.MergeParams(Params, 1);
+                        client.SendMessage(new RoomNotificationComposer("Está acontecendo um evento!",
+                                 "Está acontecendo um novo evento realizado pela equipe Space! <br><br>Este, tem o intuito de proporcionar um entretenimento a mais para os usuários!<br><br>Evento:<b>  " + Message +
+                                 "</b><br>Por:<b>  " + Session.GetHabbo().Username +
+                                 "</b> <br><br>Caso deseje participar, clique no botão abaixo! <br>",
+                                 "events", "Participar do Evento", "event:navigator/goto/" + Session.GetHabbo().CurrentRoomId));
 
-            string Message = CommandManager.MergeParams(Params, 1);
-
-            Room Quarto = Session.GetHabbo().CurrentRoom;
-            string nomequarto = Quarto.Name;
-
-            QuasarEnvironment.GetGame().GetClientManager().SendMessage(new RoomNotificationComposer("Temos um Evento",
-                             "<b>" + Session.GetHabbo().Username + "</b> está realizando um evento agora!<br><br><i>O evento vai ser: " + Message + "</i></b><br><br><font color=\"#7E7E7E\">Participe do evento e concorra a prêmios.</font>",
-                             "eventswulles", "" + nomequarto + "", "event:navigator/goto/" + Session.GetHabbo().CurrentRoomId));
+                    }                  
+                }
+            }
         }
     }
 }
