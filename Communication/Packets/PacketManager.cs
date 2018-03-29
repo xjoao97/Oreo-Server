@@ -460,8 +460,6 @@ namespace Quasar.Communication.Packets
         private void RegisterPurse()
         {
             this._incomingPackets.Add(ClientPacketHeader.GetCreditsInfoMessageEvent, new GetCreditsInfoEvent());
-            this._incomingPackets.Add(ClientPacketHeader.GetHabboClubWindowMessageEvent, new GetHabboClubWindowEvent());
-            this._incomingPackets.Add(ClientPacketHeader.GetHabboClubCenterInfoMessageEvent, new GetHabboClubCenterInfoMessageEvent());
         }
 
         private void RegisterUsers()
