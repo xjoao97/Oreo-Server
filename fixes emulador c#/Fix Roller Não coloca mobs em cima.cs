@@ -22,6 +22,7 @@ using Oreo.Communication.Packets.Outgoing.Inventory.Furni;
 using Oreo.Communication.Packets.Outgoing;
 using Oreo.Database.Interfaces;
 using System.Globalization;
+using Oreo.HabboHotel.Items.Interactor;
 
 namespace Oreo.HabboHotel.Rooms
 {
