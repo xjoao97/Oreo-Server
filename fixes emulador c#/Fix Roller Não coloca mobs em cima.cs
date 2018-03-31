@@ -33,6 +33,7 @@ namespace Oreo.HabboHotel.Rooms
         private bool mGotRollers;
         private int mRollerSpeed;
         private int mRollerCycle;
+        public int JukeboxCount
 
         private ConcurrentDictionary<int, Item> _movedItems;
 
