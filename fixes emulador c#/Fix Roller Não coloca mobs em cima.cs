@@ -382,7 +382,7 @@ namespace Oreo.HabboHotel.Rooms
                     if (ItemsOnRoller.Count > 10)
                         ItemsOnRoller = _room.GetGameMap().GetRoomItemForSquare(Roller.GetX, Roller.GetY, Roller.GetZ).Take(10).ToList();
 
-                    bool NextSquareIsRoller = (ItemsOnNext.Count(x => x.GetBaseItem().InteractionType == InteractionType.ROLLER) > 0);
+                    bool NextSquareIsRoller = (ItemsOnNext.Where(x => x.GetBaseItem().InteractionType == InteractionType.ROLLER).Count() > 0);
                     bool NextRollerClear = true;
 
                     double NextZ = 0.0;
