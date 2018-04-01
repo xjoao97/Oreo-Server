@@ -1,0 +1,5 @@
+Coloque isso na sua db
+
+
+
+CREATE TABLE `SUADB`.`log_wiredstaff` ( `timestamp` VARCHAR(255) NOT NULL , `quantidade` VARCHAR(255) NOT NULL , `user` VARCHAR(255) NOT NULL , `tipo` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
