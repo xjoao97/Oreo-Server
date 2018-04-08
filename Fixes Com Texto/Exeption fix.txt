@@ -1,0 +1,9 @@
+Caso seu emulador der essa exeption em baixo :
+
+Exception:
+System.NullReferenceException: Object reference not set to an instance of an object.
+
+execute esta sql :
+
+UPDATE `furniture` SET `behaviour_data` = `furniture`.`clothing_id` WHERE `furniture`.`clothing_id` > 0 AND `furniture`.`behaviour_data` = 0;
+UPDATE `furniture` SET `behaviour_data` = `furniture`.`wired_id` WHERE `furniture`.`wired_id` > 0 AND (`furniture`.`interaction_type` = 'wired_effect' OR `furniture`.`interaction_type` = 'wired_trigger' OR `furniture`.`interaction_type` = 'wired_condition');
