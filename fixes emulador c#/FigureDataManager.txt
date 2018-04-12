@@ -1,0 +1,24 @@
+vá em Figuredatamanager.txt procure por este código :
+
+public string ProcessFigure(string figure, string gender, ICollection<ClothingParts> clothingParts, bool hasHabboClub)
+        {
+            figure = figure.ToLower();
+            gender = gender.ToUpper();
+
+            string rebuildFigure = string.Empty;
+
+          /Check clothing, colors & Habbo Club
+          /Check Required Clothing
+           /Check Purchasable Clothing
+            return rebuildFigure;
+        }
+        
+        
+    Substitua Por este :
+    
+    public string ProcessFigure(string Figure, string gender, ICollection<ClothingParts> clothingParts, bool hasHabboClub)
+        {
+            return Figure; //O Filtro é Atualizado pela Updatefigure então não precisa atualizar aqui <>
+        }
+        
+        
