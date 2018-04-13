@@ -469,6 +469,31 @@ namespace Quasar.HabboHotel.Rooms
 
             clearPoolAnswers();
         }
+        
+        public int CountFootBall(int roomId)
++        {
++            int count = 0;
++            using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
++            {
++                dbClient.SetQuery("SELECT `id`,`user_id`,`base_item` FROM `items` WHERE `room_id` = '" + roomId + "'");
++                DataTable Data = dbClient.getTable();
++
++                foreach (DataRow Item in Data.Rows)
++                {
++
++                    dbClient.SetQuery("SELECT `id` FROM `furniture` WHERE `id` = '" + Convert.ToInt32(Item["base_item"]) + "' AND interaction_type = 'ball'");
++                    DataTable Furniture = dbClient.getTable();
++
++                    foreach (DataRow Speech in Furniture.Rows)
++                    {
++                        count++;
++                    }
++                }
++
++            }
++
++            return count;
++        }
 
         public void AddTagRange(List<string> tags)
         {
