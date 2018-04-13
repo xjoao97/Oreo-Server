@@ -107,7 +107,10 @@ namespace Quasar.HabboHotel.Users.Badges
                 }
             }
 
-            _badges.Add(Badge, new Badge(Badge, 0));
+            if (!this._badges.ContainsKey(Badge))
+            {
+                _badges.Add(Badge, new Badge(Badge, 0));
+            }
 
             if (Session != null)
             {
