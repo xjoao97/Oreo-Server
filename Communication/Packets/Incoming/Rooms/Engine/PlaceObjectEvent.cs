@@ -96,6 +96,18 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Engine
                         }
                         break;
                     }
+                    
+                    case InteractionType.FOOTBALL:
+                    {
+                       if (Room.CountFootBall(Room.Id) >= 4)
+                       {
+                            Session.SendNotification("Você só pode ter 4 bolas por quarto.");
+                            return;
+
+                      }
+                        break;
+
+                    }
 
                 case InteractionType.TENT:
                 case InteractionType.TENT_SMALL:
