@@ -94,6 +94,9 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
                             dbClient.RunQuery("DELETE FROM `bots_speech` WHERE `bot_id` = '" + Bot.BotData.Id + "'");
                             #region Save Data - TODO: MAKE METHODS FOR THIS.
                             for (int i = 0; i <= SpeechData.Length - 1; i++)
+                        {
+                            SpeechData[i] = Regex.Replace(SpeechData[i], "<(.|\\n)*?>", string.Empty);
+                            using (IQueryAdapter dbClient = DatabaseManager.GetQueryReactor())
                             {
                                 dbClient.SetQuery("INSERT INTO `bots_speech` (`bot_id`, `text`) VALUES (@id, @data)");
                                 dbClient.AddParameter("id", BotId);
