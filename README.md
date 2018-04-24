@@ -1,6 +1,6 @@
-# Oreo 4.6
+# Oreo 5.2
  
-Créditos :  pedro Phb , ERIC ....
+Créditos :  pedro Phb , ERIC , Paulo , Westty....
 
  
 
@@ -9,12 +9,24 @@ Créditos :  pedro Phb , ERIC ....
  
 __MobJacker__ The bin should be downloaded from the Dropbox for compilation, so upgrades with the Framework:
  
+    12/02/2018
     Updates Cumlative wireds :
     wireds ativadores Bots Reorganized !
     Wireds conditions moreless , thanless e negativos moreless e thanless reorganizados
     Novo wired Timer reset 
     Novos wireds customs !!
     fixado wireds classificadores e outros que estavam com defeito ! 
+    
+    NEW UPDATE núcleo Plus
+    a intenção nessa atualização não é corrigir vulnerabilidades nem Bugs e sim refazer o núcleo do Plus para aguentar mais usuários
+    Ficar mais otimizado 
+    Sem nenhum lag
+    
+    Buffer refeito
+    cachê refeito
+    packets refeito
+    
+    atualização Grande então estarei atualizando de pouco em pouco 
     
     
  
