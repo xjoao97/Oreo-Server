@@ -5,11 +5,11 @@ using Quasar.Database.Interfaces;
 
 namespace Quasar.HabboHotel.Achievements
 {
-    public class AchievementLevelFactory
+    public static class AchievementDao
     {
         public static void GetAchievementLevels(out Dictionary<string, Achievement> Achievements)
         {
-            Achievements = new Dictionary<string, Achievement>();
+            public static void LoadLevels(Dictionary<string, Achievement> achievements)
 
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -30,14 +30,14 @@ namespace Quasar.HabboHotel.Achievements
 
                         AchievementLevel AchievementLevel = new AchievementLevel(level, rewardPixels, rewardPoints, progressNeeded);
 
-                        if (!Achievements.ContainsKey(groupName))
+                        if (!achievements.ContainsKey(groupName))
                         {
                             Achievement Achievement = new Achievement(id, groupName, category, Convert.ToInt32(dRow["game_id"]));
                             Achievement.AddLevel(AchievementLevel);
-                            Achievements.Add(groupName, Achievement);
+                            achievements.Add(groupName, Achievement);
                         }
                         else
-                            Achievements[groupName].AddLevel(AchievementLevel);
+                            achievements[groupName].AddLevel(AchievementLevel);
                     }
                 }
             }

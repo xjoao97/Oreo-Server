@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace Quasar.Database.Interfaces
 {
@@ -11,6 +12,7 @@ namespace Quasar.Database.Interfaces
         string getString();
         DataTable getTable();
         void runFastQuery(string query);
+		MySqlDataReader ExecuteReader();
         void RunQuery(string query);
         void SetQuery(string query);
     }

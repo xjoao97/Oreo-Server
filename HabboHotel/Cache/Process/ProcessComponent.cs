@@ -92,7 +92,7 @@ namespace Quasar.HabboHotel.Cache.Process
 
                             UserCache Temp = null;
 
-                            if (Cache.isExpired())
+                            if (Cache.IsExpired())
                                 QuasarEnvironment.GetGame().GetCacheManager().TryRemoveUser(Cache.Id, out Temp);
 
                             Temp = null;

@@ -46,6 +46,30 @@ namespace Quasar.Database.Adapter
 
             return hasRows;
         }
+		
+		public string GetCommand() =>
+           command.CommandText;
+
+        public MySqlDataReader ExecuteReader()
+        {
+            MySqlDataReader reader = null;
+            try
+            {
+                reader = command.ExecuteReader();
+                return reader;
+            }
+            catch (MySqlException ex)
+            {
+                ExceptionLogger.LogQueryError("MySQL Error: ", ex);
+
+                return null;
+            }
+            finally
+            {
+                command.CommandText = string.Empty;
+                command.Parameters.Clear();
+            }
+        }
 
         public int getInteger()
         {

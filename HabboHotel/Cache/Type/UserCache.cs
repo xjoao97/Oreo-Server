@@ -21,7 +21,7 @@ namespace Quasar.HabboHotel.Cache
             this.Look = Look;
             this.AddedTime = DateTime.Now;
         }
-        public bool isExpired()
+        public bool IsExpired()
         {
             TimeSpan CacheTime = DateTime.Now - this.AddedTime;
             return CacheTime.TotalMinutes >= 30;

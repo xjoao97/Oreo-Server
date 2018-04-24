@@ -23,19 +23,7 @@ namespace Quasar.HabboHotel.Badges
 
         public void Init()
         {
-            using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-            {
-                dbClient.SetQuery("SELECT * FROM `badge_definitions`;");
-                DataTable GetBadges = dbClient.getTable();
-
-                foreach (DataRow Row in GetBadges.Rows)
-                {
-                    string BadgeCode = Convert.ToString(Row["code"]).ToUpper();
-
-                    if (!this._badges.ContainsKey(BadgeCode))
-                        this._badges.Add(BadgeCode, new BadgeDefinition(BadgeCode, Convert.ToString(Row["required_right"])));
-                }
-            }
+            BadgeDao.LoadBadges(_badges);
 
             //log.Info(">> Badge Manager with " + this._badges.Count + " badges loaded -> Ligado");
             //log.Info(">> Badge Manager -> Ligado");

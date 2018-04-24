@@ -43,21 +43,8 @@ namespace Quasar.HabboHotel.Cache
                     return User;
                 }
 
-            using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-            {
-                dbClient.SetQuery("SELECT `username`, `motto`, `look` FROM users WHERE id = @id LIMIT 1");
-                dbClient.AddParameter("id", Id);
-
-                DataRow dRow = dbClient.getRow();
-
-                if (dRow != null)
-                {
-                    User = new UserCache(Id, dRow["username"].ToString(), dRow["motto"].ToString(), dRow["look"].ToString());
-                    _usersCached.TryAdd(Id, User);
-                }
-
-                dRow = null;
-            }
+           User = CacheDao.GenerateUser(Id);
+           _usersCached.TryAdd(Id, User);
 
             return User;
         }

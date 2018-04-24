@@ -30,7 +30,7 @@ namespace Quasar.HabboHotel.Achievements
 
         public void LoadAchievements()
         {
-            AchievementLevelFactory.GetAchievementLevels(out _achievements);
+            AchievementDao.LoadLevels(_achievements);
         }
 
         public bool ProgressAchievement(GameClient Session, string AchievementGroup, int ProgressAmount, bool FromZero = false)
