@@ -17,7 +17,7 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.Pets
             base.WriteInteger(1);
             base.WriteInteger(1);
             base.WriteInteger(Pets.Count);
-            foreach (Pet Pet in Pets.ToList())
+            foreach (Pet Pet in Pets)
             {
                 base.WriteInteger(Pet.PetId);
                 base.WriteString(Pet.Name);

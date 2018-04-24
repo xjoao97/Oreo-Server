@@ -52,7 +52,7 @@ namespace Quasar.Communication.Packets.Incoming.Moderation
 
             if (KickAll)
             {
-                foreach (RoomUser RoomUser in Room.GetRoomUserManager().GetUserList().ToList())
+                foreach (RoomUser RoomUser in Room.GetRoomUserManager().GetUserList())
                 {
                     if (RoomUser == null || RoomUser.IsBot)
                         continue;

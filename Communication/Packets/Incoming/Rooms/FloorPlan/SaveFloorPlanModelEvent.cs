@@ -155,7 +155,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
             Room.RoomData.WallThickness = WallThick;
             Room.RoomData.FloorThickness = FloorThick;
 
-            List<RoomUser> UsersToReturn = Room.GetRoomUserManager().GetRoomUsers().ToList();
+            List<RoomUser> UsersToReturn = Room.GetRoomUserManager().GetRoomUsers();
 
             QuasarEnvironment.GetGame().GetRoomManager().ReloadModel(ModelName);
             QuasarEnvironment.GetGame().GetRoomManager().UnloadRoom(Room);

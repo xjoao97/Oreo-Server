@@ -14,7 +14,7 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.Bots
             : base(ServerPacketHeader.BotInventoryMessageComposer)
         {
             base.WriteInteger(Bots.Count);
-            foreach (Bot Bot in Bots.ToList())
+            foreach (Bot Bot in Bots)
             {
                 base.WriteInteger(Bot.Id);
                base.WriteString(Bot.Name);

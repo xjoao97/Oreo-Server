@@ -107,7 +107,8 @@ namespace Quasar.Communication.Packets.Incoming.Users
                     Data.OwnerName = NewName;
                 }
 
-                foreach (Room UserRoom in QuasarEnvironment.GetGame().GetRoomManager().GetRooms().ToList())
+
+                foreach (Room UserRoom in QuasarEnvironment.GetGame().GetRoomManager().GetRooms())
                 {
                     if (UserRoom == null || UserRoom.RoomData.OwnerName != NewName)
                         continue;

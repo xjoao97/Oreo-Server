@@ -47,7 +47,7 @@ namespace Quasar.Communication.Packets.Incoming.Groups
             {
                 if (Group.GetRequests.Count > 0)
                 {
-                    foreach (int UserId in Group.GetRequests.ToList())
+                    foreach (int UserId in Group.GetRequests)
                     {
                         Group.HandleRequest(UserId, false);
                     }
@@ -70,7 +70,7 @@ namespace Quasar.Communication.Packets.Incoming.Groups
             if (!QuasarEnvironment.GetGame().GetRoomManager().TryGetRoom(Group.RoomId, out Room))
                 return;
 
-            foreach (RoomUser User in Room.GetRoomUserManager().GetRoomUsers().ToList())
+            foreach (RoomUser User in Room.GetRoomUserManager().GetRoomUsers())
             {
                 if (Room.OwnerId == User.UserId || Group.IsAdmin(User.UserId) || !Group.IsMember(User.UserId))
                     continue;

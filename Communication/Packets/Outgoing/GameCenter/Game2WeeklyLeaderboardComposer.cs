@@ -22,7 +22,7 @@ namespace Quasar.Communication.Packets.Outgoing.GameCenter
             int num = 0;
 
             base.WriteInteger(Habbos.Count);
-            foreach (Habbo Habbo in Habbos.ToList())
+            foreach (Habbo Habbo in Habbos)
             {
                 num++;
                 base.WriteInteger(Habbo.Id);

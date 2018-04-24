@@ -13,7 +13,7 @@ namespace Quasar.Communication.Packets.Outgoing.Navigator
             : base(ServerPacketHeader.NavigatorFlatCatsMessageComposer)
         {
             base.WriteInteger(Categories.Count);
-            foreach (SearchResultList Category in Categories.ToList())
+            foreach (SearchResultList Category in Categories)
             {
                 base.WriteInteger(Category.Id);
                 base.WriteString(Category.PublicName);

@@ -868,7 +868,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                                 var DealItems = (from d in Page.Deals.Values.ToList() where d.Id == Item.Id select d);
                                 foreach (CatalogDeal DealItem in DealItems.ToList())
                                 {
-                                    foreach (CatalogItem CatalogItem in DealItem.ItemDataList.ToList())
+                                    foreach (CatalogItem CatalogItem in DealItem.ItemDataList)
                                     {
                                         List<Item> Items = ItemFactory.CreateMultipleItems(CatalogItem.Data, Session.GetHabbo(), "", CatalogItem.Amount);
 

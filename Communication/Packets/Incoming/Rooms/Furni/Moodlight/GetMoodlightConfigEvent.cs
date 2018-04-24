@@ -27,7 +27,7 @@ namespace Oreo.Communication.Packets.Incoming.Rooms.Furni.Moodlight
 
             if (Room.MoodlightData == null)
             {
-                foreach (Item item in Room.GetRoomItemHandler().GetWall.ToList())
+                foreach (Item item in Room.GetRoomItemHandler().GetWall)
                 {
                     if (item.GetBaseItem().InteractionType == InteractionType.MOODLIGHT)
                         Room.MoodlightData = new MoodlightData(item.Id);

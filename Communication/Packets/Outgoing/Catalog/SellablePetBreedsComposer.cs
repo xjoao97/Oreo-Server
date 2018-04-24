@@ -14,7 +14,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
            base.WriteString(PetType);
 
             base.WriteInteger(Races.Count);
-            foreach (PetRace Race in Races.ToList())
+            foreach (PetRace Race in Races)
             {
                 base.WriteInteger(PetId);
                 base.WriteInteger(Race.PrimaryColour);

@@ -48,7 +48,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Action
 
                 Session.SendMessage(new FlatControllerRemovedComposer(Instance, UserId));
                 Session.SendMessage(new RoomRightsListComposer(Instance));
-                Session.SendMessage(new UserUpdateComposer(Instance.GetRoomUserManager().GetUserList().ToList()));
+                Session.SendMessage(new UserUpdateComposer(Instance.GetRoomUserManager().GetUserList()));
             }
 
             if (Instance.UsersWithRights.Count > 0)

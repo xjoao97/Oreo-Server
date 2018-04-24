@@ -16,7 +16,7 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.Badges
             List<Badge> EquippedBadges = new List<Badge>();
 
             base.WriteInteger(Session.GetHabbo().GetBadgeComponent().Count);
-            foreach (Badge Badge in Session.GetHabbo().GetBadgeComponent().GetBadges().ToList())
+            foreach (Badge Badge in Session.GetHabbo().GetBadgeComponent().GetBadges())
             {
                 base.WriteInteger(1);
                 base.WriteString(Badge.Code);

@@ -15,7 +15,7 @@ namespace Quasar.Communication.Packets.Outgoing.GameCenter
         {
             base.WriteInteger(GameId);
             base.WriteInteger(Achievements.Count);
-            foreach (Achievement Ach in Achievements.ToList())
+            foreach (Achievement Ach in Achievements)
             {
                 UserAchievement UserData = Session.GetHabbo().GetAchievementData(Ach.GroupName);
                 int TargetLevel = (UserData != null ? UserData.Level + 1 : 1);

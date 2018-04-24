@@ -24,7 +24,7 @@ namespace Quasar.Communication.Packets.Incoming.Users
                 return;
 
             Dictionary<int, string> Badges = new Dictionary<int, string>();
-            foreach (RoomUser User in Room.GetRoomUserManager().GetRoomUsers().ToList())
+            foreach (RoomUser User in Room.GetRoomUserManager().GetRoomUsers())
             {
                 if (User.IsBot || User.IsPet || User.GetClient() == null || User.GetClient().GetHabbo() == null)
                     continue;
@@ -32,8 +32,8 @@ namespace Quasar.Communication.Packets.Incoming.Users
                 if (User.GetClient().GetHabbo().GetStats().FavouriteGroupId == 0 || Badges.ContainsKey(User.GetClient().GetHabbo().GetStats().FavouriteGroupId))
                     continue;
 
-                Group Group = null;
-                if (!QuasarEnvironment.GetGame().GetGroupManager().TryGetGroup(User.GetClient().GetHabbo().GetStats().FavouriteGroupId, out Group))
+        
+                if (!QuasarEnvironment.GetGame().GetGroupManager().TryGetGroup(User.GetClient().GetHabbo().GetStats().FavouriteGroupId, out Group Group))
                     continue;
 
                 if (!Badges.ContainsKey(Group.Id))
@@ -42,8 +42,8 @@ namespace Quasar.Communication.Packets.Incoming.Users
 
             if (Session.GetHabbo().GetStats().FavouriteGroupId > 0)
             {
-                Group Group = null;
-                if (QuasarEnvironment.GetGame().GetGroupManager().TryGetGroup(Session.GetHabbo().GetStats().FavouriteGroupId, out Group))
+
+                if (QuasarEnvironment.GetGame().GetGroupManager().TryGetGroup(Session.GetHabbo().GetStats().FavouriteGroupId, out Group Group))
                 {
                     if (!Badges.ContainsKey(Group.Id))
                         Badges.Add(Group.Id, Group.Badge);

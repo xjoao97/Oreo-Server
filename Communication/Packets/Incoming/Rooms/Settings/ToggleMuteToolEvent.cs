@@ -22,7 +22,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Settings
             Room.RoomMuted = !Room.RoomMuted;
 
             List<RoomUser> roomUsers = Room.GetRoomUserManager().GetRoomUsers();
-            foreach (RoomUser roomUser in roomUsers.ToList())
+            foreach (RoomUser roomUser in roomUsers)
             {
                 if (roomUser == null || roomUser.GetClient() == null)
                     continue;

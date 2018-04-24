@@ -25,7 +25,7 @@ namespace Quasar.Communication.Packets.Incoming.Messenger
             List<SearchResult> OthersUsers = new List<SearchResult>();
 
             List<SearchResult> Results = SearchResultFactory.GetSearchResult(Query);
-            foreach (SearchResult Result in Results.ToList())
+            foreach (SearchResult Result in Results)
             {
                 if (Session.GetHabbo().GetMessenger().FriendshipExists(Result.UserId))
                     Friends.Add(Result);

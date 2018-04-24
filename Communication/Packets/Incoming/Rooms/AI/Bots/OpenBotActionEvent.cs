@@ -24,12 +24,11 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
             if (Room == null)
                 return;
 
-            RoomUser BotUser = null;
-            if (!Room.GetRoomUserManager().TryGetBot(BotId, out BotUser))
+            if (!Room.GetRoomUserManager().TryGetBot(BotId, out RoomUser BotUser))
                 return;
 
             string BotSpeech = "";
-            foreach (RandomSpeech Speech in BotUser.BotData.RandomSpeech.ToList())
+            foreach (RandomSpeech Speech in BotUser.BotData.RandomSpeech)
             {
                 BotSpeech += (Speech.Message + "\n");
             }

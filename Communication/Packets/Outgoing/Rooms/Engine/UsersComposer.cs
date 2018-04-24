@@ -17,7 +17,7 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Engine
             : base(ServerPacketHeader.UsersMessageComposer)
         {
             base.WriteInteger(Users.Count);
-            foreach (RoomUser User in Users.ToList())
+            foreach (RoomUser User in Users)
             {
                 WriteUser(User);
             }

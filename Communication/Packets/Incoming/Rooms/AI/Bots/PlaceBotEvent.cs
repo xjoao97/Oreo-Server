@@ -44,7 +44,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
                 return;
 
             int BotCount = 0;
-            foreach (RoomUser User in Room.GetRoomUserManager().GetUserList().ToList())
+            foreach (RoomUser User in Room.GetRoomUserManager().GetUserList())
             {
                 if (User == null || User.IsPet || !User.IsBot)
                     continue;

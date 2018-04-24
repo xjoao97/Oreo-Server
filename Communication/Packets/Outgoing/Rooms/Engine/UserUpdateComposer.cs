@@ -14,7 +14,7 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Engine
             : base(ServerPacketHeader.UserUpdateMessageComposer)
         {
             base.WriteInteger(RoomUsers.Count);
-            foreach (RoomUser User in RoomUsers.ToList())
+            foreach (RoomUser User in RoomUsers)
             {
                 base.WriteInteger(User.VirtualId);
                 base.WriteInteger(User.X);
@@ -26,7 +26,7 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Engine
                 StringBuilder StatusComposer = new StringBuilder();
                 StatusComposer.Append("/");
 
-                foreach (KeyValuePair<string, string> Status in User.Statusses.ToList())
+                foreach (KeyValuePair<string, string> Status in User.Statusses)
                 {
                     StatusComposer.Append(Status.Key);
 

@@ -164,7 +164,7 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Furni.Wired
             base.WriteInteger(BlockedItems.Count()); // Incompatable items loop
             if (BlockedItems.Count() > 0)
             {
-                foreach (int ItemId in BlockedItems.ToList())
+                foreach (int ItemId in BlockedItems)
                     base.WriteInteger(ItemId);
             }
         }

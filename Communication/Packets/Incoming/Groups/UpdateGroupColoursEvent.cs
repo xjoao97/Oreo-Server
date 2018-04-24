@@ -42,7 +42,7 @@ namespace Quasar.Communication.Packets.Incoming.Groups
             Session.SendMessage(new GroupInfoComposer(Group, Session));
             if (Session.GetHabbo().CurrentRoom != null)
             {
-                foreach (Item Item in Session.GetHabbo().CurrentRoom.GetRoomItemHandler().GetFloor.ToList())
+                foreach (Item Item in Session.GetHabbo().CurrentRoom.GetRoomItemHandler().GetFloor)
                 {
                     if (Item == null || Item.GetBaseItem() == null)
                         continue;

@@ -30,7 +30,7 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.Trading
         private void SerializeUserItems(TradeUser User)
         {
             //base.WriteInteger(User.OfferedItems.Count);//While
-            foreach (Item Item in User.OfferedItems.ToList())
+            foreach (Item Item in User.OfferedItems)
             {
                 base.WriteInteger(Item.Id);
                 base.WriteString(Item.Data.Type.ToString().ToUpper());

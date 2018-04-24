@@ -32,7 +32,7 @@ namespace Quasar.Communication.Packets.Incoming.Groups
                 case 0:
                     {
                         List<int> MemberIds = Group.GetAllMembers;
-                        foreach (int Id in MemberIds.ToList())
+                        foreach (int Id in MemberIds)
                         {
                             UserCache GroupMember = QuasarEnvironment.GetGame().GetCacheManager().GenerateUser(Id);
                             if (GroupMember == null)
@@ -47,7 +47,7 @@ namespace Quasar.Communication.Packets.Incoming.Groups
                 case 1:
                     {
                         List<int> AdminIds = Group.GetAdministrators;
-                        foreach (int Id in AdminIds.ToList())
+                        foreach (int Id in AdminIds)
                         {
                             UserCache GroupMember = QuasarEnvironment.GetGame().GetCacheManager().GenerateUser(Id);
                             if (GroupMember == null)
@@ -62,7 +62,7 @@ namespace Quasar.Communication.Packets.Incoming.Groups
                 case 2:
                     {
                         List<int> RequestIds = Group.GetRequests;
-                        foreach (int Id in RequestIds.ToList())
+                         foreach (int Id in RequestIds)
                         {
                             UserCache GroupMember = QuasarEnvironment.GetGame().GetCacheManager().GenerateUser(Id);
                             if (GroupMember == null)

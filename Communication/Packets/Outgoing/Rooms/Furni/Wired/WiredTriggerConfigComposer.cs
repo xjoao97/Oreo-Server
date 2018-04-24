@@ -17,7 +17,7 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Furni.Wired
             base.WriteInteger(5);
 
             base.WriteInteger(Box.SetItems.Count);
-            foreach (Item Item in Box.SetItems.Values.ToList())
+            foreach (Item Item in Box.SetItems.Values)
             {
                 base.WriteInteger(Item.Id);
             }
@@ -27,17 +27,17 @@ namespace Quasar.Communication.Packets.Outgoing.Rooms.Furni.Wired
            base.WriteString(Box.StringData);
 
             base.WriteInteger(Box is IWiredCycle ? 1 : 0);
-            if (Box is IWiredCycle)
+            if (Box is IWiredCycle Cycle)
             {
                 IWiredCycle Cycle = (IWiredCycle)Box;
                 base.WriteInteger(Cycle.Delay);
             }
             base.WriteInteger(0);
             base.WriteInteger(WiredBoxTypeUtility.GetWiredId(Box.Type));
-            base.WriteInteger(BlockedItems.Count());
-            if(BlockedItems.Count() > 0)
+            base.WriteInteger(BlockedItems.Count);
+            if (BlockedItems.Count() > 0)
             {
-                foreach (int Id in BlockedItems.ToList())
+                foreach (int Id in BlockedItems)
                     base.WriteInteger(Id);
             }
         }

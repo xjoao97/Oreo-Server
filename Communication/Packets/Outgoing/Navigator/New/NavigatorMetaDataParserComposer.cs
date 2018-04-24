@@ -13,7 +13,7 @@ namespace Quasar.Communication.Packets.Outgoing.Navigator
             : base(ServerPacketHeader.NavigatorMetaDataParserMessageComposer)
         {
             base.WriteInteger(TopLevelItems.Count);//Count
-            foreach (TopLevelItem TopLevelItem in TopLevelItems.ToList())
+            foreach (TopLevelItem TopLevelItem in TopLevelItems)
             {
                 //TopLevelContext
                base.WriteString(TopLevelItem.SearchCode);//Search code

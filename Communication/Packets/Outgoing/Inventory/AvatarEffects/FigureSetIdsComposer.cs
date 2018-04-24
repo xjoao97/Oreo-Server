@@ -14,13 +14,13 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.AvatarEffects
             : base(ServerPacketHeader.FigureSetIdsMessageComposer)
         {
             base.WriteInteger(ClothingParts.Count);
-            foreach (ClothingParts Part in ClothingParts.ToList())
+            foreach (ClothingParts Part in ClothingParts)
             {
                 base.WriteInteger(Part.PartId);
             }
 
             base.WriteInteger(ClothingParts.Count);
-            foreach (ClothingParts Part in ClothingParts.ToList())
+            foreach (ClothingParts Part in ClothingParts)
             {
                base.WriteString(Part.Part);
             }

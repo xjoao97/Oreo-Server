@@ -13,7 +13,7 @@ namespace Quasar.Communication.Packets.Incoming.Messenger
     {
         public void Parse(HabboHotel.GameClients.GameClient Session, ClientPacket Packet)
         {
-            ICollection<MessengerRequest> Requests = Session.GetHabbo().GetMessenger().GetRequests().ToList();
+            ICollection<MessengerRequest> Requests = Session.GetHabbo().GetMessenger().GetRequests();
 
             Session.SendMessage(new BuddyRequestsComposer(Requests));
         }
