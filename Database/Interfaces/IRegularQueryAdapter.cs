@@ -12,6 +12,7 @@ namespace Quasar.Database.Interfaces
         string getString();
         DataTable getTable();
         void runFastQuery(string query);
+		string GetCommand();
 		MySqlDataReader ExecuteReader();
         void RunQuery(string query);
         void SetQuery(string query);

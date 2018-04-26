@@ -13,15 +13,18 @@ namespace Quasar.Communication.Packets.Incoming.Marketplace
             int ItemId = Packet.PopInt();
             int SpriteId = Packet.PopInt();
 
-            DataRow Row = null;
+
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `avgprice` FROM `catalog_marketplace_data` WHERE `sprite` = @SpriteId LIMIT 1");
                 dbClient.AddParameter("SpriteId", SpriteId);
-                Row = dbClient.getRow();
+				using (var reader = dbClient.ExecuteReader())
+                if (reader.Read())
+                Session.SendMessage(new MarketplaceItemStatsComposer(ItemId, SpriteId, reader.GetInt32("avgprice")));
+                else
+                Session.SendMessage(new MarketplaceItemStatsComposer(ItemId, SpriteId, 0));
             }
 
-            Session.SendMessage(new MarketplaceItemStatsComposer(ItemId, SpriteId, (Row != null ? Convert.ToInt32(Row["avgprice"]) : 0)));
         }
     }
 }

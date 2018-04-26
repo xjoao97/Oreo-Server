@@ -43,18 +43,17 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             string ExtraData = Packet.PopString();
             int Amount = Packet.PopInt();
 
-            CatalogPage Page = null;
-            if (!QuasarEnvironment.GetGame().GetCatalog().TryGetPage(PageId, out Page))
+            if (!QuasarEnvironment.GetGame().GetCatalog().TryGetPage(PageId, out CatalogPage Page))
                 return;
             if (Session.GetHabbo().Rank > 3 && !Session.GetHabbo().StaffOk || QuasarStaticGameSettings.IsGoingToBeClose)
                 return;
             if (!Page.Enabled || !Page.Visible || Page.MinimumRank > Session.GetHabbo().Rank || (Page.MinimumVIP > Session.GetHabbo().VIPRank && Session.GetHabbo().Rank == 1))
                 return;
 
-            CatalogItem Item = null;
+
             bool ValidItem = true;
 
-            if (!Page.Items.TryGetValue(ItemId, out Item))
+            if (!Page.Items.TryGetValue(ItemId, out CatalogItem Item))
             {
                 if (Page.ItemOffers.ContainsKey(ItemId))
                 {
@@ -69,7 +68,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             if (Session.GetHabbo()._lastitems.Count > 0)
             {
                 Page.LastItemOffers = new Dictionary<int, CatalogItem>();
-                foreach (var lastItem in Session.GetHabbo()._lastitems.ToList())
+                foreach (var lastItem in Session.GetHabbo()._lastitems)
                 {
                     Page.LastItemOffers.Add(lastItem.Key, lastItem.Value);
                 }
@@ -866,7 +865,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                         case InteractionType.DEAL:
                             {
                                 var DealItems = (from d in Page.Deals.Values.ToList() where d.Id == Item.Id select d);
-                                foreach (CatalogDeal DealItem in DealItems.ToList())
+                                foreach (CatalogDeal DealItem in DealItems)
                                 {
                                     foreach (CatalogItem CatalogItem in DealItem.ItemDataList)
                                     {

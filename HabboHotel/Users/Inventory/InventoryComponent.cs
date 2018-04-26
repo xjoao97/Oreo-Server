@@ -51,7 +51,7 @@ namespace Emulator.HabboHotel.Users.Inventory
                 this._botItems.Clear();
 
             List<Item> Items = ItemLoader.GetItemsForUser(_userId);
-            foreach (Item Item in Items.ToList())
+            foreach (Item Item in Items)
             {
                 if (Item.IsFloorItem)
                 {

@@ -321,15 +321,12 @@ namespace Quasar.HabboHotel.GameClients
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `message` FROM `chatlogs` WHERE `user_id` = '" + Target.GetHabbo().Id + "' ORDER BY `id` DESC LIMIT 10");
-                GetLogs = dbClient.getTable();
-
-                if (GetLogs != null)
-                {
-                    int Number = 11;
-                    foreach (DataRow Log in GetLogs.Rows)
+                int Number = 11;
+                using (var reader = dbClient.ExecuteReader())
+                   while (reader.Read())
                     {
                         Number -= 1;
-                        Builder.Append(Number + ": " + Convert.ToString(Log["message"]) + "\r");
+                        Builder.Append(Number + ": " + reader.GetString("message") + "\r");
                     }
                 }
             }
@@ -443,8 +440,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void UnregisterClient(int userid, string username)
         {
-            GameClient Client = null;
-            _userIDRegister.TryRemove(userid, out Client);
+            _userIDRegister.TryRemove(userid, out GameClient Client);
             _usernameRegister.TryRemove(username.ToLower(), out Client);
         }
 
@@ -509,24 +505,21 @@ namespace Quasar.HabboHotel.GameClients
             {
                 clientPingStopwatch.Restart();
 
-                try
-                {
-                    List<GameClient> ToPing = new List<GameClient>();
+                List<GameClient> ToPing = new List<GameClient>();
 
                     foreach (GameClient client in this._clients.Values.ToList())
-                    {
-                        if (client.PingCount < 6)
+                {
+                    if (client.PingCount < 6)
                         {
                             client.PingCount++;
 
                             ToPing.Add(client);
-                        }
-                        else
+                    }
+                    else
+                    {
+                        lock (timedOutConnections.SyncRoot)
                         {
-                            lock (timedOutConnections.SyncRoot)
-                            {
-                                timedOutConnections.Enqueue(client);
-                            }
+                         timedOutConnections.Enqueue(client);
                         }
                     }
 

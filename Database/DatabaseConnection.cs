@@ -29,12 +29,12 @@ namespace Quasar.Database
             GC.SuppressFinalize(this);
         }
 
-        public void connect()
+        public void Connect()
         {
             this.Open();
         }
 
-        public void disconnect()
+        public void Disconnect()
         {
             this.Close();
         }
@@ -44,17 +44,12 @@ namespace Quasar.Database
             return this._adapter;
         }
 
-        public void prepare()
-        {
-            // nothing here
-        }
-
-        public void reportDone()
+        public void ReportDone()
         {
             Dispose();
         }
 
-        public MySqlCommand createNewCommand()
+        public MySqlCommand CreateNewCommand()
         {
             return _con.CreateCommand();
         }

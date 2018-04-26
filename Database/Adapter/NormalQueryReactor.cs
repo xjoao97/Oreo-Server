@@ -9,13 +9,13 @@ namespace Quasar.Database.Adapter
         public NormalQueryReactor(IDatabaseClient Client)
             : base(Client)
         {
-            base.command = Client.createNewCommand();
+            base.command = Client.CreateNewCommand();
         }
 
         public void Dispose()
         {
             base.command.Dispose();
-            base.client.reportDone();
+            base.client.ReportDone();
             GC.SuppressFinalize(this);
         }
     }

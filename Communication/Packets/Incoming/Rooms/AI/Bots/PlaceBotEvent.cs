@@ -70,32 +70,32 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
 
             List<RandomSpeech> BotSpeechList = new List<RandomSpeech>();
 
-            //TODO: Data?
-            DataRow GetData = null;
+
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `ai_type`,`rotation`,`walk_mode`,`automatic_chat`,`speaking_interval`,`mix_sentences`,`chat_bubble` FROM `bots` WHERE `id` = @BotId LIMIT 1");
                 dbClient.AddParameter("BotId", Bot.Id);
-                GetData = dbClient.getRow();
+                
+				using (var reader = dbClient.ExecuteReader())
+                   if (reader.Read())
+                    {
+                        RoomUser BotUser = Room.GetRoomUserManager().DeployBot(new RoomBot(Bot.Id, Session.GetHabbo().CurrentRoomId, reader.GetString("ai_type"), reader.GetString("walk_mode"), Bot.Name, "", Bot.Figure, X, Y, 0, 4, 0, 0, 0, 0, ref BotSpeechList, "", 0, Bot.OwnerId, PlusEnvironment.EnumToBool(reader.GetString("automatic_chat")), reader.GetInt32("speaking_interval"), PlusEnvironment.EnumToBool(reader.GetString("mix_sentences")), reader.GetInt32("chat_bubble")), null);
+                        BotUser.Chat("Hello!", false, 0);
+
+                        Room.GetGameMap().UpdateUserMovement(new System.Drawing.Point(X, Y), new System.Drawing.Point(X, Y), BotUser);
+                    }
 
                 dbClient.SetQuery("SELECT `text` FROM `bots_speech` WHERE `bot_id` = @BotId");
                 dbClient.AddParameter("BotId", Bot.Id);
-                DataTable BotSpeech = dbClient.getTable();
-
-                foreach (DataRow Speech in BotSpeech.Rows)
-                {
-                    BotSpeechList.Add(new RandomSpeech(Convert.ToString(Speech["text"]), Bot.Id));
-                }
+                using (var reader = dbClient.ExecuteReader())
+                    while (reader.Read())
+                    {
+                        BotSpeechList.Add(new RandomSpeech(reader.GetString("text"), Bot.Id));
+                    }
             }
 
-            RoomUser BotUser = Room.GetRoomUserManager().DeployBot(new RoomBot(Bot.Id, Session.GetHabbo().CurrentRoomId, Convert.ToString(GetData["ai_type"]), Convert.ToString(GetData["walk_mode"]), Bot.Name, "", Bot.Figure, X, Y, 0, 4, 0, 0, 0, 0, ref BotSpeechList, "", 0, Bot.OwnerId, QuasarEnvironment.EnumToBool(GetData["automatic_chat"].ToString()), Convert.ToInt32(GetData["speaking_interval"]), QuasarEnvironment.EnumToBool(GetData["mix_sentences"].ToString()), Convert.ToInt32(GetData["chat_bubble"])), null);
-            BotUser.Chat("Olá " + Session.GetHabbo().Username + "!", false, 0);
 
-            Room.GetGameMap().UpdateUserMovement(new System.Drawing.Point(X,Y), new System.Drawing.Point(X, Y), BotUser);
-
-
-            Bot ToRemove = null;
-            if (!Session.GetHabbo().GetInventoryComponent().TryRemoveBot(BotId, out ToRemove))
+            if (!Session.GetHabbo().GetInventoryComponent().TryRemoveBot(BotId, out Bot ToRemove))
             {
                 Console.WriteLine("Erro ao recolher o Bot: " + ToRemove.Id);
                 return;

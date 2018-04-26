@@ -28,8 +28,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
             string DataString = Packet.PopString();
             if (ActionId < 1 || ActionId > 5)
                 return;
-            RoomUser Bot = null;
-            if (!Room.GetRoomUserManager().TryGetBot(BotId, out Bot))
+            if (!Room.GetRoomUserManager().TryGetBot(BotId, out RoomUser Bot))
                 return;
             if ((Bot.BotData.ownerID != Session.GetHabbo().Id && !Session.GetHabbo().GetPermissions().HasRight("bot_edit_any_override")))
                 return;
@@ -114,12 +113,10 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.AI.Bots
                             RoomBot.RandomSpeech.Clear();
                             dbClient.SetQuery("SELECT `text` FROM `bots_speech` WHERE `bot_id` = @id");
                             dbClient.AddParameter("id", BotId);
-                            DataTable BotSpeech = dbClient.getTable();
                             List<RandomSpeech> Speeches = new List<RandomSpeech>();
-                            foreach (DataRow Speech in BotSpeech.Rows)
-                            {
-                                RoomBot.RandomSpeech.Add(new RandomSpeech(Convert.ToString(Speech["text"]), BotId));
-                            }
+                                 using (var reader = dbClient.ExecuteReader())
+                               while (reader.Read())
+                                    RoomBot.RandomSpeech.Add(new RandomSpeech(reader.GetString("text"), BotId));
                             #endregion
                         }
                         break;

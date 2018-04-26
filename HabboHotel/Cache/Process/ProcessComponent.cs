@@ -25,10 +25,7 @@ namespace Quasar.HabboHotel.Cache.Process
         /// </summary>
         private bool _timerRunning = false;
 
-        /// <summary>
-        /// Checks if the timer is lagging behind (server can't keep up).
-        /// </summary>
-        private bool _timerLagging = false;
+       
 
         /// <summary>
         /// Enable/Disable the timer WITHOUT disabling the timer itself.
@@ -73,7 +70,6 @@ namespace Quasar.HabboHotel.Cache.Process
 
                 if (this._timerRunning)
                 {
-                    this._timerLagging = true;
                     return;
                 }
 
@@ -138,7 +134,6 @@ namespace Quasar.HabboHotel.Cache.Process
 
                 // Reset the values
                 this._timerRunning = false;
-                this._timerLagging = false;
 
                 this._resetEvent.Set();
             }

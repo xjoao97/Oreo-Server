@@ -14,6 +14,7 @@ using Quasar.Database.Interfaces;
 using Quasar.HabboHotel.Items;
 using Quasar.Communication.Packets.Outgoing.Inventory.Furni;
 using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
+using MySql.Data.MySqlClient;
 
 namespace Quasar.Communication.Packets.Incoming.Catalog
 {
@@ -36,7 +37,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 return;
             }
 
-            DataRow GetRow = null;
+            MySqlDataReader dataReader = null;
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `user_vouchers` WHERE `user_id` = '" + Session.GetHabbo().Id + "' AND `voucher` = @Voucher LIMIT 1");
@@ -44,7 +45,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 GetRow = dbClient.getRow();
             }
 
-            if (GetRow != null)
+            if (dataReader != null)
             {
                 Session.SendNotification("Você já usou esse código!");
                 return;

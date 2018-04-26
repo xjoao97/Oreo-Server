@@ -8,13 +8,12 @@ public class SSOTicketEvent : IPacketEvent
     {
         public void Parse(GameClient Session, ClientPacket Packet)
         {
-            if (Session == null || Session.RC4Client == null || Session.GetHabbo() != null)
+            if (Session == null /*|| Session.RC4Client == null*/ || Session.GetHabbo() != null)
                 return;
 
             string SSO = Packet.PopString();
-            if (string.IsNullOrEmpty(SSO) || SSO.Length < 15)
-                return;
 
-            Session.TryAuthenticate(SSO);
+            if (!string.IsNullOrEmpty(SSO))
+                Session.TryAuthenticate(SSO);
         }
     }

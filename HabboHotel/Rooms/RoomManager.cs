@@ -154,15 +154,14 @@ namespace Quasar.HabboHotel.Rooms
             if (Room == null)
                 return;
 
-            Room room = null;
-            if (this._rooms.TryRemove(Room.RoomId, out room))
+            
+            if (this._rooms.TryRemove(Room.RoomId, out Room room))
             {
                 Room.Dispose();
 
                 if (RemoveData)
                 {
-                    RoomData Data = null;
-                    this._loadedRoomData.TryRemove(Room.Id, out Data);
+                    this._loadedRoomData.TryRemove(Room.Id, out RoomData Data);
                 }
             }
         }
@@ -364,9 +363,8 @@ namespace Quasar.HabboHotel.Rooms
 
             RoomData Data = new RoomData();
 
-            Room Room;
 
-            if (TryGetRoom(RoomId, out Room))
+            if (TryGetRoom(RoomId, out Room Room))
                 return Room.RoomData;
 
             DataRow Row = null;
@@ -405,9 +403,9 @@ namespace Quasar.HabboHotel.Rooms
 
         public Room LoadRoom(int Id)
         {
-            Room Room = null;
 
-            if (TryGetRoom(Id, out Room))
+
+            if (TryGetRoom(Id, out Room Room))
                 return Room;
 
             RoomData Data = GenerateRoomData(Id);

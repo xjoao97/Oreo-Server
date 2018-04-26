@@ -24,19 +24,13 @@ namespace Quasar.HabboHotel.Catalog.Clothing
             if (this._clothing.Count > 0)
                 this._clothing.Clear();
 
-            DataTable GetClothing = null;
+            
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `id`,`clothing_name`,`clothing_parts` FROM `catalog_clothing`");
-                GetClothing = dbClient.getTable();
-            }
-
-            if (GetClothing != null)
-            {
-                foreach (DataRow Row in GetClothing.Rows)
-                {
-                    this._clothing.Add(Convert.ToInt32(Row["id"]), new ClothingItem(Convert.ToInt32(Row["id"]), Convert.ToString(Row["clothing_name"]), Convert.ToString(Row["clothing_parts"])));
-                }
+                    using (var reader = dbClient.ExecuteReader())
+                    while (reader.Read())
+                        _clothing.Add(reader.GetInt32("id"), new ClothingItem(reader.GetInt32("id"), reader.GetString("clothing_name"), reader.GetString("clothing_parts")));
             }
         }
 

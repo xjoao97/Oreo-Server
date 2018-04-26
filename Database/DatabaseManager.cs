@@ -27,8 +27,9 @@ namespace Quasar.Database
                 CMD.Dispose();
                 Con.Close();
             }
-            catch (MySqlException)
+            catch (MySqlException ex)
             {
+				Console.WriteLine(ex);
                 return false;
             }
 
@@ -41,7 +42,7 @@ namespace Quasar.Database
             {
                 IDatabaseClient DbConnection = new DatabaseConnection(this._connectionStr);
 
-                DbConnection.connect();
+                DbConnection.Connect();
 
                 return DbConnection.GetQueryReactor();
             }

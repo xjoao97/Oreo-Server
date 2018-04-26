@@ -116,8 +116,8 @@ namespace Quasar.HabboHotel.GameClients
         {
             try
             {
-                byte errorCode = 0;
-                UserData userData = UserDataFactory.GetUserData(AuthTicket, out errorCode);
+
+                UserData userData = UserDataFactory.GetUserData(AuthTicket, out byte errorCode);
                 if (errorCode == 1 || errorCode == 2)
                 {
                     Disconnect();

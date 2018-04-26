@@ -14,25 +14,23 @@ namespace Quasar.HabboHotel.Achievements
             using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `id`,`category`,`group_name`,`level`,`reward_pixels`,`reward_points`,`progress_needed`,`game_id` FROM `achievements`");
-                DataTable dTable = dbClient.getTable();
-
-                if (dTable != null)
-                {
-                    foreach (DataRow dRow in dTable.Rows)
+                
+				using (var reader = dbClient.ExecuteReader())
+                    while (reader.Read())
                     {
-                        int id = Convert.ToInt32(dRow["id"]);
-                        string category = Convert.ToString(dRow["category"]);
-                        string groupName = Convert.ToString(dRow["group_name"]);
-                        int level = Convert.ToInt32(dRow["level"]);
-                        int rewardPixels = Convert.ToInt32(dRow["reward_pixels"]);
-                        int rewardPoints = Convert.ToInt32(dRow["reward_points"]);
-                        int progressNeeded = Convert.ToInt32(dRow["progress_needed"]);
+                        int id = reader.GetInt32("id");
+                        string category = reader.GetString("category");
+                        string groupName = reader.GetString("group_name");
+                        int level = reader.GetInt32("level");
+                        int rewardPixels = reader.GetInt32("reward_pixels");
+                        int rewardPoints = reader.GetInt32("reward_points");
+                        int progressNeeded = reader.GetInt32("progress_needed");
 
                         AchievementLevel AchievementLevel = new AchievementLevel(level, rewardPixels, rewardPoints, progressNeeded);
 
                         if (!achievements.ContainsKey(groupName))
                         {
-                            Achievement Achievement = new Achievement(id, groupName, category, Convert.ToInt32(dRow["game_id"]));
+                            Achievement Achievement = new Achievement(id, groupName, category, reader.GetInt32("game_id"));
                             Achievement.AddLevel(AchievementLevel);
                             achievements.Add(groupName, Achievement);
                         }
