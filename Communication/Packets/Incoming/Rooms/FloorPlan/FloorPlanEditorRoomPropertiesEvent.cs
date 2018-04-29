@@ -1,14 +1,13 @@
-﻿using System;
 using System.Linq;
-using System.Text;
 using System.Collections.Generic;
 
-using Quasar.HabboHotel.Rooms;
-using Quasar.HabboHotel.Items;
-using Quasar.Communication.Packets.Outgoing.Rooms.FloorPlan;
-using Quasar.Communication.Packets.Outgoing.Rooms.Engine;
+using Oreo.HabboHotel.Rooms;
+using Oreo.HabboHotel.Items;
+using Oreo.Communication.Packets.Outgoing.Rooms.FloorPlan;
+using Oreo.Communication.Packets.Outgoing.Rooms.Engine;
+using System.Drawing;
 
-namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
+namespace Oreo.Communication.Packets.Incoming.Rooms.FloorPlan
 {
     class FloorPlanEditorRoomPropertiesEvent : IPacketEvent
     {
@@ -20,16 +19,26 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.FloorPlan
             Room Room = Session.GetHabbo().CurrentRoom;
             if (Room == null)
                 return;
-
-            DynamicRoomModel Model = Room.GetGameMap().Model;
-            if (Model == null)
+           
+            if (Room.GetGameMap().Model == null)
                 return;
 
-            ICollection<Item> FloorItems = Room.GetRoomItemHandler().GetFloor;
+            List<Point> Squares = new List<Point>();
+            Room.GetRoomItemManager().GetFloor.ToList().ForEach(Item =>
+            {
+                Item.GetCoords.ForEach(Point =>
+                {
+                    if (!Squares.Contains(Point))
+                        Squares.Add(Point);
+                });
+            });
 
-            Session.SendMessage(new FloorPlanFloorMapComposer(FloorItems));
-            Session.SendMessage(new FloorPlanSendDoorComposer(Model.DoorX, Model.DoorY, Model.DoorOrientation));
-            Session.SendMessage(new RoomVisualizationSettingsComposer(Room.WallThickness, Room.FloorThickness, QuasarEnvironment.EnumToBool(Room.Hidewall.ToString())));
+            Session.SendMessage(new FloorPlanFloorMapComposer(Squares));
+            Session.SendMessage(new FloorPlanSendDoorComposer(Room.GetGameMap().Model.DoorX, Room.GetGameMap().Model.DoorY, Room.GetGameMap().Model.DoorOrientation));
+            Session.SendMessage(new RoomVisualizationSettingsComposer(Room.WallThickness, Room.FloorThickness, OreoServer.EnumToBool(Room.Hidewall.ToString())));
+
+            Squares.Clear();
+            Squares = null;
         }
     }
 }
