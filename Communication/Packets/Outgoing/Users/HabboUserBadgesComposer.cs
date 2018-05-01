@@ -16,7 +16,7 @@ namespace Quasar.Communication.Packets.Outgoing.Users
             base.WriteInteger(Habbo.Id);
             base.WriteInteger(Habbo.GetBadgeComponent().EquippedCount);
 
-            foreach (Badge Badge in Habbo.GetBadgeComponent().GetBadges().ToList())
+            foreach (Badge Badge in Habbo.GetBadgeComponent().GetBadges())
             {
                 if (Badge.Slot <= 0)
                     continue;

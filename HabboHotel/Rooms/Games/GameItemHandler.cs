@@ -32,7 +32,7 @@ namespace Quasar.HabboHotel.Rooms
         {
             Random rnd = new Random();
 
-            foreach (Item item in _banzaiPyramids.Values.ToList())
+            foreach (Item item in _banzaiPyramids.Values)
             {
                 if (item == null)
                     continue;
@@ -108,7 +108,7 @@ namespace Quasar.HabboHotel.Rooms
             if (count == 0)
                 return;
 
-            foreach (Item item in items.ToList())
+            foreach (Item item in items)
             {
                 if (item == null)
                     continue;

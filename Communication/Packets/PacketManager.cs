@@ -220,7 +220,7 @@ namespace Quasar.Communication.Packets
 
         public void WaitForAllToComplete()
         {
-            foreach (Task t in this._runningTasks.Values.ToList())
+            foreach (Task t in this._runningTasks.Values)
             {
                 t.Wait();
             }

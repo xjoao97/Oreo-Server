@@ -63,7 +63,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
                         {
                             base.WriteInteger(Deal.ItemDataList.Count);
 
-                            foreach (CatalogItem DealItem in Deal.ItemDataList.ToList())
+                            foreach (CatalogItem DealItem in Deal.ItemDataList)
                             {
                                 base.WriteString(DealItem.Data.Type.ToString());
                                 base.WriteInteger(DealItem.Data.SpriteId);
@@ -82,7 +82,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
                         if (Item.PredesignedId > 0)
                         {
                             base.WriteInteger(Page.PredesignedItems.Items.Count);
-                            foreach (var predesigned in Page.PredesignedItems.Items.ToList())
+                            foreach (var predesigned in Page.PredesignedItems.Items)
                             {
                                 ItemData Data = null;
                                 if (QuasarEnvironment.GetGame().GetItemManager().GetItem(predesigned.Key, out Data)) { }
@@ -154,7 +154,7 @@ namespace Quasar.Communication.Packets.Outgoing.Catalog
             else if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy") && Page.PageLink == "last_purchases")
             {
                 base.WriteInteger(Session.GetHabbo()._lastitems.Count());
-                foreach (var Item in Session.GetHabbo()._lastitems.ToList())
+                foreach (var Item in Session.GetHabbo()._lastitems)
                 {
                     base.WriteInteger(Item.Value.Id);
                     base.WriteString(Item.Value.Name);

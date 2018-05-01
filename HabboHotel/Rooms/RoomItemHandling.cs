@@ -189,7 +189,7 @@ namespace Quasar.HabboHotel.Rooms
                 this._wallItems.Clear();
 
             List<Item> Items = ItemLoader.GetItemsForRoom(this._room.Id, this._room);
-            foreach (Item Item in Items.ToList())
+            foreach (Item Item in Items)
             {
                 if (Item == null)
                     continue;
@@ -262,7 +262,7 @@ namespace Quasar.HabboHotel.Rooms
             }
 
 
-            foreach (Item Item in _floorItems.Values.ToList())
+            foreach (Item Item in _floorItems.Values)
             {
                 if (Item.IsRoller)
                 {
@@ -379,7 +379,7 @@ namespace Quasar.HabboHotel.Rooms
                 List<Item> ItemsOnRoller;
                 List<Item> ItemsOnNext;
 
-                foreach (Item Roller in _rollers.Values.ToList())
+                foreach (Item Roller in _rollers.Values)
                 {
                     if (Roller == null)
                         continue;
@@ -398,7 +398,7 @@ namespace Quasar.HabboHotel.Rooms
                     double NextZ = 0.0;
                     bool NextRoller = false;
 
-                    foreach (Item Item in ItemsOnNext.ToList())
+                    foreach (Item Item in ItemsOnNext)
                     {
                         if (Item.IsRoller)
                         {
@@ -411,7 +411,7 @@ namespace Quasar.HabboHotel.Rooms
 
                     if (NextRoller)
                     {
-                        foreach (Item Item in ItemsOnNext.ToList())
+                        foreach (Item Item in ItemsOnNext)
                         {
                             if (Item.TotalHeight > NextZ)
                                 NextRollerClear = false;
@@ -420,7 +420,7 @@ namespace Quasar.HabboHotel.Rooms
 
                     if (ItemsOnRoller.Count > 0)
                     {
-                        foreach (Item rItem in ItemsOnRoller.ToList())
+                        foreach (Item rItem in ItemsOnRoller)
                         {
                             if (rItem == null)
                                 continue;
@@ -517,7 +517,7 @@ namespace Quasar.HabboHotel.Rooms
             if (pUser != null && pUser.GetClient() != null && pUser.GetClient().GetHabbo() != null)
             {
                 List<Item> Items = _room.GetGameMap().GetRoomItemForSquare(pNextCoord.X, pNextCoord.Y);
-                foreach (Item IItem in Items.ToList())
+                foreach (Item IItem in Items)
                 {
                     if (IItem == null)
                         continue;
@@ -541,7 +541,7 @@ namespace Quasar.HabboHotel.Rooms
             {
                 if (_movedItems.Count > 0)
                 {
-                    foreach (Item Item in _movedItems.Values.ToList())
+                    foreach (Item Item in _movedItems.Values)
                     {
                         using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
                         {
@@ -749,7 +749,7 @@ namespace Quasar.HabboHotel.Rooms
             var ItemsAffected = new List<Item>();
             var ItemsComplete = new List<Item>();
 
-            foreach (ThreeDCoord Tile in AffectedTiles.Values.ToList())
+            foreach (ThreeDCoord Tile in AffectedTiles.Values)
             {
                 List<Item> Temp = GetFurniObjects(Tile.X, Tile.Y);
 
@@ -765,7 +765,7 @@ namespace Quasar.HabboHotel.Rooms
 
             if (!OnRoller)
             {
-                foreach (Item I in ItemsComplete.ToList())
+                foreach (Item I in ItemsComplete)
                 {
                     if (I == null)
                         continue;
@@ -792,7 +792,7 @@ namespace Quasar.HabboHotel.Rooms
                 if (Item.Rotation != newRot && Item.GetX == newX && Item.GetY == newY)
                     newZ = Item.GetZ;
 
-                foreach (Item I in ItemsComplete.ToList())
+                foreach (Item I in ItemsComplete)
                 {
                     if (I == null)
                         continue;
@@ -992,7 +992,7 @@ namespace Quasar.HabboHotel.Rooms
                     }
                 }
 
-                foreach (Item item in addItems.ToList())
+                foreach (Item item in addItems)
                 {
                     if (item == null)
                         continue;
@@ -1009,7 +1009,7 @@ namespace Quasar.HabboHotel.Rooms
         {
             List<Item> Items = new List<Item>();
 
-            foreach (Item Item in this.GetWallAndFloor.ToList())
+            foreach (Item Item in this.GetWallAndFloor)
             {
                 if (Item == null || Item.UserID != Session.GetHabbo().Id)
                     continue;
@@ -1071,7 +1071,7 @@ namespace Quasar.HabboHotel.Rooms
                     return false;
 
 
-                foreach (ThreeDCoord coord in dictionary.Values.ToList())
+                foreach (ThreeDCoord coord in dictionary.Values)
                 {
                     if ((this._room.GetGameMap().Model.DoorX == coord.X) && (this._room.GetGameMap().Model.DoorY == coord.Y))
                         return false;
@@ -1081,7 +1081,7 @@ namespace Quasar.HabboHotel.Rooms
                     return false;
 
 
-                foreach (ThreeDCoord coord in dictionary.Values.ToList())
+                foreach (ThreeDCoord coord in dictionary.Values)
                 {
                     if (!this._room.GetGameMap().ValidTile(coord.X, coord.Y))
                         return false;
@@ -1094,7 +1094,7 @@ namespace Quasar.HabboHotel.Rooms
                 if (this._room.GetGameMap().Model.SqState[newX, newY] != SquareState.OPEN)
                     return false;
 
-                foreach (ThreeDCoord coord in dictionary.Values.ToList())
+                foreach (ThreeDCoord coord in dictionary.Values)
                 {
                     if (this._room.GetGameMap().Model.SqState[coord.X, coord.Y] != SquareState.OPEN)
                         return false;
@@ -1104,7 +1104,7 @@ namespace Quasar.HabboHotel.Rooms
                     if (this._room.GetGameMap().SquareHasUsers(newX, newY))
                         return false;
 
-                    foreach (ThreeDCoord coord in dictionary.Values.ToList())
+                    foreach (ThreeDCoord coord in dictionary.Values)
                     {
                         if (this._room.GetGameMap().SquareHasUsers(coord.X, coord.Y))
                             return false;
@@ -1114,7 +1114,7 @@ namespace Quasar.HabboHotel.Rooms
                 List<Item> furniObjects = this.GetFurniObjects(newX, newY);
                 List<Item> collection = new List<Item>();
                 List<Item> list3 = new List<Item>();
-                foreach (ThreeDCoord coord in dictionary.Values.ToList())
+                foreach (ThreeDCoord coord in dictionary.Values)
                 {
                     List<Item> list4 = this.GetFurniObjects(coord.X, coord.Y);
                     if (list4 != null)
@@ -1127,7 +1127,7 @@ namespace Quasar.HabboHotel.Rooms
 
                 list3.AddRange(furniObjects);
                 list3.AddRange(collection);
-                foreach (Item item in list3.ToList())
+                foreach (Item item in list3)
                 {
                     if ((item.Id != Item.Id) && !item.GetBaseItem().Stackable)
                         return false;
@@ -1148,7 +1148,7 @@ namespace Quasar.HabboHotel.Rooms
 
         public void Dispose()
         {
-            foreach (Item Item in this.GetWallAndFloor.ToList())
+            foreach (Item Item in this.GetWallAndFloor)
             {
                 if (Item == null)
                     continue;

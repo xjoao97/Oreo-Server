@@ -162,7 +162,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void StaffAlert1(ServerPacket Message, int Exclude = 0)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -176,7 +176,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void StaffAlert2(ServerPacket Message, int Exclude = 0)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -190,7 +190,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void StaffAlert(ServerPacket Message, int Exclude = 0)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -220,7 +220,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void ManagerAlert(ServerPacket Message, int Exclude = 0)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -234,7 +234,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void GroupChatAlert(ServerPacket Message, Group Group, int Exclude = 0)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -248,7 +248,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void GuideAlert(ServerPacket Message, int Exclude = 0)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -276,7 +276,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void SupportMessage(ServerPacket Message, int Exclude = 0)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -293,7 +293,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void ModAlert(string Message)
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null || client.GetHabbo() == null)
                     continue;
@@ -331,7 +331,7 @@ namespace Quasar.HabboHotel.GameClients
                 }
             }
 
-            foreach (GameClient Client in this.GetClients.ToList())
+            foreach (GameClient Client in this.GetClients)
             {
                 if (Client == null || Client.GetHabbo() == null)
                     continue;
@@ -348,7 +348,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void SendMessage(ServerPacket Packet, string fuse = "")
         {
-            foreach (GameClient Client in this._clients.Values.ToList())
+            foreach (GameClient Client in this._clients.Values)
             {
                 if (Client == null || Client.GetHabbo() == null)
                     continue;
@@ -365,7 +365,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void SendEventType1(ServerPacket Packet, string fuse = "")
         {
-            foreach (GameClient Client in this._clients.Values.ToList())
+            foreach (GameClient Client in this._clients.Values)
             {
                 if (Client == null || Client.GetHabbo() == null || Client.GetHabbo().EventType == 2)
                     continue;
@@ -382,7 +382,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void SendEventType2(ServerPacket Packet, string fuse = "")
         {
-            foreach (GameClient Client in this._clients.Values.ToList())
+            foreach (GameClient Client in this._clients.Values)
             {
                 if (Client == null || Client.GetHabbo() == null || Client.GetHabbo().EventType == 1)
                     continue;
@@ -446,7 +446,7 @@ namespace Quasar.HabboHotel.GameClients
 
         public void CloseAll()
         {
-            foreach (GameClient client in this.GetClients.ToList())
+            foreach (GameClient client in this.GetClients)
             {
                 if (client == null)
                     continue;
@@ -472,7 +472,7 @@ namespace Quasar.HabboHotel.GameClients
             log.Info("Cerrando todas las conexiones.");
             try
             {
-                foreach (GameClient client in this.GetClients.ToList())
+                foreach (GameClient client in this.GetClients)
                 {
                     if (client == null || client.GetConnection() == null)
                         continue;
@@ -507,7 +507,7 @@ namespace Quasar.HabboHotel.GameClients
 
                 List<GameClient> ToPing = new List<GameClient>();
 
-                    foreach (GameClient client in this._clients.Values.ToList())
+                    foreach (GameClient client in this._clients.Values)
                 {
                     if (client.PingCount < 6)
                         {
@@ -525,7 +525,7 @@ namespace Quasar.HabboHotel.GameClients
 
                     DateTime start = DateTime.Now;
 
-                    foreach (GameClient Client in ToPing.ToList())
+                    foreach (GameClient Client in ToPing)
                     {
                         try
                         {

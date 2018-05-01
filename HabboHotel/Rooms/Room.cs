@@ -816,7 +816,7 @@ namespace Quasar.HabboHotel.Rooms
         {
             Func<Item, bool> predicate = null;
             string Key = null;
-            foreach (Item item in this.GetRoomItemHandler().GetFurniObjects(Ball.GetX, Ball.GetY).ToList())
+            foreach (Item item in this.GetRoomItemHandler().GetFurniObjects(Ball.GetX, Ball.GetY))
             {
                 if (item.GetBaseItem().ItemName.StartsWith("fball_goal_"))
                 {
@@ -833,7 +833,7 @@ namespace Quasar.HabboHotel.Rooms
                 {
                     predicate = p => p.GetBaseItem().ItemName == ("fball_score_" + Key);
                 }
-                foreach (Item item2 in this.GetRoomItemHandler().GetFloor.Where<Item>(predicate).ToList())
+                foreach (Item item2 in this.GetRoomItemHandler().GetFloor.Where<Item>(predicate))
                 {
                     if (item2.GetBaseItem().ItemName == ("fball_score_" + Key))
                     {
@@ -862,7 +862,7 @@ namespace Quasar.HabboHotel.Rooms
             if (User == null)
                 return;
 
-            foreach (Item item in this.GetRoomItemHandler().GetFurniObjects(Ball.GetX, Ball.GetY).ToList())
+            foreach (Item item in this.GetRoomItemHandler().GetFurniObjects(Ball.GetX, Ball.GetY))
             {
                 if (item.GetBaseItem().ItemName.StartsWith("fball_goal_"))
                 {
@@ -883,7 +883,7 @@ namespace Quasar.HabboHotel.Rooms
                     predicate = p => p.GetBaseItem().ItemName == ("fball_score_" + Key);
                 }
 
-                foreach (Item item2 in this.GetRoomItemHandler().GetFloor.Where<Item>(predicate).ToList())
+                foreach (Item item2 in this.GetRoomItemHandler().GetFloor.Where<Item>(predicate))
                 {
                     if (item2.GetBaseItem().ItemName == ("fball_score_" + Key))
                     {
@@ -980,7 +980,7 @@ namespace Quasar.HabboHotel.Rooms
 
             try
             {
-                foreach (RoomUser user in _roomUserManager.GetRoomUsers().ToList())
+                foreach (RoomUser user in _roomUserManager.GetRoomUsers())
                 {
                     if (user == null || user.GetClient() == null)
                         continue;
@@ -1041,7 +1041,7 @@ namespace Quasar.HabboHotel.Rooms
             Session.SendMessage(new HeightMapComposer(Room.GetGameMap().Model.Heightmap));
             Session.SendMessage(new FloorHeightMapComposer(Room.GetGameMap().Model.GetRelativeHeightmap(), Room.GetGameMap().StaticModel.WallHeight));
 
-            foreach (RoomUser RoomUser in _roomUserManager.GetUserList().ToList())
+            foreach (RoomUser RoomUser in _roomUserManager.GetUserList())
             {
                 if (RoomUser == null)
                     continue;
@@ -1083,7 +1083,7 @@ namespace Quasar.HabboHotel.Rooms
                 return;
 
             List<RoomUser> Users = Tents[TentId];
-            foreach (RoomUser User in Users.ToList())
+            foreach (RoomUser User in Users)
             {
                 if (User == null || User.GetClient() == null || User.GetClient().GetHabbo() == null)
                     continue;
@@ -1127,7 +1127,7 @@ namespace Quasar.HabboHotel.Rooms
             if (!Tents.ContainsKey(TentId))
                 return;
 
-            foreach (RoomUser User in Tents[TentId].ToList())
+            foreach (RoomUser User in Tents[TentId])
             {
                 if (User == null || User.GetClient() == null || User.GetClient().GetHabbo() == null || User.GetClient().GetHabbo().MutedUsers.Contains(Id) || User.GetClient().GetHabbo().TentId != TentId)
                     continue;
@@ -1173,7 +1173,7 @@ namespace Quasar.HabboHotel.Rooms
 
         public void BroadcastPacket(byte[] Packet)
         {
-            foreach (RoomUser User in this._roomUserManager.GetUserList().ToList())
+            foreach (RoomUser User in this._roomUserManager.GetUserList())
             {
                 if (User == null || User.IsBot)
                     continue;
@@ -1195,7 +1195,7 @@ namespace Quasar.HabboHotel.Rooms
                 byte[] TotalBytes = new byte[0];
                 int Current = 0;
 
-                foreach (ServerPacket Packet in Messages.ToList())
+                foreach (ServerPacket Packet in Messages)
                 {
                     byte[] ToAdd = Packet.GetBytes();
                     int NewLen = TotalBytes.Length + ToAdd.Length;
@@ -1220,7 +1220,7 @@ namespace Quasar.HabboHotel.Rooms
 
         private void SaveAI()
         {
-            foreach (RoomUser User in GetRoomUserManager().GetRoomUsers().ToList())
+            foreach (RoomUser User in GetRoomUserManager().GetRoomUsers())
             {
                 if (User == null || !User.IsBot)
                     continue;

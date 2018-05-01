@@ -15,7 +15,7 @@ namespace Quasar.Communication.Packets.Incoming.LandingView
         {
             int goal = int.Parse(QuasarEnvironment.GetDBConfig().DBData["usersconcurrent_goal"]); ;
             int UsersOnline = QuasarEnvironment.GetGame().GetClientManager().Count;
-            foreach (GameClient Target in QuasarEnvironment.GetGame().GetClientManager().GetClients.ToList())
+            foreach (GameClient Target in QuasarEnvironment.GetGame().GetClientManager().GetClients)
             {
                 if (UsersOnline < goal)
                 {

@@ -19,12 +19,12 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.Furni
             base.WriteInteger(1);
 
             base.WriteInteger(Items.Count + Walls.Count);
-            foreach (Item Item in Items.ToList())
+            foreach (Item Item in Items)
             {
                 WriteItem(Item);
             }
 
-            foreach (Item Item in Walls.ToList())
+            foreach (Item Item in Walls)
             {
                 WriteItem(Item);
             }
@@ -37,7 +37,7 @@ namespace Quasar.Communication.Packets.Outgoing.Inventory.Furni
             base.WriteInteger(page);
 
             base.WriteInteger(Items.Count);
-            foreach (Item Item in Items.ToList())
+            foreach (Item Item in Items)
             {
                 WriteItem(Item);
             }

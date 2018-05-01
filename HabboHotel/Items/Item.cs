@@ -1626,7 +1626,7 @@ namespace Quasar.HabboHotel.Items
 
                                 if (TargetSquares.Count > 0)
                                 {
-                                    foreach (Point Square in TargetSquares.ToList())
+                                    foreach (Point Square in TargetSquares)
                                     {
                                         List<RoomUser> affectedUsers = _room.GetGameMap().GetRoomUsers(Square).ToList();
 

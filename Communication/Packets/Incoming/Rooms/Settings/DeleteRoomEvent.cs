@@ -38,7 +38,7 @@ namespace Quasar.Communication.Packets.Incoming.Rooms.Settings
                 return;
 
             List<Item> ItemsToRemove = new List<Item>();
-            foreach (Item Item in Room.GetRoomItemHandler().GetWallAndFloor.ToList())
+            foreach (Item Item in Room.GetRoomItemHandler().GetWallAndFloor)
             {
                 if (Item == null)
                     continue;

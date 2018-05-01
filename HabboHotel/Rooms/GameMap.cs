@@ -141,7 +141,7 @@ namespace Quasar.HabboHotel.Rooms
             int RandomNumber = QuasarEnvironment.GetRandomNumber(0, walkableSquares.Count);
             int i = 0;
 
-            foreach (Point coord in walkableSquares.ToList())
+            foreach (Point coord in walkableSquares)
             {
                 if (i == RandomNumber)
                     return coord;
@@ -209,7 +209,7 @@ namespace Quasar.HabboHotel.Rooms
             if (checkLines)
             {
                 Item[] items = _room.GetRoomItemHandler().GetFloor.ToArray();
-                foreach (Item item in items.ToList())
+                foreach (Item item in items)
                 {
                     if (item == null)
                         continue;
@@ -375,7 +375,7 @@ namespace Quasar.HabboHotel.Rooms
             #endregion
 
             Item[] tmpItems = _room.GetRoomItemHandler().GetFloor.ToArray();
-            foreach (Item Item in tmpItems.ToList())
+            foreach (Item Item in tmpItems)
             {
                 if (Item == null)
                     continue;
@@ -388,7 +388,7 @@ namespace Quasar.HabboHotel.Rooms
 
             if (_room.RoomBlockingEnabled == 0)
             {
-                foreach (RoomUser user in _room.GetRoomUserManager().GetUserList().ToList())
+                foreach (RoomUser user in _room.GetRoomUserManager().GetUserList())
                 {
                     if (user == null)
                         continue;
@@ -666,14 +666,14 @@ namespace Quasar.HabboHotel.Rooms
                 _room.GetSoccer().onGateRemove(item);
 
             bool isRemoved = false;
-            foreach (Point coord in item.GetCoords.ToList())
+            foreach (Point coord in item.GetCoords)
             {
                 if (RemoveCoordinatedItem(item, coord))
                     isRemoved = true;
             }
 
             ConcurrentDictionary<Point, List<Item>> items = new ConcurrentDictionary<Point, List<Item>>();
-            foreach (Point Tile in item.GetCoords.ToList())
+            foreach (Point Tile in item.GetCoords)
             {
                 Point point = new Point(Tile.X, Tile.Y);
                 if (mCoordinatedItems.ContainsKey(point))
@@ -688,13 +688,13 @@ namespace Quasar.HabboHotel.Rooms
                 SetDefaultValue(Tile.X, Tile.Y);
             }
 
-            foreach (Point Coord in items.Keys.ToList())
+            foreach (Point Coord in items.Keys)
             {
                 if (!items.ContainsKey(Coord))
                     continue;
 
                 List<Item> SubItems = (List<Item>)items[Coord];
-                foreach (Item Item in SubItems.ToList())
+                foreach (Item Item in SubItems)
                 {
                     ConstructMapForItem(Item, Coord);
                 }
@@ -783,7 +783,7 @@ namespace Quasar.HabboHotel.Rooms
             if (Item.GetBaseItem().Type != 's')
                 return true;
 
-            foreach (Point coord in Item.GetCoords.ToList())
+            foreach (Point coord in Item.GetCoords)
             {
                 AddCoordinatedItem(Item, new Point(coord.X, coord.Y));
             }
@@ -911,7 +911,7 @@ namespace Quasar.HabboHotel.Rooms
 
             if (Items != null && Items.Count() > 0)
             {
-                foreach (Item uItem in Items.ToList())
+                foreach (Item uItem in Items)
                 {
                     if (uItem == null)
                         continue;
@@ -1282,7 +1282,7 @@ namespace Quasar.HabboHotel.Rooms
 
             bool Chair = false;
             double HighestZ = -1;
-            foreach (Item Item in Items.ToList())
+            foreach (Item Item in Items)
             {
                 if (Item == null)
                     continue;
@@ -1477,7 +1477,7 @@ namespace Quasar.HabboHotel.Rooms
 
                 if (ItemsOnSquare != null && ItemsOnSquare.Count > 0)
                 {
-                    foreach (Item Item in ItemsOnSquare.ToList())
+                    foreach (Item Item in ItemsOnSquare)
                     {
                         if (Item == null)
                             continue;
@@ -1598,7 +1598,7 @@ namespace Quasar.HabboHotel.Rooms
 
             lock (Input)
             {
-                foreach (int Id in Input.ToList())
+                foreach (int Id in Input)
                 {
                     Item Itm = _room.GetRoomItemHandler().GetItem(Id);
                     if (Itm != null && !Items.Contains(Itm))

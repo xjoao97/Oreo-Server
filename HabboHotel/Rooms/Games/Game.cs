@@ -58,7 +58,7 @@ namespace Quasar.HabboHotel.Rooms.Games
 
             this._teamPoints[Convert.ToInt32(team)] = newPoints;
 
-            foreach (Item item in GetFurniItems(team).Values.ToList())
+            foreach (Item item in GetFurniItems(team).Values)
             {
                 if (!IsFootballGoal(item.GetBaseItem().InteractionType))
                 {
@@ -67,7 +67,7 @@ namespace Quasar.HabboHotel.Rooms.Games
                 }
             }
 
-            foreach (Item item in _room.GetRoomItemHandler().GetFloor.ToList())
+            foreach (Item item in _room.GetRoomItemHandler().GetFloor)
             {
                 if (team == TEAM.BLUE && item.Data.InteractionType == InteractionType.banzaiscoreblue)
                 {
@@ -169,22 +169,22 @@ namespace Quasar.HabboHotel.Rooms.Games
         #region Gates
         public void LockGates()
         {
-            foreach (Item item in this._redTeamItems.Values.ToList())
+            foreach (Item item in this._redTeamItems.Values)
             {
                 LockGate(item);
             }
 
-            foreach (Item item in this._greenTeamItems.Values.ToList())
+            foreach (Item item in this._greenTeamItems.Values)
             {
                 LockGate(item);
             }
 
-            foreach (Item item in this._blueTeamItems.Values.ToList())
+            foreach (Item item in this._blueTeamItems.Values)
             {
                 LockGate(item);
             }
 
-            foreach (Item item in this._yellowTeamItems.Values.ToList())
+            foreach (Item item in this._yellowTeamItems.Values)
             {
                 LockGate(item);
             }
@@ -192,22 +192,22 @@ namespace Quasar.HabboHotel.Rooms.Games
 
         public void UnlockGates()
         {
-            foreach (Item item in this._redTeamItems.Values.ToList())
+            foreach (Item item in this._redTeamItems.Values)
             {
                 UnlockGate(item);
             }
 
-            foreach (Item item in this._greenTeamItems.Values.ToList())
+            foreach (Item item in this._greenTeamItems.Values)
             {
                 UnlockGate(item);
             }
 
-            foreach (Item item in this._blueTeamItems.Values.ToList())
+            foreach (Item item in this._blueTeamItems.Values)
             {
                 UnlockGate(item);
             }
 
-            foreach (Item item in this._yellowTeamItems.Values.ToList())
+            foreach (Item item in this._yellowTeamItems.Values)
             {
                 UnlockGate(item);
             }

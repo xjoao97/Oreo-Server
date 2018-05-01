@@ -37,7 +37,7 @@ namespace Quasar.HabboHotel.Games
         public int GetCount()
         {
             int GameCount = 0;
-            foreach (GameData Game in this._games.Values.ToList())
+            foreach (GameData Game in this._games.Values)
             {
                 if (Game.GameEnabled)
                     GameCount += 1;

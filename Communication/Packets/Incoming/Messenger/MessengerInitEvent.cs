@@ -18,7 +18,7 @@ namespace Quasar.Communication.Packets.Incoming.Messenger
             Session.GetHabbo().GetMessenger().OnStatusChanged(false);
 
             ICollection<MessengerBuddy> Friends = new List<MessengerBuddy>();
-            foreach (MessengerBuddy Buddy in Session.GetHabbo().GetMessenger().GetFriends().ToList())
+            foreach (MessengerBuddy Buddy in Session.GetHabbo().GetMessenger().GetFriends())
             {
                 if (Buddy == null || Buddy.IsOnline) continue;
                 Friends.Add(Buddy);
