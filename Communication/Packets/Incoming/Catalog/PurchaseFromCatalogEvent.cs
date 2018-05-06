@@ -1,40 +1,43 @@
-﻿using System;
-using System.Linq;
+using Galaxy.Communication.Packets.Outgoing.Catalog;
+using Galaxy.Communication.Packets.Outgoing.Inventory.AvatarEffects;
+using Galaxy.Communication.Packets.Outgoing.Inventory.Bots;
+using Galaxy.Communication.Packets.Outgoing.Inventory.Furni;
+using Galaxy.Communication.Packets.Outgoing.Inventory.Pets;
+using Galaxy.Communication.Packets.Outgoing.Inventory.Purse;
+using Galaxy.Communication.Packets.Outgoing.Messenger;
+using Galaxy.Communication.Packets.Outgoing.Moderation;
+using Galaxy.Communication.Packets.Outgoing.Navigator;
+using Galaxy.Communication.Packets.Outgoing.Rooms.Notifications;
+using Galaxy.Communication.Packets.Outgoing.Users;
+using Galaxy.Core;
+using Galaxy.Database.Interfaces;
+using Galaxy.HabboHotel.Catalog;
+using Galaxy.HabboHotel.GameClients;
+using Galaxy.HabboHotel.Groups;
+using Galaxy.HabboHotel.Groups.Forums;
+using Galaxy.HabboHotel.Items;
+using Galaxy.HabboHotel.Items.Utilities;
+using Galaxy.HabboHotel.Rooms.AI;
+using Galaxy.HabboHotel.Users.Effects;
+using Galaxy.HabboHotel.Users.Inventory.Bots;
+using Galaxy.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
-using Quasar.Core;
-using Quasar.Communication.Packets.Incoming;
-using Quasar.HabboHotel.Catalog;
-using Quasar.HabboHotel.GameClients;
-using Quasar.HabboHotel.Items;
-using Quasar.HabboHotel.Groups;
-using Quasar.HabboHotel.Users.Effects;
-using Quasar.HabboHotel.Items.Utilities;
-using Quasar.HabboHotel.Users.Inventory.Bots;
-using Quasar.Communication.Packets.Outgoing.Handshake;
-using Quasar.HabboHotel.Rooms.AI;
-using Quasar.Communication.Packets.Outgoing.Catalog;
-using Quasar.Communication.Packets.Outgoing.Inventory.Bots;
-using Quasar.Communication.Packets.Outgoing.Inventory.Pets;
-using Quasar.Communication.Packets.Outgoing.Inventory.Purse;
-using Quasar.Communication.Packets.Outgoing.Inventory.Furni;
-using Quasar.Communication.Packets.Outgoing.Inventory.AvatarEffects;
-using Quasar.Database.Interfaces;
-using Quasar.Communication.Packets.Outgoing.Moderation;
-using Quasar.Utilities;
-using Quasar.Communication.Packets.Outgoing.Navigator;
-using Quasar.Communication.Packets.Outgoing.Users;
-using Quasar.Communication.Packets.Outgoing.Rooms.Notifications;
-
-namespace Quasar.Communication.Packets.Incoming.Catalog
+namespace Galaxy.Communication.Packets.Incoming.Catalog
 {
     public class PurchaseFromCatalogEvent : IPacketEvent
     {
         public void Parse(GameClient Session, ClientPacket Packet)
         {
-            if (QuasarEnvironment.GetDBConfig().DBData["catalogue_enabled"] != "1")
+            ICollection<Item> FloorItems = Session.GetHabbo().GetInventoryComponent().GetFloorItems();
+            ICollection<Item> WallItems = Session.GetHabbo().GetInventoryComponent().GetWallItems();
+
+            if (GalaxyServer.GetGame().GetSettingsManager().TryGetValue("catalog.enabled") != "1")
             {
-                Session.SendNotification("O catálogo foi desativado temporariamente!");
+                Session.SendNotification("O Catálogo foi desativado temporariamente!");
                 return;
             }
 
@@ -43,50 +46,41 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             string ExtraData = Packet.PopString();
             int Amount = Packet.PopInt();
 
-            if (!QuasarEnvironment.GetGame().GetCatalog().TryGetPage(PageId, out CatalogPage Page))
+            if (!GalaxyServer.GetGame().GetCatalog().TryGetPage(PageId, out CatalogPage Page))
                 return;
-            if (Session.GetHabbo().Rank > 3 && !Session.GetHabbo().StaffOk || QuasarStaticGameSettings.IsGoingToBeClose)
-                return;
+
             if (!Page.Enabled || !Page.Visible || Page.MinimumRank > Session.GetHabbo().Rank || (Page.MinimumVIP > Session.GetHabbo().VIPRank && Session.GetHabbo().Rank == 1))
                 return;
-
-
-            bool ValidItem = true;
 
             if (!Page.Items.TryGetValue(ItemId, out CatalogItem Item))
             {
                 if (Page.ItemOffers.ContainsKey(ItemId))
                 {
-                    Item = (CatalogItem)Page.ItemOffers[ItemId];
+                    Item = Page.ItemOffers[ItemId];
                     if (Item == null)
-                        ValidItem = false;
+                        return;
                 }
                 else
-                    ValidItem = false;
+                    return;
             }
 
-            if (Session.GetHabbo()._lastitems.Count > 0)
+            if (Session.GetHabbo().Rank > 0)
             {
-                Page.LastItemOffers = new Dictionary<int, CatalogItem>();
-                foreach (var lastItem in Session.GetHabbo()._lastitems)
+                DataRow presothiago = null;
+                using (var dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
                 {
-                    Page.LastItemOffers.Add(lastItem.Key, lastItem.Value);
+                    dbClient.SetQuery("SELECT Presidio FROM users WHERE id = '" + Session.GetHabbo().Id + "'");
+                    presothiago = dbClient.getRow();
                 }
-
-                if (Page.LastItemOffers.ContainsKey(ItemId))
+                if (Convert.ToBoolean(presothiago["Presidio"]) == true)
                 {
-                    Item = (CatalogItem)Page.LastItemOffers[ItemId];
-                    if (Item == null)
-                        ValidItem = false;
-                    else
-                        ValidItem = true;
+                    if (Session.GetHabbo().Rank > 0)
+                    {
+                        string thiago = Session.GetHabbo().Look;
+                        Session.SendMessage(new RoomNotificationComposer("police_announcement", "message", "Você está preso e não pode comprar no catálogo."));
+                        return;
+                    }
                 }
-            }
-
-            if (!ValidItem)
-            {
-                Console.WriteLine("Não encontrado:" + Item.Data.PublicName);
-                return;
             }
 
             ItemData baseItem = Item.GetBaseItem(Item.ItemId);
@@ -94,9 +88,6 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             {
                 if (baseItem.InteractionType == InteractionType.club_1_month || baseItem.InteractionType == InteractionType.club_3_month || baseItem.InteractionType == InteractionType.club_6_month)
                 {
-                    if (Item.CostCredits > Session.GetHabbo().Credits)
-                        return;
-
                     int Months = 0;
 
                     switch (baseItem.InteractionType)
@@ -116,232 +107,353 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
 
                     int num = num = 31 * Months;
 
+                    if (Item.CostCredits > Session.GetHabbo().Credits || Item.CostPixels > Session.GetHabbo().Duckets || Item.CostDiamonds > Session.GetHabbo().Diamonds || Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                        return;
+
                     if (Item.CostCredits > 0)
                     {
                         Session.GetHabbo().Credits -= Item.CostCredits;
                         Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
-
                     }
 
                     Session.GetHabbo().GetClubManager().AddOrExtendSubscription("habbo_vip", num * 24 * 3600, Session);
                     Session.GetHabbo().GetBadgeComponent().GiveBadge("HC1", true, Session);
 
                     Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
-                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
+                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
                     Session.SendMessage(new FurniListUpdateComposer());
                     return;
                 }
+
 
                 if (baseItem.InteractionType == InteractionType.namecolor)
                 {
-                    if (Item.CostGOTWPoints > Session.GetHabbo().GOTWPoints)
-                        return;
 
-                    if (Item.CostGOTWPoints > 0)
+                    if (Item.CostCredits > Session.GetHabbo().Credits || Item.CostPixels > Session.GetHabbo().Duckets || Item.CostDiamonds > Session.GetHabbo().Diamonds || Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                        return;
+                    if (Item.CostCredits > 0)
                     {
-                        Session.GetHabbo().GOTWPoints -= Item.CostGOTWPoints;
-                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
+                        if (Item.CostCredits > Session.GetHabbo().Credits)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostCredits + " créditos necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Credits -= Item.CostCredits;
+                        Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
                     }
 
-                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                    if (Item.CostPixels > 0)
                     {
-                        dbClient.RunQuery("UPDATE `users` SET `namecolor` = '" + Item.Name + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                        if (Item.CostPixels > Session.GetHabbo().Duckets)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostPixels + " duckets necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Duckets -= Item.CostPixels;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Session.GetHabbo().Duckets));//Love you, Tom.
                     }
-
-                    Session.GetHabbo()._nameColor = Item.Name;
-                    Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
-                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
-                    Session.SendMessage(new FurniListUpdateComposer());
-                    return;
-                }
-
-                if (baseItem.InteractionType == InteractionType.changename)
-                {
-                    if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
-                        return;
 
                     if (Item.CostDiamonds > 0)
                     {
+                        if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostDiamonds + " diamantes necessários para comprar isso.");
+                            return;
+                        }
                         Session.GetHabbo().Diamonds -= Item.CostDiamonds;
                         Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
                     }
 
-                    Session.GetHabbo().LastNameChange = 0;
-                    Session.GetHabbo().ChangingName = true;
-                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                    if (Item.CostGotw > 0)
                     {
-                        dbClient.RunQuery("UPDATE users SET changename = '1' WHERE id = " + Session.GetHabbo().Id + "");
+                        if (Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostGotw + " "+ExtraSettings.PTOS_COINS+" necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().GOTWPoints -= Item.CostGotw;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
                     }
 
-                    Session.GetHabbo()._changename = 1;
-                    Session.SendMessage(new UserObjectComposer(Session.GetHabbo()));
+                    using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.runFastQuery("UPDATE `users` SET `name_color` = '#" + Item.Name + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                    }
 
-                    Session.SendWhisper("Você acabou de adquirir uma mudança de nome, clique em você e mude-o.", 34);
-
+                    Session.GetHabbo().chatHTMLColour = "#" + Item.Name;
+                    Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
+                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
                     Session.SendMessage(new FurniListUpdateComposer());
-                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
                     return;
                 }
 
-
-
-                if (baseItem.InteractionType == InteractionType.tag)
+                if (baseItem.InteractionType == InteractionType.prefixname)
                 {
-                    if (ExtraData.Length == 0 || ExtraData.Length > 8 || ExtraData.Length < 0)
+
+                    if (ExtraData.Length > 15 || ExtraData.Length < 0)
                     {
-                        Session.SendNotification("Desculpe, você deve inserir uma tag entre 1 e 8 caracteres");
-                        return;
-                    }
-                    else if (ExtraData.Contains("<br>") || ExtraData.Contains("<b>") || ExtraData.Contains("<i>") || ExtraData.Contains("<Br>") || ExtraData.Contains("<BR>") ||
-                        ExtraData.Contains("<bR>") || ExtraData.Contains("<B>") || ExtraData.Contains("<I>"))
-                    {
-                        Session.SendNotification("Oops, nada de código HTML!");
+                        Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
+                        Session.SendWhisper("Você deve digitar uma tag de 1 a 15 caracteres para adquirir.", 34);
                         return;
                     }
 
-                    else if (ExtraData.ToUpper().Contains("ADM") || ExtraData.ToUpper().Contains("MOD") || ExtraData.ToUpper().Contains("M0D") || ExtraData.ToUpper().Contains("STAFF") ||
-                        ExtraData.ToUpper().Contains("0WNER") || ExtraData.ToUpper().Contains("OWNER") || ExtraData.ToUpper().Contains("GM") || ExtraData.ToUpper().Contains("EDM") ||
-                        ExtraData.ToUpper().Contains("ROOKIE") || ExtraData.ToUpper().Contains("R00KIE") || ExtraData.ToUpper().Contains("BAW") || ExtraData.ToUpper().Contains("HFM") || ExtraData.ToUpper().Contains("\r"))
+                    if (!Session.GetHabbo().GetPermissions().HasRight("word_filter_override") &&
+                    GalaxyServer.GetGame().GetChatManager().GetFilter().IsUnnaceptableWord(ExtraData, out string word))
                     {
-                        Session.SendNotification("Essa tag pertence a equipe!");
+                        Session.GetHabbo().BannedPhraseCount++;
+                        if (Session.GetHabbo().BannedPhraseCount >= 1)
+                        {
+
+                            Session.GetHabbo().TimeMuted = 10;
+                            Session.SendNotification("Você foi silenciado, um moderador vai rever o seu caso, aparentemente, você nomeou um hotel! Não continue divulgando ser for um hotel pois temos ante divulgação - Aviso<font size =\"11\" color=\"#fc0a3a\">  <b>" + Session.GetHabbo().BannedPhraseCount + "/5</b></font> Se chega ao numero 5/5 você sera banido automaticamente");
+                            GalaxyServer.GetGame().GetClientManager().StaffAlert(new RoomNotificationComposer("Alerta publicitário:",
+                                "Atenção colaboradores, o usuário <b>" + Session.GetHabbo().Username + "</b> divulgou um link de um site ou hotel na compra de uma tag na loja, você poderia investigar? so click no botão abaixo *Ir ao Quarto*. <i> a palavra dita:<font size =\"11\" color=\"#f40909\">  <b>  " + ExtraData +
+                                "</b></font></i>   dentro de um quarto\r\n" + "- Nome do usuário: <font size =\"11\" color=\"#0b82c6\">  <b>" +
+                                Session.GetHabbo().Username + "</b>", "", "Ir ao Quarto", "event:navigator/goto/" +
+                                Session.GetHabbo().CurrentRoomId));
+                        }
+
+                        if (Session.GetHabbo().BannedPhraseCount >= 5)
+                        {
+                            GalaxyServer.GetGame().GetModerationManager().BanUser("GalaxyServer anti-divulgação", HabboHotel.Moderation.ModerationBanType.USERNAME, Session.GetHabbo().Username, "Banido por spam com a frase (" + ExtraData + ")", (GalaxyServer.GetUnixTimestamp() + 78892200));
+                            Session.Disconnect();
+                            return;
+                        }
+                        Session.SendMessage(new RoomNotificationComposer("furni_placement_error", "message", "Mensagem inapropiada no " + GalaxyServer.HotelName + "! Estamos investigando o que você falou no quarto!"));
                         return;
                     }
 
-                    string character;
-                    ExtraData = QuasarEnvironment.GetGame().GetChatManager().GetFilter().IsUnnaceptableWord(ExtraData, out character) ? "" : ExtraData;
+                    if (ExtraData.ToUpper().Contains("ADM") || ExtraData.ToUpper().Contains("ADMIN") || ExtraData.ToUpper().Contains("GER") || ExtraData.ToUpper().Contains("DONO") || ExtraData.ToUpper().Contains("RANK") || ExtraData.ToUpper().Contains("MNG") || ExtraData.ToUpper().Contains("MOD") || ExtraData.ToUpper().Contains("STAFF") || ExtraData.ToUpper().Contains("ALFA") || ExtraData.ToUpper().Contains("ALPHA") || ExtraData.ToUpper().Contains("HELPER") || ExtraData.ToUpper().Contains("GM") || ExtraData.ToUpper().Contains("CEO") || ExtraData.ToUpper().Contains("ROOKIE") || ExtraData.ToUpper().Contains("M0D") || ExtraData.ToUpper().Contains("DEV") || ExtraData.ToUpper().Contains("OWNR") || ExtraData.ToUpper().Contains("FUNDADOR") || ExtraData.ToUpper().Contains("<") || ExtraData.ToUpper().Contains(">") || ExtraData.ToUpper().Contains("POLICIAL") || ExtraData.ToUpper().Contains("policial") || ExtraData.ToUpper().Contains("ajudante") || ExtraData.ToUpper().Contains("embaixador") || ExtraData.ToUpper().Contains("AJUDANTE") || ExtraData.ToUpper().Contains("EMBAIXADOR") || ExtraData.ToUpper().Contains("VIP") || ExtraData.ToUpper().Contains("vip") || ExtraData.ToUpper().Contains("PROG") || ExtraData.ToUpper().Contains("prog") || ExtraData.ToUpper().Contains("WEBM") || ExtraData.ToUpper().Contains("WEBMASTER"))
+                    {
+                        Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
+                        Session.SendWhisper("Você não pode colocar um prefixo administrativo!", 34);
+                        return;
+                    }
+
+
+                    if (ExtraData == "off" || ExtraData == "")
+                    {
+                        Session.GetHabbo()._NamePrefix = "";
+                        Session.SendWhisper("O prefixo foi desativado!");
+                    }
+
+                    ExtraData = GalaxyServer.GetGame().GetChatManager().GetFilter().IsUnnaceptableWord(ExtraData, out string character) ? "" : ExtraData;
 
                     if (string.IsNullOrEmpty(ExtraData))
                     {
-                        Session.SendNotification("Essa palavra " + character + " não está permitida no filtro " + QuasarEnvironment.GetDBConfig().DBData["hotel.name"] + ", por isso você não pode usar-la!");
+                        Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
+                        Session.SendWhisper("Parece ter uma palavra inapropriada!");
                         return;
                     }
 
-
-                    if (Item.CostGOTWPoints > Session.GetHabbo().GOTWPoints)
+                    if (Item.CostCredits > Session.GetHabbo().Credits || Item.CostPixels > Session.GetHabbo().Duckets || Item.CostDiamonds > Session.GetHabbo().Diamonds || Item.CostGotw > Session.GetHabbo().GOTWPoints)
                         return;
 
-                    if (Item.CostGOTWPoints > 0)
+                    if (Item.CostCredits > 0)
                     {
-                        Session.GetHabbo().GOTWPoints -= Item.CostGOTWPoints;
-                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
+                        if (Item.CostCredits > Session.GetHabbo().Credits)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostCredits + " créditos necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Credits -= Item.CostCredits;
+                        Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
                     }
 
-
-                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                    if (Item.CostPixels > 0)
                     {
-                        dbClient.RunQuery("UPDATE `users` SET `tag` = '" + ExtraData + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                        if (Item.CostPixels > Session.GetHabbo().Duckets)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostPixels + " duckets necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Duckets -= Item.CostPixels;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Session.GetHabbo().Duckets));//Love you, Tom.
                     }
-
-                    Session.GetHabbo()._tag = ExtraData;
-                    Session.SendMessage(new AlertNotificationHCMessageComposer(4));
-                    Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
-                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
-                    Session.SendMessage(new FurniListUpdateComposer());
-                    return;
-                }
-
-
-
-
-                if (baseItem.InteractionType == InteractionType.tagcolor)
-                {
-                    if (Item.CostGOTWPoints > Session.GetHabbo().GOTWPoints)
-                        return;
-
-                    if (Item.CostGOTWPoints > 0)
-                    {
-                        Session.GetHabbo().GOTWPoints -= Item.CostGOTWPoints;
-                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
-                    }
-
-                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                    {
-                        dbClient.RunQuery("UPDATE `users` SET `tagcolor` = '" + Item.Name + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
-                    }
-
-                    Session.GetHabbo()._tagcolor = Item.Name;
-                    Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
-                    Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
-                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
-                    return;
-                }
-
-                if (baseItem.InteractionType == InteractionType.tagrainbow)
-                {
-                    if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
-                        return;
 
                     if (Item.CostDiamonds > 0)
                     {
+                        if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostDiamonds + " diamantes necessários para comprar isso.");
+                            return;
+                        }
                         Session.GetHabbo().Diamonds -= Item.CostDiamonds;
-                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 103));
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
                     }
 
-                    using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                    if (Item.CostGotw > 0)
                     {
-                        dbClient.RunQuery("UPDATE `users` SET `tagcolor` = '" + Item.Name + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                        if (Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostGotw + " " + ExtraSettings.PTOS_COINS + " necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().GOTWPoints -= Item.CostGotw;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
                     }
 
-                    Session.GetHabbo()._tagcolor = Item.Name;
-                    Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
+                    string prefixospace = ExtraData.Replace("\n","");
+                    string prefixospace2 = prefixospace.Replace("\r", "");
+                    string prefixospace3 = prefixospace2.Replace(Environment.NewLine, "");
+                    using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.runFastQuery("UPDATE `users` SET `prefix_name` = '" + prefixospace3 + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                    }
+
+                    Session.GetHabbo()._NamePrefix = prefixospace3;
                     Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
-                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
+                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
                     Session.SendMessage(new FurniListUpdateComposer());
                     return;
                 }
 
-
-                if (baseItem.InteractionType == InteractionType.club_vip || baseItem.InteractionType == InteractionType.club_vip2)
+                if (baseItem.InteractionType == InteractionType.prefixcolor)
                 {
-                    if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
+                    if (Item.CostCredits > Session.GetHabbo().Credits || Item.CostPixels > Session.GetHabbo().Duckets || Item.CostDiamonds > Session.GetHabbo().Diamonds || Item.CostGotw > Session.GetHabbo().GOTWPoints)
                         return;
 
-                    int Months = 0;
+                    if (Item.CostCredits > 0)
+                    {
+                        if (Item.CostCredits > Session.GetHabbo().Credits)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostCredits + " créditos necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Credits -= Item.CostCredits;
+                        Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
+                    }
+
+                    if (Item.CostPixels > 0)
+                    {
+                        if (Item.CostPixels > Session.GetHabbo().Duckets)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostPixels + " duckets necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Duckets -= Item.CostPixels;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Session.GetHabbo().Duckets));//Love you, Tom.
+                    }
+
+                    if (Item.CostDiamonds > 0)
+                    {
+                        if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostDiamonds + " diamantes necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Diamonds -= Item.CostDiamonds;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
+                    }
+
+                    if (Item.CostGotw > 0)
+                    {
+                        if (Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostGotw + " " + ExtraSettings.PTOS_COINS + " necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().GOTWPoints -= Item.CostGotw;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
+                    }
+
+                    using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.SetQuery("UPDATE `users` SET `prefix_name_color` = @prefixn WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                        dbClient.AddParameter("prefixn", "#" + Item.Name);
+                        dbClient.RunQuery();
+                    }
+
+                    Session.GetHabbo()._NamePrefixColor = "#" + Item.Name;
+                    Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
+                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
+                    Session.SendMessage(new FurniListUpdateComposer());
+                    return;
+                }
+
+                if (baseItem.InteractionType == InteractionType.CLUB_VIP || baseItem.InteractionType == InteractionType.CLUB_VIP2)
+                {
+                    // int Months = 0;
 
                     switch (baseItem.InteractionType)
                     {
-                        case InteractionType.club_vip:
-                            Months = 1;
+                        case InteractionType.CLUB_VIP:
+                            /// Months = 1;
                             break;
 
-                        case InteractionType.club_vip2:
-                            Months = 3;
+                        case InteractionType.CLUB_VIP2:
+                            //    Months = 3;
                             break;
                     }
 
-                    Session.GetHabbo().Diamonds -= Item.CostDiamonds;
-                    Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
+                    if (Item.CostCredits > Session.GetHabbo().Credits || Item.CostPixels > Session.GetHabbo().Duckets || Item.CostDiamonds > Session.GetHabbo().Diamonds || Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                        return;
 
-                    var IsVIP = Session.GetHabbo().GetClubManager().HasSubscription("club_vip");
-                    if (IsVIP)
+                    if (Item.CostCredits > 0)
                     {
-                        Session.SendMessage(new AlertNotificationHCMessageComposer(4));
+                        if (Item.CostCredits > Session.GetHabbo().Credits)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostCredits + " créditos necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Credits -= Item.CostCredits;
+                        Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
                     }
-                    else
+
+                    if (Item.CostPixels > 0)
                     {
-                        Session.SendMessage(new AlertNotificationHCMessageComposer(5));
+                        if (Item.CostPixels > Session.GetHabbo().Duckets)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostPixels + " duckets necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Duckets -= Item.CostPixels;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Session.GetHabbo().Duckets));//Love you, Tom.
                     }
+
+                    if (Item.CostDiamonds > 0)
+                    {
+                        if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostDiamonds + " diamantes necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().Diamonds -= Item.CostDiamonds;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
+                    }
+
+                    if (Item.CostGotw > 0)
+                    {
+                        if(Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                        {
+                            Session.SendNotification("Você não tem os " + Item.CostGotw + " " + ExtraSettings.PTOS_COINS + " necessários para comprar isso.");
+                            return;
+                        }
+                        Session.GetHabbo().GOTWPoints -= Item.CostGotw;
+                        Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
+                    }
+
 
                     Session.GetHabbo().GetClubManager().AddOrExtendSubscription("club_vip", 1 * 24 * 3600, Session);
                     Session.GetHabbo().GetBadgeComponent().GiveBadge("DVIP", true, Session);
 
-                    QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_VipClub", 1);
+                    GalaxyServer.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_VipClub", 1);
                     Session.SendMessage(new ScrSendUserInfoComposer(Session.GetHabbo()));
-                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
+                    Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
                     Session.SendMessage(new FurniListUpdateComposer());
 
                     if (Session.GetHabbo().Rank > 2)
                     {
-                        Session.SendWhisper("Oops, você faz parte da equipe portanto não pode comprar VIP!");
+                        Session.SendWhisper("Parece que você ja é vip!.");
                         return;
                     }
 
                     else if (Session.GetHabbo().Rank < 2)
                     {
-                        using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
+                        using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
                         {
-                            dbClient.RunQuery("UPDATE `users` SET `rank` = '2' WHERE `user_id` = '" + Session.GetHabbo().Id + "'");
-                            dbClient.RunQuery("UPDATE `users` SET `rank_vip` = '1' WHERE `user_id` = '" + Session.GetHabbo().Id + "'");
+                            dbClient.runFastQuery("UPDATE `users` SET `rank` = '2' WHERE `id` = '" + Session.GetHabbo().Id + "'");
+                            dbClient.runFastQuery("UPDATE `users` SET `rank_vip` = '1' WHERE `id` = '" + Session.GetHabbo().Id + "'");
                             Session.GetHabbo().Rank = 2;
                             Session.GetHabbo().VIPRank = 1;
                         }
@@ -355,61 +467,67 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 Amount = 1;
 
             int AmountPurchase = Item.Amount > 1 ? Item.Amount : Amount;
+
             int TotalCreditsCost = Amount > 1 ? ((Item.CostCredits * Amount) - ((int)Math.Floor((double)Amount / 6) * Item.CostCredits)) : Item.CostCredits;
             int TotalPixelCost = Amount > 1 ? ((Item.CostPixels * Amount) - ((int)Math.Floor((double)Amount / 6) * Item.CostPixels)) : Item.CostPixels;
             int TotalDiamondCost = Amount > 1 ? ((Item.CostDiamonds * Amount) - ((int)Math.Floor((double)Amount / 6) * Item.CostDiamonds)) : Item.CostDiamonds;
-            int TotalGOTWPointsCost = Amount > 1 ? ((Item.CostGOTWPoints * Amount) - ((int)Math.Floor((double)Amount / 6) * Item.CostGOTWPoints)) : Item.CostGOTWPoints;
-            //int TotalPumpkinsCost = Amount > 1 ? ((Item.CostPumpkins * Amount) - ((int)Math.Floor((double)Amount / 6) * Item.CostPumpkins)) : Item.CostPumpkins;
+            int TotalGotwCost = Amount > 1 ? ((Item.CostGotw * Amount) - ((int)Math.Floor((double)Amount / 6) * Item.CostGotw)) : Item.CostGotw;
+                if (TotalCreditsCost > Session.GetHabbo().Credits)
+                {
+                    Session.SendNotification("Você não tem os " + TotalCreditsCost + " créditos necessários para comprar isso.");
+                    return;
+                }
 
-            if (Session.GetHabbo().Credits < TotalCreditsCost || Session.GetHabbo().Duckets < TotalPixelCost || Session.GetHabbo().Diamonds < TotalDiamondCost || Session.GetHabbo().GOTWPoints < TotalGOTWPointsCost)
-                return;
+                if (TotalPixelCost > Session.GetHabbo().Duckets)
+                {
+                    Session.SendNotification("Você não tem os " + TotalPixelCost + " duckets necessários para comprar isso.");
+                    return;
+                }
+                if (TotalDiamondCost > Session.GetHabbo().Diamonds)
+                {
+                    Session.SendNotification("Você não tem os " + TotalDiamondCost + " diamantes necessários para comprar isso.");
+                    return;
+                }
+                if (TotalGotwCost > Session.GetHabbo().GOTWPoints)
+                {
+                    Session.SendNotification("Você não tem os " + TotalGotwCost + " " + ExtraSettings.PTOS_COINS + " necessários para comprar isso.");
+                    return;
+                }
+            
 
             int LimitedEditionSells = 0;
             int LimitedEditionStack = 0;
 
-
-
-
-
-
-            if (Item.CostCredits > 0)
-            {
-                Session.GetHabbo().Credits -= TotalCreditsCost;
-                Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
-            }
-
-            if (Item.CostPixels > 0)
-            {
-                Session.GetHabbo().Duckets -= TotalPixelCost;
-                Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Session.GetHabbo().Duckets));//Love you, Tom.
-            }
-
-            if (Item.CostDiamonds > 0)
-            {
-                Session.GetHabbo().Diamonds -= TotalDiamondCost;
-                Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
-            }
-
-            if (Item.CostGOTWPoints > 0)
-            {
-                Session.GetHabbo().GOTWPoints -= TotalGOTWPointsCost;
-                Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
-            }
-
-            /*if (Item.CostPumpkins > 0)
-            {
-                Session.GetHabbo().Pumpkins -= TotalPumpkinsCost;
-                Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Pumpkins, 0, 104));
-            */
-
             #region PREDESIGNED_ROOM
-            if (Item.PredesignedId > 0 && QuasarEnvironment.GetGame().GetCatalog().GetPredesignedRooms().predesignedRoom.ContainsKey((uint)Item.PredesignedId))
+            if (Item.PredesignedId > 0 && GalaxyServer.GetGame().GetCatalog().GetPredesignedRooms().predesignedRoom.ContainsKey((uint)Item.PredesignedId))
             {
+                if (Item.CostCredits > Session.GetHabbo().Credits)
+                    return;
+                if (Item.CostCredits > 0)
+                {
+                    Session.GetHabbo().Credits -= Item.CostCredits;
+                    Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
+                }
+                if (Item.CostPixels > 0)
+                {
+                    Session.GetHabbo().Duckets -= Item.CostPixels;
+                    Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Session.GetHabbo().Duckets));//Love you, Tom.
+                }
+                if (Item.CostDiamonds > 0)
+                {
+                    Session.GetHabbo().Diamonds -= Item.CostDiamonds;
+                    Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
+                }
+                if (Item.CostGotw > 0)
+                {
+                    Session.GetHabbo().GOTWPoints -= Item.CostGotw;
+                    Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
+                }
                 #region SELECT ROOM AND CREATE NEW
-                var predesigned = QuasarEnvironment.GetGame().GetCatalog().GetPredesignedRooms().predesignedRoom[(uint)Item.PredesignedId];
+                var predesigned = GalaxyServer.GetGame().GetCatalog().GetPredesignedRooms().predesignedRoom[(uint)Item.PredesignedId];
                 var decoration = predesigned.RoomDecoration;
-
-                var createRoom = QuasarEnvironment.GetGame().GetRoomManager().CreateRoom(Session, Session.GetHabbo().Username + "'s room", "Um quarto pré decorado :)", predesigned.RoomModel, 1, 25, 1);
+                //NOMBRES DE LA SALA & Sú descripción.
+                var createRoom = GalaxyServer.GetGame().GetRoomManager().CreateRoom(Session, "" + Item.Name + "", "Esse quarto é um pack disponível no catálogo!", predesigned.RoomModel, 1, 25, 1);
 
                 createRoom.FloorThickness = int.Parse(decoration[0]);
                 createRoom.WallThickness = int.Parse(decoration[1]);
@@ -418,23 +536,23 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 createRoom.Wallpaper = decoration[4];
                 createRoom.Landscape = decoration[5];
                 createRoom.Floor = decoration[6];
-                var newRoom = QuasarEnvironment.GetGame().GetRoomManager().LoadRoom(createRoom.Id);
+                var newRoom = GalaxyServer.GetGame().GetRoomManager().LoadRoom(createRoom.Id);
                 #endregion
 
                 #region CREATE FLOOR ITEMS
                 if (predesigned.FloorItems != null)
                     foreach (var floorItems in predesigned.FloorItemData)
-                        using (var dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                            dbClient.runFastQuery("INSERT INTO items VALUES (null, " + Session.GetHabbo().Id + ", " + newRoom.RoomId + ", " + floorItems.BaseItem + ", '" + floorItems.ExtraData + "', " +
-                                floorItems.X + ", " + floorItems.Y + ", " + TextHandling.GetString(floorItems.Z) + ", " + floorItems.Rot + ", '', 0, 0);");
+                        using (var dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                            dbClient.RunQuery("INSERT INTO items VALUES (null, " + Session.GetHabbo().Id + ", " + newRoom.RoomId + ", " + floorItems.BaseItem + ", '" + floorItems.ExtraData + "', " +
+                                floorItems.X + ", " + floorItems.Y + ", " + TextHandling.GetString(floorItems.Z) + ", " + floorItems.Rot + ", '', 0, 0, false);");
                 #endregion
 
                 #region CREATE WALL ITEMS
                 if (predesigned.WallItems != null)
                     foreach (var wallItems in predesigned.WallItemData)
-                        using (var dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                            dbClient.runFastQuery("INSERT INTO items VALUES (null, " + Session.GetHabbo().Id + ", " + newRoom.RoomId + ", " + wallItems.BaseItem + ", '" + wallItems.ExtraData +
-                                "', 0, 0, 0, 0, '" + wallItems.WallCoord + "', 0, 0);");
+                        using (var dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                            dbClient.RunQuery("INSERT INTO items VALUES (null, " + Session.GetHabbo().Id + ", " + newRoom.RoomId + ", " + wallItems.BaseItem + ", '" + wallItems.ExtraData +
+                                "', 0, 0, 0, 0, '" + wallItems.WallCoord + "', 0, 0, false);");
                 #endregion
 
                 #region VERIFY IF CONTAINS BADGE AND GIVE
@@ -444,7 +562,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 #region GENERATE ROOM AND SEND PACKET
                 Session.SendMessage(new PurchaseOKComposer());
                 Session.GetHabbo().GetInventoryComponent().UpdateItems(false);
-                QuasarEnvironment.GetGame().GetRoomManager().LoadRoom(newRoom.Id).GetRoomItemHandler().LoadFurniture();
+                GalaxyServer.GetGame().GetRoomManager().LoadRoom(newRoom.Id).GetRoomItemHandler().LoadFurniture();
                 var newFloorItems = newRoom.GetRoomItemHandler().GetFloor;
                 foreach (var roomItem in newFloorItems) newRoom.GetRoomItemHandler().SetFloorItem(roomItem, roomItem.GetX, roomItem.GetY, roomItem.GetZ);
                 var newWallItems = newRoom.GetRoomItemHandler().GetWall;
@@ -463,20 +581,62 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                     break;
 
                 case InteractionType.GUILD_FORUM:
-                    int GroupId;
-                    if (!int.TryParse(ExtraData, out GroupId))
-                        break;
+                    Group Gp;
+                    GroupForum Gf;
+                    int GpId;
+                    if (!int.TryParse(ExtraData, out GpId))
+                    {
+                        Session.SendNotification("Ops! Ocorreu algum erro ao obter o ID do grupo");
+                        Session.SendMessage(new PurchaseOKComposer());
+                        return;
+                    }
+                    if (!GalaxyServer.GetGame().GetGroupManager().TryGetGroup(GpId, out Gp))
+                    {
+                        Session.SendNotification("Ops! Esse ID não existe!");
+                        Session.SendMessage(new PurchaseOKComposer());
+                        return;
+                    }
 
-                    Group gp;
-                    if (!QuasarEnvironment.GetGame().GetGroupManager().TryGetGroup(GroupId, out gp))
-                        break;
+                    if (Gp.CreatorId != Session.GetHabbo().Id)
+                    {
+                        Session.SendNotification("Ops! Você não é o proprietário do grupo.\n\nFórum deve ser criado pelo proprietário do grupo...");
+                        Session.SendMessage(new PurchaseOKComposer());
+                        return;
+                    }
 
-                    if (gp.HasForum)
-                        break;
+                    Gf = GalaxyServer.GetGame().GetGroupForumManager().CreateGroupForum(Gp);
+                    Session.SendMessage(new RoomNotificationComposer("forums.delivered", new Dictionary<string, string>
+                            { { "groupId", Gp.Id.ToString() },  { "groupName", Gp.Name } }));
+                    break;
 
-                    var forum = QuasarEnvironment.GetGame().GetGroupForumManager().CreateGroupForum(gp);
+                case InteractionType.GUILD_FORUM_CHAT:
+                    Group thegroup;
+                    Group Group = null;
+                    if (!GalaxyServer.GetGame().GetGroupManager().TryGetGroup(Convert.ToInt32(ExtraData), out thegroup))
+                        return;
+                    if (!(GalaxyServer.GetGame().GetGroupManager().GetGroupsForUser(Session.GetHabbo().Id).Contains(thegroup)))
+                    {
+                        return;
+                    }
 
-                    Session.SendMessage(new RoomNotificationComposer("forums.delivered"));
+                    int groupID = Convert.ToInt32(ExtraData);
+                    if (thegroup.CreatorId != Session.GetHabbo().Id)
+                    {
+                        Session.SendNotification("Ops! Você não é o dono do grupo para poder compra o chat de grupo!");
+                        Session.SendMessage(new PurchaseOKComposer());
+                        return;
+                    }
+
+                    using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.SetQuery("UPDATE groups SET has_chat = '1' WHERE id = @id");
+                        dbClient.AddParameter("id", groupID);
+                        dbClient.RunQuery();
+                    }
+
+                    GalaxyServer.GetGame().GetClientManager().GetClientByUserID(Session.GetHabbo().Id).SendMessage(new FriendListUpdateComposer(Group, 1));
+                    Session.SendNotification("Chat de grupo criado com exito!");
+                    Session.SendMessage(new PurchaseOKComposer());
 
                     break;
 
@@ -489,41 +649,13 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                 case InteractionType.PINATA:
                 case InteractionType.PINATATRIGGERED:
                 case InteractionType.MAGICEGG:
+                case InteractionType.MAGICCHEST:
                     ExtraData = "0";
-                    break;
-
-                case InteractionType.FOOTBALL_GATE:
-                    ExtraData = "hd-180-14.ch-210-1408.lg-270-1408,hd-600-14.ch-630-1408.lg-695-1408";
                     break;
 
                 #region Pet handling
 
-                case InteractionType.pet0:
-                case InteractionType.pet1:
-                case InteractionType.pet2:
-                case InteractionType.pet3:
-                case InteractionType.pet4:
-                case InteractionType.pet5:
-                case InteractionType.pet6:
-                case InteractionType.pet7:
-                case InteractionType.pet8:
-                case InteractionType.pet9:
-                case InteractionType.pet10:
-                case InteractionType.pet11:
-                case InteractionType.pet12:
-                case InteractionType.pet13:
-                case InteractionType.pet14:
-                case InteractionType.pet15:
-                case InteractionType.pet16:
-                case InteractionType.pet17:
-                case InteractionType.pet18:
-                case InteractionType.pet19:
-                case InteractionType.pet20:
-                case InteractionType.pet21:
-                case InteractionType.pet22:
-                case InteractionType.pet28:
-                case InteractionType.pet29:
-                case InteractionType.pet30:
+                case InteractionType.PET:
                     try
                     {
                         string[] Bits = ExtraData.Split('\n');
@@ -531,7 +663,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                         string Race = Bits[1];
                         string Color = Bits[2];
 
-                        int.Parse(Race);
+                        int.Parse(Race); // to trigger any possible errors
 
                         if (!PetUtility.CheckPetName(PetName))
                             return;
@@ -542,11 +674,11 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                         if (Color.Length != 6)
                             return;
 
-                        QuasarEnvironment.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_PetLover", 1);
+                        GalaxyServer.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_PetLover", 1);
                     }
                     catch (Exception e)
                     {
-                        Logging.LogException(e.ToString());
+                        ExceptionLogger.LogException(e);
                         return;
                     }
 
@@ -565,15 +697,15 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                         if (string.IsNullOrEmpty(ExtraData))
                             Number = 0;
                         else
-                            Number = Double.Parse(ExtraData, QuasarEnvironment.CultureInfo);
+                            Number = Double.Parse(ExtraData, GalaxyServer.CultureInfo);
                     }
                     catch (Exception e)
                     {
-                        Logging.HandleException(e, "Catalog.HandlePurchase: " + ExtraData);
+                        ExceptionLogger.LogException(e);
                     }
 
                     ExtraData = Number.ToString().Replace(',', '.');
-                    break;
+                    break; // maintain extra data // todo: validate
 
                 case InteractionType.POSTIT:
                     ExtraData = "FFFF33";
@@ -591,10 +723,18 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                     ExtraData = "m" + Convert.ToChar(5) + ".ch-210-1321.lg-285-92" + Convert.ToChar(5) + "Manequim Padrão";
                     break;
 
+                case InteractionType.FOOTBALL_GATE:
+                    ExtraData = "hd-99999-99999.lg-270-62;hd-99999-99999.ch-630-62.lg-695-62";
+                    break;
+
+                case InteractionType.vikingtent:
+                    ExtraData = "0";
+                    break;
+
                 case InteractionType.BADGE_DISPLAY:
                     if (!Session.GetHabbo().GetBadgeComponent().HasBadge(ExtraData))
                     {
-                        Session.SendMessage(new BroadcastMessageAlertComposer("Oops, aparentemente você não tem este emblema!"));
+                        Session.SendMessage(new BroadcastMessageAlertComposer("Parece que você não tem esse emblema!"));
                         return;
                     }
 
@@ -616,6 +756,97 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             }
             #endregion
 
+
+            if (Item.IsLimited)
+            {
+                if (Item.LimitedEditionStack <= Item.LimitedEditionSells)
+                {
+                    Session.SendNotification("Este item está esgotado!\n\n" + "Por favor, note que você não recebeu outro item (Você também não foi cobrado por isso!)");
+                    using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.SetQuery("UPDATE `catalog_items` SET `limited_sells` = @limitedstack WHERE `id` = @itemId LIMIT 1");
+                        dbClient.AddParameter("limitedstack", Item.LimitedEditionStack);
+                        dbClient.AddParameter("itemId", Item.Id);
+                        dbClient.RunQuery();
+
+                        LimitedEditionSells = Item.LimitedEditionSells;
+                        LimitedEditionStack = Item.LimitedEditionStack;
+                    }
+                    Session.SendMessage(new PurchaseOKComposer());
+                    GalaxyServer.GetGame().GetCatalog().Init(GalaxyServer.GetGame().GetItemManager());
+                    GalaxyServer.GetGame().GetClientManager().SendMessage(new CatalogUpdatedComposer());
+                    return;
+                }
+
+
+                Item.LimitedEditionSells++;
+                using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                {
+                    dbClient.SetQuery("UPDATE `catalog_items` SET `limited_sells` = @limitSells WHERE `id` = @itemId LIMIT 1");
+                    dbClient.AddParameter("limitSells", Item.LimitedEditionSells);
+                    dbClient.AddParameter("itemId", Item.Id);
+                    dbClient.RunQuery();
+
+                    LimitedEditionSells = Item.LimitedEditionSells;
+                    LimitedEditionStack = Item.LimitedEditionStack;
+                }
+
+                if (Session.GetHabbo().Rank == 1)
+                {
+                    GalaxyServer.GetGame().GetClientManager().SendMessage(new RoomNotificationComposer("furni/" + Item.Data.ItemName, 3, "O usuário " + Session.GetHabbo().Username + " comprou o raro " + Item.Name + " lote " + Item.LimitedEditionSells + "/" + Item.LimitedEditionStack, "!"));
+                }
+                ///log de compras
+                using (IQueryAdapter dbClient = GalaxyServer.GetDatabaseManager().GetQueryReactor())
+                {
+                    dbClient.SetQuery("INSERT INTO `logs_ltd` (`user_id`, `rare`, `ltd_sell`, `ltd_stack`, `timestamp`) VALUES ('" + Session.GetHabbo().Id + "', '" + Item.Id + "', '" + Item.LimitedEditionStack + "', '" + Item.LimitedEditionSells + "', '" + GalaxyServer.GetIUnixTimestamp() + "');");
+                    dbClient.RunQuery();
+                }
+                ////
+            }
+            if (Item.CostCredits > 0)
+            {
+                if (Item.CostCredits > Session.GetHabbo().Credits)
+                {
+                    Session.SendNotification("Você não tem os " + Item.CostCredits + " créditos necessários para comprar isso.");
+                    return;
+                }
+                Session.GetHabbo().Credits -= Item.CostCredits;
+                Session.SendMessage(new CreditBalanceComposer(Session.GetHabbo().Credits));
+            }
+
+            if (Item.CostPixels > 0)
+            {
+                if (Item.CostPixels > Session.GetHabbo().Duckets)
+                {
+                    Session.SendNotification("Você não tem os " + Item.CostPixels + " duckets necessários para comprar isso.");
+                    return;
+                }
+                Session.GetHabbo().Duckets -= Item.CostPixels;
+                Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Duckets, Session.GetHabbo().Duckets));//Love you, Tom.
+            }
+
+            if (Item.CostDiamonds > 0)
+            {
+                if (Item.CostDiamonds > Session.GetHabbo().Diamonds)
+                {
+                    Session.SendNotification("Você não tem os " + Item.CostDiamonds + " diamantes necessários para comprar isso.");
+                    return;
+                }
+                Session.GetHabbo().Diamonds -= Item.CostDiamonds;
+                Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().Diamonds, 0, 5));
+            }
+
+            if (Item.CostGotw > 0)
+            {
+                if (Item.CostGotw > Session.GetHabbo().GOTWPoints)
+                {
+                    Session.SendNotification("Você não tem os " + Item.CostGotw + " " + ExtraSettings.PTOS_COINS + " necessários para comprar isso.");
+                    return;
+                }
+                Session.GetHabbo().GOTWPoints -= Item.CostGotw;
+                Session.SendMessage(new HabboActivityPointNotificationComposer(Session.GetHabbo().GOTWPoints, 0, 103));
+            }
+
             Item NewItem = null;
             switch (Item.Data.Type.ToString().ToLower())
             {
@@ -632,7 +863,6 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                                 if (Items != null)
                                 {
                                     GeneratedGenericItems.AddRange(Items);
-                                    //Session.SendMessage(RoomNotificationComposer.SendBubble("icons/" + Item.Data.ItemName + "_icon", "Você comprou " + Item.Data.PublicName + "", "inventory/open/furni"));
                                 }
                             }
                             else
@@ -642,7 +872,6 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                                 if (NewItem != null)
                                 {
                                     GeneratedGenericItems.Add(NewItem);
-                                    //Session.SendMessage(RoomNotificationComposer.SendBubble("icons/" + Item.Data.ItemName + "_icon", "Você comprou " + Item.Data.PublicName + "", "inventory/open/furni"));
                                 }
                             }
                             break;
@@ -650,10 +879,11 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                         case InteractionType.GUILD_GATE:
                         case InteractionType.GUILD_ITEM:
                         case InteractionType.GUILD_FORUM:
+                            int groupId = 0;
+                            int.TryParse(ExtraData, out groupId);
                             if (AmountPurchase > 1)
                             {
-
-                                List<Item> Items = ItemFactory.CreateMultipleItems(Item.Data, Session.GetHabbo(), ExtraData, AmountPurchase, Convert.ToInt32(ExtraData));
+                                List<Item> Items = ItemFactory.CreateMultipleItems(Item.Data, Session.GetHabbo(), ExtraData, AmountPurchase, groupId);
 
                                 if (Items != null)
                                 {
@@ -662,12 +892,35 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                             }
                             else
                             {
-                                NewItem = ItemFactory.CreateSingleItemNullable(Item.Data, Session.GetHabbo(), ExtraData, ExtraData, Convert.ToInt32(ExtraData));
+                                NewItem = ItemFactory.CreateSingleItemNullable(Item.Data, Session.GetHabbo(), ExtraData, ExtraData, groupId);
 
                                 if (NewItem != null)
                                 {
                                     GeneratedGenericItems.Add(NewItem);
-                                    //Session.SendMessage(RoomNotificationComposer.SendBubble("icons/" + Item.Data.ItemName + "_icon", "Você comprou " + Item.Data.PublicName + "", "inventory/open/furni"));
+                                }
+                            }
+                            break;
+
+                        case InteractionType.MUSIC_DISC:
+                            string flags = Convert.ToString(Item.ExtradataInt);
+                            if (AmountPurchase > 1)
+                            {
+                                List<Item> Items = ItemFactory.CreateMultipleItems(Item.Data, Session.GetHabbo(), flags, AmountPurchase);
+
+                                if (Items != null)
+                                {
+                                    GeneratedGenericItems.AddRange(Items);
+                                    GalaxyServer.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_MusicCollector", 1);
+                                }
+                            }
+                            else
+                            {
+                                NewItem = ItemFactory.CreateSingleItemNullable(Item.Data, Session.GetHabbo(), flags, flags);
+
+                                if (NewItem != null)
+                                {
+                                    GeneratedGenericItems.Add(NewItem);
+                                    GalaxyServer.GetGame().GetAchievementManager().ProgressAchievement(Session, "ACH_MusicCollector", 1);
                                 }
                             }
                             break;
@@ -713,123 +966,6 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                             }
                             break;
 
-                        case InteractionType.reward_box:
-                            {
-                                string ED = Session.GetHabbo().Username + Convert.ToChar(5) + "Você recebeu um cofre comum!." + Convert.ToChar(5) + Session.GetHabbo().Id + Convert.ToChar(5) + Item.Data.Id + Convert.ToChar(5) + 206 + Convert.ToChar(5) + 1 + Convert.ToChar(5) + 1;
-                                ExtraData = ED;
-                                int NewItemId = 0;
-
-                                int Reward = RandomNumber.GenerateRandom(1, 10);
-                                #region Rewards
-                                switch (Reward)
-                                {
-                                    case 1:
-                                        Reward = 9501; //rare_colourable_scifirocket*1
-                                        break;
-                                    case 2:
-                                        Reward = 9510; //rare_colourable_elephant_statue*1
-                                        break;
-                                    case 3:
-                                        Reward = 1587; //ads_calip_lava
-                                        break;
-                                    case 4:
-                                        Reward = 540004; //loyalty_elk
-                                        break;
-                                    case 5:
-                                        Reward = 385; //marquee*4
-                                        break;
-                                    case 6:
-                                        Reward = 9502; //rare_colourable_fountain*1
-                                        break;
-                                    case 7:
-                                        Reward = 212; //club_sofa
-                                        break;
-                                    case 8:
-                                        Reward = 9506; //rare_colourable_parasol*1
-                                        break;
-                                    case 9:
-                                        Reward = 9514; //rare_colourable_scifiport*1
-                                        break;
-                                    case 10:
-                                        Reward = 353; //scifirocket*4
-                                        break;
-                                }
-                                #endregion
-
-                                using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                                {
-                                    dbClient.SetQuery("INSERT INTO `items` (`base_item`,`user_id`,`extra_data`) VALUES (9377, '" + Session.GetHabbo().Id + "', @extra_data)");
-                                    dbClient.AddParameter("extra_data", ED);
-                                    NewItemId = Convert.ToInt32(dbClient.InsertQuery());
-
-                                    dbClient.SetQuery("INSERT INTO `user_presents` (`item_id`,`base_id`,`extra_data`) VALUES ('" + NewItemId + "', '" + Reward + "', @extra_data)");
-                                    dbClient.AddParameter("extra_data", (string.IsNullOrEmpty(ExtraData) ? "" : ExtraData));
-                                    dbClient.RunQuery();
-                                }
-
-                                Session.GetHabbo().GetInventoryComponent().UpdateItems(true);
-
-                                break;
-                            }
-
-                        case InteractionType.reward_box2:
-                            {
-                                string ED = Session.GetHabbo().Username + Convert.ToChar(5) + "Você recebeu um cofre épico!" + Convert.ToChar(5) + Session.GetHabbo().Id + Convert.ToChar(5) + Item.Data.Id + Convert.ToChar(5) + 206 + Convert.ToChar(5) + 1 + Convert.ToChar(5) + 1;
-                                ExtraData = ED;
-                                int NewItemId = 0;
-
-                                int Reward = RandomNumber.GenerateRandom(1, 10);
-                                #region Rewards
-                                switch (Reward)
-                                {
-                                    case 1:
-                                        Reward = 9501; //rare_colourable_scifirocket*1
-                                        break;
-                                    case 2:
-                                        Reward = 9510; //rare_colourable_elephant_statue*1
-                                        break;
-                                    case 3:
-                                        Reward = 1587; //ads_calip_lava
-                                        break;
-                                    case 4:
-                                        Reward = 540004; //loyalty_elk
-                                        break;
-                                    case 5:
-                                        Reward = 385; //marquee*4
-                                        break;
-                                    case 6:
-                                        Reward = 9502; //rare_colourable_fountain*1
-                                        break;
-                                    case 7:
-                                        Reward = 212; //club_sofa
-                                        break;
-                                    case 8:
-                                        Reward = 9506; //rare_colourable_parasol*1
-                                        break;
-                                    case 9:
-                                        Reward = 9514; //rare_colourable_scifiport*1
-                                        break;
-                                    case 10:
-                                        Reward = 353; //scifirocket*4
-                                        break;
-                                }
-                                #endregion
-
-                                using (IQueryAdapter dbClient = QuasarEnvironment.GetDatabaseManager().GetQueryReactor())
-                                {
-                                    dbClient.SetQuery("INSERT INTO `items` (`base_item`,`user_id`,`extra_data`) VALUES (9378, '" + Session.GetHabbo().Id + "', @extra_data)");
-                                    dbClient.AddParameter("extra_data", ED);
-                                    NewItemId = Convert.ToInt32(dbClient.InsertQuery());
-
-                                    dbClient.SetQuery("INSERT INTO `user_presents` (`item_id`,`base_id`,`extra_data`) VALUES ('" + NewItemId + "', '" + Reward + "', @extra_data)");
-                                    dbClient.AddParameter("extra_data", (string.IsNullOrEmpty(ExtraData) ? "" : ExtraData));
-                                    dbClient.RunQuery();
-                                }
-
-                                Session.GetHabbo().GetInventoryComponent().UpdateItems(true);
-
-                                break;
-                            }
 
                         case InteractionType.TONER:
                             {
@@ -840,11 +976,9 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                                     if (Items != null)
                                     {
                                         GeneratedGenericItems.AddRange(Items);
-                                        //Session.SendMessage(RoomNotificationComposer.SendBubble("icons/" + Item.Data.ItemName + "_icon", "Você comprou " + Item.Data.PublicName + "", "inventory/open/furni"));
                                         foreach (Item I in Items)
                                         {
                                             ItemFactory.CreateTonerData(I);
-
                                         }
                                     }
                                 }
@@ -855,7 +989,6 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                                     if (NewItem != null)
                                     {
                                         GeneratedGenericItems.Add(NewItem);
-                                        //Session.SendMessage(RoomNotificationComposer.SendBubble("icons/" + Item.Data.ItemName + "_icon", "Você comprou " + Item.Data.PublicName + "", "inventory/open/furni"));
                                         ItemFactory.CreateTonerData(NewItem);
                                     }
                                 }
@@ -864,41 +997,36 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
 
                         case InteractionType.DEAL:
                             {
+                                //Fetch the deal where the ID is this items ID.
                                 var DealItems = (from d in Page.Deals.Values.ToList() where d.Id == Item.Id select d);
+
+                                //This bit, iterating ONE item? How can I make this simpler
                                 foreach (CatalogDeal DealItem in DealItems)
                                 {
-                                    foreach (CatalogItem CatalogItem in DealItem.ItemDataList)
+                                    //Here I loop the DealItems ItemDataList.
+                                    foreach (CatalogItem CatalogItem in DealItem.ItemDataList.ToList())
                                     {
-                                        List<Item> Items = ItemFactory.CreateMultipleItems(CatalogItem.Data, Session.GetHabbo(), "", CatalogItem.Amount);
+                                        List<Item> Items = ItemFactory.CreateMultipleItems(CatalogItem.Data, Session.GetHabbo(), "", AmountPurchase);
 
                                         if (Items != null)
                                         {
-
                                             GeneratedGenericItems.AddRange(Items);
                                         }
                                     }
                                 }
+                                break;
                             }
-                            break;
-                    }
 
-                    if (!Item.Data.IsRare || !Item.IsLimited || Item.CostDiamonds == 0 || Item.CostGOTWPoints == 0 || Item.Data.InteractionType != InteractionType.DEAL || Item.Data.InteractionType != InteractionType.club_1_month || Item.Data.InteractionType != InteractionType.club_3_month
-                       || Item.Data.InteractionType != InteractionType.club_6_month || Item.Data.InteractionType != InteractionType.PREFIX_NAME || Item.Data.InteractionType != InteractionType.changename)
-                    {
-                        Dictionary<int, CatalogItem> Lastitems = new Dictionary<int, CatalogItem>();
-                        Lastitems = Session.GetHabbo()._lastitems;
-                        if (!Lastitems.ContainsKey(Item.Id)) Session.GetHabbo()._lastitems.Add(Item.Id, Item);
                     }
-
 
                     foreach (Item PurchasedItem in GeneratedGenericItems)
                     {
                         if (Session.GetHabbo().GetInventoryComponent().TryAddItem(PurchasedItem))
                         {
+                            //Session.SendMessage(new FurniListAddComposer(PurchasedItem));
                             Session.SendMessage(new FurniListNotificationComposer(PurchasedItem.Id, 1));
                         }
                     }
-
                     break;
 
                 case "e":
@@ -916,9 +1044,14 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                     else
                         Effect = AvatarEffectFactory.CreateNullable(Session.GetHabbo(), Item.Data.SpriteId, 3600);
 
-                    if (Effect != null)// && Session.GetHabbo().Effects().TryAdd(Effect))
+                    if (Effect != null)
                     {
                         Session.SendMessage(new AvatarEffectAddedComposer(Item.Data.SpriteId, 3600));
+                        Session.GetHabbo().Effects().ApplyEffect(Item.Data.SpriteId);
+                        Session.GetHabbo().Effects().TryAdd(Effect);
+                        Session.SendMessage(new RoomNotificationComposer("furni_placement_error", "message", "Você comprou o efeito " + Item.Data.SpriteId + " na loja, se ele não aparecer em seu inventário feche e abra denovo!"));
+                        Session.SendMessage(new AvatarEffectsComposer(Session.GetHabbo().Effects().GetAllEffects));
+
                     }
                     break;
 
@@ -931,7 +1064,7 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
                         Session.SendMessage(new FurniListNotificationComposer(Bot.Id, 5));
                     }
                     else
-                        Session.SendNotification("Oops, ocorreu um erro tente novamente!");
+                        Session.SendNotification("Houve um erro ao comprar isso!");
                     break;
 
                 case "b":
@@ -943,446 +1076,24 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
 
                 case "p":
                     {
-                        switch (Item.Data.InteractionType)
+                        string[] PetData = ExtraData.Split('\n');
+
+                        Pet GeneratedPet = PetUtility.CreatePet(Session.GetHabbo().Id, PetData[0], Item.Data.BehaviourData, PetData[1], PetData[2]);
+                        if (GeneratedPet != null)
                         {
-                            #region Pets
-                            #region Pet 0
-                            case InteractionType.pet0:
-                                string[] PetData = ExtraData.Split('\n');
-                                Pet GeneratedPet = PetUtility.CreatePet(Session.GetHabbo().Id, PetData[0], 0, PetData[1], PetData[2]);
+                            Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet);
 
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet);
+                            Session.SendMessage(new FurniListNotificationComposer(GeneratedPet.PetId, 3));
+                            Session.SendMessage(new PetInventoryComposer(Session.GetHabbo().GetInventoryComponent().GetPets()));
 
-                                break;
-                            #endregion
-                            #region Pet 1
-                            case InteractionType.pet1:
-                                string[] PetData1 = ExtraData.Split('\n');
-                                Pet GeneratedPet1 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData1[0], 1, PetData1[1], PetData1[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet1);
-
-                                break;
-                            #endregion
-                            #region Pet 2
-                            case InteractionType.pet2:
-                                string[] PetData5 = ExtraData.Split('\n');
-                                Pet GeneratedPet5 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData5[0], 2, PetData5[1], PetData5[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet5);
-
-                                break;
-                            #endregion
-                            #region Pet 3
-                            case InteractionType.pet3:
-                                string[] PetData2 = ExtraData.Split('\n');
-                                Pet GeneratedPet2 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData2[0], 3, PetData2[1], PetData2[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet2);
-
-                                break;
-                            #endregion
-                            #region Pet 4
-                            case InteractionType.pet4:
-                                string[] PetData3 = ExtraData.Split('\n');
-                                Pet GeneratedPet3 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData3[0], 4, PetData3[1], PetData3[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet3);
-
-                                break;
-                            #endregion
-                            #region Pet 5
-                            case InteractionType.pet5:
-                                string[] PetData7 = ExtraData.Split('\n');
-                                Pet GeneratedPet7 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData7[0], 5, PetData7[1], PetData7[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet7);
-
-                                break;
-                            #endregion
-                            #region Pet 6 (wrong?)
-                            case InteractionType.pet6:
-                                string[] PetData4 = ExtraData.Split('\n');
-                                Pet GeneratedPet4 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData4[0], 6, PetData4[1], PetData4[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet4);
-
-                                break;
-                            #endregion
-                            #region Pet 7 (wrong?)
-                            case InteractionType.pet7:
-                                string[] PetData6 = ExtraData.Split('\n');
-                                Pet GeneratedPet6 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData6[0], 7, PetData6[1], PetData6[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet6);
-
-                                break;
-                            #endregion
-                            #region Pet 8
-                            case InteractionType.pet8:
-                                string[] PetData8 = ExtraData.Split('\n');
-                                Pet GeneratedPet8 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData8[0], 8, PetData8[1], PetData8[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet8);
-
-                                break;
-                            #endregion
-                            #region Pet 9
-                            case InteractionType.pet9:
-                                string[] PetData9 = ExtraData.Split('\n');
-                                Pet GeneratedPet9 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData9[0], 9, PetData9[1], PetData9[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet9);
-
-                                break;
-                            #endregion
-                            #region Pet 10
-                            case InteractionType.pet10:
-                                string[] PetData10 = ExtraData.Split('\n');
-                                Pet GeneratedPet10 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData10[0], 10, PetData10[1], PetData10[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet10);
-
-                                break;
-                            #endregion
-                            #region Pet 11
-                            case InteractionType.pet11:
-                                string[] PetData11 = ExtraData.Split('\n');
-                                Pet GeneratedPet11 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData11[0], 11, PetData11[1], PetData11[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet11);
-
-                                break;
-                            #endregion
-                            #region Pet 12
-                            case InteractionType.pet12:
-                                string[] PetData12 = ExtraData.Split('\n');
-                                Pet GeneratedPet12 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData12[0], 12, PetData12[1], PetData12[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet12);
-
-                                break;
-                            #endregion
-                            #region Pet 13
-                            case InteractionType.pet13:
-                                string[] PetData13 = ExtraData.Split('\n');
-                                Pet GeneratedPet13 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData13[0], 13, PetData13[1], PetData13[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet13);
-
-                                break;
-                            #endregion
-                            #region Pet 14
-                            case InteractionType.pet14:
-                                string[] PetData14 = ExtraData.Split('\n');
-                                Pet GeneratedPet14 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData14[0], 14, PetData14[1], PetData14[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet14);
-
-                                break;
-                            #endregion
-                            #region Pet 15
-                            case InteractionType.pet15:
-                                string[] PetData15 = ExtraData.Split('\n');
-                                Pet GeneratedPet15 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData15[0], 15, PetData15[1], PetData15[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet15);
-
-                                break;
-                            #endregion
-                            #region Pet 16
-                            case InteractionType.pet16:
-                                string[] PetData16 = ExtraData.Split('\n');
-                                Pet GeneratedPet16 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData16[0], 16, PetData16[1], PetData16[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet16);
-
-                                break;
-                            #endregion
-                            #region Pet 17
-                            case InteractionType.pet17:
-                                string[] PetData17 = ExtraData.Split('\n');
-                                Pet GeneratedPet17 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData17[0], 17, PetData17[1], PetData17[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet17);
-
-                                break;
-                            #endregion
-                            #region Pet 18
-                            case InteractionType.pet18:
-                                string[] PetData18 = ExtraData.Split('\n');
-                                Pet GeneratedPet18 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData18[0], 18, PetData18[1], PetData18[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet18);
-
-                                break;
-                            #endregion
-                            #region Pet 19
-                            case InteractionType.pet19:
-                                string[] PetData19 = ExtraData.Split('\n');
-                                Pet GeneratedPet19 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData19[0], 19, PetData19[1], PetData19[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet19);
-
-                                break;
-                            #endregion
-                            #region Pet 20
-                            case InteractionType.pet20:
-                                string[] PetData20 = ExtraData.Split('\n');
-                                Pet GeneratedPet20 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData20[0], 20, PetData20[1], PetData20[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet20);
-
-                                break;
-                            #endregion
-                            #region Pet 21
-                            case InteractionType.pet21:
-                                string[] PetData21 = ExtraData.Split('\n');
-                                Pet GeneratedPet21 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData21[0], 21, PetData21[1], PetData21[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet21);
-
-                                break;
-                            #endregion
-                            #region Pet 22
-                            case InteractionType.pet22:
-                                string[] PetData22 = ExtraData.Split('\n');
-                                Pet GeneratedPet22 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData22[0], 22, PetData22[1], PetData22[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet22);
-
-                                break;
-                            #endregion
-                            #region Pet 23
-                            case InteractionType.pet23:
-                                string[] PetData23 = ExtraData.Split('\n');
-                                Pet GeneratedPet23 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData23[0], 23, PetData23[1], PetData23[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet23);
-
-                                break;
-                            #endregion
-                            #region Pet 24
-                            case InteractionType.pet24:
-                                string[] PetData24 = ExtraData.Split('\n');
-                                Pet GeneratedPet24 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData24[0], 24, PetData24[1], PetData24[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet24);
-
-                                break;
-                            #endregion
-                            #region Pet 25
-                            case InteractionType.pet25:
-                                string[] PetData25 = ExtraData.Split('\n');
-                                Pet GeneratedPet25 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData25[0], 25, PetData25[1], PetData25[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet25);
-
-                                break;
-                            #endregion
-                            #region Pet 26
-                            case InteractionType.pet26:
-                                string[] PetData26 = ExtraData.Split('\n');
-                                Pet GeneratedPet26 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData26[0], 26, PetData26[1], PetData26[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet26);
-
-                                break;
-                            #endregion
-                            #region Pet 27
-                            case InteractionType.pet27:
-                                string[] PetData27 = ExtraData.Split('\n');
-                                Pet GeneratedPet27 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData27[0], 27, PetData27[1], PetData27[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet27);
-
-                                break;
-                            #endregion
-                            #region Pet 28
-                            case InteractionType.pet28:
-                                string[] PetData28 = ExtraData.Split('\n');
-                                Pet GeneratedPet28 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData28[0], 28, PetData28[1], PetData28[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet28);
-
-                                break;
-                            #endregion
-                            #region Pet 29
-                            case InteractionType.pet29:
-                                string[] PetData29 = ExtraData.Split('\n');
-                                Pet GeneratedPet29 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData29[0], 29, PetData29[1], PetData29[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet29);
-
-                                break;
-                            #endregion
-                            #region Pet 30
-                            case InteractionType.pet30:
-                                string[] PetData30 = ExtraData.Split('\n');
-                                Pet GeneratedPet30 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData30[0], 30, PetData30[1], PetData30[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet30);
-
-                                break;
-                            #endregion
-                            #region Pet 31
-                            case InteractionType.pet31:
-                                string[] PetData31 = ExtraData.Split('\n');
-                                Pet GeneratedPet31 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData31[0], 31, PetData31[1], PetData31[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet31);
-
-                                break;
-                            #endregion
-                            #region Pet 32
-                            case InteractionType.pet32:
-                                string[] PetData32 = ExtraData.Split('\n');
-                                Pet GeneratedPet32 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData32[0], 32, PetData32[1], PetData32[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet32);
-
-                                break;
-                            #endregion
-                            #region Pet 33
-                            case InteractionType.pet33:
-                                string[] PetData33 = ExtraData.Split('\n');
-                                Pet GeneratedPet33 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData33[0], 33, PetData33[1], PetData33[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet33);
-
-                                break;
-                            #endregion
-                            #region Pet 34
-                            case InteractionType.pet34:
-                                string[] PetData34 = ExtraData.Split('\n');
-                                Pet GeneratedPet34 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData34[0], 34, PetData34[1], PetData34[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet34);
-
-                                break;
-                            #endregion
-                            #region Pet 35
-                            case InteractionType.pet35:
-                                string[] PetData35 = ExtraData.Split('\n');
-                                Pet GeneratedPet35 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData35[0], 35, PetData35[1], PetData35[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet35);
-
-                                break;
-                            #endregion
-                            #region Pet 36
-                            case InteractionType.pet36:
-                                string[] PetData36 = ExtraData.Split('\n');
-                                Pet GeneratedPet36 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData36[0], 36, PetData36[1], PetData36[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet36);
-
-                                break;
-                            #endregion
-                            #region Pet 37
-                            case InteractionType.pet37:
-                                string[] PetData37 = ExtraData.Split('\n');
-                                Pet GeneratedPet37 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData37[0], 37, PetData37[1], PetData37[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet37);
-
-                                break;
-                            #endregion
-                            #region Pet 38
-                            case InteractionType.pet38:
-                                string[] PetData38 = ExtraData.Split('\n');
-                                Pet GeneratedPet38 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData38[0], 38, PetData38[1], PetData38[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet38);
-
-                                break;
-                            #endregion
-                            #region Pet 39
-                            case InteractionType.pet39:
-                                string[] PetData39 = ExtraData.Split('\n');
-                                Pet GeneratedPet39 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData39[0], 39, PetData39[1], PetData39[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet39);
-
-                                break;
-                            #endregion
-                            #region Pet 40
-                            case InteractionType.pet40:
-                                string[] PetData40 = ExtraData.Split('\n');
-                                Pet GeneratedPet40 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData40[0], 40, PetData40[1], PetData40[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet40);
-
-                                break;
-                            #endregion
-                            #region Pet 41
-                            case InteractionType.pet41:
-                                string[] PetData41 = ExtraData.Split('\n');
-                                Pet GeneratedPet41 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData41[0], 41, PetData41[1], PetData41[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet41);
-
-                                break;
-                            #endregion
-                            #region Pet 42
-                            case InteractionType.pet42:
-                                string[] PetData42 = ExtraData.Split('\n');
-                                Pet GeneratedPet42 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData42[0], 42, PetData42[1], PetData42[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet42);
-
-                                break;
-                            #endregion
-                            #region Pet 43
-                            case InteractionType.pet43:
-                                string[] PetData43 = ExtraData.Split('\n');
-                                Pet GeneratedPet43 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData43[0], 43, PetData43[1], PetData43[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet43);
-
-                                break;
-                            #endregion
-                            #region Pet 44
-                            case InteractionType.pet44:
-                                string[] PetData44 = ExtraData.Split('\n');
-                                Pet GeneratedPet44 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData44[0], 44, PetData44[1], PetData44[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet44);
-
-                                break;
-                            #endregion
-                            #region Pet 45
-                            case InteractionType.pet45:
-                                string[] PetData45 = ExtraData.Split('\n');
-                                Pet GeneratedPet45 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData45[0], 45, PetData45[1], PetData45[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet45);
-
-                                break;
-                            #endregion
-                            #region Pet 46
-                            case InteractionType.pet46:
-                                string[] PetData46 = ExtraData.Split('\n');
-                                Pet GeneratedPet46 = PetUtility.CreatePet(Session.GetHabbo().Id, PetData46[0], 46, PetData46[1], PetData46[2]);
-
-                                Session.GetHabbo().GetInventoryComponent().TryAddPet(GeneratedPet46);
-
-                                break;
-                                #endregion
-                                #endregion
-                        }
-
-                        Session.SendMessage(new FurniListNotificationComposer(0, 3));
-                        Session.SendMessage(new PetInventoryComposer(Session.GetHabbo().GetInventoryComponent().GetPets()));
-
-                        ItemData PetFood = null;
-                        if (QuasarEnvironment.GetGame().GetItemManager().GetItem(320, out PetFood))
-                        {
-                            Item Food = ItemFactory.CreateSingleItemNullable(PetFood, Session.GetHabbo(), "", "");
-                            if (Food != null)
+                            if (GalaxyServer.GetGame().GetItemManager().GetItem(320, out ItemData PetFood))
                             {
-                                Session.GetHabbo().GetInventoryComponent().TryAddItem(Food);
-                                Session.SendMessage(new FurniListNotificationComposer(Food.Id, 1));
+                                Item Food = ItemFactory.CreateSingleItemNullable(PetFood, Session.GetHabbo(), "", "");
+                                if (Food != null)
+                                {
+                                    Session.GetHabbo().GetInventoryComponent().TryAddItem(Food);
+                                    Session.SendMessage(new FurniListNotificationComposer(Food.Id, 1));
+                                }
                             }
                         }
                         break;
@@ -1390,8 +1101,9 @@ namespace Quasar.Communication.Packets.Incoming.Catalog
             }
 
             if (Item.Badge != string.Empty) Session.GetHabbo().GetBadgeComponent().GiveBadge(Item.Badge, true, Session);
-            Session.SendMessage(new PurchaseOKComposer(Item, Item.Data));
+            Session.SendMessage(new PurchaseOKComposer(Item, Item.Data, Item.Items));
             Session.SendMessage(new FurniListUpdateComposer());
+
         }
     }
 }
