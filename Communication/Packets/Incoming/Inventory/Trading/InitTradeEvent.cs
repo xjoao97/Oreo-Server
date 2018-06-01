@@ -50,7 +50,9 @@ namespace Quasar.Communication.Packets.Incoming.Inventory.Trading
                 }
             }
 
-            RoomUser TargetUser = Room.GetRoomUserManager().GetRoomUserByVirtualId(Packet.PopInt());
+            RoomUser TargetUser = Room.GetRoomUserManager().GetRoomUserByVirtualId(UserId);
+            if (TargetUser == null)
+                return;
 
             if (TargetUser == null || TargetUser.GetClient() == null || TargetUser.GetClient().GetHabbo() == null)
                 return;
