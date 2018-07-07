@@ -1020,12 +1020,11 @@ namespace Galaxy.Communication.Packets.Incoming.Catalog
                     }
 
                     foreach (Item PurchasedItem in GeneratedGenericItems)
-                    {
-                        if (Session.GetHabbo().GetInventoryComponent().TryAddItem(PurchasedItem))
                         {
-                            //Session.SendMessage(new FurniListAddComposer(PurchasedItem));
-                            Session.SendMessage(new FurniListNotificationComposer(PurchasedItem.Id, 1));
+                            Session.GetHabbo().GetInventoryComponent().TryAddItem(PurchasedItem);
+
                         }
+                        Session.SendMessage(new FurniListNotificationComposer(GeneratedGenericItems, 1));
                     }
                     break;
 
